@@ -4,7 +4,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="stylesheet" href="shared.css"/>
 </head><body>
-<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<nav>
+  <a class="logo" href="../index.html">PDFHub</a>
+  <div class="nav-right">
+    <a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
 <div class="tool-wrap">
   <div class="tool-header">
     <div class="tool-icon" style="color:var(--a3)"><i class="fas fa-file-excel"></i></div>
@@ -41,7 +47,7 @@
     <i class="fas fa-shield-alt" style="color:var(--a3)"></i> Powered by SheetJS. Your file stays in your browser — never uploaded anywhere.
   </div>
 </div>
-<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js">
 <script>
 let file=null, workbook=null;
 const drop=document.getElementById('drop'),fin=document.getElementById('fin');
@@ -116,5 +122,33 @@ ${tableHtml}
     btn.disabled=false;
   }catch(e){showStatus('Error: '+e.message,'error');btn.disabled=false;}
 }
+
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  html.setAttribute('data-theme', savedTheme);
+  updateThemeToggle(savedTheme);
+}
+
+function updateThemeToggle(theme) {
+  if (theme === 'dark') {
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  } else {
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+  }
+}
+
+themeToggle.addEventListener('click', function() {
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateThemeToggle(newTheme);
+});
+
+initTheme();
 </script>
 </body></html>

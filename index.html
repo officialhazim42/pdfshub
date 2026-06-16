@@ -3,11 +3,40 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>PDFHub – Free PDF Tools</title>
+<title>PDFHub – Free PDF Tools & Services</title>
+<meta name="description" content="Free PDF tools online - merge, split, compress, convert, sign & secure PDFs. No login required, 100% private processing."/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+:root[data-theme="dark"]{
+  --bg:#07070d;
+  --s1:#0f0f1a;
+  --s2:#161625;
+  --border:#252538;
+  --text:#eeeef8;
+  --muted:#6b6b8a;
+  --accent:#7c6aff;
+  --a2:#ff5f7e;
+  --a3:#00e5a0;
+  --a4:#ffb347;
+  --a5:#38d9f5;
+  --a6:#c084fc;
+}
+:root[data-theme="light"]{
+  --bg:#f8f9fa;
+  --s1:#ffffff;
+  --s2:#f1f3f5;
+  --border:#e0e2e8;
+  --text:#1a1a2e;
+  --muted:#6b7280;
+  --accent:#7c6aff;
+  --a2:#ff5f7e;
+  --a3:#00c896;
+  --a4:#ffb347;
+  --a5:#38d9f5;
+  --a6:#c084fc;
+}
 :root{
   --bg:#07070d;
   --s1:#0f0f1a;
@@ -23,30 +52,35 @@
   --a6:#c084fc;
 }
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 55% at 15% 5%,rgba(124,106,255,.09) 0%,transparent 55%),radial-gradient(ellipse 55% 45% at 85% 90%,rgba(255,95,126,.07) 0%,transparent 55%);pointer-events:none;z-index:0}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 6%}
+nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;transition:all .3s ease}
+:root[data-theme="light"] nav{background:rgba(255,255,255,.92)}
 .logo{font-family:'Syne',sans-serif;font-size:1.45rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px;text-decoration:none}
 .logo em{font-style:normal;font-weight:400;opacity:.6}
+.nav-right{display:flex;align-items:center;gap:20px}
 .nav-socials{display:flex;gap:14px}
 .nav-socials a{color:var(--muted);font-size:.95rem;transition:color .2s,transform .2s;text-decoration:none}
 .nav-socials a:hover{color:var(--text);transform:translateY(-2px)}
+.theme-toggle{background:var(--s2);border:1px solid var(--border);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:var(--text)}
+.theme-toggle:hover{border-color:var(--accent);background:var(--s1)}
 @media(max-width:600px){.nav-socials{display:none}}
 
 /* HERO */
 .hero{position:relative;z-index:1;padding:72px 6% 48px;text-align:center}
-.badge{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--a3);border:1px solid rgba(0,229,160,.22);background:rgba(0,229,160,.06);padding:5px 14px;border-radius:99px;margin-bottom:22px}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--a3);border:1px solid rgba(0,229,160,.22);background:rgba(0,229,160,.06);padding:5px 14px;border-radius:99px;margin-bottom:22px;animation:slideDown .6s ease}
 .dot{width:6px;height:6px;background:var(--a3);border-radius:50%;animation:blink 1.5s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:800;letter-spacing:-2px;line-height:1.08;margin-bottom:18px}
+@keyframes slideDown{0%{opacity:0;transform:translateY(-10px)}100%{opacity:1;transform:translateY(0)}}
+h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:800;letter-spacing:-2px;line-height:1.08;margin-bottom:18px;animation:slideDown .7s ease}
 h1 .g{background:linear-gradient(135deg,var(--accent) 30%,var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{color:var(--muted);font-size:1.05rem;max-width:520px;margin:0 auto 36px;line-height:1.7;font-weight:400}
-.stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:36px}
+.sub{color:var(--muted);font-size:1.05rem;max-width:520px;margin:0 auto 36px;line-height:1.7;font-weight:400;animation:slideDown .8s ease}
+.stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:36px;animation:slideDown .9s ease}
 .stat .n{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;background:linear-gradient(135deg,var(--accent),#b9acff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .stat .l{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
-.search-box{max-width:420px;margin:0 auto 58px;position:relative}
+.search-box{max-width:420px;margin:0 auto 58px;position:relative;animation:slideDown 1s ease}
 .search-box i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem}
 .search-box input{width:100%;background:var(--s1);border:1px solid var(--border);color:var(--text);padding:13px 18px 13px 42px;border-radius:12px;font-size:.9rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s}
 .search-box input::placeholder{color:var(--muted)}
@@ -54,18 +88,23 @@ h1 .g{background:linear-gradient(135deg,var(--accent) 30%,var(--a2));-webkit-bac
 
 /* CATEGORIES */
 .wrap{position:relative;z-index:1;max-width:1220px;margin:0 auto;padding:0 6% 80px}
-.cat{margin-bottom:52px}
-.cat-head{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-.cat-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
-.cat-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-.3px}
-.cat-cnt{margin-left:auto;font-size:.68rem;color:var(--muted);background:var(--s2);border:1px solid var(--border);padding:2px 9px;border-radius:99px}
+.cat{margin-bottom:52px;animation:fadeIn 1s ease}
+@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+.cat-head{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--border);transition:border-color .3s}
+.cat-head:hover{border-bottom-color:var(--accent)}
+.cat-ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;transition:transform .2s}
+.cat-name{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:-.3px}
+.cat-cnt{margin-left:auto;font-size:.68rem;color:var(--muted);background:var(--s2);border:1px solid var(--border);padding:4px 12px;border-radius:99px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:12px}
 
 /* TOOL CARD */
 .card{display:flex;flex-direction:column;gap:9px;background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-decoration:none;color:inherit;cursor:pointer;transition:background .2s,border-color .2s,transform .18s,box-shadow .2s;position:relative;overflow:hidden}
-.card:hover{transform:translateY(-4px)}
+.card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);transition:left .5s;z-index:1}
+.card:hover::before{left:100%}
+.card:hover{transform:translateY(-4px);border-color:rgba(124,106,255,.3)}
 .fbadge{position:absolute;top:10px;right:10px;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:rgba(0,229,160,.1);color:var(--a3);border:1px solid rgba(0,229,160,.22);padding:2px 7px;border-radius:5px}
-.c-ico{font-size:1.25rem;line-height:1}
+.c-ico{font-size:1.45rem;line-height:1;transition:transform .2s}
+.card:hover .c-ico{transform:scale(1.1)}
 .c-name{font-size:.88rem;font-weight:600;line-height:1.3}
 .c-desc{font-size:.73rem;color:var(--muted);line-height:1.55}
 .c-arr{margin-top:auto;font-size:.68rem;color:var(--muted);transition:transform .2s,color .2s}
@@ -99,24 +138,33 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:48
 .f-logo{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
 .f-by{font-size:.82rem;color:var(--muted);margin-bottom:24px}
 .f-by a{color:var(--accent);text-decoration:none;font-weight:600}
+.f-by a:hover{text-decoration:underline}
 .socials{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:24px}
-.soc{display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--muted);font-size:.8rem;font-weight:500;padding:7px 14px;background:var(--s1);border:1px solid var(--border);border-radius:9px;transition:all .2s}
-.soc:hover{color:var(--text);border-color:var(--accent);background:var(--s2);transform:translateY(-2px)}
+.soc{display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text);font-size:.8rem;font-weight:500;padding:8px 14px;background:var(--s1);border:1px solid var(--border);border-radius:9px;transition:all .2s;position:relative}
 .soc i{font-size:.95rem}
+.soc:hover{border-color:var(--accent);background:var(--s2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(124,106,255,.15)}
 .f-copy{font-size:.72rem;color:var(--muted);opacity:.55}
 .card.hidden{display:none}
+.cta-section{margin:60px 0;text-align:center;padding:40px;background:linear-gradient(135deg,rgba(124,106,255,.08),rgba(255,95,126,.08));border:1px solid var(--border);border-radius:16px}
+.cta-section h2{font-size:1.8rem;margin-bottom:12px;font-weight:700}
+.cta-section p{color:var(--muted);margin-bottom:20px;font-size:.95rem}
+.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,var(--accent),#6254e8);color:#fff;text-decoration:none;border-radius:10px;font-weight:600;transition:all .2s}
+.btn-cta:hover{filter:brightness(1.1);transform:translateY(-2px)}
 </style>
 </head>
 <body>
 
 <nav>
   <a class="logo" href="index.html">PDF<em>Hub</em></a>
-  <div class="nav-socials">
-    <a href="https://instagram.com/officialhazim42" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://twitter.com/officialhazim42" target="_blank"><i class="fab fa-x-twitter"></i></a>
-    <a href="https://youtube.com/@officialhazim42" target="_blank"><i class="fab fa-youtube"></i></a>
-    <a href="https://tiktok.com/@officialhazim42" target="_blank"><i class="fab fa-tiktok"></i></a>
-    <a href="https://github.com/officialhazim42" target="_blank"><i class="fab fa-github"></i></a>
+  <div class="nav-right">
+    <div class="nav-socials">
+      <a href="https://instagram.com/officialhazim42" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com/officialhazim42" target="_blank" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://youtube.com/@officialhazim42" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://tiktok.com/@officialhazim42" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="https://github.com/officialhazim42" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
   </div>
 </nav>
 
@@ -239,46 +287,118 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:48
   <div class="cat-head">
     <div class="cat-ic"><i class="fas fa-brain"></i></div>
     <div class="cat-name">PDF Intelligence</div>
-    <div class="cat-cnt">2 tools</div>
+    <div class="cat-cnt">5 tools</div>
   </div>
   <div class="grid">
     <a class="card" href="tools/summarize.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-robot"></i></div><div class="c-name">AI Summarizer</div><div class="c-desc">Get an AI summary of any PDF document.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
     <a class="card" href="tools/translate.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-language"></i></div><div class="c-name">Translate PDF</div><div class="c-desc">Translate PDF text into any language.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
+    <a class="card" href="tools/extract-text.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-file-contract"></i></div><div class="c-name">Extract Text</div><div class="c-desc">Extract all text from PDF documents.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
+    <a class="card" href="tools/batch-convert.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-sync-alt"></i></div><div class="c-name">Batch Convert</div><div class="c-desc">Convert multiple files at once.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
+    <a class="card" href="tools/metadata.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-info-circle"></i></div><div class="c-name">PDF Metadata</div><div class="c-desc">View and edit PDF metadata info.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
+  </div>
+</div>
+
+<!-- UTILITIES -->
+<div class="cat c-organize">
+  <div class="cat-head">
+    <div class="cat-ic"><i class="fas fa-tools"></i></div>
+    <div class="cat-name">Utilities</div>
+    <div class="cat-cnt">4 tools</div>
+  </div>
+  <div class="grid">
+    <a class="card" href="tools/page-count.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-calculator"></i></div><div class="c-name">Page Counter</div><div class="c-desc">Get total page count from PDF.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
+    <a class="card" href="tools/file-size.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-weight"></i></div><div class="c-name">File Size Checker</div><div class="c-desc">Check PDF file size and properties.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
+    <a class="card" href="tools/pdf-converter.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-magic"></i></div><div class="c-name">Universal Converter</div><div class="c-desc">Convert between all file formats.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
+    <a class="card" href="tools/batch-rename.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-tag"></i></div><div class="c-name">Batch Rename</div><div class="c-desc">Rename multiple PDFs at once.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
   </div>
 </div>
 
 </main>
 
+<section class="cta-section">
+  <h2>Ready to get started?</h2>
+  <p>Try any of our 40+ free tools with no sign-up required</p>
+  <a href="#" class="btn-cta"><i class="fas fa-rocket"></i> Explore All Tools</a>
+</section>
+
 <footer>
   <div class="f-logo">PDFHub</div>
-  <div class="f-by">Built by <a href="https://instagram.com/officialhazim42" target="_blank">@officialhazim42</a> · Free forever · No sign-up needed</div>
+  <div class="f-by">Built with ❤️ by <a href="https://instagram.com/officialhazim42" target="_blank">@officialhazim42</a> · Free forever · No sign-up needed</div>
   <div class="socials">
-    <a class="soc" href="https://instagram.com/officialhazim42" target="_blank"><i class="fab fa-instagram" style="color:#e1306c"></i>Instagram</a>
-    <a class="soc" href="https://twitter.com/officialhazim42" target="_blank"><i class="fab fa-x-twitter"></i>Twitter / X</a>
-    <a class="soc" href="https://youtube.com/@officialhazim42" target="_blank"><i class="fab fa-youtube" style="color:#ff0000"></i>YouTube</a>
-    <a class="soc" href="https://tiktok.com/@officialhazim42" target="_blank"><i class="fab fa-tiktok" style="color:#69c9d0"></i>TikTok</a>
-    <a class="soc" href="https://facebook.com/officialhazim42" target="_blank"><i class="fab fa-facebook" style="color:#1877f2"></i>Facebook</a>
-    <a class="soc" href="https://linkedin.com/in/hazim-bashir-faqeer" target="_blank"><i class="fab fa-linkedin" style="color:#0077b5"></i>LinkedIn</a>
-    <a class="soc" href="https://github.com/officialhazim42" target="_blank"><i class="fab fa-github"></i>GitHub</a>
-    <a class="soc" href="https://t.me/officialhazim42" target="_blank"><i class="fab fa-telegram" style="color:#26a5e4"></i>Telegram</a>
-    <a class="soc" href="https://snapchat.com/add/officialhazim42" target="_blank"><i class="fab fa-snapchat" style="color:#fffc00"></i>Snapchat</a>
-    <a class="soc" href="https://wa.me/+919055267442" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366"></i>WhatsApp</a>
+    <a class="soc" href="https://instagram.com/officialhazim42" target="_blank" title="Follow on Instagram"><i class="fab fa-instagram" style="color:#e1306c"></i>Instagram</a>
+    <a class="soc" href="https://twitter.com/officialhazim42" target="_blank" title="Follow on Twitter"><i class="fab fa-x-twitter" style="color:#000"></i>Twitter/X</a>
+    <a class="soc" href="https://youtube.com/@officialhazim42" target="_blank" title="Subscribe on YouTube"><i class="fab fa-youtube" style="color:#ff0000"></i>YouTube</a>
+    <a class="soc" href="https://tiktok.com/@officialhazim42" target="_blank" title="Follow on TikTok"><i class="fab fa-tiktok" style="color:#69c9d0"></i>TikTok</a>
+    <a class="soc" href="https://facebook.com/officialhazim42" target="_blank" title="Like on Facebook"><i class="fab fa-facebook" style="color:#1877f2"></i>Facebook</a>
+    <a class="soc" href="https://linkedin.com/in/hazim-bashir-faqeer" target="_blank" title="Connect on LinkedIn"><i class="fab fa-linkedin" style="color:#0077b5"></i>LinkedIn</a>
+    <a class="soc" href="https://github.com/officialhazim42" target="_blank" title="Follow on GitHub"><i class="fab fa-github" style="color:#333"></i>GitHub</a>
+    <a class="soc" href="https://t.me/officialhazim42" target="_blank" title="Message on Telegram"><i class="fab fa-telegram" style="color:#26a5e4"></i>Telegram</a>
+    <a class="soc" href="https://snapchat.com/add/officialhazim42" target="_blank" title="Add on Snapchat"><i class="fab fa-snapchat" style="color:#fffc00; text-shadow: 0 0 2px #000"></i>Snapchat</a>
+    <a class="soc" href="https://wa.me/919055267442" target="_blank" title="Chat on WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366"></i>WhatsApp</a>
+    <a class="soc" href="https://discord.gg/pdfhub" target="_blank" title="Join Discord"><i class="fab fa-discord" style="color:#5865f2"></i>Discord</a>
+    <a class="soc" href="https://reddit.com/u/officialhazim42" target="_blank" title="Follow on Reddit"><i class="fab fa-reddit" style="color:#ff4500"></i>Reddit</a>
   </div>
-  <div class="f-copy">©Net Gallery Hb by @officialhazim42 · All processing done in your browser · Your files never leave your device</div>
+  <div class="f-copy">©2024 PDFHub · All processing done in your browser · Your files never leave your device · Made with passion by Hazim Bashir</div>
 </footer>
 
 <script>
-function search(q){
-  q=q.toLowerCase().trim();
-  document.querySelectorAll('.card').forEach(c=>{
-    const t=(c.querySelector('.c-name')?.textContent+' '+c.querySelector('.c-desc')?.textContent).toLowerCase();
-    c.classList.toggle('hidden',!!q&&!t.includes(q));
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+// Initialize theme on page load
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  html.setAttribute('data-theme', savedTheme);
+  updateThemeToggle(savedTheme);
+}
+
+// Update toggle button appearance
+function updateThemeToggle(theme) {
+  if (theme === 'dark') {
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  } else {
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+  }
+}
+
+// Toggle theme
+themeToggle.addEventListener('click', function() {
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateThemeToggle(newTheme);
+});
+
+// Search functionality
+function search(q) {
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('.card').forEach(c => {
+    const t = (c.querySelector('.c-name')?.textContent + ' ' + c.querySelector('.c-desc')?.textContent).toLowerCase();
+    c.classList.toggle('hidden', !!q && !t.includes(q));
   });
-  document.querySelectorAll('.cat').forEach(cat=>{
-    const vis=[...cat.querySelectorAll('.card')].some(c=>!c.classList.contains('hidden'));
-    cat.style.display=(!q||vis)?'':'none';
+  document.querySelectorAll('.cat').forEach(cat => {
+    const vis = [...cat.querySelectorAll('.card')].some(c => !c.classList.contains('hidden'));
+    cat.style.display = (!q || vis) ? '' : 'none';
   });
 }
+
+// Initialize on page load
+initTheme();
+
+// Add smooth scroll behavior to CTA button
+document.querySelector('.btn-cta').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.querySelector('.cat').scrollIntoView({ behavior: 'smooth' });
+});
+
+// Add keyboard shortcut for theme toggle (Ctrl+Shift+T)
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+    themeToggle.click();
+  }
+});
 </script>
 </body>
 </html>

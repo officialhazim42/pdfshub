@@ -4,7 +4,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="stylesheet" href="shared.css"/>
 </head><body>
-<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<nav>
+  <a class="logo" href="../index.html">PDFHub</a>
+  <div class="nav-right">
+    <a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
 <div class="tool-wrap">
   <div class="tool-header">
     <div class="tool-icon" style="color:var(--a2)"><i class="fas fa-file-word"></i></div>
@@ -43,7 +49,7 @@
     <i class="fas fa-shield-alt" style="color:var(--accent)"></i> Your file never leaves your device. All conversion happens locally in your browser using mammoth.js.
   </div>
 </div>
-<script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+<script src="https://unpkg.com/mammoth/mammoth.browser.min.js">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script>
 let file=null;
@@ -111,5 +117,33 @@ async function go(){
     btn.disabled=false;
   }
 }
+
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  html.setAttribute('data-theme', savedTheme);
+  updateThemeToggle(savedTheme);
+}
+
+function updateThemeToggle(theme) {
+  if (theme === 'dark') {
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  } else {
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+  }
+}
+
+themeToggle.addEventListener('click', function() {
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateThemeToggle(newTheme);
+});
+
+initTheme();
 </script>
 </body></html>

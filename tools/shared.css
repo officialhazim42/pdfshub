@@ -1,19 +1,34 @@
 /* shared.css - used by all tool pages */
 *{margin:0;padding:0;box-sizing:border-box}
+:root[data-theme="dark"]{
+  --bg:#07070d;--s1:#0f0f1a;--s2:#161625;--border:#252538;
+  --text:#eeeef8;--muted:#6b6b8a;
+  --accent:#7c6aff;--a2:#ff5f7e;--a3:#00e5a0;--a4:#ffb347;--a5:#38d9f5;--a6:#c084fc;
+}
+:root[data-theme="light"]{
+  --bg:#f8f9fa;--s1:#ffffff;--s2:#f1f3f5;--border:#e0e2e8;
+  --text:#1a1a2e;--muted:#6b7280;
+  --accent:#7c6aff;--a2:#ff5f7e;--a3:#00c896;--a4:#ffb347;--a5:#38d9f5;--a6:#c084fc;
+}
 :root{
   --bg:#07070d;--s1:#0f0f1a;--s2:#161625;--border:#252538;
   --text:#eeeef8;--muted:#6b6b8a;
   --accent:#7c6aff;--a2:#ff5f7e;--a3:#00e5a0;--a4:#ffb347;--a5:#38d9f5;--a6:#c084fc;
 }
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 55% at 15% 5%,rgba(124,106,255,.08) 0%,transparent 55%);pointer-events:none;z-index:0}
-nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 6%}
+nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;transition:all .3s ease}
+:root[data-theme="light"] nav{background:rgba(255,255,255,.92)}
 .logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:15px}
 .back{color:var(--muted);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:6px;transition:color .2s}
 .back:hover{color:var(--text)}
+.theme-toggle{background:var(--s2);border:1px solid var(--border);width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:var(--text);font-size:.85rem}
+.theme-toggle:hover{border-color:var(--accent);background:var(--s1)}
 .tool-wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:48px 6% 80px}
 .tool-header{margin-bottom:36px;text-align:center}
-.tool-icon{font-size:2.5rem;margin-bottom:14px}
+.tool-icon{font-size:2.5rem;margin-bottom:14px;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .tool-header h1{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;letter-spacing:-1px;margin-bottom:8px}
 .tool-header p{color:var(--muted);font-size:.92rem;max-width:480px;margin:0 auto}
 .drop-area{border:2px dashed var(--border);border-radius:16px;padding:48px 24px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:var(--s1);margin-bottom:20px}
@@ -29,7 +44,8 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.9);backdrop-filter
 .btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;filter:none!important}
 .action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 .file-list{margin-bottom:16px;display:flex;flex-direction:column;gap:8px}
-.file-item{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.82rem}
+.file-item{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.82rem;animation:slideInLeft .3s ease}
+@keyframes slideInLeft{0%{opacity:0;transform:translateX(-20px)}100%{opacity:1;transform:translateX(0)}}
 .file-item i{color:var(--a2);font-size:1rem}
 .file-item .fn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .file-item .fs{color:var(--muted);font-size:.75rem;white-space:nowrap}
@@ -42,7 +58,8 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.9);backdrop-filter
 .opt-row input,.opt-row select{background:var(--s2);border:1px solid var(--border);color:var(--text);padding:9px 12px;border-radius:8px;font-size:.85rem;font-family:'DM Sans',sans-serif;outline:none;width:100%;transition:border-color .2s}
 .opt-row input:focus,.opt-row select:focus{border-color:var(--accent)}
 .opt-row input[type=range]{padding:4px 0;cursor:pointer}
-.status{padding:12px 16px;border-radius:10px;font-size:.82rem;margin-top:12px;display:none}
+.status{padding:12px 16px;border-radius:10px;font-size:.82rem;margin-top:12px;display:none;animation:slideDown .3s ease}
+@keyframes slideDown{0%{opacity:0;transform:translateY(-10px)}100%{opacity:1;transform:translateY(0)}}
 .status.show{display:block}
 .status.info{background:rgba(124,106,255,.12);border:1px solid rgba(124,106,255,.25);color:#b8b0ff}
 .status.success{background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.25);color:#5effc4}
@@ -51,8 +68,10 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.9);backdrop-filter
 .progress.show{display:block}
 .progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--a2));border-radius:99px;transition:width .3s;width:0%}
 .preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:16px}
-.prev-card{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:8px;text-align:center;cursor:grab;position:relative}
+.prev-card{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:8px;text-align:center;cursor:grab;position:relative;transition:all .2s}
+.prev-card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .prev-card img{width:100%;height:90px;object-fit:contain;border-radius:6px}
 .prev-card .pn{font-size:.7rem;color:var(--muted);margin-top:5px}
-.prev-card .del-p{position:absolute;top:4px;right:4px;background:var(--a2);color:#fff;border:none;border-radius:4px;width:18px;height:18px;font-size:.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.prev-card .del-p{position:absolute;top:4px;right:4px;background:var(--a2);color:#fff;border:none;border-radius:4px;width:18px;height:18px;font-size:.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.prev-card .del-p:hover{transform:scale(1.1)}
 canvas{display:none}

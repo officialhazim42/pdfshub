@@ -4,7 +4,13 @@
 <link rel="stylesheet" href="shared.css"/>
 <style>#htmlInput{width:100%;min-height:200px;background:var(--s2);border:1px solid var(--border);color:var(--text);padding:14px;border-radius:10px;font-family:monospace;font-size:.85rem;outline:none;resize:vertical}#htmlInput:focus{border-color:var(--accent)}</style>
 </head><body>
-<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<nav>
+  <a class="logo" href="../index.html">PDFHub</a>
+  <div class="nav-right">
+    <a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
 <div class="tool-wrap">
   <div class="tool-header"><div class="tool-icon" style="color:var(--a2)"><i class="fas fa-code"></i></div><h1>HTML to PDF</h1><p>Paste HTML code or a URL to convert to PDF. Uses browser print engine.</p></div>
   <div class="options" style="display:block">
@@ -33,4 +39,32 @@ function go(){
   const w=window.open('','_blank');w.document.write(fullHtml);w.document.close();w.onload=()=>{w.print();};
   showStatus('Print dialog opened. Choose "Save as PDF" as the printer.','success');
 }
+
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  html.setAttribute('data-theme', savedTheme);
+  updateThemeToggle(savedTheme);
+}
+
+function updateThemeToggle(theme) {
+  if (theme === 'dark') {
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  } else {
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+  }
+}
+
+themeToggle.addEventListener('click', function() {
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateThemeToggle(newTheme);
+});
+
+initTheme();
 </script></body></html>
