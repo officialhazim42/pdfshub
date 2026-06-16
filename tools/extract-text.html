@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Extract Text – PDFHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+<nav>
+  <a class="logo" href="../index.html">PDFHub</a>
+  <div class="nav-right">
+    <a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+<div class="tool-wrap">
+  <div class="tool-header"><div class="tool-icon" style="color:var(--a6)"><i class="fas fa-file-contract"></i></div><h1>Extract Text</h1><p>Extract all selectable text from a PDF and download as plain text.</p></div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()"><i class="fas fa-cloud-upload-alt"></i><div class="dl">Drop a PDF or click to upload</div><div class="ds">Text-based PDFs work best</div></div>
+  <input type="file" id="fin" accept=".pdf" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="extract()"><i class="fas fa-file-alt"></i> Extract Text</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+  <div id="outWrap" style="margin-top:14px;display:none">
+    <div style="margin-bottom:8px;font-weight:600;color:var(--muted)">Extracted Text</div>
+    <textarea id="outText" style="width:100%;min-height:240px;padding:12px;border-radius:8px;border:1px solid var(--border);background:var(--s1);color:var(--text)"></textarea>
+    <div style="margin-top:8px"><button class="btn btn-primary" onclick="downloadText()"><i class="fas fa-download"></i> Download .txt</button></div>
+  </div>
+</div>
+<script>
+const drop=document.getElementById('drop'),fin=document.getElementById('fin'),finfo=document.getElementById('finfo');
+let file=null;
+fin.onchange=e=>{if(e.target.files[0])onFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')onFile(f)};
+function onFile(f){file=f;finfo.innerHTML=`<div class="file-item"><i class="fas fa-file-pdf"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span></div>`;document.getElementById('goBtn').disabled=false;}
+function showStatus(m,t){const s=document.getElementById('status');s.textContent=m;s.className='status show '+(t||'')}
+async function extract(){if(!file)return;const btn=document.getElementById('goBtn');btn.disabled=true;document.getElementById('prog').classList.add('show');document.getElementById('pbar').style.width='10%';showStatus('Extracting text…','info');
+  try{
+    const ab=await file.arrayBuffer();pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const pdf=await pdfjsLib.getDocument({data:ab}).promise;let out='';
+    for(let p=1;p<=pdf.numPages;p++){document.getElementById('pbar').style.width=Math.round((p/pdf.numPages)*90+10)+'%';const page=await pdf.getPage(p);const txt=await page.getTextContent();out+=txt.items.map(i=>i.str).join(' ')+"\n\n"}
+    document.getElementById('outText').value=out;document.getElementById('outWrap').style.display='block';document.getElementById('pbar').style.width='100%';showStatus('✓ Extraction complete','success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+  btn.disabled=false;
+}
+function downloadText(){const txt=document.getElementById('outText').value;const blob=new Blob([txt],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(file?.name?.replace(/\.pdf$/i,'')||'extracted')+'.txt';a.click();}
+
+// Theme toggle (same pattern used across tools)
+const themeToggle = document.getElementById('themeToggle');const html = document.documentElement;
+function initTheme(){const saved=localStorage.getItem('theme')||'dark';html.setAttribute('data-theme',saved);updateThemeToggle(saved)}
+function updateThemeToggle(theme){themeToggle.innerHTML = theme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'}
+themeToggle.addEventListener('click',()=>{const cur=html.getAttribute('data-theme');const nxt=cur==='dark'?'light':'dark';html.setAttribute('data-theme',nxt);localStorage.setItem('theme',nxt);updateThemeToggle(nxt)});
+initTheme();
+</script>
+</body>
+</html>

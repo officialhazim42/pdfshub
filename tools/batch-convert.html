@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Batch Convert – PDFHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+</head>
+<body>
+<nav>
+  <a class="logo" href="../index.html">PDFHub</a>
+  <div class="nav-right">
+    <a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+<div class="tool-wrap">
+  <div class="tool-header"><div class="tool-icon" style="color:var(--a6)"><i class="fas fa-sync-alt"></i></div><h1>Batch Download</h1><p>Package multiple files into a single ZIP for easy download.</p></div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()"><i class="fas fa-cloud-upload-alt"></i><div class="dl">Drop files or click to upload</div><div class="ds">Multiple files supported</div></div>
+  <input type="file" id="fin" multiple hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="zipBtn" disabled onclick="createZip()"><i class="fas fa-file-archive"></i> Download ZIP</button>
+    <button class="btn btn-secondary" onclick="location.reload()">Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+</div>
+<script>
+const drop=document.getElementById('drop'),fin=document.getElementById('fin'),finfo=document.getElementById('finfo');let files=[];
+fin.onchange=e=>{addFiles([...e.target.files])};drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');addFiles([...e.dataTransfer.files])};
+function addFiles(list){files=[...files,...list];render();document.getElementById('zipBtn').disabled=files.length===0}
+function render(){finfo.innerHTML='';files.forEach((f,i)=>{const d=document.createElement('div');d.className='file-item';d.innerHTML=`<i class="fas fa-file"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span><button class="rm" onclick="remove(${i})"><i class="fas fa-times"></i></button>`;finfo.appendChild(d)})}
+function remove(i){files.splice(i,1);render();document.getElementById('zipBtn').disabled=files.length===0}
+async function createZip(){const btn=document.getElementById('zipBtn');btn.disabled=true;document.getElementById('prog').classList.add('show');document.getElementById('pbar').style.width='10%';showStatus('Preparing ZIP…','info');
+  try{const zip=new JSZip();for(let i=0;i<files.length;i++){const f=files[i];const ab=await f.arrayBuffer();zip.file(f.name,ab);document.getElementById('pbar').style.width=Math.round((i/files.length)*80+10)+'%'}
+    const blob=await zip.generateAsync({type:'blob'},meta=>document.getElementById('pbar').style.width=Math.round(meta.percent)+'%');
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='files.zip';a.click();document.getElementById('pbar').style.width='100%';showStatus('✓ ZIP ready — download started.','success');}
+  catch(e){showStatus('Error: '+e.message,'error')}
+  btn.disabled=false}
+function showStatus(m,t){const s=document.getElementById('status');s.textContent=m;s.className='status show '+(t||'')}
+
+// Theme
+const themeToggle = document.getElementById('themeToggle');const html=document.documentElement;function initTheme(){const saved=localStorage.getItem('theme')||'dark';html.setAttribute('data-theme',saved);updateThemeToggle(saved)}function updateThemeToggle(theme){themeToggle.innerHTML=theme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'}themeToggle.addEventListener('click',()=>{const cur=html.getAttribute('data-theme');const nxt=cur==='dark'?'light':'dark';html.setAttribute('data-theme',nxt);localStorage.setItem('theme',nxt);updateThemeToggle(nxt)});initTheme();
+</script>
+</body>
+</html>
