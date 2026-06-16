@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Word to PDF – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header">
+    <div class="tool-icon" style="color:var(--a2)"><i class="fas fa-file-word"></i></div>
+    <h1>Word to PDF</h1>
+    <p>Convert .docx Word files to PDF directly in your browser — no upload, no server, 100% private.</p>
+  </div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <div class="dl">Drop a .docx file or click to upload</div>
+    <div class="ds">.docx format · Processed entirely in your browser</div>
+  </div>
+  <input type="file" id="fin" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row"><label>Page size</label>
+      <select id="psize">
+        <option value="a4">A4 (210×297mm)</option>
+        <option value="letter">Letter (8.5×11in)</option>
+      </select>
+    </div>
+    <div class="opt-row"><label>Font size</label>
+      <select id="fsize">
+        <option value="11pt">11pt (default)</option>
+        <option value="12pt">12pt</option>
+        <option value="10pt">10pt (compact)</option>
+      </select>
+    </div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-file-pdf"></i> Convert to PDF</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+  <div style="margin-top:16px;padding:14px;background:rgba(124,106,255,.07);border:1px solid rgba(124,106,255,.2);border-radius:10px;font-size:.78rem;color:var(--muted)">
+    <i class="fas fa-shield-alt" style="color:var(--accent)"></i> Your file never leaves your device. All conversion happens locally in your browser using mammoth.js.
+  </div>
+</div>
+<script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+let file=null;
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f)loadFile(f)};
+function loadFile(f){
+  file=f;
+  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-word" style="color:#2b5797"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span></div>`;
+  document.getElementById('opts').style.display='block';
+  document.getElementById('goBtn').disabled=false;
+}
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;
+  document.getElementById('prog').classList.add('show');
+  document.getElementById('pbar').style.width='20%';
+  showStatus('Reading Word document…','info');
+  try{
+    const psize=document.getElementById('psize').value;
+    const fsize=document.getElementById('fsize').value;
+    const ab=await file.arrayBuffer();
+    document.getElementById('pbar').style.width='40%';
+    // Convert docx to HTML using mammoth
+    const result=await mammoth.convertToHtml({arrayBuffer:ab});
+    const html=result.value;
+    document.getElementById('pbar').style.width='70%';
+    showStatus('Generating PDF…','info');
+
+    const pageSizes={a4:'210mm 297mm',letter:'8.5in 11in'};
+    const printHtml=`<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+  @page { size: ${pageSizes[psize]}; margin: 20mm 18mm; }
+  body { font-family: 'Calibri', 'Arial', sans-serif; font-size: ${fsize}; line-height: 1.5; color: #111; }
+  h1,h2,h3,h4,h5,h6 { font-family: 'Calibri', 'Arial', sans-serif; margin: 0.8em 0 0.4em; }
+  h1 { font-size: 1.8em; } h2 { font-size: 1.4em; } h3 { font-size: 1.2em; }
+  p { margin: 0.4em 0 0.6em; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+  td,th { border: 1px solid #ccc; padding: 6px 10px; }
+  th { background: #f0f0f0; font-weight: 700; }
+  img { max-width: 100%; }
+  ul,ol { margin: 0.4em 0; padding-left: 1.5em; }
+  li { margin: 0.2em 0; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+</style>
+</head><body>${html}</body></html>`;
+
+    const printWin=window.open('','_blank','width=900,height=700');
+    printWin.document.write(printHtml);
+    printWin.document.close();
+    printWin.onload=()=>{
+      setTimeout(()=>{
+        printWin.print();
+        document.getElementById('pbar').style.width='100%';
+        showStatus('✓ Print dialog opened — choose "Save as PDF" as printer to download!','success');
+      },400);
+    };
+    btn.disabled=false;
+  }catch(e){
+    showStatus('Error: '+e.message+'. Make sure it\'s a valid .docx file.','error');
+    btn.disabled=false;
+  }
+}
+</script>
+</body></html>

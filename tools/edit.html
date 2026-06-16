@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Edit PDF – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+#toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding:12px;background:var(--s2);border:1px solid var(--border);border-radius:12px}
+.tool-btn{padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--s1);color:var(--muted);cursor:pointer;font-size:.8rem;font-family:'DM Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:6px}
+.tool-btn.active,.tool-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+#canvasWrap{position:relative;display:inline-block;cursor:crosshair}
+#pdfCanvas{border:1px solid var(--border);border-radius:8px;max-width:100%}
+#drawCanvas{position:absolute;top:0;left:0;border-radius:8px;pointer-events:all}
+#pgNav{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:.85rem}
+#pgNav button{background:var(--s2);border:1px solid var(--border);color:var(--text);padding:5px 12px;border-radius:7px;cursor:pointer}
+.tool-opt{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted)}
+.tool-opt input[type=color]{width:28px;height:28px;border:none;border-radius:4px;cursor:pointer;background:none;padding:0}
+.tool-opt input[type=range]{width:80px}
+#textInput{position:absolute;background:transparent;border:1px dashed var(--accent);color:#000;font-size:16px;padding:2px 4px;outline:none;min-width:100px;display:none;z-index:10}
+</style>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap" style="max-width:900px">
+  <div class="tool-header"><div class="tool-icon" style="color:var(--a5)"><i class="fas fa-edit"></i></div><h1>Edit PDF</h1><p>Draw, add text, highlight, and annotate PDF pages.</p></div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()"><i class="fas fa-cloud-upload-alt"></i><div class="dl">Drop a PDF or click to upload</div></div>
+  <input type="file" id="fin" accept=".pdf" hidden/>
+  <div id="editor" style="display:none">
+    <div id="toolbar">
+      <button class="tool-btn active" id="tb-pen" onclick="setTool('pen')"><i class="fas fa-pen"></i> Pen</button>
+      <button class="tool-btn" id="tb-text" onclick="setTool('text')"><i class="fas fa-font"></i> Text</button>
+      <button class="tool-btn" id="tb-highlight" onclick="setTool('highlight')"><i class="fas fa-highlighter"></i> Highlight</button>
+      <button class="tool-btn" id="tb-rect" onclick="setTool('rect')"><i class="fas fa-square"></i> Rectangle</button>
+      <button class="tool-btn" id="tb-line" onclick="setTool('line')"><i class="fas fa-minus"></i> Line</button>
+      <button class="tool-btn" id="tb-eraser" onclick="setTool('eraser')"><i class="fas fa-eraser"></i> Eraser</button>
+      <span style="flex:1"></span>
+      <div class="tool-opt"><i class="fas fa-palette"></i><input type="color" id="color" value="#e53935"/></div>
+      <div class="tool-opt"><i class="fas fa-circle" style="font-size:.5rem"></i><input type="range" id="lineW" min="1" max="30" value="3"/></div>
+      <button class="tool-btn" onclick="undo()"><i class="fas fa-undo"></i></button>
+      <button class="tool-btn" onclick="clearPage()"><i class="fas fa-trash"></i></button>
+    </div>
+    <div id="pgNav">
+      <button onclick="changePage(-1)"><i class="fas fa-chevron-left"></i></button>
+      <span id="pgInfo">Page 1 of 1</span>
+      <button onclick="changePage(1)"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div id="canvasWrap">
+      <canvas id="pdfCanvas"></canvas>
+      <canvas id="drawCanvas"></canvas>
+      <input id="textInput" type="text" placeholder="Type here…"/>
+    </div>
+    <div class="action-row" style="margin-top:16px">
+      <button class="btn btn-primary" onclick="saveEdited()"><i class="fas fa-download"></i> Save Edited PDF</button>
+      <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+</div>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let file=null,pdfJsDoc=null,curPage=1,tool='pen',drawing=false,startX,startY;
+let pageAnnotations={};// {pageNum: [{type,data}]}
+let history=[];
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
+async function loadFile(f){file=f;const ab=await f.arrayBuffer();pdfJsDoc=await pdfjsLib.getDocument({data:ab}).promise;document.getElementById('editor').style.display='block';drop.style.display='none';renderPage(1);}
+const pdfC=document.getElementById('pdfCanvas'),pdfCtx=pdfC.getContext('2d');
+const drawC=document.getElementById('drawCanvas'),dCtx=drawC.getContext('2d');
+let viewport=null;
+async function renderPage(n){
+  curPage=n;document.getElementById('pgInfo').textContent=`Page ${n} of ${pdfJsDoc.numPages}`;
+  const page=await pdfJsDoc.getPage(n);viewport=page.getViewport({scale:1.3});
+  pdfC.width=drawC.width=viewport.width;pdfC.height=drawC.height=viewport.height;
+  document.getElementById('drawCanvas').style.width=pdfC.style.width=viewport.width+'px';
+  document.getElementById('drawCanvas').style.height=pdfC.style.height=viewport.height+'px';
+  await page.render({canvasContext:pdfCtx,viewport}).promise;
+  redrawAnnotations();
+}
+function changePage(d){const n=curPage+d;if(n>=1&&n<=pdfJsDoc.numPages)renderPage(n);}
+function setTool(t){tool=t;document.querySelectorAll('.tool-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tb-'+t)?.classList.add('active');drawC.style.cursor=t==='text'?'text':t==='eraser'?'cell':'crosshair';}
+function getPos(e){const r=drawC.getBoundingClientRect();return{x:(e.clientX-r.left)*(drawC.width/r.width),y:(e.clientY-r.top)*(drawC.height/r.height)};}
+function getColor(){return document.getElementById('color').value;}
+function getLW(){return parseInt(document.getElementById('lineW').value);}
+let pathData=null;
+drawC.onmousedown=e=>{
+  const p=getPos(e);
+  if(tool==='text'){const ti=document.getElementById('textInput');ti.style.left=p.x+'px';ti.style.top=p.y+'px';ti.style.display='block';ti.style.fontSize=getLW()*2+12+'px';ti.style.color=getColor();ti.focus();return;}
+  drawing=true;startX=p.x;startY=p.y;
+  if(tool==='pen'||tool==='highlight'||tool==='eraser'){pathData={type:tool,color:getColor(),lw:getLW(),pts:[[p.x,p.y]]};saveSnapshot();}
+};
+drawC.onmousemove=e=>{
+  if(!drawing)return;const p=getPos(e);
+  if(tool==='pen'||tool==='highlight'||tool==='eraser'){
+    pathData.pts.push([p.x,p.y]);
+    dCtx.save();if(tool==='highlight'){dCtx.globalAlpha=.35;dCtx.globalCompositeOperation='multiply';}
+    else if(tool==='eraser')dCtx.globalCompositeOperation='destination-out';
+    dCtx.strokeStyle=tool==='eraser'?'rgba(0,0,0,1)':pathData.color;dCtx.lineWidth=tool==='highlight'?getLW()*4:getLW();dCtx.lineCap='round';dCtx.lineJoin='round';
+    dCtx.beginPath();const pts=pathData.pts;dCtx.moveTo(pts[pts.length-2][0],pts[pts.length-2][1]);dCtx.lineTo(p.x,p.y);dCtx.stroke();dCtx.restore();
+  } else {
+    redrawAnnotations();
+    dCtx.strokeStyle=getColor();dCtx.lineWidth=getLW();dCtx.setLineDash([]);
+    if(tool==='rect'){dCtx.strokeRect(startX,startY,p.x-startX,p.y-startY);}
+    else if(tool==='line'){dCtx.beginPath();dCtx.moveTo(startX,startY);dCtx.lineTo(p.x,p.y);dCtx.stroke();}
+  }
+};
+drawC.onmouseup=e=>{
+  if(!drawing)return;drawing=false;const p=getPos(e);
+  if(tool==='pen'||tool==='highlight'||tool==='eraser'){addAnnotation({...pathData});pathData=null;}
+  else if(tool==='rect')addAnnotation({type:'rect',color:getColor(),lw:getLW(),x:startX,y:startY,w:p.x-startX,h:p.y-startY});
+  else if(tool==='line')addAnnotation({type:'line',color:getColor(),lw:getLW(),x1:startX,y1:startY,x2:p.x,y2:p.y});
+};
+document.getElementById('textInput').onkeydown=e=>{
+  if(e.key==='Enter'){const ti=e.target;const x=parseInt(ti.style.left),y=parseInt(ti.style.top);addAnnotation({type:'text',text:ti.value,x,y,color:ti.style.color,size:parseInt(ti.style.fontSize)||16});ti.value='';ti.style.display='none';}
+};
+function addAnnotation(a){if(!pageAnnotations[curPage])pageAnnotations[curPage]=[];pageAnnotations[curPage].push(a);redrawAnnotations();}
+function saveSnapshot(){history.push(JSON.parse(JSON.stringify(pageAnnotations)));}
+function undo(){if(history.length){pageAnnotations=history.pop();redrawAnnotations();}}
+function clearPage(){saveSnapshot();pageAnnotations[curPage]=[];redrawAnnotations();}
+function redrawAnnotations(){
+  dCtx.clearRect(0,0,drawC.width,drawC.height);
+  (pageAnnotations[curPage]||[]).forEach(a=>{
+    dCtx.save();
+    if(a.type==='pen'||a.type==='highlight'||a.type==='eraser'){
+      if(a.type==='highlight'){dCtx.globalAlpha=.35;}
+      else if(a.type==='eraser'){dCtx.globalCompositeOperation='destination-out';}
+      dCtx.strokeStyle=a.type==='eraser'?'rgba(0,0,0,1)':a.color;dCtx.lineWidth=a.type==='highlight'?a.lw*4:a.lw;dCtx.lineCap='round';dCtx.lineJoin='round';
+      dCtx.beginPath();a.pts.forEach(([x,y],i)=>i?dCtx.lineTo(x,y):dCtx.moveTo(x,y));dCtx.stroke();
+    } else if(a.type==='rect'){dCtx.strokeStyle=a.color;dCtx.lineWidth=a.lw;dCtx.strokeRect(a.x,a.y,a.w,a.h);}
+    else if(a.type==='line'){dCtx.strokeStyle=a.color;dCtx.lineWidth=a.lw;dCtx.beginPath();dCtx.moveTo(a.x1,a.y1);dCtx.lineTo(a.x2,a.y2);dCtx.stroke();}
+    else if(a.type==='text'){dCtx.fillStyle=a.color;dCtx.font=`${a.size}px sans-serif`;dCtx.fillText(a.text,a.x,a.y+a.size);}
+    dCtx.restore();
+  });
+}
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function saveEdited(){
+  showStatus('Flattening annotations…','info');
+  try{
+    const ab=await file.arrayBuffer();const doc=await PDFLib.PDFDocument.load(ab,{ignoreEncryption:true});
+    const scale=1/1.3;
+    for(const [pg,anns] of Object.entries(pageAnnotations)){
+      if(!anns.length)continue;
+      const page=doc.getPage(parseInt(pg)-1);const {height}=page.getSize();
+      // render annotations to canvas, embed as image
+      const fc=document.createElement('canvas');fc.width=drawC.width;fc.height=drawC.height;
+      const fc2=fc.getContext('2d');
+      pageAnnotations[parseInt(pg)]?.forEach(a=>{
+        fc2.save();
+        if(a.type==='pen'||a.type==='highlight'){if(a.type==='highlight')fc2.globalAlpha=.35;fc2.strokeStyle=a.color;fc2.lineWidth=a.type==='highlight'?a.lw*4:a.lw;fc2.lineCap='round';fc2.lineJoin='round';fc2.beginPath();a.pts.forEach(([x,y],i)=>i?fc2.lineTo(x,y):fc2.moveTo(x,y));fc2.stroke();}
+        else if(a.type==='rect'){fc2.strokeStyle=a.color;fc2.lineWidth=a.lw;fc2.strokeRect(a.x,a.y,a.w,a.h);}
+        else if(a.type==='line'){fc2.strokeStyle=a.color;fc2.lineWidth=a.lw;fc2.beginPath();fc2.moveTo(a.x1,a.y1);fc2.lineTo(a.x2,a.y2);fc2.stroke();}
+        else if(a.type==='text'){fc2.fillStyle=a.color;fc2.font=`${a.size}px sans-serif`;fc2.fillText(a.text,a.x,a.y+a.size);}
+        fc2.restore();
+      });
+      const dataUrl=fc.toDataURL('image/png');const resp=await fetch(dataUrl);const imgAb=await resp.arrayBuffer();
+      const img=await doc.embedPng(imgAb);
+      page.drawImage(img,{x:0,y:0,width:fc.width*scale,height:fc.height*scale});
+    }
+    const bytes=await doc.save();const blob=new Blob([bytes],{type:'application/pdf'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='edited.pdf';a.click();
+    showStatus('✓ Saved!','success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+}
+</script></body></html>

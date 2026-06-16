@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>HTML to PDF – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>#htmlInput{width:100%;min-height:200px;background:var(--s2);border:1px solid var(--border);color:var(--text);padding:14px;border-radius:10px;font-family:monospace;font-size:.85rem;outline:none;resize:vertical}#htmlInput:focus{border-color:var(--accent)}</style>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header"><div class="tool-icon" style="color:var(--a2)"><i class="fas fa-code"></i></div><h1>HTML to PDF</h1><p>Paste HTML code or a URL to convert to PDF. Uses browser print engine.</p></div>
+  <div class="options" style="display:block">
+    <div class="opt-row"><label>Input type</label><select id="inputType" onchange="toggleInput()"><option value="html">HTML Code</option><option value="url">URL (opens in new tab for printing)</option></select></div>
+    <div id="htmlArea"><div class="opt-row"><label>HTML Content</label><textarea id="htmlInput" placeholder="&lt;h1&gt;Hello&lt;/h1&gt;&lt;p&gt;Your content here…&lt;/p&gt;"></textarea></div></div>
+    <div id="urlArea" style="display:none"><div class="opt-row"><label>Website URL</label><input type="url" id="urlInput" placeholder="https://example.com"/></div></div>
+    <div class="opt-row"><label>Page size</label><select id="psize"><option value="a4">A4</option><option value="letter">Letter</option></select></div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" onclick="go()"><i class="fas fa-file-pdf"></i> Convert to PDF</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div style="margin-top:16px;padding:14px;background:var(--s2);border:1px solid var(--border);border-radius:10px;font-size:.78rem;color:var(--muted)">
+    <i class="fas fa-info-circle" style="color:var(--accent)"></i> A print dialog will open. Select "Save as PDF" as the printer to save the output.
+  </div>
+</div>
+<script>
+function toggleInput(){const t=document.getElementById('inputType').value;document.getElementById('htmlArea').style.display=t==='html'?'':'none';document.getElementById('urlArea').style.display=t==='url'?'':'none';}
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+function go(){
+  const type=document.getElementById('inputType').value;
+  if(type==='url'){const url=document.getElementById('urlInput').value.trim();if(!url){showStatus('Enter a URL','error');return;}window.open(url,'_blank');showStatus('Page opened in new tab. Use Ctrl+P / Cmd+P and choose "Save as PDF".','info');return;}
+  const html=document.getElementById('htmlInput').value.trim();if(!html){showStatus('Enter HTML content','error');return;}
+  const psize=document.getElementById('psize').value;
+  const fullHtml=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>@page{size:${psize};margin:15mm}body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.5}*{box-sizing:border-box}img{max-width:100%}</style></head><body>${html}</body></html>`;
+  const w=window.open('','_blank');w.document.write(fullHtml);w.document.close();w.onload=()=>{w.print();};
+  showStatus('Print dialog opened. Choose "Save as PDF" as the printer.','success');
+}
+</script></body></html>

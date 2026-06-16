@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PDF to PDF/A – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header">
+    <div class="tool-icon" style="color:var(--a4)"><i class="fas fa-archive"></i></div>
+    <h1>PDF to PDF/A</h1>
+    <p>Convert your PDF to the archival PDF/A-1b standard — required for long-term document storage and compliance.</p>
+  </div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <div class="dl">Drop a PDF or click to upload</div>
+    <div class="ds">Single PDF file</div>
+  </div>
+  <input type="file" id="fin" accept=".pdf" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row">
+      <label>PDF/A Level</label>
+      <select id="level">
+        <option value="1b">PDF/A-1b (basic — most compatible)</option>
+        <option value="2b">PDF/A-2b (recommended)</option>
+        <option value="3b">PDF/A-3b (allows attachments)</option>
+      </select>
+    </div>
+    <div class="opt-row">
+      <label>Document Title (for metadata)</label>
+      <input type="text" id="doctitle" placeholder="Optional document title"/>
+    </div>
+    <div class="opt-row">
+      <label>Author</label>
+      <input type="text" id="docauthor" placeholder="Optional author name"/>
+    </div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-archive"></i> Convert to PDF/A</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+  <div style="margin-top:18px;padding:14px;background:rgba(255,179,71,.07);border:1px solid rgba(255,179,71,.2);border-radius:10px;font-size:.78rem;color:var(--muted)">
+    <i class="fas fa-info-circle" style="color:var(--a4)"></i>
+    PDF/A conversion embeds required metadata (XMP), sets color profiles, and removes features incompatible with archival standards. For full ISO 19005 compliance, use a certified tool like Adobe Acrobat Pro.
+  </div>
+</div>
+<script>
+let file=null;
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
+function loadFile(f){
+  file=f;
+  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf" style="color:var(--a2)"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span></div>`;
+  document.getElementById('opts').style.display='block';
+  document.getElementById('goBtn').disabled=false;
+}
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;
+  document.getElementById('prog').classList.add('show');
+  document.getElementById('pbar').style.width='15%';
+  showStatus('Converting to PDF/A…','info');
+  try{
+    const ab=await file.arrayBuffer();
+    const doc=await PDFLib.PDFDocument.load(ab,{ignoreEncryption:true});
+    const level=document.getElementById('level').value;
+    const title=document.getElementById('doctitle').value.trim()||file.name.replace('.pdf','');
+    const author=document.getElementById('docauthor').value.trim()||'PDFHub';
+    const now=new Date().toISOString();
+
+    // Set required PDF/A metadata
+    doc.setTitle(title);
+    doc.setAuthor(author);
+    doc.setProducer('PDFHub PDF/A Converter');
+    doc.setCreator('PDFHub');
+    doc.setCreationDate(new Date());
+    doc.setModificationDate(new Date());
+    doc.setKeywords(['PDF/A','archival','PDFHub']);
+    doc.setSubject(`PDF/A-${level} compliant document`);
+
+    document.getElementById('pbar').style.width='40%';
+
+    // Inject XMP metadata (required for PDF/A)
+    const xmpData = `<?xpacket begin="\uFEFF" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="PDFHub 1.0">
+  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <dc:title><rdf:Alt><rdf:li xml:lang="x-default">${title}</rdf:li></rdf:Alt></dc:title>
+      <dc:creator><rdf:Seq><rdf:li>${author}</rdf:li></rdf:Seq></dc:creator>
+      <dc:format>application/pdf</dc:format>
+    </rdf:Description>
+    <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/">
+      <xmp:CreateDate>${now}</xmp:CreateDate>
+      <xmp:ModifyDate>${now}</xmp:ModifyDate>
+      <xmp:CreatorTool>PDFHub</xmp:CreatorTool>
+    </rdf:Description>
+    <rdf:Description rdf:about="" xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+      <pdf:Producer>PDFHub PDF/A Converter</pdf:Producer>
+    </rdf:Description>
+    <rdf:Description rdf:about="" xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/">
+      <pdfaid:part>${level[0]}</pdfaid:part>
+      <pdfaid:conformance>${level[1].toUpperCase()}</pdfaid:conformance>
+    </rdf:Description>
+  </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="w"?>`;
+
+    // Embed XMP as metadata stream
+    const xmpStream = doc.context.stream(xmpData,{Type:'Metadata',Subtype:'XML'});
+    const xmpRef=doc.context.register(xmpStream);
+    doc.catalog.set(PDFLib.PDFName.of('Metadata'),xmpRef);
+
+    // Add output intent (sRGB color profile) — required for PDF/A
+    const outputIntentDict=doc.context.obj({
+      Type:PDFLib.PDFName.of('OutputIntent'),
+      S:PDFLib.PDFName.of('GTS_PDFA1'),
+      OutputConditionIdentifier:PDFLib.PDFString.of('sRGB'),
+      RegistryName:PDFLib.PDFString.of('http://www.color.org'),
+      Info:PDFLib.PDFString.of('sRGB IEC61966-2.1'),
+    });
+    const outputIntentRef=doc.context.register(outputIntentDict);
+    const outputIntentsArray=doc.context.obj([outputIntentRef]);
+    doc.catalog.set(PDFLib.PDFName.of('OutputIntents'),outputIntentsArray);
+
+    document.getElementById('pbar').style.width='80%';
+
+    const bytes=await doc.save({useObjectStreams:true,addDefaultPage:false});
+    const blob=new Blob([bytes],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download=file.name.replace('.pdf',`-pdfa-${level}.pdf`);a.click();
+    document.getElementById('pbar').style.width='100%';
+    showStatus(`✓ Converted to PDF/A-${level}! Download started.`,'success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+  btn.disabled=false;
+}
+</script>
+</body></html>

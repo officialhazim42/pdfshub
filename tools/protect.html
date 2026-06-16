@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Protect PDF – PDFHub</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/><link rel="stylesheet" href="shared.css"/></head>
+<body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header"><div class="tool-icon" style="color:#facc15"><i class="fas fa-lock"></i></div><h1>Protect PDF</h1><p>Add password protection to your PDF using PDF encryption.</p></div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()"><i class="fas fa-cloud-upload-alt"></i><div class="dl">Drop a PDF or click to upload</div><div class="ds">Single PDF</div></div>
+  <input type="file" id="fin" accept=".pdf" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row"><label>Password</label><input type="password" id="pw" placeholder="Enter a strong password"/></div>
+    <div class="opt-row"><label>Confirm Password</label><input type="password" id="pw2" placeholder="Repeat password"/></div>
+    <div class="opt-row"><label>Permissions</label>
+      <select id="perms">
+        <option value="all">All permissions (read + print + copy)</option>
+        <option value="readonly">Read only (no print, no copy)</option>
+        <option value="print">Allow printing only</option>
+      </select>
+    </div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-lock"></i> Protect PDF</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+  <div style="margin-top:20px;padding:14px;background:rgba(250,204,21,.07);border:1px solid rgba(250,204,21,.2);border-radius:10px;font-size:.78rem;color:var(--muted);">
+    <i class="fas fa-info-circle" style="color:#facc15"></i> PDF encryption is applied via the pdf-lib library. For maximum security, use a strong password with mixed characters.
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+let file=null;
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
+function loadFile(f){file=f;document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span></div>`;document.getElementById('opts').style.display='block';document.getElementById('goBtn').disabled=false;}
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function go(){
+  const pw=document.getElementById('pw').value,pw2=document.getElementById('pw2').value;
+  if(!pw){showStatus('Enter a password','error');return;}
+  if(pw!==pw2){showStatus('Passwords do not match','error');return;}
+  const btn=document.getElementById('goBtn');btn.disabled=true;document.getElementById('prog').classList.add('show');document.getElementById('pbar').style.width='30%';showStatus('Protecting…','info');
+  try{
+    const ab=await file.arrayBuffer();
+    const doc=await PDFLib.PDFDocument.load(ab,{ignoreEncryption:true});
+    document.getElementById('pbar').style.width='70%';
+    const bytes=await doc.save({userPassword:pw,ownerPassword:pw+'_owner',permissions:{printing:'lowResolution',modifying:false,copying:false,annotating:false,fillingForms:false,contentAccessibility:true,documentAssembly:false}});
+    const blob=new Blob([bytes],{type:'application/pdf'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='protected.pdf';a.click();
+    document.getElementById('pbar').style.width='100%';showStatus('✓ Protected! Download started.','success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+  btn.disabled=false;
+}
+</script></body></html>

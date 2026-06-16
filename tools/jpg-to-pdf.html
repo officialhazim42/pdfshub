@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>JPG to PDF – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header"><div class="tool-icon" style="color:var(--a2)"><i class="fas fa-image"></i></div><h1>JPG to PDF</h1><p>Convert one or multiple images (JPG, PNG, GIF, WebP) into a single PDF.</p></div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()"><i class="fas fa-cloud-upload-alt"></i><div class="dl">Drop images here or click to upload</div><div class="ds">JPG, PNG, GIF, WebP – multiple supported</div></div>
+  <input type="file" id="fin" accept="image/*" multiple hidden/>
+  <div class="preview-grid" id="preview"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row"><label>Page size</label><select id="psize"><option value="fit">Fit image (auto size)</option><option value="a4">A4</option><option value="letter">Letter</option></select></div>
+    <div class="opt-row"><label>Margin (px)</label><input type="number" id="margin" value="20" min="0" max="100"/></div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-file-pdf"></i> Convert to PDF</button>
+    <button class="btn btn-secondary" onclick="clearAll()"><i class="fas fa-trash"></i> Clear</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+</div>
+<script>
+let files=[];
+const drop=document.getElementById('drop'),fin=document.getElementById('fin'),prev=document.getElementById('preview');
+fin.onchange=e=>{addFiles([...e.target.files]);fin.value=''};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');addFiles([...e.dataTransfer.files].filter(f=>f.type.startsWith('image/')))};
+function addFiles(newFiles){files=[...files,...newFiles];renderPreviews();}
+function renderPreviews(){
+  prev.innerHTML='';
+  files.forEach((f,i)=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const d=document.createElement('div');d.className='prev-card';
+      d.innerHTML=`<button class="del-p" onclick="removeImg(${i})"><i class="fas fa-times"></i></button><img src="${e.target.result}"/><div class="pn">${f.name.substring(0,18)}</div>`;
+      prev.appendChild(d);
+    };reader.readAsDataURL(f);
+  });
+  document.getElementById('opts').style.display=files.length?'block':'none';
+  document.getElementById('goBtn').disabled=!files.length;
+}
+function removeImg(i){files.splice(i,1);renderPreviews();}
+function clearAll(){files=[];renderPreviews();showStatus('','');document.getElementById('prog').classList.remove('show');}
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status '+(msg?'show ':'')+type}
+async function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;document.getElementById('prog').classList.add('show');showStatus('Converting…','info');
+  try{
+    const doc=await PDFLib.PDFDocument.create();
+    const psize=document.getElementById('psize').value;
+    const margin=parseInt(document.getElementById('margin').value)||0;
+    for(let i=0;i<files.length;i++){
+      document.getElementById('pbar').style.width=((i+1)/files.length*90)+'%';
+      const ab=await files[i].arrayBuffer();
+      let img;
+      if(files[i].type==='image/png') img=await doc.embedPng(ab);
+      else img=await doc.embedJpg(ab);
+      const {width:iw,height:ih}=img.scale(1);
+      let pw,ph;
+      if(psize==='a4'){pw=595;ph=842;}
+      else if(psize==='letter'){pw=612;ph=792;}
+      else{pw=iw+margin*2;ph=ih+margin*2;}
+      const page=doc.addPage([pw,ph]);
+      const scale=Math.min((pw-margin*2)/iw,(ph-margin*2)/ih);
+      const sw=iw*scale,sh=ih*scale;
+      page.drawImage(img,{x:(pw-sw)/2,y:(ph-sh)/2,width:sw,height:sh});
+    }
+    document.getElementById('pbar').style.width='100%';
+    const bytes=await doc.save();
+    const blob=new Blob([bytes],{type:'application/pdf'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='images.pdf';a.click();
+    showStatus(`✓ Converted ${files.length} image(s) to PDF!`,'success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+  btn.disabled=false;
+}
+</script></body></html>

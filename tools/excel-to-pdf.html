@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Excel to PDF – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header">
+    <div class="tool-icon" style="color:var(--a3)"><i class="fas fa-file-excel"></i></div>
+    <h1>Excel to PDF</h1>
+    <p>Convert .xlsx spreadsheets to PDF directly in your browser — no upload needed.</p>
+  </div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <div class="dl">Drop an .xlsx file or click to upload</div>
+    <div class="ds">.xlsx, .xls, .csv · 100% client-side</div>
+  </div>
+  <input type="file" id="fin" accept=".xlsx,.xls,.csv" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row"><label>Sheet to export</label><select id="sheetSel"></select></div>
+    <div class="opt-row"><label>Page orientation</label>
+      <select id="orient"><option value="portrait">Portrait</option><option value="landscape">Landscape (wider tables)</option></select>
+    </div>
+    <div class="opt-row"><label>Page size</label>
+      <select id="psize"><option value="a4">A4</option><option value="letter">Letter</option></select>
+    </div>
+  </div>
+  <div id="preview" style="display:none;margin-bottom:14px">
+    <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Preview</div>
+    <div id="tableWrap" style="overflow:auto;max-height:300px;border:1px solid var(--border);border-radius:10px"></div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-file-pdf"></i> Convert to PDF</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+  <div style="margin-top:16px;padding:14px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.2);border-radius:10px;font-size:.78rem;color:var(--muted)">
+    <i class="fas fa-shield-alt" style="color:var(--a3)"></i> Powered by SheetJS. Your file stays in your browser — never uploaded anywhere.
+  </div>
+</div>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script>
+let file=null, workbook=null;
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f)loadFile(f)};
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+
+async function loadFile(f){
+  file=f;
+  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-excel" style="color:#1f7244"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span></div>`;
+  showStatus('Reading spreadsheet…','info');
+  try{
+    const ab=await f.arrayBuffer();
+    workbook=XLSX.read(ab,{type:'array'});
+    const sheetSel=document.getElementById('sheetSel');
+    sheetSel.innerHTML=workbook.SheetNames.map((n,i)=>`<option value="${i}">${n}</option>`).join('');
+    sheetSel.onchange=()=>renderPreview();
+    document.getElementById('opts').style.display='block';
+    renderPreview();
+    document.getElementById('goBtn').disabled=false;
+    showStatus('','');
+  }catch(e){showStatus('Error reading file: '+e.message,'error')}
+}
+
+function renderPreview(){
+  const idx=parseInt(document.getElementById('sheetSel').value)||0;
+  const sheet=workbook.Sheets[workbook.SheetNames[idx]];
+  const html=XLSX.utils.sheet_to_html(sheet);
+  document.getElementById('tableWrap').innerHTML=`<style>table{border-collapse:collapse;font-size:12px;font-family:Arial}td,th{border:1px solid #ccc;padding:4px 8px;white-space:nowrap}tr:nth-child(even){background:#f9f9f9}th{background:#e8f5e9;font-weight:700}</style>${html}`;
+  document.getElementById('preview').style.display='block';
+}
+
+function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;
+  document.getElementById('prog').classList.add('show');
+  document.getElementById('pbar').style.width='30%';
+  showStatus('Generating PDF…','info');
+  try{
+    const idx=parseInt(document.getElementById('sheetSel').value)||0;
+    const sheetName=workbook.SheetNames[idx];
+    const sheet=workbook.Sheets[sheetName];
+    const tableHtml=XLSX.utils.sheet_to_html(sheet);
+    const orient=document.getElementById('orient').value;
+    const psize=document.getElementById('psize').value;
+    const pageSizeCSS=psize==='a4'?'210mm 297mm':'8.5in 11in';
+
+    const printHtml=`<!DOCTYPE html><html><head><meta charset="UTF-8">
+<style>
+@page { size: ${pageSizeCSS}; orientation: ${orient}; margin: 10mm; }
+body { font-family: Arial, sans-serif; font-size: 9pt; }
+h2 { font-size: 12pt; margin-bottom: 8px; color: #333; }
+table { border-collapse: collapse; width: 100%; page-break-inside: auto; }
+tr { page-break-inside: avoid; page-break-after: auto; }
+td, th { border: 1px solid #999; padding: 4px 7px; vertical-align: top; word-break: break-word; max-width: 150px; }
+th { background: #e8f5e9; font-weight: 700; }
+tr:nth-child(even) td { background: #f9f9f9; }
+</style></head><body>
+<h2>${sheetName} — ${file.name}</h2>
+${tableHtml}
+</body></html>`;
+
+    const w=window.open('','_blank','width=1000,height=750');
+    w.document.write(printHtml);
+    w.document.close();
+    w.onload=()=>setTimeout(()=>{
+      w.print();
+      document.getElementById('pbar').style.width='100%';
+      showStatus('✓ Print dialog opened — select "Save as PDF" as printer!','success');
+    },400);
+    btn.disabled=false;
+  }catch(e){showStatus('Error: '+e.message,'error');btn.disabled=false;}
+}
+</script>
+</body></html>

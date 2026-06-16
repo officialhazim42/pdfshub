@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PDF to Excel – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<style>
+#tablePreview{overflow:auto;max-height:280px;border:1px solid var(--border);border-radius:10px;margin-bottom:14px;display:none}
+#tablePreview table{border-collapse:collapse;font-size:12px;width:100%}
+#tablePreview td,#tablePreview th{border:1px solid var(--border);padding:4px 8px;white-space:nowrap;background:var(--s2)}
+#tablePreview tr:first-child td{background:var(--s1);font-weight:600;color:var(--accent)}
+</style>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header">
+    <div class="tool-icon" style="color:var(--a4)"><i class="fas fa-file-excel"></i></div>
+    <h1>PDF to Excel</h1>
+    <p>Extract tables and text from PDF, intelligently detect columns, and export as .xlsx spreadsheet.</p>
+  </div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <div class="dl">Drop a PDF or click to upload</div>
+    <div class="ds">Works best on PDFs with tables · 100% browser-side</div>
+  </div>
+  <input type="file" id="fin" accept=".pdf" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row"><label>Pages to extract (blank = all)</label><input type="text" id="pgrange" placeholder="e.g. 1-5"/></div>
+    <div class="opt-row"><label>Column detection</label>
+      <select id="colmode">
+        <option value="auto">Auto (detect columns by X position)</option>
+        <option value="tab">Tab/space separated</option>
+        <option value="lines">Each line = one row</option>
+      </select>
+    </div>
+    <div class="opt-row"><label>Output format</label>
+      <select id="outfmt">
+        <option value="xlsx">Excel (.xlsx)</option>
+        <option value="csv">CSV (.csv)</option>
+      </select>
+    </div>
+  </div>
+  <div id="tablePreview" id="tablePreview"></div>
+  <div class="action-row">
+    <button class="btn btn-secondary" id="prevBtn" style="display:none" onclick="preview()"><i class="fas fa-eye"></i> Preview Table</button>
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-file-excel"></i> Export to Excel</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+</div>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let file=null, pdfDoc=null, extractedData=[];
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function loadFile(f){
+  file=f;
+  const ab=await f.arrayBuffer();
+  pdfDoc=await pdfjsLib.getDocument({data:ab}).promise;
+  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf" style="color:var(--a2)"></i><span class="fn">${f.name}</span><span class="fs">${pdfDoc.numPages} pages</span></div>`;
+  document.getElementById('opts').style.display='block';
+  document.getElementById('goBtn').disabled=false;
+  document.getElementById('prevBtn').style.display='';
+}
+function parsePages(str,max){if(!str.trim())return Array.from({length:max},(_,i)=>i+1);const set=new Set();str.split(',').forEach(r=>{r=r.trim();if(r.includes('-')){const[a,b]=r.split('-').map(Number);for(let i=a;i<=Math.min(b,max);i++)set.add(i);}else{const n=parseInt(r);if(n>=1&&n<=max)set.add(n);}});return[...set].sort((a,b)=>a-b);}
+
+async function extractTableData(){
+  const pages=parsePages(document.getElementById('pgrange').value,pdfDoc.numPages);
+  const colmode=document.getElementById('colmode').value;
+  const allRows=[];
+  for(let i=0;i<pages.length;i++){
+    document.getElementById('pbar').style.width=((i+1)/pages.length*70)+'%';
+    const page=await pdfDoc.getPage(pages[i]);
+    const content=await page.getTextContent();
+    if(colmode==='lines'){
+      const lineMap={};
+      content.items.forEach(item=>{
+        const y=Math.round(item.transform[5]);
+        if(!lineMap[y])lineMap[y]=[];
+        lineMap[y].push({x:item.transform[4],text:item.str});
+      });
+      Object.keys(lineMap).sort((a,b)=>b-a).forEach(y=>{
+        const line=lineMap[y].sort((a,b)=>a.x-b.x).map(i=>i.text).join(' ').trim();
+        if(line)allRows.push([`Page ${pages[i]}`,line]);
+      });
+    }else if(colmode==='auto'){
+      // Detect columns by X position clustering
+      const lineMap={};
+      content.items.forEach(item=>{
+        const y=Math.round(item.transform[5]/3)*3;// group nearby Y positions
+        if(!lineMap[y])lineMap[y]=[];
+        lineMap[y].push({x:Math.round(item.transform[4]),text:item.str.trim()});
+      });
+      // Find common X positions (columns)
+      const allX=content.items.map(i=>Math.round(i.transform[4]/20)*20);
+      const xFreq={};allX.forEach(x=>{xFreq[x]=(xFreq[x]||0)+1;});
+      const colBoundaries=Object.entries(xFreq).filter(([,v])=>v>2).map(([k])=>parseInt(k)).sort((a,b)=>a-b);
+      
+      Object.keys(lineMap).sort((a,b)=>b-a).forEach(y=>{
+        const items=lineMap[y].sort((a,b)=>a.x-b.x);
+        if(!items.length||!items.some(i=>i.text))return;
+        if(colBoundaries.length<2){allRows.push(items.map(i=>i.text));return;}
+        // Assign items to columns
+        const row=new Array(Math.min(colBoundaries.length,10)).fill('');
+        items.forEach(item=>{
+          let col=0;for(let c=0;c<colBoundaries.length;c++){if(item.x>=colBoundaries[c]-15)col=c;}
+          if(col<row.length)row[col]+=(row[col]?' ':'')+item.text;
+        });
+        if(row.some(c=>c.trim()))allRows.push(row);
+      });
+    }else{
+      // Tab separated
+      content.items.forEach(item=>{
+        const cols=item.str.split(/\t+/).map(s=>s.trim()).filter(Boolean);
+        if(cols.length>1)allRows.push(cols);
+        else if(cols[0])allRows.push([cols[0]]);
+      });
+    }
+  }
+  return allRows;
+}
+
+async function preview(){
+  document.getElementById('prog').classList.add('show');document.getElementById('pbar').style.width='10%';showStatus('Extracting…','info');
+  try{
+    extractedData=await extractTableData();
+    const tp=document.getElementById('tablePreview');
+    if(!extractedData.length){showStatus('No data found','error');return;}
+    const cols=Math.max(...extractedData.map(r=>r.length));
+    let html='<table>';
+    extractedData.slice(0,30).forEach((row,i)=>{
+      html+=`<tr>${row.map(c=>`<td>${c||''}</td>`).join('')}${'<td></td>'.repeat(Math.max(0,cols-row.length))}</tr>`;
+    });
+    html+='</table>';
+    if(extractedData.length>30)html+=`<div style="padding:8px;font-size:.75rem;color:var(--muted)">Showing 30 of ${extractedData.length} rows…</div>`;
+    tp.innerHTML=html;tp.style.display='block';
+    document.getElementById('pbar').style.width='100%';showStatus(`✓ Found ${extractedData.length} rows, ${cols} columns`,'success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+}
+
+async function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;
+  document.getElementById('prog').classList.add('show');showStatus('Extracting and building spreadsheet…','info');
+  try{
+    if(!extractedData.length)extractedData=await extractTableData();
+    document.getElementById('pbar').style.width='85%';
+    const outfmt=document.getElementById('outfmt').value;
+    const ws=XLSX.utils.aoa_to_sheet(extractedData);
+    const wb=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,'Extracted Data',ws);
+    if(outfmt==='csv'){
+      const csv=XLSX.utils.sheet_to_csv(ws);
+      const blob=new Blob([csv],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file.name.replace('.pdf','.csv');a.click();
+    }else{
+      XLSX.writeFile(wb,file.name.replace('.pdf','.xlsx'));
+    }
+    document.getElementById('pbar').style.width='100%';showStatus(`✓ Exported ${extractedData.length} rows! Download started.`,'success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+  btn.disabled=false;
+}
+</script>
+</body></html>

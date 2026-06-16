@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Sign PDF – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+#sigCanvas{background:#fff;border:1px solid var(--border);border-radius:10px;cursor:crosshair;touch-action:none;width:100%;max-width:500px;display:block;}
+.sig-tabs{display:flex;gap:8px;margin-bottom:12px}
+.sig-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border);background:var(--s2);color:var(--muted);cursor:pointer;font-size:.82rem;font-family:'DM Sans',sans-serif;transition:all .2s}
+.sig-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+#typeInput{width:100%;max-width:500px;font-size:1.8rem;padding:10px 14px;background:#fff;color:#000;border:1px solid var(--border);border-radius:10px;font-family:cursive;outline:none}
+#pdfViewer{position:relative;display:inline-block}
+#pdfViewer canvas{border:1px solid var(--border);border-radius:8px;max-width:100%}
+.sig-overlay{position:absolute;cursor:move;border:2px dashed var(--accent);border-radius:4px;display:flex;align-items:center;justify-content:center;background:rgba(124,106,255,.08);user-select:none;min-width:120px;min-height:40px}
+.sig-overlay img{max-width:100%;max-height:100%;pointer-events:none}
+.sig-overlay .del-sig{position:absolute;top:-10px;right:-10px;background:var(--a2);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:.65rem;cursor:pointer}
+#pgNav{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:.85rem}
+#pgNav button{background:var(--s2);border:1px solid var(--border);color:var(--text);padding:5px 12px;border-radius:7px;cursor:pointer}
+</style>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header"><div class="tool-icon" style="color:#facc15"><i class="fas fa-signature"></i></div><h1>Sign PDF</h1><p>Draw or type your signature, then place it on any PDF page.</p></div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()"><i class="fas fa-cloud-upload-alt"></i><div class="dl">Drop a PDF or click to upload</div></div>
+  <input type="file" id="fin" accept=".pdf" hidden/>
+  <div id="sigSection" style="display:none">
+    <div style="margin:20px 0 10px;font-size:.85rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px">1. Create Signature</div>
+    <div class="sig-tabs">
+      <button class="sig-tab active" onclick="setMode('draw')">Draw</button>
+      <button class="sig-tab" onclick="setMode('type')">Type</button>
+    </div>
+    <div id="drawArea">
+      <canvas id="sigCanvas" width="500" height="150"></canvas>
+      <div class="action-row" style="margin-top:8px">
+        <button class="btn btn-secondary" style="font-size:.78rem;padding:7px 14px" onclick="clearSig()"><i class="fas fa-eraser"></i> Clear</button>
+        <select id="penColor" style="background:var(--s2);border:1px solid var(--border);color:var(--text);padding:7px 12px;border-radius:8px;font-family:'DM Sans',sans-serif">
+          <option value="#000000">Black</option><option value="#1a237e">Dark Blue</option><option value="#b71c1c">Dark Red</option>
+        </select>
+      </div>
+    </div>
+    <div id="typeArea" style="display:none">
+      <input type="text" id="typeInput" placeholder="Type your name…"/>
+      <select id="sigFont" style="background:var(--s2);border:1px solid var(--border);color:var(--text);padding:7px 12px;border-radius:8px;font-family:'DM Sans',sans-serif;margin-top:8px">
+        <option value="cursive">Cursive</option><option value="'Dancing Script',cursive">Script</option><option value="fantasy">Fantasy</option>
+      </select>
+    </div>
+    <div style="margin:20px 0 10px;font-size:.85rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px">2. Place on PDF – Click page to add signature</div>
+    <div id="pgNav">
+      <button onclick="prevPage()"><i class="fas fa-chevron-left"></i></button>
+      <span id="pgInfo">Page 1 of 1</span>
+      <button onclick="nextPage()"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div id="pdfViewer"><canvas id="pdfCanvas"></canvas></div>
+    <div class="action-row" style="margin-top:16px">
+      <button class="btn btn-primary" onclick="saveSigned()"><i class="fas fa-download"></i> Save Signed PDF</button>
+      <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+</div>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let file=null,pdfDoc=null,curPage=1,signatures=[];
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
+async function loadFile(f){file=f;const ab=await f.arrayBuffer();pdfDoc=await pdfjsLib.getDocument({data:ab}).promise;document.getElementById('sigSection').style.display='block';drop.style.display='none';renderPage(1);}
+// Drawing
+const sigC=document.getElementById('sigCanvas'),ctx2=sigC.getContext('2d');let drawing=false,lastX=0,lastY=0;
+ctx2.strokeStyle='#000';ctx2.lineWidth=2.5;ctx2.lineCap='round';ctx2.lineJoin='round';
+function getPos(e){const r=sigC.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:(t.clientX-r.left)*(sigC.width/r.width),y:(t.clientY-r.top)*(sigC.height/r.height)};}
+sigC.onmousedown=sigC.ontouchstart=e=>{e.preventDefault();drawing=true;const p=getPos(e);lastX=p.x;lastY=p.y;};
+sigC.onmousemove=sigC.ontouchmove=e=>{e.preventDefault();if(!drawing)return;ctx2.strokeStyle=document.getElementById('penColor').value;ctx2.beginPath();ctx2.moveTo(lastX,lastY);const p=getPos(e);ctx2.lineTo(p.x,p.y);ctx2.stroke();lastX=p.x;lastY=p.y;};
+sigC.onmouseup=sigC.ontouchend=()=>drawing=false;
+function clearSig(){ctx2.clearRect(0,0,sigC.width,sigC.height);}
+let mode='draw';
+function setMode(m){mode=m;document.querySelectorAll('.sig-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&m==='draw')||(i===1&&m==='type')));document.getElementById('drawArea').style.display=m==='draw'?'':'none';document.getElementById('typeArea').style.display=m==='type'?'':'none';}
+function getSigDataUrl(){
+  if(mode==='type'){
+    const text=document.getElementById('typeInput').value.trim();if(!text)return null;
+    const c=document.createElement('canvas');c.width=400;c.height=120;const cx=c.getContext('2d');
+    cx.font=`72px ${document.getElementById('sigFont').value}`;cx.fillStyle='#000';cx.textBaseline='middle';cx.fillText(text,10,60);return c.toDataURL('image/png');
+  }
+  const d=sigC.toDataURL('image/png');const tmp=document.createElement('canvas');tmp.width=sigC.width;tmp.height=sigC.height;const tc=tmp.getContext('2d');tc.drawImage(sigC,0,0);
+  const data=tc.getImageData(0,0,tmp.width,tmp.height).data;const hasContent=data.some((_,i)=>i%4===3&&data[i]>0);
+  return hasContent?d:null;
+}
+// PDF Render
+const pdfCanvas=document.getElementById('pdfCanvas'),pdfCtx=pdfCanvas.getContext('2d');let viewport=null;
+async function renderPage(n){
+  curPage=n;document.getElementById('pgInfo').textContent=`Page ${n} of ${pdfDoc.numPages}`;
+  const page=await pdfDoc.getPage(n);viewport=page.getViewport({scale:1.2});
+  pdfCanvas.width=viewport.width;pdfCanvas.height=viewport.height;
+  await page.render({canvasContext:pdfCtx,viewport}).promise;
+  // redraw placed sigs for this page
+  renderPlacedSigs();
+}
+function prevPage(){if(curPage>1)renderPage(curPage-1);}
+function nextPage(){if(curPage<pdfDoc.numPages)renderPage(curPage+1);}
+// Place sig on click
+const viewer=document.getElementById('pdfViewer');
+pdfCanvas.onclick=e=>{
+  const sig=getSigDataUrl();if(!sig){showStatus('Draw or type a signature first!','error');return;}
+  const r=pdfCanvas.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;
+  signatures.push({page:curPage,x,y,w:160,h:50,dataUrl:sig});renderPlacedSigs();
+};
+function renderPlacedSigs(){
+  document.querySelectorAll('.sig-overlay').forEach(e=>e.remove());
+  signatures.filter(s=>s.page===curPage).forEach((s,gi)=>{
+    const idx=signatures.indexOf(s);
+    const el=document.createElement('div');el.className='sig-overlay';el.style.cssText=`left:${s.x-s.w/2}px;top:${s.y-s.h/2}px;width:${s.w}px;height:${s.h}px;`;
+    el.innerHTML=`<img src="${s.dataUrl}"/><button class="del-sig" onclick="removeSig(${idx})"><i class="fas fa-times"></i></button>`;
+    makeDraggable(el,s,idx);viewer.appendChild(el);
+  });
+}
+function removeSig(i){signatures.splice(i,1);renderPlacedSigs();}
+function makeDraggable(el,s,idx){let sx,sy;
+  el.onmousedown=e=>{if(e.target.tagName==='BUTTON')return;sx=e.clientX-el.offsetLeft;sy=e.clientY-el.offsetTop;
+    const mm=e2=>{el.style.left=(e2.clientX-sx)+'px';el.style.top=(e2.clientY-sy)+'px';signatures[idx].x=e2.clientX-sx+s.w/2;signatures[idx].y=e2.clientY-sy+s.h/2;};
+    const mu=()=>{document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);};
+    document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);
+  };
+}
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function saveSigned(){
+  if(!signatures.length){showStatus('Place at least one signature on the PDF','error');return;}
+  showStatus('Saving…','info');
+  try{
+    const pdfLibMod=PDFLib;
+    const ab=await file.arrayBuffer();const doc=await pdfLibMod.PDFDocument.load(ab,{ignoreEncryption:true});
+    const pages=doc.getPages();
+    const scale=1/1.2;// reverse viewport scale
+    for(const s of signatures){
+      const page=pages[s.page-1];const {height}=page.getSize();
+      const resp=await fetch(s.dataUrl);const sigAb=await resp.arrayBuffer();
+      const img=await doc.embedPng(sigAb);
+      const realX=s.x*scale-s.w*scale/2;const realY=height-(s.y*scale+s.h*scale/2);
+      page.drawImage(img,{x:realX,y:realY,width:s.w*scale,height:s.h*scale});
+    }
+    const bytes=await doc.save();const blob=new Blob([bytes],{type:'application/pdf'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='signed.pdf';a.click();
+    showStatus('✓ Signed PDF saved!','success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+}
+</script></body></html>

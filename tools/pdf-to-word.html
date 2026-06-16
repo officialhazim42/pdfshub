@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PDF to Word – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header">
+    <div class="tool-icon" style="color:var(--a4)"><i class="fas fa-file-word"></i></div>
+    <h1>PDF to Word</h1>
+    <p>Extract all text from your PDF and download as an editable .docx Word document.</p>
+  </div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <div class="dl">Drop a PDF or click to upload</div>
+    <div class="ds">Text-based PDFs · 100% browser-side</div>
+  </div>
+  <input type="file" id="fin" accept=".pdf" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row"><label>Pages (blank = all)</label><input type="text" id="pgrange" placeholder="e.g. 1-5 or leave blank"/></div>
+    <div class="opt-row"><label>Output format</label>
+      <select id="outfmt">
+        <option value="docx">Word Document (.docx)</option>
+        <option value="rtf">Rich Text (.rtf)</option>
+        <option value="txt">Plain Text (.txt)</option>
+      </select>
+    </div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-file-word"></i> Convert to Word</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+</div>
+<script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let file=null, pdfDoc=null;
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function loadFile(f){
+  file=f;
+  const ab=await f.arrayBuffer();
+  pdfDoc=await pdfjsLib.getDocument({data:ab}).promise;
+  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf" style="color:var(--a2)"></i><span class="fn">${f.name}</span><span class="fs">${pdfDoc.numPages} pages · ${(f.size/1024/1024).toFixed(2)} MB</span></div>`;
+  document.getElementById('opts').style.display='block';
+  document.getElementById('goBtn').disabled=false;
+}
+function parsePages(str,max){if(!str.trim())return Array.from({length:max},(_,i)=>i+1);const set=new Set();str.split(',').forEach(r=>{r=r.trim();if(r.includes('-')){const[a,b]=r.split('-').map(Number);for(let i=a;i<=Math.min(b,max);i++)set.add(i);}else{const n=parseInt(r);if(n>=1&&n<=max)set.add(n);}});return[...set].sort((a,b)=>a-b);}
+async function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;
+  document.getElementById('prog').classList.add('show');
+  showStatus('Extracting text from PDF…','info');
+  try{
+    const pages=parsePages(document.getElementById('pgrange').value,pdfDoc.numPages);
+    const outfmt=document.getElementById('outfmt').value;
+    let pageTexts=[];
+    for(let i=0;i<pages.length;i++){
+      document.getElementById('pbar').style.width=((i+1)/pages.length*80)+'%';
+      const page=await pdfDoc.getPage(pages[i]);
+      const content=await page.getTextContent();
+      // Group items into lines by Y position
+      const lines={};
+      content.items.forEach(item=>{
+        const y=Math.round(item.transform[5]);
+        if(!lines[y])lines[y]=[];
+        lines[y].push(item.str);
+      });
+      const text=Object.keys(lines).sort((a,b)=>b-a).map(y=>lines[y].join(' ')).join('\n');
+      pageTexts.push({page:pages[i],text});
+    }
+    document.getElementById('pbar').style.width='90%';
+
+    if(outfmt==='txt'){
+      const full=pageTexts.map(p=>`--- Page ${p.page} ---\n${p.text}`).join('\n\n');
+      const blob=new Blob([full],{type:'text/plain'});
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file.name.replace('.pdf','.txt');a.click();
+    } else if(outfmt==='rtf'){
+      let rtf='{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 Arial;}}\\f0\\fs22 ';
+      pageTexts.forEach(p=>{
+        rtf+=`{\\b\\fs28 Page ${p.page}}\\par\\par `;
+        rtf+=p.text.replace(/\\/g,'\\\\').replace(/\{/g,'\\{').replace(/\}/g,'\\}').replace(/\n/g,'\\par ');
+        rtf+='\\par\\par\\par ';
+      });
+      rtf+='}';
+      const blob=new Blob([rtf],{type:'application/rtf'});
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file.name.replace('.pdf','.rtf');a.click();
+    } else {
+      // Build proper .docx using docx.js library
+      try{
+        const {Document,Packer,Paragraph,TextRun,HeadingLevel,PageBreak}=docx;
+        const children=[];
+        pageTexts.forEach((p,idx)=>{
+          if(idx>0)children.push(new Paragraph({children:[new PageBreak()]}));
+          children.push(new Paragraph({text:`Page ${p.page}`,heading:HeadingLevel.HEADING_2}));
+          p.text.split('\n').filter(l=>l.trim()).forEach(line=>{
+            children.push(new Paragraph({children:[new TextRun({text:line,size:22})]}));
+          });
+        });
+        const doc=new Document({sections:[{properties:{},children}]});
+        const blob=await Packer.toBlob(doc);
+        const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file.name.replace('.pdf','.docx');a.click();
+      }catch{
+        // Fallback: generate RTF if docx library not available
+        showStatus('Falling back to .rtf format…','info');
+        let rtf='{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 Arial;}}\\f0\\fs22 ';
+        pageTexts.forEach(p=>{rtf+=`{\\b\\fs28 Page ${p.page}}\\par\\par `;rtf+=p.text.replace(/\\/g,'\\\\').replace(/\n/g,'\\par ');rtf+='\\par\\par ';});
+        rtf+='}';
+        const blob=new Blob([rtf],{type:'application/rtf'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file.name.replace('.pdf','.rtf');a.click();
+      }
+    }
+    document.getElementById('pbar').style.width='100%';
+    showStatus(`✓ Converted ${pages.length} page(s) — download started!`,'success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+  btn.disabled=false;
+}
+</script>
+</body></html>

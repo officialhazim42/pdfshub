@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PowerPoint to PDF – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header">
+    <div class="tool-icon" style="color:var(--a2)"><i class="fas fa-file-powerpoint"></i></div>
+    <h1>PowerPoint to PDF</h1>
+    <p>Convert .pptx presentations to PDF — text and content extracted directly in your browser.</p>
+  </div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <div class="dl">Drop a .pptx file or click to upload</div>
+    <div class="ds">.pptx format · No server needed</div>
+  </div>
+  <input type="file" id="fin" accept=".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row"><label>Slide layout</label>
+      <select id="layout">
+        <option value="slide">One slide per page (16:9)</option>
+        <option value="notes">Slides with notes</option>
+        <option value="handout2">Handout — 2 per page</option>
+        <option value="handout4">Handout — 4 per page</option>
+      </select>
+    </div>
+    <div class="opt-row"><label>Background color</label>
+      <select id="bg"><option value="white">White</option><option value="#f0f4ff">Light blue</option><option value="#fff9f0">Light warm</option></select>
+    </div>
+  </div>
+  <div id="preview" style="display:none;margin-bottom:14px">
+    <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Slides Preview (<span id="slideCount">0</span> slides)</div>
+    <div id="slidesWrap" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px"></div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-file-pdf"></i> Convert to PDF</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+</div>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+<script>
+let file=null, slides=[];
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f)loadFile(f)};
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+
+function extractXmlText(xml){
+  // Extract all <a:t> text nodes from pptx XML
+  const matches=[...xml.matchAll(/<a:t[^>]*>([^<]*)<\/a:t>/g)];
+  return matches.map(m=>m[1].replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'")).join(' ');
+}
+
+function extractTitle(xml){
+  // Try to get title placeholder text
+  const titleMatch=xml.match(/ph type="title"[\s\S]*?<a:t[^>]*>([^<]+)<\/a:t>/);
+  if(titleMatch)return titleMatch[1];
+  // Fallback: first text node
+  const first=xml.match(/<a:t[^>]*>([^<]{3,})<\/a:t>/);
+  return first?first[1]:'';
+}
+
+function extractImages(zip, slideFile){
+  // Find relationship file
+  const relFile=slideFile.replace('slides/slide','slides/_rels/slide').replace('.xml','.xml.rels');
+  return [];// simplified - would need more complex extraction for images
+}
+
+async function loadFile(f){
+  file=f;
+  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-powerpoint" style="color:#d04423"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span></div>`;
+  showStatus('Reading presentation…','info');
+  try{
+    const ab=await f.arrayBuffer();
+    const zip=await JSZip.loadAsync(ab);
+    slides=[];
+    // Get slide files in order
+    const slideFiles=Object.keys(zip.files)
+      .filter(n=>n.match(/^ppt\/slides\/slide\d+\.xml$/))
+      .sort((a,b)=>{const na=parseInt(a.match(/\d+/)[0]),nb=parseInt(b.match(/\d+/)[0]);return na-nb;});
+
+    for(let i=0;i<slideFiles.length;i++){
+      document.getElementById('pbar').style.width=((i+1)/slideFiles.length*60)+'%';
+      document.getElementById('prog').classList.add('show');
+      const xml=await zip.files[slideFiles[i]].async('string');
+      const text=extractXmlText(xml);
+      const title=extractTitle(xml)||`Slide ${i+1}`;
+      // Extract notes if available
+      const notesFile=slideFiles[i].replace('slides/slide','slides/slideLayouts/../notesSlides/notesSlide');
+      let notes='';
+      try{const nxml=await zip.files['ppt/notesSlides/notesSlide'+(i+1)+'.xml']?.async('string');if(nxml)notes=extractXmlText(nxml);}catch{}
+      slides.push({num:i+1,title,text,notes});
+    }
+
+    document.getElementById('slideCount').textContent=slides.length;
+    renderPreview();
+    document.getElementById('opts').style.display='block';
+    document.getElementById('preview').style.display='block';
+    document.getElementById('goBtn').disabled=false;
+    showStatus('','');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+}
+
+function renderPreview(){
+  const wrap=document.getElementById('slidesWrap');
+  wrap.innerHTML='';
+  const bg=document.getElementById('bg')?.value||'white';
+  slides.forEach(s=>{
+    const card=document.createElement('div');
+    card.style.cssText=`background:${bg};border:1px solid var(--border);border-radius:8px;padding:12px;aspect-ratio:16/9;overflow:hidden;font-family:Arial;position:relative`;
+    card.innerHTML=`
+      <div style="font-size:9px;color:#666;margin-bottom:4px">Slide ${s.num}</div>
+      <div style="font-size:10px;font-weight:700;color:#222;margin-bottom:4px;line-height:1.2">${s.title.substring(0,50)}</div>
+      <div style="font-size:7px;color:#555;line-height:1.3;overflow:hidden;max-height:60px">${s.text.substring(0,200)}</div>`;
+    wrap.appendChild(card);
+  });
+}
+
+function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;
+  document.getElementById('prog').classList.add('show');
+  document.getElementById('pbar').style.width='20%';
+  showStatus('Building PDF layout…','info');
+  try{
+    const layout=document.getElementById('layout').value;
+    const bg=document.getElementById('bg').value;
+
+    let slidesHTML='';
+    if(layout==='handout2'){
+      for(let i=0;i<slides.length;i+=2){
+        const pair=[slides[i],slides[i+1]].filter(Boolean);
+        slidesHTML+=`<div class="page">${pair.map(s=>slideCard(s,bg,'48%')).join('')}</div>`;
+      }
+    }else if(layout==='handout4'){
+      for(let i=0;i<slides.length;i+=4){
+        const group=slides.slice(i,i+4);
+        slidesHTML+=`<div class="page grid4">${group.map(s=>slideCard(s,bg,'48%')).join('')}</div>`;
+      }
+    }else{
+      slides.forEach(s=>{
+        const notesBlock=layout==='notes'&&s.notes?`<div class="notes-block"><div class="notes-label">Notes</div><div class="notes-text">${s.notes.substring(0,500)}</div></div>`:'';
+        slidesHTML+=`<div class="page slide-page"><div class="slide-main" style="background:${bg}">${slideInnerHTML(s)}</div>${notesBlock}</div>`;
+      });
+    }
+
+    const printHtml=`<!DOCTYPE html><html><head><meta charset="UTF-8">
+<style>
+@page { size: ${layout.includes('handout')?'A4 portrait':'A4 landscape'}; margin: 8mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; }
+.page { page-break-after: always; page-break-inside: avoid; display: flex; flex-wrap: wrap; gap: 10px; padding: 4px; align-items: flex-start; min-height: 97vh; }
+.slide-page { flex-direction: column; }
+.slide-main { width: 100%; aspect-ratio: 16/9; border: 1px solid #ccc; border-radius: 4px; padding: 20px; overflow: hidden; }
+.slide-num { font-size: 8pt; color: #999; margin-bottom: 6px; }
+.slide-title { font-size: 18pt; font-weight: 700; color: #222; margin-bottom: 10px; line-height: 1.2; }
+.slide-body { font-size: 10pt; color: #444; line-height: 1.5; white-space: pre-wrap; }
+.notes-block { margin-top: 10px; padding: 10px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; }
+.notes-label { font-size: 7pt; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.notes-text { font-size: 9pt; color: #333; line-height: 1.4; }
+.grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.handout-card { border: 1px solid #ccc; border-radius: 4px; padding: 10px; aspect-ratio: 16/9; overflow: hidden; }
+</style>
+</head><body>${slidesHTML}</body></html>`;
+
+    const w=window.open('','_blank','width=1200,height=800');
+    w.document.write(printHtml);
+    w.document.close();
+    w.onload=()=>setTimeout(()=>{
+      w.print();
+      document.getElementById('pbar').style.width='100%';
+      showStatus('✓ Print dialog opened — select "Save as PDF" as printer!','success');
+    },500);
+    btn.disabled=false;
+  }catch(e){showStatus('Error: '+e.message,'error');btn.disabled=false;}
+}
+
+function slideCard(s,bg,width){
+  return `<div class="handout-card" style="background:${bg};width:${width}">
+    <div class="slide-num">Slide ${s.num}</div>
+    <div class="slide-title" style="font-size:10pt">${s.title.substring(0,60)}</div>
+    <div class="slide-body" style="font-size:7pt">${s.text.substring(0,300)}</div>
+  </div>`;
+}
+function slideInnerHTML(s){
+  return `<div class="slide-num">Slide ${s.num}</div>
+    <div class="slide-title">${s.title.substring(0,80)}</div>
+    <div class="slide-body">${s.text.replace(s.title,'').trim().substring(0,800)}</div>`;
+}
+</script>
+</body></html>

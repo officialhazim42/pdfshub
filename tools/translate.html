@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Translate PDF – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<style>
+.lang-pair{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-bottom:16px}
+.lang-pair select{background:var(--s2);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font-size:.85rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.lang-pair select:focus{border-color:var(--accent)}
+.swap-btn{background:var(--s2);border:1px solid var(--border);color:var(--muted);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.swap-btn:hover{color:var(--text);border-color:var(--accent)}
+#resultBox{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:20px;font-size:.88rem;line-height:1.8;display:none;max-height:500px;overflow-y:auto;color:var(--text);white-space:pre-wrap}
+.page-section{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.page-section:last-child{border-bottom:none;margin-bottom:0}
+.page-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent);font-weight:700;margin-bottom:6px}
+</style>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header">
+    <div class="tool-icon" style="color:var(--a6)"><i class="fas fa-language"></i></div>
+    <h1>Translate PDF</h1>
+    <p>Extract text from your PDF and translate it into any language using free translation APIs.</p>
+  </div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <div class="dl">Drop a PDF or click to upload</div>
+    <div class="ds">Text-based PDFs · Up to 20 pages</div>
+  </div>
+  <input type="file" id="fin" accept=".pdf" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="lang-pair">
+      <select id="srcLang">
+        <option value="auto">Auto-detect</option>
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="es">Spanish</option>
+        <option value="it">Italian</option>
+        <option value="pt">Portuguese</option>
+        <option value="ru">Russian</option>
+        <option value="zh">Chinese</option>
+        <option value="ja">Japanese</option>
+        <option value="ko">Korean</option>
+        <option value="ar">Arabic</option>
+        <option value="hi">Hindi</option>
+        <option value="tr">Turkish</option>
+        <option value="pl">Polish</option>
+        <option value="nl">Dutch</option>
+      </select>
+      <button class="swap-btn" onclick="swapLangs()" title="Swap languages"><i class="fas fa-exchange-alt"></i></button>
+      <select id="tgtLang">
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="es">Spanish</option>
+        <option value="it">Italian</option>
+        <option value="pt">Portuguese</option>
+        <option value="ru">Russian</option>
+        <option value="zh">Chinese (Simplified)</option>
+        <option value="ja">Japanese</option>
+        <option value="ko">Korean</option>
+        <option value="ar">Arabic</option>
+        <option value="hi">Hindi</option>
+        <option value="tr">Turkish</option>
+        <option value="pl">Polish</option>
+        <option value="nl">Dutch</option>
+        <option value="ur">Urdu</option>
+      </select>
+    </div>
+    <div class="opt-row">
+      <label>Pages to translate (blank = all, max 20)</label>
+      <input type="text" id="pgrange" placeholder="e.g. 1-5 or leave blank for all"/>
+    </div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-language"></i> Translate PDF</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+  <div id="resultBox"></div>
+  <div id="actionRow" style="display:none">
+    <div class="action-row" style="margin-top:10px">
+      <button class="btn btn-secondary" onclick="copyTranslation()"><i class="fas fa-copy"></i> Copy Text</button>
+      <button class="btn btn-secondary" onclick="downloadTranslation()"><i class="fas fa-download"></i> Download .txt</button>
+      <button class="btn btn-primary" onclick="savePDF()"><i class="fas fa-file-pdf"></i> Save as PDF</button>
+    </div>
+  </div>
+</div>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let file=null, translatedPages=[], totalPageCount=0;
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
+
+async function loadFile(f){
+  file=f;
+  const ab=await f.arrayBuffer();
+  const doc=await pdfjsLib.getDocument({data:ab}).promise;
+  totalPageCount=doc.numPages;
+  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf" style="color:var(--a2)"></i><span class="fn">${f.name}</span><span class="fs">${totalPageCount} pages</span></div>`;
+  document.getElementById('opts').style.display='block';
+  document.getElementById('goBtn').disabled=false;
+}
+
+function swapLangs(){
+  const src=document.getElementById('srcLang'),tgt=document.getElementById('tgtLang');
+  if(src.value==='auto')return;
+  const tmp=src.value;src.value=tgt.value;tgt.value=tmp;
+}
+
+function parsePages(str,max){
+  const limit=Math.min(max,20);
+  if(!str.trim())return Array.from({length:limit},(_,i)=>i+1);
+  const set=new Set();
+  str.split(',').forEach(r=>{r=r.trim();if(r.includes('-')){const[a,b]=r.split('-').map(Number);for(let i=a;i<=Math.min(b,limit);i++)set.add(i);}else{const n=parseInt(r);if(n>=1&&n<=limit)set.add(n);}});
+  return[...set].sort((a,b)=>a-b);
+}
+
+async function extractPageTexts(pageNums){
+  const ab=await file.arrayBuffer();
+  const doc=await pdfjsLib.getDocument({data:ab}).promise;
+  const results=[];
+  for(let i=0;i<pageNums.length;i++){
+    document.getElementById('pbar').style.width=((i+1)/pageNums.length*30)+'%';
+    const page=await doc.getPage(pageNums[i]);
+    const content=await page.getTextContent();
+    const text=content.items.map(item=>item.str).join(' ').trim();
+    results.push({page:pageNums[i],text});
+  }
+  return results;
+}
+
+async function translateChunk(text,src,tgt){
+  // Use MyMemory free API (no key needed, 5000 chars/day)
+  if(!text||text.length<3)return text;
+  const chunk=text.substring(0,500); // safe chunk size for free API
+  try{
+    const langPair=`${src==='auto'?'en':src}|${tgt}`;
+    const url=`https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=${langPair}`;
+    const res=await fetch(url);
+    if(!res.ok)throw new Error('API error');
+    const data=await res.json();
+    if(data.responseStatus===200&&data.responseData?.translatedText){
+      return data.responseData.translatedText;
+    }
+    throw new Error('Translation failed');
+  }catch{
+    return `[Translation unavailable for this chunk — API limit reached. Text: "${chunk.substring(0,100)}…"]`;
+  }
+}
+
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+
+async function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;
+  document.getElementById('prog').classList.add('show');
+  document.getElementById('pbar').style.width='5%';
+  showStatus('Extracting text…','info');
+  translatedPages=[];
+  const src=document.getElementById('srcLang').value;
+  const tgt=document.getElementById('tgtLang').value;
+  const pageNums=parsePages(document.getElementById('pgrange').value,totalPageCount);
+
+  try{
+    const pageTexts=await extractPageTexts(pageNums);
+    const resultBox=document.getElementById('resultBox');
+    resultBox.style.display='block';resultBox.innerHTML='';
+
+    for(let i=0;i<pageTexts.length;i++){
+      document.getElementById('pbar').style.width=(30+(i/pageTexts.length*65))+'%';
+      showStatus(`Translating page ${pageTexts[i].page} of ${pageTexts.length}…`,'info');
+      const {page,text}=pageTexts[i];
+      if(!text){translatedPages.push({page,translated:'[No text on this page]'});continue;}
+
+      // Split into chunks of 500 chars and translate each
+      const chunks=[];
+      for(let j=0;j<Math.min(text.length,3000);j+=450)chunks.push(text.substring(j,j+450));
+
+      let translated='';
+      for(const chunk of chunks){
+        translated+=await translateChunk(chunk,src,tgt)+' ';
+        await new Promise(r=>setTimeout(r,300)); // rate limit
+      }
+      translatedPages.push({page,translated:translated.trim()});
+
+      // Render as we go
+      const section=document.createElement('div');section.className='page-section';
+      section.innerHTML=`<div class="page-label">Page ${page}</div><div>${translated.trim()}</div>`;
+      resultBox.appendChild(section);
+      resultBox.scrollTop=resultBox.scrollHeight;
+    }
+    document.getElementById('pbar').style.width='100%';
+    document.getElementById('actionRow').style.display='block';
+    showStatus(`✓ Translated ${pageTexts.length} page(s)!`,'success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+  btn.disabled=false;
+}
+
+function getFullText(){return translatedPages.map(p=>`--- Page ${p.page} ---\n${p.translated}`).join('\n\n');}
+function copyTranslation(){navigator.clipboard.writeText(getFullText()).then(()=>showStatus('✓ Copied!','success'));}
+function downloadTranslation(){const blob=new Blob([getFullText()],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='translated.txt';a.click();}
+
+async function savePDF(){
+  showStatus('Creating PDF…','info');
+  try{
+    const doc=await PDFLib.PDFDocument.create();
+    const font=await doc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const bold=await doc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+    for(const {page,translated} of translatedPages){
+      const pg=doc.addPage([595,842]);
+      const {height}=pg.getSize();
+      pg.drawText(`Page ${page}`,{x:40,y:height-40,size:11,font:bold,color:PDFLib.rgb(0.4,0.3,1)});
+      // Word wrap
+      const words=translated.split(' ');let line='',y=height-65;
+      const maxW=515,size=10;
+      for(const word of words){
+        const test=line?(line+' '+word):word;
+        if(font.widthOfTextAtSize(test,size)>maxW){if(y<40){pg.addPage?.();y=height-40;}pg.drawText(line,{x:40,y,size,font,color:PDFLib.rgb(0.1,0.1,0.1)});line=word;y-=size*1.6;}
+        else line=test;
+      }
+      if(line)pg.drawText(line,{x:40,y,size,font,color:PDFLib.rgb(0.1,0.1,0.1)});
+    }
+    const bytes=await doc.save();
+    const blob=new Blob([bytes],{type:'application/pdf'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='translated.pdf';a.click();
+    showStatus('✓ PDF saved!','success');
+  }catch(e){showStatus('Error creating PDF: '+e.message,'error')}
+}
+</script>
+</body></html>

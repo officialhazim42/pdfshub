@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Scan to PDF – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<style>
+#camArea{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px;text-align:center}
+video{width:100%;max-width:480px;border-radius:8px;background:#000}
+#snapCanvas{display:none}
+.snap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin:12px 0}
+.snap-item{position:relative}
+.snap-item img{width:100%;border-radius:6px;border:1px solid var(--border)}
+.snap-item button{position:absolute;top:2px;right:2px;background:var(--a2);color:#fff;border:none;border-radius:4px;width:18px;height:18px;font-size:.6rem;cursor:pointer}
+</style>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header"><div class="tool-icon" style="color:var(--accent)"><i class="fas fa-camera"></i></div><h1>Scan to PDF</h1><p>Use your camera to scan documents and save as PDF. Or upload images.</p></div>
+  <div id="camArea">
+    <video id="video" autoplay playsinline></video>
+    <div class="action-row" style="justify-content:center;margin-top:12px">
+      <button class="btn btn-primary" id="camBtn" onclick="startCamera()"><i class="fas fa-camera"></i> Start Camera</button>
+      <button class="btn btn-primary" id="snapBtn" style="display:none" onclick="snap()"><i class="fas fa-circle"></i> Snap Photo</button>
+      <button class="btn btn-secondary" id="stopBtn" style="display:none" onclick="stopCamera()"><i class="fas fa-stop"></i> Stop</button>
+    </div>
+  </div>
+  <div style="text-align:center;color:var(--muted);font-size:.82rem;margin-bottom:12px">— or upload images —</div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()" style="padding:24px"><i class="fas fa-images"></i><div class="dl">Upload images</div><div class="ds">JPG, PNG, WebP</div></div>
+  <input type="file" id="fin" accept="image/*" multiple hidden/>
+  <canvas id="snapCanvas"></canvas>
+  <div class="snap-grid" id="snapGrid"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row"><label>Page size</label><select id="psize"><option value="fit">Fit image</option><option value="a4">A4</option><option value="letter">Letter</option></select></div>
+    <div class="opt-row"><label>Enhancement</label><select id="enhance"><option value="none">None</option><option value="grayscale">Grayscale</option><option value="contrast">High Contrast</option></select></div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-file-pdf"></i> Create PDF</button>
+    <button class="btn btn-secondary" onclick="clearAll()"><i class="fas fa-trash"></i> Clear All</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+</div>
+<script>
+let images=[],stream=null;
+const video=document.getElementById('video'),sc=document.getElementById('snapCanvas'),sCtx=sc.getContext('2d');
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{addImages([...e.target.files]);fin.value=''};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');addImages([...e.dataTransfer.files].filter(f=>f.type.startsWith('image/')))};
+async function startCamera(){try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});video.srcObject=stream;document.getElementById('camBtn').style.display='none';document.getElementById('snapBtn').style.display='';document.getElementById('stopBtn').style.display='';}catch(e){showStatus('Camera access denied: '+e.message,'error')}}
+function stopCamera(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;video.srcObject=null;document.getElementById('camBtn').style.display='';document.getElementById('snapBtn').style.display='none';document.getElementById('stopBtn').style.display='none';}}
+function snap(){sc.width=video.videoWidth;sc.height=video.videoHeight;sCtx.drawImage(video,0,0);sc.toBlob(blob=>addImages([new File([blob],'scan-'+(images.length+1)+'.jpg',{type:'image/jpeg'})]),'image/jpeg',0.92);}
+function addImages(files){images=[...images,...files.map(f=>({file:f,dataUrl:null}))];images.forEach((img,i)=>{if(!img.dataUrl){const r=new FileReader();r.onload=e=>{img.dataUrl=e.target.result;renderGrid();};r.readAsDataURL(img.file);}});renderGrid();}
+function renderGrid(){const g=document.getElementById('snapGrid');g.innerHTML='';images.forEach((img,i)=>{if(!img.dataUrl)return;const d=document.createElement('div');d.className='snap-item';d.innerHTML=`<img src="${img.dataUrl}"/><button onclick="removeImg(${i})"><i class="fas fa-times"></i></button>`;g.appendChild(d);});document.getElementById('opts').style.display=images.length?'block':'none';document.getElementById('goBtn').disabled=!images.length;}
+function removeImg(i){images.splice(i,1);renderGrid();}
+function clearAll(){images=[];renderGrid();}
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;document.getElementById('prog').classList.add('show');showStatus('Creating PDF…','info');
+  try{
+    const doc=await PDFLib.PDFDocument.create();const psize=document.getElementById('psize').value;const enhance=document.getElementById('enhance').value;
+    for(let i=0;i<images.length;i++){
+      document.getElementById('pbar').style.width=((i+1)/images.length*90)+'%';
+      let dataUrl=images[i].dataUrl;
+      if(enhance!=='none'){const ic=document.createElement('canvas');const img=new Image();await new Promise(res=>{img.onload=res;img.src=dataUrl;});ic.width=img.width;ic.height=img.height;const ic2=ic.getContext('2d');if(enhance==='grayscale'){ic2.filter='grayscale(100%)';} else if(enhance==='contrast'){ic2.filter='grayscale(100%) contrast(200%)';}ic2.drawImage(img,0,0);dataUrl=ic.toDataURL('image/jpeg',0.9);}
+      const resp=await fetch(dataUrl);const ab=await resp.arrayBuffer();
+      let embedded;try{embedded=await doc.embedJpg(ab);}catch{embedded=await doc.embedPng(ab);}
+      const {width:iw,height:ih}=embedded.scale(1);
+      let pw,ph;if(psize==='a4'){pw=595;ph=842;}else if(psize==='letter'){pw=612;ph=792;}else{pw=iw;ph=ih;}
+      const page=doc.addPage([pw,ph]);const scale=Math.min(pw/iw,ph/ih);
+      page.drawImage(embedded,{x:(pw-iw*scale)/2,y:(ph-ih*scale)/2,width:iw*scale,height:ih*scale});
+    }
+    document.getElementById('pbar').style.width='100%';const bytes=await doc.save();
+    const blob=new Blob([bytes],{type:'application/pdf'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='scan.pdf';a.click();
+    showStatus(`✓ PDF created with ${images.length} page(s)!`,'success');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+  btn.disabled=false;
+}
+</script></body></html>

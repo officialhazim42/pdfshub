@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PDF to PowerPoint – PDFHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<style>
+.slide-thumb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.slide-thumb{background:var(--s2);border:1px solid var(--border);border-radius:8px;overflow:hidden;text-align:center}
+.slide-thumb canvas{width:100%;display:block}
+.slide-thumb .sn{font-size:.7rem;color:var(--muted);padding:4px}
+</style>
+</head><body>
+<nav><a class="logo" href="../index.html">PDFHub</a><a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a></nav>
+<div class="tool-wrap">
+  <div class="tool-header">
+    <div class="tool-icon" style="color:var(--a4)"><i class="fas fa-file-powerpoint"></i></div>
+    <h1>PDF to PowerPoint</h1>
+    <p>Convert each PDF page into a slide image, then export as a .pptx presentation.</p>
+  </div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <div class="dl">Drop a PDF or click to upload</div>
+    <div class="ds">Each page becomes a slide</div>
+  </div>
+  <input type="file" id="fin" accept=".pdf" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row"><label>Pages (blank = all, max 20)</label><input type="text" id="pgrange" placeholder="e.g. 1-10"/></div>
+    <div class="opt-row"><label>Slide quality</label>
+      <select id="scale"><option value="1.5">High (1.5x)</option><option value="1" selected>Standard (1x)</option><option value="0.75">Fast (0.75x)</option></select>
+    </div>
+    <div class="opt-row"><label>Slide size</label>
+      <select id="slidesize"><option value="widescreen">Widescreen (16:9)</option><option value="standard">Standard (4:3)</option></select>
+    </div>
+  </div>
+  <div class="slide-thumb-grid" id="thumbGrid"></div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-file-powerpoint"></i> Export as PPTX</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+</div>
+<script src="https://unpkg.com/pptxgenjs/dist/pptxgen.bundle.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let file=null, pdfDoc=null, slideImages=[];
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function loadFile(f){
+  file=f;
+  const ab=await f.arrayBuffer();
+  pdfDoc=await pdfjsLib.getDocument({data:ab}).promise;
+  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf" style="color:var(--a2)"></i><span class="fn">${f.name}</span><span class="fs">${pdfDoc.numPages} pages</span></div>`;
+  document.getElementById('opts').style.display='block';
+  document.getElementById('goBtn').disabled=false;
+}
+function parsePages(str,max){
+  const limit=Math.min(max,20);
+  if(!str.trim())return Array.from({length:limit},(_,i)=>i+1);
+  const set=new Set();str.split(',').forEach(r=>{r=r.trim();if(r.includes('-')){const[a,b]=r.split('-').map(Number);for(let i=a;i<=Math.min(b,limit);i++)set.add(i);}else{const n=parseInt(r);if(n>=1&&n<=limit)set.add(n);}});return[...set].sort((a,b)=>a-b);
+}
+async function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;
+  document.getElementById('prog').classList.add('show');
+  showStatus('Rendering PDF pages as images…','info');
+  const pages=parsePages(document.getElementById('pgrange').value,pdfDoc.numPages);
+  const scale=parseFloat(document.getElementById('scale').value);
+  const slidesize=document.getElementById('slidesize').value;
+  const grid=document.getElementById('thumbGrid');grid.innerHTML='';slideImages=[];
+  try{
+    // Step 1: Render each page to canvas
+    for(let i=0;i<pages.length;i++){
+      document.getElementById('pbar').style.width=((i+1)/pages.length*60)+'%';
+      const page=await pdfDoc.getPage(pages[i]);
+      const vp=page.getViewport({scale});
+      const canvas=document.createElement('canvas');canvas.width=vp.width;canvas.height=vp.height;
+      await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+      const dataUrl=canvas.toDataURL('image/jpeg',0.92);
+      slideImages.push({page:pages[i],dataUrl,w:vp.width,h:vp.height});
+      // Thumbnail
+      const thumb=document.createElement('div');thumb.className='slide-thumb';
+      const tc=document.createElement('canvas');const tw=150,th=Math.round(vp.height/vp.width*150);
+      tc.width=tw;tc.height=th;tc.getContext('2d').drawImage(canvas,0,0,tw,th);
+      thumb.appendChild(tc);thumb.innerHTML+=`<div class="sn">Slide ${pages[i]}</div>`;
+      grid.appendChild(thumb);
+    }
+    document.getElementById('pbar').style.width='65%';
+    showStatus('Building PPTX file…','info');
+
+    // Step 2: Build PPTX
+    const pptx=new PptxGenJS();
+    const isWide=slidesize==='widescreen';
+    pptx.layout=isWide?'LAYOUT_WIDE':'LAYOUT_4x3';
+    const slideW=isWide?10:10, slideH=isWide?5.625:7.5;
+
+    for(const {dataUrl,w,h} of slideImages){
+      const slide=pptx.addSlide();
+      // Fit image to slide maintaining aspect ratio
+      const imgRatio=w/h;const slideRatio=slideW/slideH;
+      let iw,ih,ix,iy;
+      if(imgRatio>slideRatio){iw=slideW;ih=slideW/imgRatio;ix=0;iy=(slideH-ih)/2;}
+      else{ih=slideH;iw=slideH*imgRatio;iy=0;ix=(slideW-iw)/2;}
+      slide.addImage({data:dataUrl,x:ix,y:iy,w:iw,h:ih});
+    }
+
+    document.getElementById('pbar').style.width='90%';
+    await pptx.writeFile({fileName:file.name.replace('.pdf','.pptx')});
+    document.getElementById('pbar').style.width='100%';
+    showStatus(`✓ Exported ${slideImages.length} slides as PPTX!`,'success');
+  }catch(e){
+    // Fallback if pptxgenjs fails
+    showStatus('PPTX library error — trying alternative…','info');
+    try{
+      await buildPptxManually();
+    }catch(e2){showStatus('Error: '+e2.message,'error')}
+  }
+  btn.disabled=false;
+}
+
+// Manual PPTX builder using JSZip (fallback)
+async function buildPptxManually(){
+  // Build a minimal valid PPTX file manually
+  const JSZip=(await import('https://unpkg.com/jszip/dist/jszip.min.js')).default||window.JSZip;
+  if(!JSZip)throw new Error('JSZip not available');
+  const zip=new JSZip();
+  const rels=zip.folder('_rels');
+  const ppt=zip.folder('ppt');
+  const slides=ppt.folder('slides');
+  const slideRels=slides.folder('_rels');
+  const media=ppt.folder('media');
+
+  rels.file('.rels',`<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="ppt/presentation.xml"/></Relationships>`);
+
+  let slideXmls=[],slideRelEntries=[];
+  for(let i=0;i<slideImages.length;i++){
+    const imgData=slideImages[i].dataUrl.split(',')[1];
+    media.file(`img${i+1}.jpeg`,imgData,{base64:true});
+    slides.file(`slide${i+1}.xml`,`<?xml version="1.0"?><p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><p:cSld><p:spTree><p:sp><p:nvSpPr><p:cNvPr id="1"/><p:cNvSpPr><a:spLocks/></p:cNvSpPr><p:nvPr/></p:nvSpPr><p:spPr/></p:sp><p:pic><p:nvPicPr><p:cNvPr id="2" name="img"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId1"/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="9144000" cy="5143500"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic></p:spTree></p:cSld></p:sld>`);
+    slideRels.file(`slide${i+1}.xml.rels`,`<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="../media/img${i+1}.jpeg"/></Relationships>`);
+    slideXmls.push(`<p:sldId id="${256+i}" r:id="rId${i+2}"/>`);
+    slideRelEntries.push(`<Relationship Id="rId${i+2}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide${i+1}.xml"/>`);
+  }
+
+  ppt.file('presentation.xml',`<?xml version="1.0"?><p:presentation xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><p:sldMasterIdLst/><p:sldSz cx="9144000" cy="5143500"/><p:notesSz cx="6858000" cy="9144000"/><p:sldIdLst>${slideXmls.join('')}</p:sldIdLst></p:presentation>`);
+  ppt.file('_rels/presentation.xml.rels',`<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${slideRelEntries.join('')}</Relationships>`);
+  zip.file('[Content_Types].xml',`<?xml version="1.0"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="jpeg" ContentType="image/jpeg"/><Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>${slideImages.map((_,i)=>`<Override PartName="/ppt/slides/slide${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>`).join('')}</Types>`);
+
+  const blob=await zip.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.presentationml.presentation'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file.name.replace('.pdf','.pptx');a.click();
+  document.getElementById('pbar').style.width='100%';showStatus(`✓ Exported ${slideImages.length} slides as PPTX!`,'success');
+}
+</script>
+</body></html>
