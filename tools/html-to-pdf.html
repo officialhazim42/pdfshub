@@ -2,6 +2,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="stylesheet" href="shared.css"/>
+<script src="shared.js"></script>
 <style>#htmlInput{width:100%;min-height:200px;background:var(--s2);border:1px solid var(--border);color:var(--text);padding:14px;border-radius:10px;font-family:monospace;font-size:.85rem;outline:none;resize:vertical}#htmlInput:focus{border-color:var(--accent)}</style>
 </head><body>
 <div id="dlModal"></div>
@@ -39,7 +40,7 @@ function go(){
   if(type==='url'){const url=document.getElementById('urlInput').value.trim();if(!url){showStatus('Enter a URL','error');return;}window.open(url,'_blank');showStatus('Page opened in new tab. Use Ctrl+P / Cmd+P and choose "Save as PDF".','info');return;}
   const html=document.getElementById('htmlInput').value.trim();if(!html){showStatus('Enter HTML content','error');return;}
   const psize=document.getElementById('psize').value;
-  const fullHtml=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>@page{size:${psize};margin:15mm}body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.5}*{box-sizing:border-box}img{max-width:100%}</style><script src="shared.js"></script>
+  const fullHtml=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>@page{size:${psize};margin:15mm}body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.5}*{box-sizing:border-box}img{max-width:100%}</style><script src="shared.js"><\/script>
 </head><body>
 <div id="dlModal"></div>${html}<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p><div class="soc-mini"><a href="https://instagram.com/officialhazim42" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a><a href="https://twitter.com/officialhazim42" target="_blank" title="Twitter/X"><i class="fab fa-x-twitter"></i></a><a href="https://youtube.com/@officialhazim42" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a><a href="https://tiktok.com/@officialhazim42" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a><a href="https://github.com/officialhazim42" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a href="https://t.me/officialhazim42" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a></div></div>
 </body></html>`;
