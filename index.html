@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<meta name="description" content="PDFHub — 32 free PDF tools. Merge, split, compress, convert, sign, edit PDFs. 100% browser-based, no upload, no login."/>
+<meta name="description" content="PDFHub — 33 free PDF tools. Merge, split, compress, convert, sign, edit PDFs. 100% browser-based, no upload, no login."/>
 <meta name="theme-color" content="#07070d"/>
 <link rel="icon" href="favicon.png" type="image/png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
-<title>PDFHub – 32 Free PDF Tools Online</title>
+<title>PDFHub – 33 Free PDF Tools Online</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
@@ -23,7 +23,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 /* NAV */
 nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 6%}
-.logo{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--a2));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px;text-decoration:none}
+.logo{display:inline-flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--a2));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px;text-decoration:none}.logo-mark{width:30px;height:30px;display:block;border-radius:8px;object-fit:cover;box-shadow:0 4px 16px rgba(124,106,255,.24)}
 .nav-right{display:flex;align-items:center;gap:14px}
 .global-theme-toggle{display:flex;align-items:center;gap:8px;padding:4px 7px;border:1px solid var(--border);border-radius:9px;background:var(--s1);color:var(--text);cursor:pointer}
 .global-theme-toggle .t-label{font-size:.68rem;color:var(--text);font-weight:600}.global-theme-toggle .toggle-track{width:38px;height:22px}
@@ -148,7 +148,7 @@ h1 .g{background:linear-gradient(135deg,var(--accent) 20%,var(--a2));background-
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(186px,1fr));gap:11px}
 
 /* TOOL CARD */
-.card{display:flex;flex-direction:column;gap:8px;background:var(--s1);border:1px solid var(--border);border-radius:13px;padding:17px 15px 14px;text-decoration:none;color:inherit;cursor:pointer;transition:background .2s,border-color .2s,transform .18s,box-shadow .2s;position:relative;overflow:hidden}
+.card{display:flex;flex-direction:column;gap:8px;background:var(--s1);border:1px solid var(--border);border-radius:13px;padding:17px 15px 14px;text-decoration:none;color:inherit;cursor:pointer;transition:background .2s,border-color .2s,transform .18s,box-shadow .2s;position:relative;overflow:visible}.card .fbadge{right:38px}.card-help{position:absolute;top:9px;right:10px;width:20px;height:20px;border:1px solid var(--border);border-radius:50%;background:var(--s2);color:var(--muted);font:700 .68rem/18px 'DM Sans',sans-serif;text-align:center;z-index:2;cursor:help}.card-help:hover,.card-help:focus{color:#fff;background:var(--accent);border-color:var(--accent);outline:none}.card-help::after{content:attr(data-tooltip);position:absolute;right:0;top:27px;width:190px;padding:8px 9px;border:1px solid var(--border);border-radius:8px;background:var(--s2);box-shadow:0 10px 24px rgba(0,0,0,.25);color:var(--text);font:500 .68rem/1.45 'DM Sans',sans-serif;text-align:left;opacity:0;pointer-events:none;transform:translateY(-3px);transition:opacity .16s,transform .16s;z-index:20}.card-help:hover::after,.card-help:focus::after{opacity:1;transform:translateY(0)}
 .card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(255,255,255,.02));pointer-events:none}
 .card:hover{transform:translateY(-4px)}
 .fbadge{position:absolute;top:10px;right:10px;font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:rgba(0,229,160,.1);color:var(--a3);border:1px solid rgba(0,229,160,.22);padding:2px 7px;border-radius:5px}
@@ -218,7 +218,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
 <body>
 
 <nav>
-  <a class="logo" href="index.html">PDFHub</a>
+  <a class="logo" href="index.html"><img class="logo-mark" src="favicon.png" alt="" aria-hidden="true"/>PDF HUB</a>
   <div class="nav-right">
     <div class="nav-socials">
       <a href="https://instagram.com/officialhazim42" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -255,7 +255,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
     <div class="pill pink"><i class="fas fa-infinity"></i> Unlimited usage</div>
   </div>
   <div class="stats">
-    <div class="stat"><div class="n" data-target="32">0</div><div class="l">Tools</div></div>
+    <div class="stat"><div class="n" data-target="33">0</div><div class="l">Tools</div></div>
     <div class="stat"><div class="n">∞</div><div class="l">Free Uses</div></div>
     <div class="stat"><div class="n" data-target="0">0</div><div class="l">Sign-ups</div></div>
     <div class="stat"><div class="n">100%</div><div class="l">Private</div></div>
@@ -356,10 +356,11 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
 
 <!-- AI -->
 <div class="cat c-ai" id="ai">
-  <div class="cat-head"><div class="cat-ic"><i class="fas fa-brain"></i></div><div class="cat-name">PDF Intelligence</div><div class="cat-cnt">2 tools</div></div>
+  <div class="cat-head"><div class="cat-ic"><i class="fas fa-brain"></i></div><div class="cat-name">PDF Intelligence</div><div class="cat-cnt">3 tools</div></div>
   <div class="grid">
     <a class="card" href="tools/summarize.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-robot"></i></div><div class="c-name">AI Summarizer</div><div class="c-desc">Get a smart AI summary of any PDF document.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
     <a class="card" href="tools/translate.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-language"></i></div><div class="c-name">Translate PDF</div><div class="c-desc">Translate PDF text into 16+ languages free.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
+    <a class="card" href="tools/pdf-to-markdown.html"><div class="fbadge">Free</div><div class="c-ico"><i class="fas fa-file-code"></i></div><div class="c-name">PDF to Markdown</div><div class="c-desc">Convert PDF text into clean, editable Markdown.</div><div class="c-arr"><i class="fas fa-arrow-right"></i></div></a>
   </div>
 </div>
 
@@ -383,7 +384,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
   <div class="f-bottom">
     <span class="f-copy">©PDFHub</span><div class="f-dot"></div>
     <span class="f-copy">by @officialhazim42</span><div class="f-dot"></div>
-    <span class="f-copy">All 32 tools free forever</span><div class="f-dot"></div>
+    <span class="f-copy">All 33 tools free forever</span><div class="f-dot"></div>
     <span class="f-copy">Your files never leave your device</span>
   </div>
 </footer>
@@ -464,6 +465,14 @@ window.addEventListener('DOMContentLoaded',()=>{
     const name=card.querySelector('.c-name')?.textContent?.trim();
     const link=card.getAttribute('href');
     if(!name || !link) return;
+    const help=document.createElement('span');
+    help.className='card-help';
+    help.textContent='?';
+    help.tabIndex=0;
+    help.setAttribute('role','img');
+    help.dataset.tooltip=`How to use: ${card.querySelector('.c-desc')?.textContent?.trim()||'Open the tool and follow the steps.'}`;
+    help.setAttribute('aria-label',help.dataset.tooltip);
+    card.appendChild(help);
     card.addEventListener('click',()=>saveHistoryTool(name,link));
   });
 });

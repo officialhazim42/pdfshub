@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PDF to Markdown – PDFHub</title>
+<link rel="icon" href="../favicon.png" type="image/png"/>
+<link rel="apple-touch-icon" href="../favicon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="shared.js"></script>
+<style>
+#markdownBox{width:100%;min-height:360px;resize:vertical;background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:18px;color:var(--text);font:400 .85rem/1.7 'DM Sans',sans-serif;outline:none;display:none;tab-size:2}
+#markdownBox:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,106,255,.15)}
+.markdown-note{margin-top:12px;color:var(--muted);font-size:.76rem;line-height:1.6}
+</style>
+</head>
+<body>
+<div id="dlModal"></div>
+<nav>
+  <a class="logo" href="../index.html">PDFHub</a>
+  <div class="nav-right-tools">
+    <a class="back" href="../index.html"><i class="fas fa-chevron-left"></i> All Tools</a>
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">
+      <span class="t-label" id="themeLabel">Dark</span>
+      <div class="toggle-track"><div class="toggle-knob"><i class="fas fa-moon"></i></div></div>
+    </div>
+  </div>
+</nav>
+<div class="tool-wrap">
+  <div class="tool-header">
+    <div class="tool-icon" style="color:var(--a6)"><i class="fas fa-file-code"></i></div>
+    <h1>PDF to Markdown</h1>
+    <p>Extract text from a PDF and convert it into clean, editable Markdown.</p>
+  </div>
+  <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <div class="dl">Drop a PDF or click to upload</div>
+    <div class="ds">Text-based PDFs work best</div>
+  </div>
+  <input type="file" id="fin" accept=".pdf,application/pdf" hidden/>
+  <div class="file-list" id="finfo"></div>
+  <div class="options" id="opts" style="display:none">
+    <div class="opt-row">
+      <label><input type="checkbox" id="pageBreaks" checked/> Add page separators</label>
+    </div>
+    <div class="opt-row">
+      <label><input type="checkbox" id="headings" checked/> Detect headings and lists</label>
+    </div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-file-code"></i> Convert to Markdown</button>
+    <button class="btn btn-secondary" onclick="location.reload()"><i class="fas fa-redo"></i> Reset</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
+  <textarea id="markdownBox" aria-label="Generated Markdown" spellcheck="false"></textarea>
+  <p class="markdown-note" id="markdownNote" style="display:none">Review the extracted Markdown before using it. Scanned PDFs need OCR first, and complex visual layouts may need manual cleanup.</p>
+  <div class="action-row" id="outputActions" style="display:none">
+    <button class="btn btn-secondary" onclick="copyMarkdown()"><i class="fas fa-copy"></i> Copy Markdown</button>
+    <button class="btn btn-primary" onclick="downloadMarkdown()"><i class="fas fa-download"></i> Download .md</button>
+  </div>
+</div>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let file=null,markdown='';
+const drop=document.getElementById('drop'),fin=document.getElementById('fin');
+fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf'||f?.name.toLowerCase().endsWith('.pdf'))loadFile(f)};
+function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
+async function loadFile(f){
+  try{
+    file=f;
+    const doc=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;
+    document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf"></i><span class="fn">${escapeHtml(f.name)}</span><span class="fs">${doc.numPages} pages</span></div>`;
+    document.getElementById('opts').style.display='block';
+    document.getElementById('goBtn').disabled=false;
+    showStatus('PDF ready to convert.','success');
+  }catch(e){showStatus('Could not read this PDF: '+e.message,'error')}
+}
+function normalizeLine(line){return line.replace(/[ \t]+/g,' ').trim()}
+function isHeading(line){return line.length>2&&line.length<100&&!/[.!?]$/.test(line)&&line.split(/\s+/).length<=14}
+function toMarkdown(lines,pageNumber,detect){
+  const output=[];let paragraph=[];
+  const flush=()=>{if(paragraph.length){output.push(paragraph.join(' '));paragraph=[]}};
+  lines.map(normalizeLine).forEach(line=>{
+    if(!line){flush();return}
+    if(!detect){paragraph.push(line);return}
+    const bullet=line.match(/^(?:[•●▪◦*-])\s+(.+)/);
+    const numbered=line.match(/^\s*(\d+)[.)]\s+(.+)/);
+    if(bullet){flush();output.push('- '+bullet[1]);return}
+    if(numbered){flush();output.push(numbered[1]+'. '+numbered[2]);return}
+    if(isHeading(line)&&(/^[A-Z0-9][A-Z0-9\s:&/-]+$/.test(line)||line.length<60)){flush();output.push('## '+line);return}
+    paragraph.push(line);
+  });
+  flush();
+  return output.join('\n\n');
+}
+async function go(){
+  const btn=document.getElementById('goBtn');btn.disabled=true;
+  document.getElementById('prog').classList.add('show');document.getElementById('pbar').style.width='5%';
+  showStatus('Extracting text from PDF…','info');
+  try{
+    const doc=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;
+    const pages=[];const detect=document.getElementById('headings').checked;const breaks=document.getElementById('pageBreaks').checked;
+    for(let i=1;i<=doc.numPages;i++){
+      const page=await doc.getPage(i);const content=await page.getTextContent();
+      const text=toMarkdown(content.items.map(item=>item.str),i,detect);
+      if(text)pages.push((breaks?'## Page '+i+'\n\n':'')+text);
+      document.getElementById('pbar').style.width=(i/doc.numPages*90+5)+'%';
+    }
+    markdown=`# ${file.name.replace(/\.pdf$/i,'')}\n\n${pages.join('\n\n---\n\n')}`.trim()+'\n';
+    const box=document.getElementById('markdownBox');box.value=markdown;box.style.display='block';
+    document.getElementById('markdownNote').style.display='block';document.getElementById('outputActions').style.display='flex';
+    document.getElementById('pbar').style.width='100%';showStatus('Markdown generated successfully.','success');
+  }catch(e){showStatus('Error converting PDF: '+e.message,'error')}
+  btn.disabled=false;
+}
+function copyMarkdown(){navigator.clipboard.writeText(document.getElementById('markdownBox').value).then(()=>showStatus('Markdown copied to clipboard.','success'))}
+function downloadMarkdown(){const name=file.name.replace(/\.pdf$/i,'')+'.md';downloadBlob(new Blob([document.getElementById('markdownBox').value],{type:'text/markdown;charset=utf-8'}),name)}
+</script>
+<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p><div class="soc-mini"><a href="https://instagram.com/officialhazim42" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a><a href="https://twitter.com/officialhazim42" target="_blank" title="Twitter/X"><i class="fab fa-x-twitter"></i></a><a href="https://youtube.com/@officialhazim42" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a><a href="https://tiktok.com/@officialhazim42" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a><a href="https://t.me/officialhazim42" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a></div></div>
+</body>
+</html>

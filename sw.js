@@ -40,6 +40,7 @@ const APP_SHELL = [
   './tools/split.html',
   './tools/summarize.html',
   './tools/translate.html',
+  './tools/pdf-to-markdown.html',
   './tools/unlock.html',
   './tools/watermark.html',
   './tools/word-to-pdf.html'
