@@ -1,11 +1,12 @@
 (function(){
-  document.querySelectorAll('.logo').forEach(logo=>{logo.innerHTML='<img class="logo-mark" src="favicon.png" alt="" aria-hidden="true"/>PDF HUB';});
+  const root=document.body.dataset.root||'';
+  const historyHref=url=>root+(url==='index.html'?'index.html':url.startsWith('tools/')?url:`tools/${url}`);
+  document.querySelectorAll('.logo').forEach(logo=>{logo.innerHTML=`<img class="logo-mark" src="${root}favicons/favicon.png" alt="" aria-hidden="true"/>PDF HUB`;});
   const footerHtml=`<footer class="site-footer"><div class="f-logo">PDFHub</div><div class="f-by">Built with ❤️ by <a href="https://instagram.com/officialhazim42" target="_blank">@officialhazim42</a> · Free forever · No sign-up · Files never leave your device</div><div class="socials"><a class="soc" href="https://instagram.com/officialhazim42" target="_blank"><i class="fab fa-instagram" style="color:#e1306c"></i> Instagram</a><a class="soc" href="https://twitter.com/officialhazim42" target="_blank"><i class="fab fa-x-twitter"></i> Twitter / X</a><a class="soc" href="https://youtube.com/@officialhazim42" target="_blank"><i class="fab fa-youtube" style="color:#ff0000"></i> YouTube</a><a class="soc" href="https://tiktok.com/@officialhazim42" target="_blank"><i class="fab fa-tiktok" style="color:#69c9d0"></i> TikTok</a><a class="soc" href="https://facebook.com/officialhazim42" target="_blank"><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook</a><a class="soc" href="https://linkedin.com/in/hazim-bashir-faqeer" target="_blank"><i class="fab fa-linkedin" style="color:#0077b5"></i> LinkedIn</a><a class="soc" href="https://github.com/officialhazim42" target="_blank"><i class="fab fa-github"></i> GitHub</a><a class="soc" href="https://t.me/officialhazim42" target="_blank"><i class="fab fa-telegram" style="color:#26a5e4"></i> Telegram</a><a class="soc" href="https://snapchat.com/add/officialhazim42" target="_blank"><i class="fab fa-snapchat" style="color:#fffc00"></i> Snapchat</a><a class="soc" href="https://wa.me/9055267442" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp</a></div><div class="f-bottom"><span class="f-copy">©PDFHub</span><div class="f-dot"></div><span class="f-copy">by @officialhazim42</span><div class="f-dot"></div><span class="f-copy">All 33 tools free forever</span><div class="f-dot"></div><span class="f-copy">Your files never leave your device</span></div></footer>`;
   document.querySelector('.page-main')?.insertAdjacentHTML('afterend',footerHtml);
   document.querySelectorAll('link[rel="icon"],link[rel="apple-touch-icon"]').forEach(link=>link.remove());
-  const favicon=document.createElement('link');favicon.rel='icon';favicon.href='favicon.png';favicon.type='image/png';document.head.appendChild(favicon);
-  const touchIcon=document.createElement('link');touchIcon.rel='apple-touch-icon';touchIcon.href='favicon.png';document.head.appendChild(touchIcon);
-  const root=document.body.dataset.root||'';
+  const favicon=document.createElement('link');favicon.rel='icon';favicon.href=root+'favicons/favicon.png';favicon.type='image/png';document.head.appendChild(favicon);
+  const touchIcon=document.createElement('link');touchIcon.rel='apple-touch-icon';touchIcon.href=root+'favicons/favicon.png';document.head.appendChild(touchIcon);
   const getHistory=()=>{try{return JSON.parse(localStorage.getItem('pdfhub-history-tools')||'[]')}catch{return []}};
   const saveHistory=(name,url)=>{const items=getHistory().filter(item=>item.url!==url);items.unshift({name,url});localStorage.setItem('pdfhub-history-tools',JSON.stringify(items.slice(0,12)));};
   const theme=localStorage.getItem('pdfhub-theme')||'dark';
@@ -33,11 +34,11 @@
   }
   if(page==='history'){
     const list=document.getElementById('historyList'),items=getHistory();
-    list.innerHTML=items.length?items.map(item=>`<a class="activity-item" href="${root}${item.url}"><i class="fas fa-arrow-up-right-from-square"></i><span>${item.name}</span><small>Recent tool</small></a>`).join(''):'<div class="notice"><i class="fas fa-clock"></i><span>No tool activity yet. Open a PDF tool and it will appear here.</span></div>';
+    list.innerHTML=items.length?items.map(item=>`<a class="activity-item" href="${historyHref(item.url)}"><i class="fas fa-arrow-up-right-from-square"></i><span>${item.name}</span><small>Recent tool</small></a>`).join(''):'<div class="notice"><i class="fas fa-clock"></i><span>No tool activity yet. Open a PDF tool and it will appear here.</span></div>';
   }
   if(page==='dashboard'){
     const items=getHistory();document.getElementById('toolCount').textContent=items.length;document.getElementById('notificationCountLarge').textContent=localStorage.getItem('pdfhub-notifications-seen')==='true'?'0':'2';
-    document.getElementById('dashboardActivity').innerHTML=items.length?items.slice(0,6).map(item=>`<a class="activity-item" href="${root}${item.url}"><i class="fas fa-file-pdf"></i><span>${item.name}</span><small>Available offline</small></a>`).join(''):'<div class="notice"><i class="fas fa-sparkles"></i><span>Your dashboard will populate as you explore PDFHub tools.</span></div>';
+    document.getElementById('dashboardActivity').innerHTML=items.length?items.slice(0,6).map(item=>`<a class="activity-item" href="${historyHref(item.url)}"><i class="fas fa-file-pdf"></i><span>${item.name}</span><small>Available offline</small></a>`).join(''):'<div class="notice"><i class="fas fa-sparkles"></i><span>Your dashboard will populate as you explore PDFHub tools.</span></div>';
     document.getElementById('notificationMessage').textContent=items.length?`Your local workspace has ${items.length} recent tool${items.length===1?'':'s'} ready to revisit.`:'Welcome to PDFHub. Your first tool activity will appear here.';
   }
 })();

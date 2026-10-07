@@ -73,13 +73,17 @@ Most processing happens locally in the browser, so files are not uploaded to a P
 ```text
 .
 ├── index.html             # Homepage and tool directory
-├── dashboard.html         # Local activity dashboard
-├── history.html           # Recently used tools
-├── about.html             # About page
-├── terms.html             # Terms and conditions
-├── site-pages.css         # Styles for shared site pages
-├── site-pages.js          # Shared site-page behavior
 ├── sw.js                  # Service worker and app-shell cache
+├── favicons/
+│   ├── favicon.png         # Shared site icon
+│   └── *.svg               # Individual PDF-tool favicons
+├── menu-bar/
+│   ├── dashboard.html      # Local activity dashboard
+│   ├── history.html        # Recently used tools
+│   ├── about.html          # About page
+│   ├── terms.html          # Terms and conditions
+│   ├── site-pages.css      # Styles for shared site pages
+│   └── site-pages.js       # Shared site-page behavior
 └── tools/
     ├── *.html             # Individual PDF tools
     ├── shared.css         # Shared tool-page styles

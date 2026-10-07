@@ -2,7 +2,7 @@
 
 function normalizeBrandLogo(){
   document.querySelectorAll('.logo').forEach(logo=>{
-    logo.innerHTML='<img class="logo-mark" src="../favicon.png" alt="" aria-hidden="true"/>PDF HUB';
+    logo.innerHTML='<img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>PDF HUB';
   });
 }
 
@@ -17,7 +17,7 @@ function normalizeSiteFooter(){
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{normalizeBrandLogo();normalizeSiteFooter();},{once:true});else{normalizeBrandLogo();normalizeSiteFooter();}
 
-// Give each tool page its own uploaded favicon.
+// Give each tool page its own favicon stored with the shared site icons.
 (function(){
   const icons={
     'compare.html':['CMP','#facc15'],
@@ -55,11 +55,9 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     'word-to-pdf.html':['DOC','#38d9f5']
   };
   const filename=location.pathname.split('/').pop();
-  const [label,color]=icons[filename]||['PDF','#7c6aff'];
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0f0f1a"/><rect x="7" y="7" width="50" height="50" rx="11" fill="${color}"/><path d="M19 15h17l9 9v25H19z" fill="#0f0f1a" opacity=".92"/><path d="M36 15v11h9" fill="${color}" opacity=".7"/><text x="32" y="43" fill="#fff" font-family="Arial,sans-serif" font-size="${label.length>4?'9':'12'}" font-weight="700" text-anchor="middle">${label}</text></svg>`;
-  const iconUrl=`data:image/svg+xml,${encodeURIComponent(svg)}`;
+  const iconUrl=icons[filename]?`../favicons/${filename.replace(/\.html$/,'.svg')}`:'../favicons/favicon.png';
   document.querySelectorAll('link[rel="icon"],link[rel="apple-touch-icon"]').forEach(link=>link.remove());
-  const icon=document.createElement('link');icon.rel='icon';icon.href=iconUrl;icon.type='image/svg+xml';document.head.appendChild(icon);
+  const icon=document.createElement('link');icon.rel='icon';icon.href=iconUrl;icon.type=iconUrl.endsWith('.svg')?'image/svg+xml':'image/png';document.head.appendChild(icon);
   const touch=document.createElement('link');touch.rel='apple-touch-icon';touch.href=iconUrl;document.head.appendChild(touch);
 })();
 
@@ -202,7 +200,7 @@ function ensureSiteMenu(){
   toggle.className='menu-toggle';toggle.id='menuToggle';toggle.type='button';toggle.title='Open menu';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','siteMenu');toggle.innerHTML='<i class="fas fa-bars"></i>';
   const menu=document.createElement('div');menu.className='site-menu';menu.id='siteMenu';menu.setAttribute('aria-hidden','true');
   const notificationCount=localStorage.getItem('pdfhub-notifications-seen')==='true'?'0':'2';
-  menu.innerHTML=`<div class="menu-heading"><span>PDFHub control center</span><small>Stored in this browser</small></div><form class="menu-search" id="menuSearch"><input id="menuSearchInput" type="search" placeholder="Search tools..." aria-label="Search tools"/><button type="submit" title="Search"><i class="fas fa-arrow-right"></i></button></form><div class="menu-list"><div class="menu-theme-row"><span><i class="fas fa-circle-half-stroke"></i> Appearance</span><button class="theme-toggle" id="menuThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode"><span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span></button></div><a class="menu-action" href="../dashboard.html"><i class="fas fa-chart-line"></i><span>Personal dashboard</span><span class="menu-badge" id="dashboardCount">${getHistoryTools().length}</span></a><a class="menu-action" href="../dashboard.html#notifications"><i class="fas fa-bell"></i><span>Notifications</span><span class="menu-badge" id="notificationCount">${notificationCount}</span></a><a class="menu-action" href="../history.html"><i class="fas fa-clock-rotate-left"></i><span>History</span></a><a class="menu-action" href="../terms.html"><i class="fas fa-file-contract"></i><span>Terms and conditions</span></a><a class="menu-action" href="../about.html"><i class="fas fa-circle-info"></i><span>About us</span></a></div><p class="menu-note">Your files stay on this device. No account required.</p>`;
+  menu.innerHTML=`<div class="menu-heading"><span>PDFHub control center</span><small>Stored in this browser</small></div><form class="menu-search" id="menuSearch"><input id="menuSearchInput" type="search" placeholder="Search tools..." aria-label="Search tools"/><button type="submit" title="Search"><i class="fas fa-arrow-right"></i></button></form><div class="menu-list"><div class="menu-theme-row"><span><i class="fas fa-circle-half-stroke"></i> Appearance</span><button class="theme-toggle" id="menuThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode"><span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span></button></div><a class="menu-action" href="../menu-bar/dashboard.html"><i class="fas fa-chart-line"></i><span>Personal dashboard</span><span class="menu-badge" id="dashboardCount">${getHistoryTools().length}</span></a><a class="menu-action" href="../menu-bar/dashboard.html#notifications"><i class="fas fa-bell"></i><span>Notifications</span><span class="menu-badge" id="notificationCount">${notificationCount}</span></a><a class="menu-action" href="../menu-bar/history.html"><i class="fas fa-clock-rotate-left"></i><span>History</span></a><a class="menu-action" href="../menu-bar/terms.html"><i class="fas fa-file-contract"></i><span>Terms and conditions</span></a><a class="menu-action" href="../menu-bar/about.html"><i class="fas fa-circle-info"></i><span>About us</span></a></div><p class="menu-note">Your files stay on this device. No account required.</p>`;
   menu.querySelector('.menu-theme-row')?.remove();
   const homeLink=document.createElement('a');homeLink.className='menu-action';homeLink.href='../index.html';homeLink.innerHTML='<i class="fas fa-house"></i><span>Home</span>';menu.querySelector('.menu-list').prepend(homeLink);
   container.append(toggle,menu);
