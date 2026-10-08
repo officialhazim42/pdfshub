@@ -13,12 +13,16 @@
   if(theme==='light')document.body.classList.add('light');
   const menu=document.getElementById('siteMenu');
   const toggle=document.getElementById('menuToggle');
+  menu?.setAttribute('aria-hidden','true');
+  toggle?.setAttribute('aria-controls','siteMenu');
+  toggle?.setAttribute('aria-label','Open menu');
   menu?.querySelector('.menu-theme-row')?.remove();
   if(menu){const home=document.createElement('a');home.className='menu-action';home.href=root+'index.html';home.innerHTML='<i class="fas fa-house"></i><span>Home</span>';menu.querySelector('.menu-list')?.prepend(home);}
   const globalTheme=document.createElement('button');globalTheme.className='global-theme-toggle';globalTheme.type='button';globalTheme.title='Toggle light/dark mode';globalTheme.innerHTML='<span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span>';globalTheme.onclick=()=>window.toggleTheme();toggle.parentElement.insertBefore(globalTheme,toggle);
-  const close=()=>{menu?.classList.remove('open');toggle?.setAttribute('aria-expanded','false');if(toggle)toggle.innerHTML='<i class="fas fa-bars"></i>';};
-  toggle?.addEventListener('click',event=>{event.stopPropagation();const open=!menu.classList.contains('open');menu.classList.toggle('open',open);toggle.setAttribute('aria-expanded',String(open));toggle.innerHTML=open?'<i class="fas fa-xmark"></i>':'<i class="fas fa-bars"></i>';});
+  const close=()=>{menu?.classList.remove('open');menu?.setAttribute('aria-hidden','true');toggle?.setAttribute('aria-expanded','false');toggle?.setAttribute('aria-label','Open menu');if(toggle){toggle.title='Open menu';toggle.innerHTML='<i class="fas fa-bars"></i>';}};
+  toggle?.addEventListener('click',event=>{event.stopPropagation();const open=!menu.classList.contains('open');menu.classList.toggle('open',open);menu.setAttribute('aria-hidden',String(!open));toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close menu':'Open menu');toggle.title=open?'Close menu':'Open menu';toggle.innerHTML=open?'<i class="fas fa-xmark"></i>':'<i class="fas fa-bars"></i>';if(open)menu.querySelector('#menuSearchInput')?.focus();});
   document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))close();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu?.classList.contains('open')){close();toggle?.focus();}});
   document.getElementById('menuSearch')?.addEventListener('submit',event=>{event.preventDefault();location.href=root+'index.html?search='+encodeURIComponent(document.getElementById('menuSearchInput').value);});
   window.toggleTheme=function(){const light=document.body.classList.toggle('light');localStorage.setItem('pdfhub-theme',light?'light':'dark');const label=document.getElementById('themeLabel'),knob=document.getElementById('themeKnob');if(label)label.textContent=light?'Light':'Dark';if(knob)knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';};
   const light=document.body.classList.contains('light');document.getElementById('themeLabel').textContent=light?'Light':'Dark';document.getElementById('themeKnob').innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';

@@ -207,12 +207,14 @@ function ensureSiteMenu(){
   const globalTheme=document.createElement('button');globalTheme.className='global-theme-toggle';globalTheme.id='globalThemeToggle';globalTheme.type='button';globalTheme.title='Toggle light/dark mode';globalTheme.innerHTML='<span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span>';globalTheme.onclick=toggleTheme;container.insertBefore(globalTheme,toggle);
   if(document.body.classList.contains('light')){globalTheme.querySelector('.t-label').textContent='Light';globalTheme.querySelector('.toggle-knob').innerHTML='<i class="fas fa-sun"></i>';}
   menu.querySelector('#menuSearch').addEventListener('submit',event=>{event.preventDefault();location.href='../index.html?search='+encodeURIComponent(menu.querySelector('#menuSearchInput').value);});
-  const close=()=>{menu.classList.remove('open');menu.setAttribute('aria-hidden','true');toggle.setAttribute('aria-expanded','false');toggle.innerHTML='<i class="fas fa-bars"></i>';};
-  toggle.addEventListener('click',event=>{event.stopPropagation();if(menu.classList.contains('open'))close();else{menu.classList.add('open');menu.setAttribute('aria-hidden','false');toggle.setAttribute('aria-expanded','true');toggle.innerHTML='<i class="fas fa-xmark"></i>';}});
+  const close=()=>{menu.classList.remove('open');menu.setAttribute('aria-hidden','true');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open menu');toggle.title='Open menu';toggle.innerHTML='<i class="fas fa-bars"></i>';};
+  toggle.setAttribute('aria-label','Open menu');menu.setAttribute('aria-hidden','true');
+  toggle.addEventListener('click',event=>{event.stopPropagation();if(menu.classList.contains('open'))close();else{menu.classList.add('open');menu.setAttribute('aria-hidden','false');toggle.setAttribute('aria-expanded','true');toggle.setAttribute('aria-label','Close menu');toggle.title='Close menu';toggle.innerHTML='<i class="fas fa-xmark"></i>';menu.querySelector('#menuSearchInput').focus();}});
   menu.querySelectorAll('[data-menu-action]').forEach(action=>action.addEventListener('click',()=>{
     if(action.dataset.menuAction==='dashboard')menu.querySelector('.menu-note').textContent=`${getHistoryTools().length} tool${getHistoryTools().length===1?'':'s'} in your local dashboard.`;
   }));
   document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))close();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu.classList.contains('open')){close();toggle.focus();}});
 }
 
 // ── DOWNLOAD MODAL ─────────────────────────────────────

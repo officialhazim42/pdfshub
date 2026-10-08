@@ -41,6 +41,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.92);backdrop-filte
 .menu-list{display:grid;gap:5px;padding-top:10px}
 .menu-action{display:flex;align-items:center;gap:10px;width:100%;padding:10px 9px;border:0;border-radius:9px;background:transparent;color:var(--text);font:600 .78rem 'DM Sans',sans-serif;text-align:left;cursor:pointer;text-decoration:none}
 .menu-action:hover{background:#24243a;color:#fff}.menu-action i{width:18px;color:#9e91ff;text-align:center}.menu-action:hover i{color:#fff}
+.menu-toggle:focus-visible,.global-theme-toggle:focus-visible,.menu-search button:focus-visible,.menu-action:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .menu-action .menu-badge{margin-left:auto;min-width:19px;padding:2px 6px;border-radius:99px;background:rgba(255,95,126,.14);color:var(--a2);font-size:.62rem;text-align:center}
 .menu-note{padding:8px 9px 2px;color:var(--muted);font-size:.66rem;line-height:1.5}
 .menu-theme-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px;border-radius:9px;background:rgba(124,106,255,.06);color:var(--muted);font-size:.74rem}
@@ -523,6 +524,8 @@ function toggleSiteMenu(force){
   const open=typeof force==='boolean'?force:!menu.classList.contains('open');
   menu.classList.toggle('open',open);menu.setAttribute('aria-hidden',String(!open));toggle.setAttribute('aria-expanded',String(open));
   toggle.innerHTML=open?'<i class="fas fa-xmark"></i>':'<i class="fas fa-bars"></i>';
+  toggle.setAttribute('aria-label',open?'Close menu':'Open menu');toggle.title=open?'Close menu':'Open menu';
+  if(open)menu.querySelector('#menuSearchInput')?.focus();
 }
 function showMenuNotice(message){
   const note=document.querySelector('.menu-note');if(!note)return;
@@ -533,6 +536,7 @@ document.getElementById('menuSearch')?.addEventListener('submit',event=>{event.p
 const notificationCount=document.getElementById('notificationCount');
 if(notificationCount&&localStorage.getItem('pdfhub-notifications-seen')==='true')notificationCount.textContent='0';
 document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))toggleSiteMenu(false)});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.getElementById('siteMenu')?.classList.contains('open')){toggleSiteMenu(false);document.getElementById('menuToggle')?.focus()}});
 updateMenuState();
 const initialSearch=new URLSearchParams(location.search).get('search');
 if(initialSearch){document.getElementById('searchInput').value=initialSearch;doSearch(initialSearch)}
