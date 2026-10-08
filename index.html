@@ -69,9 +69,6 @@ body.light .toggle-knob{transform:translateX(18px)}
 .theme-toggle:hover .toggle-track{border-color:var(--accent)}
 body{transition:background .3s,color .3s}
 
-.nav-socials{display:flex;gap:14px}
-.nav-socials a{color:var(--muted);font-size:.95rem;transition:color .2s,transform .2s;text-decoration:none}
-.nav-socials a:hover{color:var(--text);transform:translateY(-2px)}
 .history-toggle{position:relative;display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:var(--s1);color:var(--text);cursor:pointer;user-select:none;transition:border-color .2s,transform .2s}
 .history-toggle:hover{border-color:var(--accent);transform:translateY(-1px)}
 .history-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(124,106,255,.1);color:var(--accent);font-size:.7rem}
@@ -81,7 +78,6 @@ body{transition:background .3s,color .3s}
 .history-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 8px;border-radius:8px;color:var(--text);text-decoration:none;font-size:.7rem;background:var(--s2);border:1px solid transparent}
 .history-item:hover{border-color:var(--accent);color:var(--text)}
 .history-empty{padding:10px 8px;color:var(--muted);font-size:.68rem;text-align:center;border:1px dashed var(--border);border-radius:8px}
-@media(max-width:600px){.nav-socials{display:none}}
 
 /* ── LIGHT THEME ── */
 body.light{
@@ -197,10 +193,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
 .f-by{font-size:.82rem;color:var(--muted);margin-bottom:28px}
 .f-by a{color:var(--accent);text-decoration:none;font-weight:600}
 .f-by a:hover{text-decoration:underline}
-.socials{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-bottom:28px}
-.soc{display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--muted);font-size:.78rem;font-weight:500;padding:7px 13px;background:var(--s1);border:1px solid var(--border);border-radius:9px;transition:all .2s;white-space:nowrap}
-.soc:hover{color:var(--text);border-color:var(--accent);background:var(--s2);transform:translateY(-2px);box-shadow:0 4px 14px rgba(124,106,255,.2)}
-.soc i{font-size:.9rem}
 .f-bottom{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .f-dot{width:3px;height:3px;border-radius:50%;background:var(--border)}
 .f-copy{font-size:.72rem;color:var(--muted);opacity:.5}
@@ -213,7 +205,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
 /* HIDDEN */
 .card.hidden{display:none}
 @media(max-width:540px){.grid{grid-template-columns:1fr 1fr}.stats{max-width:100%}}
-@media(max-width:700px){.nav-socials{display:none}.info-sections{grid-template-columns:1fr}}
+@media(max-width:700px){.info-sections{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -221,13 +213,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
 <nav>
   <a class="logo" href="index.html"><img class="logo-mark" src="favicons/favicon.png" alt="" aria-hidden="true"/>PDF HUB</a>
   <div class="nav-right">
-    <div class="nav-socials">
-      <a href="https://instagram.com/officialhazim42" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://twitter.com/officialhazim42" target="_blank" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://youtube.com/@officialhazim42" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="https://tiktok.com/@officialhazim42" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-      <a href="https://github.com/officialhazim42" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-    </div>
     <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode"><span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span></button>
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteMenu" title="Open menu"><i class="fas fa-bars"></i></button>
     <div class="site-menu" id="siteMenu" aria-hidden="true">
@@ -369,19 +354,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
 
 <footer>
   <div class="f-logo">PDFHub</div>
-  <div class="f-by">Built with ❤️ by <a href="https://instagram.com/officialhazim42" target="_blank">@officialhazim42</a> · Free forever · No sign-up · Files never leave your device</div>
-  <div class="socials">
-    <a class="soc" href="https://instagram.com/officialhazim42" target="_blank"><i class="fab fa-instagram" style="color:#e1306c"></i> Instagram</a>
-    <a class="soc" href="https://twitter.com/officialhazim42" target="_blank"><i class="fab fa-x-twitter"></i> Twitter / X</a>
-    <a class="soc" href="https://youtube.com/@officialhazim42" target="_blank"><i class="fab fa-youtube" style="color:#ff0000"></i> YouTube</a>
-    <a class="soc" href="https://tiktok.com/@officialhazim42" target="_blank"><i class="fab fa-tiktok" style="color:#69c9d0"></i> TikTok</a>
-    <a class="soc" href="https://facebook.com/officialhazim42" target="_blank"><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook</a>
-    <a class="soc" href="https://linkedin.com/in/hazim-bashir-faqeer" target="_blank"><i class="fab fa-linkedin" style="color:#0077b5"></i> LinkedIn</a>
-    <a class="soc" href="https://github.com/officialhazim42" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-    <a class="soc" href="https://t.me/officialhazim42" target="_blank"><i class="fab fa-telegram" style="color:#26a5e4"></i> Telegram</a>
-    <a class="soc" href="https://snapchat.com/add/officialhazim42" target="_blank"><i class="fab fa-snapchat" style="color:#fffc00"></i> Snapchat</a>
-    <a class="soc" href="https://wa.me/9055267442" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp</a>
-  </div>
+  <div class="f-by">Built with ❤️ · Free forever · No sign-up · Files never leave your device</div>
   <div class="f-bottom">
     <span class="f-copy">©PDFHub</span><div class="f-dot"></div>
     <span class="f-copy">by @officialhazim42</span><div class="f-dot"></div>
