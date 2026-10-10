@@ -41,6 +41,16 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.92);backdrop-filte
 .menu-list{display:grid;gap:5px;padding-top:10px}
 .menu-action{display:flex;align-items:center;gap:10px;width:100%;padding:10px 9px;border:0;border-radius:9px;background:transparent;color:var(--text);font:600 .78rem 'DM Sans',sans-serif;text-align:left;cursor:pointer;text-decoration:none}
 .menu-action:hover{background:#24243a;color:#fff}.menu-action i{width:18px;color:#9e91ff;text-align:center}.menu-action:hover i{color:#fff}
+.menu-action.menu-featured{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:11px;padding:12px;border:1px solid rgba(124,106,255,.24);background:linear-gradient(135deg,rgba(124,106,255,.13),rgba(56,217,245,.06));transition:border-color .2s,background .2s,transform .2s}
+.menu-action.menu-featured:hover{border-color:rgba(124,106,255,.55);background:linear-gradient(135deg,rgba(124,106,255,.2),rgba(56,217,245,.1));transform:translateY(-1px)}
+.menu-feature-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(124,106,255,.25);border-radius:12px;background:rgba(124,106,255,.14);color:#b8adff}
+.menu-feature-icon i{width:auto!important;color:inherit!important;font-size:1rem}
+.menu-feature-copy{min-width:0;display:grid;gap:4px;align-content:center}
+.menu-feature-title{color:var(--text);font-size:.8rem;font-weight:700;letter-spacing:.05px}
+.menu-feature-subtitle{color:var(--muted);font-size:.65rem;font-weight:400;line-height:1.4}
+.menu-feature-meta{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.7rem}
+.menu-feature-meta>i{width:auto!important;color:inherit!important;font-size:.66rem}
+.menu-feature-count{min-width:23px;padding:3px 6px;border:1px solid rgba(124,106,255,.24);border-radius:99px;background:rgba(124,106,255,.13);color:#c8c0ff;font-size:.65rem;font-weight:700;text-align:center}
 .menu-toggle:focus-visible,.global-theme-toggle:focus-visible,.menu-search button:focus-visible,.menu-action:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .menu-action .menu-badge{margin-left:auto;min-width:19px;padding:2px 6px;border-radius:99px;background:rgba(255,95,126,.14);color:var(--a2);font-size:.62rem;text-align:center}
 .menu-note{padding:8px 9px 2px;color:var(--muted);font-size:.66rem;line-height:1.5}
@@ -51,6 +61,10 @@ body.light .site-menu{background:rgba(255,255,255,.98);border-color:#d5d5e8}
 body.light .menu-search input{background:#ebebf5;border-color:#d5d5e8}
 body.light .menu-action:hover{background:var(--s2);color:var(--text)}
 body.light .menu-action:hover i{color:var(--accent)}
+body.light .menu-action.menu-featured:hover{background:linear-gradient(135deg,rgba(124,106,255,.12),rgba(56,160,200,.06));color:var(--text)}
+body.light .menu-feature-title{color:var(--text)}
+body.light .menu-feature-subtitle,body.light .menu-feature-meta{color:var(--muted)}
+body.light .menu-feature-count{color:#5142bd;background:rgba(124,106,255,.1)}
 
 .history-toggle{position:relative;display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:var(--s1);color:var(--text);cursor:pointer;user-select:none;transition:border-color .2s,transform .2s}
 .history-toggle:hover{border-color:var(--accent);transform:translateY(-1px)}
@@ -220,8 +234,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
       <form class="menu-search" id="menuSearch"><input id="menuSearchInput" type="search" placeholder="Search tools..." aria-label="Search tools"/><button type="submit" title="Search"><i class="fas fa-arrow-right"></i></button></form>
       <div class="menu-list">
         <a class="menu-action" href="index.html"><i class="fas fa-house"></i><span>Home</span></a>
-        <a class="menu-action" href="menu-bar/dashboard.html"><i class="fas fa-chart-line"></i><span>Personal dashboard</span><span class="menu-badge" id="dashboardCount">0</span></a>
-        <a class="menu-action" href="menu-bar/dashboard.html#notifications"><i class="fas fa-bell"></i><span>Notifications</span><span class="menu-badge" id="notificationCount">2</span></a>
+        <a class="menu-action menu-featured" href="menu-bar/dashboard.html" aria-label="Open your dashboard, recent activity, and notifications"><span class="menu-feature-icon"><i class="fas fa-chart-line"></i></span><span class="menu-feature-copy"><span class="menu-feature-title">Dashboard &amp; updates</span><span class="menu-feature-subtitle">Activity, recent tools, and notifications</span></span><span class="menu-feature-meta"><span class="menu-feature-count" id="dashboardCount">0</span><i class="fas fa-arrow-up-right-from-square"></i></span></a>
         <a class="menu-action" href="menu-bar/history.html"><i class="fas fa-clock-rotate-left"></i><span>History</span></a>
         <a class="menu-action" href="menu-bar/terms.html"><i class="fas fa-file-contract"></i><span>Terms and conditions</span></a>
         <a class="menu-action" href="menu-bar/about.html"><i class="fas fa-circle-info"></i><span>About us</span></a>
@@ -506,8 +519,6 @@ function showMenuNotice(message){
 }
 document.getElementById('menuToggle')?.addEventListener('click',event=>{event.stopPropagation();toggleSiteMenu();updateMenuState()});
 document.getElementById('menuSearch')?.addEventListener('submit',event=>{event.preventDefault();const query=document.getElementById('menuSearchInput').value;toggleSiteMenu(false);document.getElementById('searchInput').value=query;doSearch(query);document.getElementById('searchInput').focus()});
-const notificationCount=document.getElementById('notificationCount');
-if(notificationCount&&localStorage.getItem('pdfhub-notifications-seen')==='true')notificationCount.textContent='0';
 document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))toggleSiteMenu(false)});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.getElementById('siteMenu')?.classList.contains('open')){toggleSiteMenu(false);document.getElementById('menuToggle')?.focus()}});
 updateMenuState();
