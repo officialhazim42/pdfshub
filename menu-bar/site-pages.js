@@ -18,6 +18,10 @@
   toggle?.setAttribute('aria-controls','siteMenu');
   toggle?.setAttribute('aria-label','Open menu');
   menu?.querySelector('.menu-theme-row')?.remove();
+  if(menu&&!menu.querySelector('.menu-status')){
+    menu.querySelector('.menu-search')?.insertAdjacentHTML('afterend','<div class="menu-status"><span><i class="fas fa-shield-halved"></i> Runs in your browser</span><span class="menu-status-dot">●</span><span>No account needed</span></div>');
+    menu.querySelector('.menu-list')?.insertAdjacentHTML('afterbegin','<div class="menu-section-label">Workspace</div>');
+  }
   const dashboardLink=menu?.querySelector('.menu-action[href$="dashboard.html"]');
   const notificationsLink=menu?.querySelector('.menu-action[href$="dashboard.html#notifications"]');
   if(dashboardLink){
@@ -26,6 +30,10 @@
     dashboardLink.innerHTML='<span class="menu-feature-icon"><i class="fas fa-chart-line"></i></span><span class="menu-feature-copy"><span class="menu-feature-title">Dashboard &amp; updates</span><span class="menu-feature-subtitle">Activity, recent tools, and notifications</span></span><span class="menu-feature-meta"><span class="menu-feature-count" id="dashboardCount">0</span><i class="fas fa-arrow-up-right-from-square"></i></span>';
   }
   notificationsLink?.remove();
+  const termsLink=menu?.querySelector('.menu-action[href$="terms.html"]');
+  if(termsLink&&!menu.querySelector('.menu-section-label[data-section="about"]')){
+    termsLink.insertAdjacentHTML('beforebegin','<div class="menu-section-label" data-section="about">About PDFHub</div>');
+  }
   if(menu){const home=document.createElement('a');home.className='menu-action';home.href=root+'index.html';home.innerHTML='<i class="fas fa-house"></i><span>Home</span>';menu.querySelector('.menu-list')?.prepend(home);}
   const globalTheme=document.createElement('button');globalTheme.className='global-theme-toggle';globalTheme.type='button';globalTheme.title='Toggle light/dark mode';globalTheme.innerHTML='<span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span>';globalTheme.onclick=()=>window.toggleTheme();toggle.parentElement.insertBefore(globalTheme,toggle);
   const close=()=>{menu?.classList.remove('open');menu?.setAttribute('aria-hidden','true');toggle?.setAttribute('aria-expanded','false');toggle?.setAttribute('aria-label','Open menu');if(toggle){toggle.title='Open menu';toggle.innerHTML='<i class="fas fa-bars"></i>';}};
@@ -33,7 +41,8 @@
   document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))close();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu?.classList.contains('open')){close();toggle?.focus();}});
   document.getElementById('menuSearch')?.addEventListener('submit',event=>{event.preventDefault();location.href=root+'index.html?search='+encodeURIComponent(document.getElementById('menuSearchInput').value);});
-  window.toggleTheme=function(){const light=document.body.classList.toggle('light');localStorage.setItem('pdfhub-theme',light?'light':'dark');const label=document.getElementById('themeLabel'),knob=document.getElementById('themeKnob');if(label)label.textContent=light?'Light':'Dark';if(knob)knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';};
+  window.toggleTheme=function(){const light=document.body.classList.toggle('light');localStorage.setItem('pdfhub-theme',light?'light':'dark');document.querySelectorAll('.t-label').forEach(label=>label.textContent=light?'Light':'Dark');document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>');document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f2f2f8':'#07070d');};
+  window.addEventListener('storage',event=>{if(event.key!=='pdfhub-theme')return;const light=event.newValue==='light';document.body.classList.toggle('light',light);document.querySelectorAll('.t-label').forEach(label=>label.textContent=light?'Light':'Dark');document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>');});
   const light=document.body.classList.contains('light');document.getElementById('themeLabel').textContent=light?'Light':'Dark';document.getElementById('themeKnob').innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
   const count=document.getElementById('dashboardCount');if(count)count.textContent=getHistory().length;
   const page=document.body.dataset.page;

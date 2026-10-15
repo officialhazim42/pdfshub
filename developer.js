@@ -12,6 +12,20 @@
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f4f4f8':'#07070d');
   };
   applyTheme(localStorage.getItem('pdfhub-theme')||'dark');
+  const enhanceMenu=()=>{
+    const menu=document.getElementById('siteMenu');
+    if(!menu)return;
+    if(!menu.querySelector('.menu-status')){
+      menu.querySelector('.menu-search')?.insertAdjacentHTML('afterend','<div class="menu-status"><span><i class="fas fa-shield-halved"></i> Runs in your browser</span><span class="menu-status-dot">●</span><span>No account needed</span></div>');
+    }
+    const dashboard=menu.querySelector('.menu-action[href*="dashboard.html"]');
+    if(dashboard&&!menu.querySelector('.menu-section-label')){
+      dashboard.insertAdjacentHTML('beforebegin','<div class="menu-section-label">Workspace</div>');
+      const terms=menu.querySelector('.menu-action[href*="terms.html"]');
+      terms?.insertAdjacentHTML('beforebegin','<div class="menu-section-label" data-section="about">About PDFHub</div>');
+    }
+  };
+  enhanceMenu();
   if(!window.__pdfhubThemeWrapped){
     window.toggleTheme=()=>{
       const next=document.body.classList.contains('light')?'dark':'light';
