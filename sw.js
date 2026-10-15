@@ -40,6 +40,8 @@ const APP_SHELL = [
   './menu-bar/dashboard.html',
   './menu-bar/terms.html',
   './menu-bar/about.html',
+  './menu-bar/privacy.html',
+  './menu-bar/favorites.html',
   './menu-bar/site-pages.css',
   './menu-bar/site-pages.js',
   './tools/shared.css',
@@ -76,7 +78,12 @@ const APP_SHELL = [
   './tools/pdf-to-markdown.html',
   './tools/unlock.html',
   './tools/watermark.html',
-  './tools/word-to-pdf.html'
+  './tools/word-to-pdf.html',
+  './guides/index.html',
+  './guides/styles.css',
+  './guides/data.js',
+  './guides/index.js',
+  './guides/guide.js'
 ];
 
 self.addEventListener('install', event => {

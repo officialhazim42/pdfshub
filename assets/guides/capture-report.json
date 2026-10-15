@@ -1,0 +1,306 @@
+{
+  "generatedAt": "2026-10-15T14:24:17.416Z",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "results": [
+    {
+      "tool": "compare.html",
+      "guide": "compare-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "compress.html",
+      "guide": "compress-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "crop.html",
+      "guide": "crop-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "edit.html",
+      "guide": "edit-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "excel-to-pdf.html",
+      "guide": "excel-to-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "extract-pages.html",
+      "guide": "extract-pages",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "forms.html",
+      "guide": "forms-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "html-to-pdf.html",
+      "guide": "html-to-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "jpg-to-pdf.html",
+      "guide": "jpg-to-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "merge.html",
+      "guide": "merge-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "ocr.html",
+      "guide": "ocr-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "organize.html",
+      "guide": "organize-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "page-numbers.html",
+      "guide": "page-numbers",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "pdf-to-excel.html",
+      "guide": "pdf-to-excel",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "pdf-to-jpg.html",
+      "guide": "pdf-to-jpg",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "pdf-to-markdown.html",
+      "guide": "pdf-to-markdown",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "pdf-to-pdfa.html",
+      "guide": "pdf-to-pdfa",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "pdf-to-ppt.html",
+      "guide": "pdf-to-ppt",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "pdf-to-word.html",
+      "guide": "pdf-to-word",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "ppt-to-pdf.html",
+      "guide": "ppt-to-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "protect.html",
+      "guide": "protect-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "redact.html",
+      "guide": "redact-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "remove-pages.html",
+      "guide": "remove-pages",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "repair.html",
+      "guide": "repair-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "rotate.html",
+      "guide": "rotate-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "scan-to-pdf.html",
+      "guide": "scan-to-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "sign.html",
+      "guide": "sign-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "split.html",
+      "guide": "split-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "summarize.html",
+      "guide": "summarize-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "translate.html",
+      "guide": "translate-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "unlock.html",
+      "guide": "unlock-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "watermark.html",
+      "guide": "watermark-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    },
+    {
+      "tool": "word-to-pdf.html",
+      "guide": "word-to-pdf",
+      "screenshots": [
+        "step-1-open.webp",
+        "step-2-configured.webp"
+      ],
+      "error": null
+    }
+  ]
+}

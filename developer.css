@@ -4,16 +4,15 @@
 .pdfhub-developer.open .pdfhub-developer-trigger{background:var(--accent,#7c6aff);border-color:var(--accent,#7c6aff);color:#fff}
 .pdfhub-developer-trigger:focus-visible,.pdfhub-developer button:focus-visible,.pdfhub-developer a:focus-visible{outline:2px solid var(--accent,#7c6aff);outline-offset:3px}
 .menu-status{display:flex;align-items:center;gap:6px;padding:10px 3px 1px;color:var(--muted,#6b6b8a);font-size:.61rem}.menu-status i{color:var(--a3,#00e5a0);margin-right:2px}.menu-status-dot{color:var(--border,#252538);font-size:.5rem}.menu-section-label{padding:10px 9px 3px;color:var(--muted2,#4a4a6a);font-size:.59rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}.menu-action-note{margin-left:auto;color:var(--muted,#6b6b8a);font-size:.6rem;font-weight:500}
-.pdfhub-developer-panel{position:absolute;z-index:1;left:0;bottom:0;display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100vw - 36px);min-height:52px;padding:6px 8px 6px 62px;border:1px solid var(--border,#252538);border-radius:26px;background:var(--s1,#0f0f1a);box-shadow:0 12px 32px rgba(0,0,0,.32);opacity:0;pointer-events:none;transform:scaleX(.1);transform-origin:left center;transition:opacity .25s,transform .25s}
-.pdfhub-developer-panel{background:color-mix(in srgb,var(--s1,#0f0f1a) 94%,transparent)}
+.pdfhub-developer-panel{position:absolute;z-index:1;left:0;bottom:0;display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100vw - 36px);min-height:52px;padding:6px 8px 6px 62px;border:1px solid rgba(31,27,62,.16);border-radius:26px;background:rgba(255,255,255,.94);box-shadow:0 12px 32px rgba(0,0,0,.24);opacity:0;pointer-events:none;transform:scaleX(.1);transform-origin:left center;transition:opacity .25s,transform .25s}
 .pdfhub-developer.open .pdfhub-developer-panel{opacity:1;pointer-events:auto;transform:scaleX(1)}
 .pdfhub-developer-panel>*{opacity:0;transition:opacity .12s .04s}
 .pdfhub-developer.open .pdfhub-developer-panel>*{opacity:1}
-.pdfhub-developer-about{border:0;background:transparent;color:var(--text,#eeeef8);cursor:pointer;font:600 .72rem 'DM Sans',sans-serif;white-space:nowrap}
+.pdfhub-developer-about{border:0;background:transparent;color:#211c3d;cursor:pointer;font:700 .72rem 'DM Sans',sans-serif;white-space:nowrap}
 .pdfhub-developer-about:hover{color:var(--accent,#7c6aff)}
-.pdfhub-developer-social{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9px;color:var(--muted,#6b6b8a);text-decoration:none;transition:color .2s,background .2s,transform .2s}
-.pdfhub-developer-social:hover{color:var(--text,#eeeef8);background:rgba(124,106,255,.14);transform:translateY(-1px)}
-.pdfhub-developer-dialog{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.72);opacity:0;pointer-events:none;transition:opacity .2s}
+.pdfhub-developer-social{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9px;color:#625a86;text-decoration:none;transition:color .2s,background .2s,transform .2s}
+.pdfhub-developer-social:hover{color:var(--accent,#7c6aff);background:rgba(124,106,255,.12);transform:translateY(-1px)}
+.pdfhub-developer-dialog{position:fixed;inset:0;z-index:2147483005;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.72);opacity:0;pointer-events:none;transition:opacity .2s}
 .pdfhub-developer-dialog.open{opacity:1;pointer-events:auto}
 .pdfhub-developer-card{position:relative;width:min(680px,100%);max-height:min(780px,calc(100vh - 40px));overflow:auto;border:1px solid var(--border,#252538);border-radius:20px;background:var(--s1,#0f0f1a);box-shadow:0 24px 70px rgba(0,0,0,.45);transform:translateY(8px) scale(.98);transition:transform .2s}
 .pdfhub-developer-dialog.open .pdfhub-developer-card{transform:none}

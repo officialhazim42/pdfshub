@@ -145,9 +145,6 @@ body.light .toggle-knob{transform:translateX(18px);background:var(--accent)}
 .tool-header p{color:var(--muted);font-size:.92rem;max-width:500px;margin:0 auto;line-height:1.65}
 
 /* ── TOOL GUIDE ── */
-.tool-guide{display:grid;grid-template-columns:1.15fr .85fr;gap:0;margin:-10px 0 24px;padding:0;background:linear-gradient(135deg,var(--s1),rgba(124,106,255,.035));border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-.tool-guide-main,.tool-guide-tips{padding:18px 20px}.tool-guide-kicker{color:var(--a3);font-size:.61rem;font-weight:700;letter-spacing:1.15px;text-transform:uppercase;margin-bottom:7px}.tool-guide h2{font:700 .86rem 'Syne',sans-serif;color:var(--text);margin-bottom:10px;letter-spacing:.2px}.tool-guide h2 i{color:var(--accent);margin-right:5px}.tool-guide ol,.tool-guide ul{margin:0;padding-left:21px;color:var(--muted);font-size:.78rem;line-height:1.6}.tool-guide li+li{margin-top:5px}.tool-guide strong{color:var(--text);font-weight:600}.tool-guide-tips{border-left:1px solid var(--border);background:rgba(0,229,160,.025)}.tool-guide-tips li::marker{color:var(--a3)}
-@media(max-width:620px){.tool-guide{grid-template-columns:1fr}.tool-guide-tips{padding-left:0;border-left:0;border-top:1px solid var(--border);padding-top:14px}}
 
 /* ── DROP AREA ── */
 .drop-area{border:2px dashed var(--border);border-radius:var(--radius);padding:44px 24px;text-align:center;cursor:pointer;transition:border-color .25s,background .25s,transform .2s;background:var(--s1);margin-bottom:18px;position:relative}

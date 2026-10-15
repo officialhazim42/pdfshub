@@ -181,10 +181,10 @@ h1 .g{background:linear-gradient(135deg,var(--accent) 20%,var(--a2));background-
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(186px,1fr));gap:11px}
 
 /* TOOL CARD */
-.card{display:flex;flex-direction:column;gap:8px;background:var(--s1);border:1px solid var(--border);border-radius:13px;padding:17px 15px 14px;text-decoration:none;color:inherit;cursor:pointer;transition:background .2s,border-color .2s,transform .18s,box-shadow .2s;position:relative;overflow:visible}.card .fbadge{right:38px}.card-help{position:absolute;top:9px;right:10px;width:20px;height:20px;border:1px solid var(--border);border-radius:50%;background:var(--s2);color:var(--muted);font:700 .68rem/18px 'DM Sans',sans-serif;text-align:center;z-index:2;cursor:help}.card-help:hover,.card-help:focus{color:#fff;background:var(--accent);border-color:var(--accent);outline:none}.card-help::after{content:attr(data-tooltip);position:absolute;right:0;top:27px;width:190px;padding:8px 9px;border:1px solid var(--border);border-radius:8px;background:var(--s2);box-shadow:0 10px 24px rgba(0,0,0,.25);color:var(--text);font:500 .68rem/1.45 'DM Sans',sans-serif;text-align:left;opacity:0;pointer-events:none;transform:translateY(-3px);transition:opacity .16s,transform .16s;z-index:20}.card-help:hover::after,.card-help:focus::after{opacity:1;transform:translateY(0)}
+.card{display:flex;flex-direction:column;gap:8px;background:var(--s1);border:1px solid var(--border);border-radius:13px;padding:17px 15px 14px;text-decoration:none;color:inherit;cursor:pointer;transition:background .2s,border-color .2s,transform .18s,box-shadow .2s;position:relative;overflow:visible}
 .card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(255,255,255,.02));pointer-events:none}
 .card:hover{transform:translateY(-4px)}
-.fbadge{position:absolute;top:10px;right:10px;font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:rgba(0,229,160,.1);color:var(--a3);border:1px solid rgba(0,229,160,.22);padding:2px 7px;border-radius:5px}
+.fbadge{position:absolute;top:10px;right:12px;font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:rgba(0,229,160,.1);color:var(--a3);border:1px solid rgba(0,229,160,.22);padding:2px 7px;border-radius:5px}
 .c-ico{font-size:1.3rem;line-height:1}
 .c-name{font-size:.88rem;font-weight:600;line-height:1.3;color:var(--text)}
 .c-desc{font-size:.72rem;color:var(--muted);line-height:1.55;flex:1}
@@ -241,6 +241,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
 /* HIDDEN */
 .card.hidden{display:none}
 @media(max-width:540px){.grid{grid-template-columns:1fr 1fr}.stats{max-width:100%}}
+.favorite-toggle{position:absolute;top:9px;right:50px;width:24px;height:24px;display:grid;place-items:center;border:0;border-radius:6px;background:transparent;color:var(--muted);cursor:pointer;padding:0;z-index:2;font-size:.78rem}.favorite-toggle:hover,.favorite-toggle[aria-pressed="true"]{color:var(--accent)}.favorite-toggle[aria-pressed="true"]{color:var(--a4)}.favorite-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media(max-width:700px){.info-sections{grid-template-columns:1fr}}
 </style>
 </head>
@@ -257,7 +258,10 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
       <div class="menu-list">
         <a class="menu-action" href="index.html"><i class="fas fa-house"></i><span>Home</span></a>
         <a class="menu-action menu-featured" href="menu-bar/dashboard.html" aria-label="Open your dashboard, recent activity, and notifications"><span class="menu-feature-icon"><i class="fas fa-chart-line"></i></span><span class="menu-feature-copy"><span class="menu-feature-title">Dashboard &amp; updates</span><span class="menu-feature-subtitle">Activity, recent tools, and notifications</span></span><span class="menu-feature-meta"><span class="menu-feature-count" id="dashboardCount">0</span><i class="fas fa-arrow-up-right-from-square"></i></span></a>
+        <a class="menu-action" href="guides/"><i class="fas fa-book-open"></i><span>User Guides &amp; Tips</span><span class="menu-action-note">33 guides</span></a>
+        <a class="menu-action" href="menu-bar/favorites.html"><i class="fas fa-star"></i><span>Favorites</span><span class="menu-action-note">Local</span></a>
         <a class="menu-action" href="menu-bar/history.html"><i class="fas fa-clock-rotate-left"></i><span>History</span></a>
+        <a class="menu-action" href="menu-bar/privacy.html"><i class="fas fa-shield-halved"></i><span>Privacy Center</span></a>
         <a class="menu-action" href="menu-bar/terms.html"><i class="fas fa-file-contract"></i><span>Terms and conditions</span></a>
         <a class="menu-action" href="menu-bar/about.html"><i class="fas fa-circle-info"></i><span>About us</span></a>
       </div>
@@ -474,14 +478,8 @@ window.addEventListener('DOMContentLoaded',()=>{
     const name=card.querySelector('.c-name')?.textContent?.trim();
     const link=card.getAttribute('href');
     if(!name || !link) return;
-    const help=document.createElement('span');
-    help.className='card-help';
-    help.textContent='?';
-    help.tabIndex=0;
-    help.setAttribute('role','img');
-    help.dataset.tooltip=`How to use: ${card.querySelector('.c-desc')?.textContent?.trim()||'Open the tool and follow the steps.'}`;
-    help.setAttribute('aria-label',help.dataset.tooltip);
-    card.appendChild(help);
+    const favoriteItems=()=>{try{return JSON.parse(localStorage.getItem('pdfhub-favorites')||'[]')}catch{return []}};
+    const favorite=document.createElement('button');favorite.className='favorite-toggle';favorite.type='button';favorite.title='Toggle favorite';const selected=favoriteItems().includes(link);favorite.setAttribute('aria-label',selected?`Remove ${name} from favorites`:`Add ${name} to favorites`);favorite.setAttribute('aria-pressed',String(selected));favorite.innerHTML=`<i class="fa-${selected?'solid':'regular'} fa-star" aria-hidden="true"></i>`;favorite.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();const items=favoriteItems();const next=items.includes(link)?items.filter(item=>item!==link):[...items,link];const isSelected=next.includes(link);localStorage.setItem('pdfhub-favorites',JSON.stringify(next));favorite.setAttribute('aria-pressed',String(isSelected));favorite.setAttribute('aria-label',isSelected?`Remove ${name} from favorites`:`Add ${name} to favorites`);favorite.innerHTML=`<i class="fa-${isSelected?'solid':'regular'} fa-star" aria-hidden="true"></i>`});card.appendChild(favorite);
     card.addEventListener('click',()=>saveHistoryTool(name,link));
   });
 });

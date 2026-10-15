@@ -114,7 +114,7 @@
   let lastFocus=null;
   const toast=message=>{let node=document.querySelector('.pdfhub-developer-toast');if(!node){node=document.createElement('div');node.className='pdfhub-developer-toast';node.setAttribute('role','status');document.body.append(node)}node.textContent=message;node.classList.add('show');setTimeout(()=>node.classList.remove('show'),2600)};
   const setPanel=open=>{widget.classList.toggle('open',open);trigger.setAttribute('aria-expanded',String(open));trigger.setAttribute('aria-label',open?'Close developer panel':'Open developer panel');trigger.innerHTML=`<i class="fas ${open?'fa-xmark':'fa-user'}" aria-hidden="true"></i>`;};
-  const setDialog=open=>{dialog.classList.toggle('open',open);dialog.setAttribute('aria-hidden',String(!open));if(open){lastFocus=document.activeElement;close.focus();}else{lastFocus?.focus();}};
+  const setDialog=open=>{dialog.classList.toggle('open',open);dialog.setAttribute('aria-hidden',String(!open));widget.inert=open;document.getElementById('pdfhubScrollTop')?.toggleAttribute('inert',open);document.body.classList.toggle('pdfhub-modal-open',open);if(open){lastFocus=document.activeElement;setPanel(false);close.focus();}else{lastFocus?.focus();}};
   trigger.addEventListener('click',()=>setPanel(!widget.classList.contains('open')));
   about.addEventListener('click',()=>setDialog(true));
   close.addEventListener('click',()=>setDialog(false));dialog.addEventListener('click',event=>{if(event.target===dialog)setDialog(false)});
