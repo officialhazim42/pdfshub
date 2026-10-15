@@ -1,10 +1,38 @@
 (function(){
-  if(document.getElementById('pdfhubDeveloper'))return;
   const scriptSource=document.currentScript?.src||'';
   const root=document.body.dataset.root||scriptSource.replace(/developer\.js(?:[?#].*)?$/,'');
   if(!document.getElementById('pdfhubDeveloperStyles')){
     const style=document.createElement('link');style.id='pdfhubDeveloperStyles';style.rel='stylesheet';style.href=root+'developer.css';document.head.appendChild(style);
   }
+  const applyTheme=theme=>{
+    const light=theme==='light';
+    document.body.classList.toggle('light',light);
+    document.querySelectorAll('#themeLabel,.global-theme-toggle .t-label').forEach(label=>label.textContent=light?'Light':'Dark');
+    document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=`<i class="fas fa-${light?'sun':'moon'}"></i>`);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f4f4f8':'#07070d');
+  };
+  applyTheme(localStorage.getItem('pdfhub-theme')||'dark');
+  if(!window.__pdfhubThemeWrapped){
+    window.toggleTheme=()=>{
+      const next=document.body.classList.contains('light')?'dark':'light';
+      localStorage.setItem('pdfhub-theme',next);
+      applyTheme(next);
+    };
+    window.__pdfhubThemeWrapped=true;
+    window.addEventListener('storage',event=>{if(event.key==='pdfhub-theme')applyTheme(event.newValue||'dark');});
+  }
+  const existingScrollTop=document.getElementById('scrollTop')||document.getElementById('pdfhubScrollTop');
+  if(!existingScrollTop){
+    const scrollTop=document.createElement('button');
+    scrollTop.id='pdfhubScrollTop';document.body.appendChild(scrollTop);scrollTop.className='pdfhub-scroll-top';scrollTop.type='button';scrollTop.title='Back to top';scrollTop.setAttribute('aria-label','Back to top');scrollTop.innerHTML='<i class="fas fa-arrow-up" aria-hidden="true"></i>';
+    const updateScrollTop=()=>scrollTop.classList.toggle('show',window.scrollY>320);
+    window.addEventListener('scroll',updateScrollTop,{passive:true});
+    scrollTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    updateScrollTop();
+  }else if(!existingScrollTop.classList.contains('pdfhub-scroll-top')){
+    existingScrollTop.classList.add('pdfhub-scroll-top');
+  }
+  if(document.getElementById('pdfhubDeveloper'))return;
   const profile={name:'Hazim Bashir',urdu:'حازم بشیر',handle:'@officialhazim42',role:'Android Developer & Software Creator',location:'Ganderbal, Jammu & Kashmir, India',email:'hazimbashirfaqeer@gmail.com',bio:"Hi, I'm Hazim Bashir (حازم بشیر), an independent software developer from Ganderbal, Jammu & Kashmir, India. I specialize in designing modern, high-performance, and privacy-first Android applications using Kotlin and Jetpack Compose. My mission is to craft clean, offline-first mobile experiences that respect user data privacy without compromise."};
   const socials=[
     ['Instagram','@officialhazim42','https://instagram.com/officialhazim42','fa-instagram'],
