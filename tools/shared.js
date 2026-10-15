@@ -359,4 +359,5 @@ window.addEventListener('DOMContentLoaded',()=>{
   ensureHistoryToggle();
   attachHistoryToggle();
   ensureSiteMenu();
+  if(!document.getElementById('pdfhubDeveloperScript')){const developer=document.createElement('script');developer.id='pdfhubDeveloperScript';developer.src='../developer.js';document.body.appendChild(developer);}
 });

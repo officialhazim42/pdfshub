@@ -47,4 +47,5 @@
     document.getElementById('dashboardActivity').innerHTML=items.length?items.slice(0,6).map(item=>`<a class="activity-item" href="${historyHref(item.url)}"><i class="fas fa-file-pdf"></i><span>${item.name}</span><small>Available offline</small></a>`).join(''):'<div class="notice"><i class="fas fa-sparkles"></i><span>Your dashboard will populate as you explore PDFHub tools.</span></div>';
     document.getElementById('notificationMessage').textContent=items.length?`Your local workspace has ${items.length} recent tool${items.length===1?'':'s'} ready to revisit.`:'Welcome to PDFHub. Your first tool activity will appear here.';
   }
+  if(!document.getElementById('pdfhubDeveloperScript')){const developer=document.createElement('script');developer.id='pdfhubDeveloperScript';developer.src=root+'developer.js';document.body.appendChild(developer);}
 })();
