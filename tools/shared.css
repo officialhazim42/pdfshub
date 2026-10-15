@@ -32,6 +32,37 @@ body.light .btn-secondary{color:var(--text)}
 body.light .file-item{color:var(--text)}
 body.light .tool-footer p{color:var(--muted)}
 
+/* Keep every interactive surface legible in both themes. */
+body{color-scheme:dark}
+body.light{color-scheme:light}
+body.light .site-menu,
+body.light .history-menu{background:var(--s1);border-color:var(--border);color:var(--text)}
+body.light .menu-action:hover{background:var(--s2);color:var(--text)}
+body.light .menu-action:hover i{color:var(--accent)}
+body.light .menu-search input,
+body.light .opt-row input,
+body.light .opt-row select,
+body.light .opt-row textarea{background:var(--s2);border-color:var(--border);color:var(--text)}
+body.light .menu-heading,
+body.light .menu-theme-row{color:var(--text)}
+body.light .menu-note,
+body.light .menu-theme-row .t-label{color:var(--muted)}
+body.light .tool-footer,
+body.light .site-footer{background:var(--s1);border-color:var(--border)}
+body.light .tool-footer a,
+body.light .site-footer a{color:var(--accent)}
+body.light .tool-footer p,
+body.light .site-footer .f-by,
+body.light .site-footer .f-copy{color:var(--muted)}
+body.light .panel,
+body.light .modal-card,
+body.light .download-modal-content{background:var(--s1);border-color:var(--border);color:var(--text)}
+body.light .btn-secondary{background:var(--s2);border-color:var(--border);color:var(--text)}
+body.light .file-item,
+body.light .drop-area{background:var(--s1);border-color:var(--border);color:var(--text)}
+body.light .drop-area:hover,
+body.light .drop-area.over{background:var(--card-hover-bg);border-color:var(--accent)}
+
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 10% 0%,var(--glow-1) 0%,transparent 55%),radial-gradient(ellipse 60% 40% at 90% 100%,var(--glow-2) 0%,transparent 55%);pointer-events:none;z-index:0}

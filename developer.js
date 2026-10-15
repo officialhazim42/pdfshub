@@ -21,6 +21,48 @@
     window.__pdfhubThemeWrapped=true;
     window.addEventListener('storage',event=>{if(event.key==='pdfhub-theme')applyTheme(event.newValue||'dark');});
   }
+  const siteRoot=document.body.dataset.root||root;
+  const enhanceFooter=()=>{
+    const footer=document.querySelector('footer');
+    if(!footer||footer.querySelector('.pdfhub-footer-links'))return;
+    const links=[
+      ['Tools',siteRoot+'index.html'],
+      ['Dashboard',siteRoot+'menu-bar/dashboard.html'],
+      ['History',siteRoot+'menu-bar/history.html'],
+      ['About PDFHub',siteRoot+'menu-bar/about.html'],
+      ['Terms',siteRoot+'menu-bar/terms.html'],
+      ['Contact',`mailto:hazimbashirfaqeer@gmail.com?subject=${encodeURIComponent('PDFHub Inquiry')}`]
+    ];
+    const nav=document.createElement('nav');
+    nav.className='pdfhub-footer-links';
+    nav.setAttribute('aria-label','Footer navigation');
+    nav.innerHTML=links.map(([label,href])=>`<a href="${href}">${label}</a>`).join('');
+    const status=document.createElement('div');
+    status.className='pdfhub-footer-status';
+    status.innerHTML='<span><i class="fas fa-shield-halved" aria-hidden="true"></i> Browser-first and privacy-conscious</span><span><i class="fas fa-circle-check" aria-hidden="true"></i> No account required</span>';
+    footer.append(nav,status);
+  };
+  enhanceFooter();
+  document.querySelectorAll('.site-menu').forEach(menu=>{
+    menu.setAttribute('role','navigation');
+    menu.setAttribute('aria-label','PDFHub navigation');
+    const toggle=document.querySelector(`[aria-controls="${menu.id}"]`);
+    if(!toggle||menu.dataset.accessibilityReady)return;
+    menu.dataset.accessibilityReady='true';
+    let opener=null;
+    toggle.addEventListener('click',()=>{if(menu.classList.contains('open'))opener=document.activeElement;});
+    menu.addEventListener('keydown',event=>{
+      if(event.key!=='Tab')return;
+      const focusable=[...menu.querySelectorAll('a[href],button:not([disabled]),input:not([disabled])')].filter(element=>element.offsetParent!==null);
+      if(!focusable.length)return;
+      const first=focusable[0],last=focusable[focusable.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+    });
+    menu.addEventListener('focusout',()=>{
+      if(!menu.classList.contains('open')&&opener?.focus)opener.focus();
+    });
+  });
   const existingScrollTop=document.getElementById('scrollTop')||document.getElementById('pdfhubScrollTop');
   if(!existingScrollTop){
     const scrollTop=document.createElement('button');

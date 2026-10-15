@@ -80,6 +80,28 @@ body.light .menu-feature-count{color:#5142bd;background:rgba(124,106,255,.1)}
 .toggle-track{width:42px;height:24px;background:var(--s2);border-radius:99px;position:relative;transition:background .3s;border:1px solid var(--border);flex-shrink:0}
 .toggle-knob{position:absolute;top:3px;left:3px;width:16px;height:16px;background:var(--accent);border-radius:50%;transition:transform .3s;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:#fff}
 body.light .toggle-knob{transform:translateX(18px)}
+
+/* Theme-safe controls and surfaces. */
+body{color-scheme:dark}
+body.light{color-scheme:light}
+body.light nav,
+body.light .site-menu,
+body.light .history-menu{background:var(--nav-bg);border-color:var(--border)}
+body.light .menu-action:hover{background:var(--s2);color:var(--text)}
+body.light .menu-action:hover i{color:var(--accent)}
+body.light .menu-search input{background:var(--s2);border-color:var(--border);color:var(--text)}
+body.light .menu-heading,
+body.light .menu-action,
+body.light .menu-feature-title{color:var(--text)}
+body.light .menu-note,
+body.light .menu-feature-subtitle,
+body.light .menu-feature-meta{color:var(--muted)}
+body.light .card,
+body.light .info-section,
+body.light .pill{background:var(--s1);border-color:var(--border)}
+body.light .card:hover{background:var(--card-hover-bg);border-color:rgba(100,80,220,.35)}
+body.light .card::after{background:linear-gradient(135deg,transparent 60%,rgba(80,70,160,.025))}
+body.light footer{background:var(--s1);border-color:var(--border)}
 .theme-toggle:hover .toggle-track{border-color:var(--accent)}
 body{transition:background .3s,color .3s}
 

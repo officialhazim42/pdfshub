@@ -179,8 +179,17 @@ window.toggleTheme=function(){
   document.querySelectorAll('.toggle-knob').forEach(k=>{
     k.innerHTML=isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
   });
-  document.querySelectorAll('#themeLabel').forEach(l=>l.textContent=isLight?'Light':'Dark');
+  document.querySelectorAll('.t-label').forEach(l=>l.textContent=isLight?'Light':'Dark');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',isLight?'#f4f4f8':'#07070d');
 };
+window.addEventListener('storage',event=>{
+  if(event.key!=='pdfhub-theme')return;
+  const isLight=event.newValue==='light';
+  document.body.classList.toggle('light',isLight);
+  document.querySelectorAll('.toggle-knob').forEach(k=>{k.innerHTML=isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';});
+  document.querySelectorAll('.t-label').forEach(l=>l.textContent=isLight?'Light':'Dark');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',isLight?'#f4f4f8':'#07070d');
+});
 
 function ensureHistoryToggle(){
   const container = document.querySelector('.nav-right') || document.querySelector('.nav-right-tools');

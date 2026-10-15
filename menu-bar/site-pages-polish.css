@@ -73,5 +73,14 @@ body.light .terms-toc h2,body.light .legal-section h2{color:#222239}
 body.light .terms-toc a,body.light .terms-footnote{color:#696981}
 body.light .terms-toc a:hover{color:#5142bd}
 body.light .legal-number{color:#6655d9}
+body.light nav,
+body.light .site-menu,
+body.light .terms-toc,
+body.light .legal-section,
+body.light .principle-card{background:var(--s1);border-color:var(--border)}
+body.light .menu-action:hover{background:var(--s2)!important;color:var(--text)!important}
+body.light .menu-action:hover i{color:var(--accent)!important}
+body.light .menu-search input{background:var(--s2);border-color:var(--border);color:var(--text)}
+body.light .site-footer{background:var(--s1);border-color:var(--border)}
 @media(max-width:760px){.about-principles{grid-template-columns:1fr}.principle-card{min-height:0}.principle-icon{margin-bottom:16px}.workflow-list{grid-template-columns:1fr;gap:0}.workflow-list li{min-height:0}.terms-layout{grid-template-columns:1fr;gap:19px}.terms-toc{position:static;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.terms-toc h2{grid-column:1/-1}.terms-footnote{margin-left:0}}
 @media(max-width:520px){.editorial-page,.terms-page{width:90%;padding:47px 0 58px}.editorial-hero{margin-bottom:35px}.editorial-hero h1{font-size:clamp(2.45rem,13vw,3.5rem)}.principle-card{padding:20px}.about-note{padding:19px;gap:13px}.about-contact{align-items:flex-start;flex-direction:column}.legal-section{grid-template-columns:31px minmax(0,1fr);gap:9px;padding:17px 15px}.terms-toc{padding:14px 10px}.terms-toc a{font-size:.68rem}}
