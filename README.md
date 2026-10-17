@@ -6,67 +6,26 @@ Most processing happens locally in the browser, so files are not uploaded to a P
 
 ## Features
 
-- 33 PDF tools with separate, focused workflows
-- Drag-and-drop file selection on supported tools
-- Local browser processing for many operations
-- Downloadable results without a server account
-- Light and dark themes
-- Local tool history and dashboard activity
-- Responsive layouts for desktop and mobile
-- Service-worker caching for offline use after the site has been loaded
 
 ## Available Tools
 
 ### Organize PDFs
 
-- Compare PDFs
-- Merge PDFs
-- Split PDFs
-- Remove pages
-- Extract pages
-- Organize pages
-- Rotate pages
 
 ### Optimize and repair
 
-- Compress PDF
-- Repair PDF
-- Crop PDF
 
 ### Convert to PDF
 
-- JPG to PDF
-- Word to PDF
-- Excel to PDF
-- PowerPoint to PDF
-- HTML to PDF
-- Scan to PDF
 
 ### Convert from PDF
 
-- PDF to JPG
-- PDF to Word
-- PDF to Excel
-- PDF to PowerPoint
-- PDF to PDF/A
-- PDF to Markdown
 
 ### Edit and annotate
 
-- Edit PDF
-- Fill PDF forms
-- Add page numbers
-- Add watermark
-- Sign PDF
-- Redact PDF
 
 ### Security and extraction
 
-- Protect PDF
-- Unlock PDF
-- OCR PDF
-- Summarize PDF
-- Translate PDF
 
 ## Project Structure
 
