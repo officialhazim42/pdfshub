@@ -41,31 +41,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Select Original and Modified Versions",
-        "desc": "Open Compare PDF and load both the Original PDF and the Modified PDF files.",
-        "image": "step-1-upload.webp",
+        "title": "Open Compare PDF",
+        "desc": "Open Compare PDF to visually highlight differences between two document versions.",
+        "image": "step-1-open.webp",
         "alt": "Compare PDF dual upload areas"
       },
       {
         "step": 2,
-        "title": "Review Dual Previews",
-        "desc": "Confirm matching document versions and page counts in the side-by-side preview cards.",
-        "image": "step-2-preview.webp",
-        "alt": "Compare PDF dual document verification"
+        "title": "Upload Original & Revised Files",
+        "desc": "Load both the Original PDF and the Modified PDF files into the dual drop boxes.",
+        "image": "step-2-upload.webp",
+        "alt": "Compare PDF showing both loaded documents"
       },
       {
         "step": 3,
-        "title": "Execute Visual Pixel Diff",
-        "desc": "Click Compare PDFs to launch pixel-level difference analysis across corresponding pages.",
-        "image": "step-3-compare.webp",
-        "alt": "Compare PDF diff action button"
+        "title": "Review Side-by-Side Previews",
+        "desc": "Confirm matching page counts and alignment in the side-by-side preview panes.",
+        "image": "step-3-preview.webp",
+        "alt": "Compare PDF side by side preview panes"
       },
       {
         "step": 4,
+        "title": "Execute Visual Pixel Diff",
+        "desc": "Click Compare PDFs to analyze pixel-level changes across corresponding pages.",
+        "image": "step-4-compare.webp",
+        "alt": "Compare PDF action button"
+      },
+      {
+        "step": 5,
         "title": "Inspect Highlighted Changes",
-        "desc": "Review the comparison interface where text modifications and layout shifts are highlighted.",
-        "image": "step-4-diff.webp",
-        "alt": "Compare PDF comparison results view"
+        "desc": "Review highlighted differences to quickly spot added, removed, or edited content.",
+        "image": "step-5-diff.webp",
+        "alt": "Compare PDF highlighted difference view"
       }
     ]
   },
@@ -111,31 +118,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload PDF Document",
-        "desc": "Open Compress PDF and drop your document into the upload target area.",
-        "image": "step-1-upload.webp",
-        "alt": "Compress PDF upload interface"
+        "title": "Open Compress PDF",
+        "desc": "Open Compress PDF to reduce document size for fast email sharing and web uploads.",
+        "image": "step-1-open.webp",
+        "alt": "Compress PDF drop zone"
       },
       {
         "step": 2,
-        "title": "Select Compression Level",
-        "desc": "Choose Low (maximum fidelity), Medium (balanced), or High (maximum structural compression).",
-        "image": "step-2-settings.webp",
-        "alt": "Compress PDF compression level options"
+        "title": "Upload Your PDF",
+        "desc": "Drop your large PDF document into the workspace to check its baseline size.",
+        "image": "step-2-upload.webp",
+        "alt": "Compress PDF loaded file and initial size display"
       },
       {
         "step": 3,
-        "title": "Optimize Structure and Metadata",
-        "desc": "Click Compress PDF to strip redundant metadata and pack objects into binary streams.",
-        "image": "step-3-process.webp",
-        "alt": "Compress PDF optimization processing"
+        "title": "Select Compression Level",
+        "desc": "Choose your desired balance of quality and size: Low, Recommended Medium, or Extreme.",
+        "image": "step-3-settings.webp",
+        "alt": "Compress PDF compression level selection dropdown"
       },
       {
         "step": 4,
-        "title": "Download Optimized PDF",
-        "desc": "Check the saved percentage and reduced file size in the result modal, then click Download.",
-        "image": "step-4-download.webp",
-        "alt": "Compress PDF download result modal"
+        "title": "Compress Document",
+        "desc": "Click Compress PDF to optimize embedded images and remove unused metadata in memory.",
+        "image": "step-4-process.webp",
+        "alt": "Compress PDF processing button"
+      },
+      {
+        "step": 5,
+        "title": "Review Savings & Download",
+        "desc": "Review the percentage of file size reduction and click Download to save the optimized PDF.",
+        "image": "step-5-download.webp",
+        "alt": "Compress PDF result screen with size savings"
       }
     ]
   },
@@ -181,30 +195,37 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Select PDF to Crop",
-        "desc": "Open Crop PDF and upload the document with unwanted white margins or print bleed lines.",
-        "image": "step-1-upload.webp",
-        "alt": "Crop PDF upload area"
+        "title": "Open Crop PDF",
+        "desc": "Open Crop PDF to trim white space or excess margins from document sheets.",
+        "image": "step-1-open.webp",
+        "alt": "Crop PDF drop zone"
       },
       {
         "step": 2,
-        "title": "Set Margin Offsets in Points",
-        "desc": "Enter margin offsets for Top, Bottom, Left, and Right bounds, and select target pages (All, Odd, Even).",
-        "image": "step-2-margins.webp",
-        "alt": "Crop PDF margin offset fields"
+        "title": "Upload PDF Document",
+        "desc": "Upload the document to inspect its current page dimensions and margins.",
+        "image": "step-2-upload.webp",
+        "alt": "Crop PDF document loaded"
       },
       {
         "step": 3,
-        "title": "Adjust Visible Page Bounds",
-        "desc": "Click Crop PDF to update the page CropBox and MediaBox boundaries.",
-        "image": "step-3-crop.webp",
-        "alt": "Crop PDF action button"
+        "title": "Set Top, Bottom & Side Margins",
+        "desc": "Enter crop margin values for top, bottom, left, and right borders in points.",
+        "image": "step-3-margins.webp",
+        "alt": "Crop PDF margin offset inputs"
       },
       {
         "step": 4,
-        "title": "Download Trimmed PDF",
-        "desc": "Confirm the newly trimmed dimensions in the preview modal and download your cropped document.",
-        "image": "step-4-download.webp",
+        "title": "Apply Crop Dimensions",
+        "desc": "Click Crop PDF to adjust the document boundary box and trim margins.",
+        "image": "step-4-crop.webp",
+        "alt": "Crop PDF action button"
+      },
+      {
+        "step": 5,
+        "title": "Download Cropped PDF",
+        "desc": "Save your trimmed PDF with focused content and eliminated outer borders.",
+        "image": "step-5-download.webp",
         "alt": "Crop PDF download modal"
       }
     ]
@@ -251,31 +272,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload PDF for Annotation",
-        "desc": "Open Edit PDF and load the document page you wish to annotate.",
-        "image": "step-1-upload.webp",
-        "alt": "Edit PDF upload drop area"
+        "title": "Open Edit PDF",
+        "desc": "Open Edit PDF to access the in-browser document markup and annotation studio.",
+        "image": "step-1-open.webp",
+        "alt": "Edit PDF landing area"
       },
       {
         "step": 2,
-        "title": "Select Annotation Tool",
-        "desc": "Choose Pen (draw), Text (type stamps), Highlight (marker), Rectangle, or Line from the toolbar.",
-        "image": "step-2-toolbar.webp",
-        "alt": "Edit PDF drawing and annotation toolbar"
+        "title": "Upload Document for Editing",
+        "desc": "Upload your document to render interactive vector canvas pages.",
+        "image": "step-2-upload.webp",
+        "alt": "Edit PDF canvas loaded"
       },
       {
         "step": 3,
-        "title": "Draw and Stamp Annotations",
-        "desc": "Apply your notes and drawings onto the interactive canvas, then click Save Edited PDF.",
-        "image": "step-3-annotate.webp",
-        "alt": "Edit PDF active canvas and save action"
+        "title": "Select Annotation Tool",
+        "desc": "Choose pen, text box, highlighter, rectangle, line, or eraser from the top toolbar.",
+        "image": "step-3-toolbar.webp",
+        "alt": "Edit PDF annotation toolbar options"
       },
       {
         "step": 4,
-        "title": "Download Annotated PDF",
-        "desc": "Review flattened annotations in the result modal and download your updated PDF document.",
-        "image": "step-4-download.webp",
-        "alt": "Edit PDF download ready confirmation"
+        "title": "Annotate and Draw on Canvas",
+        "desc": "Add notes, draw highlights, or insert text directly onto the document canvas.",
+        "image": "step-4-annotate.webp",
+        "alt": "Edit PDF document with active drawings"
+      },
+      {
+        "step": 5,
+        "title": "Save & Download PDF",
+        "desc": "Click Save PDF to flatten annotations into the document structure and download.",
+        "image": "step-5-download.webp",
+        "alt": "Edit PDF save confirmation"
       }
     ]
   },
@@ -321,31 +349,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Spreadsheet",
-        "desc": "Open Excel to PDF and select an .xlsx, .xls, or .csv workbook file.",
-        "image": "step-1-upload.webp",
-        "alt": "Excel to PDF file drop area"
+        "title": "Open Excel to PDF",
+        "desc": "Open Excel to PDF to convert spreadsheet sheets and tables into formatted reports.",
+        "image": "step-1-open.webp",
+        "alt": "Excel to PDF drop zone"
       },
       {
         "step": 2,
-        "title": "Select Sheet and Orientation",
-        "desc": "Select which sheet to export, toggle Landscape for wide tables, and inspect the live table preview.",
-        "image": "step-2-preview.webp",
-        "alt": "Excel to PDF sheet selection and table preview"
+        "title": "Upload Workbook",
+        "desc": "Upload your Microsoft Excel (.xlsx, .xls) workbook to parse worksheets.",
+        "image": "step-2-upload.webp",
+        "alt": "Excel to PDF workbook loaded"
       },
       {
         "step": 3,
-        "title": "Convert Table to Print Format",
-        "desc": "Click Convert to PDF to render the spreadsheet data into a styled printable grid.",
-        "image": "step-3-convert.webp",
-        "alt": "Excel to PDF convert action"
+        "title": "Select Sheet & Page Layout",
+        "desc": "Choose the target worksheet, select landscape orientation to fit columns, and set margins.",
+        "image": "step-3-preview.webp",
+        "alt": "Excel to PDF sheet and layout controls"
       },
       {
         "step": 4,
-        "title": "Save as PDF via Print Dialog",
-        "desc": "Confirm the table pagination in the browser print window and click Save as PDF.",
-        "image": "step-4-print.webp",
-        "alt": "Excel to PDF print window instructions"
+        "title": "Convert Spreadsheet",
+        "desc": "Click Convert to PDF to format tabular rows and columns into printable pages.",
+        "image": "step-4-convert.webp",
+        "alt": "Excel to PDF convert button"
+      },
+      {
+        "step": 5,
+        "title": "Download Clean Table PDF",
+        "desc": "Inspect the rendered table preview and download your clean PDF report.",
+        "image": "step-5-print.webp",
+        "alt": "Excel to PDF preview and download button"
       }
     ]
   },
@@ -391,31 +426,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Source Document",
-        "desc": "Open Extract Pages and drop the PDF from which you want to pull specific high-value pages.",
-        "image": "step-1-upload.webp",
-        "alt": "Extract Pages upload zone"
+        "title": "Open Extract Pages",
+        "desc": "Open Extract Pages to isolate specific chapters or sections into a new document.",
+        "image": "step-1-open.webp",
+        "alt": "Extract Pages initial interface"
       },
       {
         "step": 2,
-        "title": "Define Page Numbers to Keep",
-        "desc": "Enter the exact page numbers or ranges you wish to compile into a brand new PDF (e.g. 1-2).",
-        "image": "step-2-select-pages.webp",
-        "alt": "Extract Pages page range field"
+        "title": "Upload Source PDF",
+        "desc": "Drop the PDF file containing pages you need to export.",
+        "image": "step-2-upload.webp",
+        "alt": "Extract Pages loaded document details"
       },
       {
         "step": 3,
-        "title": "Compile Extracted Pages",
-        "desc": "Click Extract Pages to pull and copy only the requested pages into a new document buffer.",
-        "image": "step-3-extract.webp",
-        "alt": "Extract Pages action button"
+        "title": "Define Pages to Extract",
+        "desc": "Type the target page numbers or ranges (e.g. 1-2) you want to extract.",
+        "image": "step-3-select.webp",
+        "alt": "Extract Pages page range entry area"
       },
       {
         "step": 4,
-        "title": "Save Extracted Document",
-        "desc": "Review the extracted page count and download your isolated PDF file.",
-        "image": "step-4-download.webp",
-        "alt": "Extract Pages download prompt"
+        "title": "Extract Chosen Pages",
+        "desc": "Click Extract Pages to generate a standalone document containing only your selected pages.",
+        "image": "step-4-extract.webp",
+        "alt": "Extract Pages button ready to execute"
+      },
+      {
+        "step": 5,
+        "title": "Download Extracted File",
+        "desc": "Save the newly created PDF file containing your extracted pages.",
+        "image": "step-5-download.webp",
+        "alt": "Extract Pages download modal ready"
       }
     ]
   },
@@ -461,31 +503,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Fillable PDF Form",
-        "desc": "Open PDF Forms and upload any interactive AcroForm PDF document.",
-        "image": "step-1-upload.webp",
-        "alt": "PDF Forms upload area"
+        "title": "Open PDF Forms",
+        "desc": "Open PDF Forms to fill interactive form fields and save completed records.",
+        "image": "step-1-open.webp",
+        "alt": "PDF Forms drop zone"
       },
       {
         "step": 2,
-        "title": "Inspect Detected Form Fields",
-        "desc": "The tool scans and presents all interactive form fields (text inputs, checkboxes, dropdowns).",
-        "image": "step-2-fields.webp",
-        "alt": "PDF Forms interactive fields list"
+        "title": "Upload Interactive PDF Form",
+        "desc": "Load the fillable PDF form into the workspace to inspect form fields.",
+        "image": "step-2-upload.webp",
+        "alt": "PDF Forms document loaded with fields"
       },
       {
         "step": 3,
-        "title": "Fill Data and Values",
-        "desc": "Fill your details into the field controls, then click Save Filled PDF to flatten the data.",
-        "image": "step-3-fill.webp",
-        "alt": "PDF Forms filled fields and save action"
+        "title": "Fill Text & Checkbox Fields",
+        "desc": "Enter text values, check confirmation boxes, and select dropdown choices.",
+        "image": "step-3-fields.webp",
+        "alt": "PDF Forms active input fields"
       },
       {
         "step": 4,
+        "title": "Flatten & Encode Entries",
+        "desc": "Click Save Filled PDF to encode input values into the document dictionary.",
+        "image": "step-4-fill.webp",
+        "alt": "PDF Forms save button"
+      },
+      {
+        "step": 5,
         "title": "Download Completed Form",
-        "desc": "Confirm that all field values are saved, then download your finalized PDF form.",
-        "image": "step-4-download.webp",
-        "alt": "PDF Forms download ready modal"
+        "desc": "Download the completed form ready for administrative or legal submission.",
+        "image": "step-5-download.webp",
+        "alt": "PDF Forms download modal"
       }
     ]
   },
@@ -531,31 +580,31 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Choose Mode",
-        "desc": "Open HTML to PDF. Select between pasting raw HTML markup or inputting a live website URL.",
+        "title": "Select Source Mode",
+        "desc": "Open HTML to PDF and choose between Website URL rendering or direct Raw HTML code input.",
         "image": "step-1-mode.webp",
-        "alt": "HTML to PDF mode selection"
+        "alt": "HTML to PDF source mode selector"
       },
       {
         "step": 2,
-        "title": "Input Content and Set Paper Size",
-        "desc": "Paste your HTML code into the editor or specify the target URL, then choose A4 or Letter sizing.",
+        "title": "Enter URL or HTML Code",
+        "desc": "Paste your webpage address or enter custom HTML source code into the editor.",
         "image": "step-2-input.webp",
-        "alt": "HTML to PDF code textarea and page size"
+        "alt": "HTML to PDF code editor and URL input"
       },
       {
         "step": 3,
-        "title": "Render Document",
-        "desc": "Click Convert to PDF to invoke the browser layout engine with print stylesheet rules.",
+        "title": "Render Document Layout",
+        "desc": "Click Convert to PDF to compile styles, CSS layouts, and web typography.",
         "image": "step-3-convert.webp",
-        "alt": "HTML to PDF convert button"
+        "alt": "HTML to PDF conversion button active"
       },
       {
         "step": 4,
-        "title": "Save Rendered PDF",
-        "desc": "Select Save as PDF in the browser print interface to create your document.",
+        "title": "Download or Print PDF",
+        "desc": "Preview the rendered document layout and download your finished PDF.",
         "image": "step-4-print.webp",
-        "alt": "HTML to PDF print dialog instructions"
+        "alt": "HTML to PDF completed document preview"
       }
     ]
   },
@@ -601,31 +650,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Select Input Images",
-        "desc": "Open JPG to PDF and upload one or multiple images in JPG, PNG, GIF, or WebP format.",
-        "image": "step-1-upload.webp",
-        "alt": "JPG to PDF image drop area"
+        "title": "Open JPG to PDF",
+        "desc": "Open JPG to PDF to compile photo albums or graphic files into formatted PDF pages.",
+        "image": "step-1-open.webp",
+        "alt": "JPG to PDF initial upload zone"
       },
       {
         "step": 2,
-        "title": "Configure Layout and Margins",
-        "desc": "Choose page dimensions (Fit to Image, A4, or US Letter) and adjust outer border margins.",
-        "image": "step-2-layout.webp",
-        "alt": "JPG to PDF layout and sizing settings"
+        "title": "Upload Image Files",
+        "desc": "Select one or more JPG, PNG, or WebP photos to convert into PDF format.",
+        "image": "step-2-upload.webp",
+        "alt": "JPG to PDF image list loaded"
       },
       {
         "step": 3,
-        "title": "Convert Images to PDF Pages",
-        "desc": "Click Convert to PDF to embed each image onto a high-resolution PDF canvas.",
-        "image": "step-3-convert.webp",
-        "alt": "JPG to PDF conversion action"
+        "title": "Choose Page Size & Margins",
+        "desc": "Set paper dimensions (A4, Letter), page orientation, and margin spacing.",
+        "image": "step-3-layout.webp",
+        "alt": "JPG to PDF layout configuration controls"
       },
       {
         "step": 4,
-        "title": "Download Combined PDF",
-        "desc": "Verify page layout in the preview modal and download your compiled PDF document.",
-        "image": "step-4-download.webp",
-        "alt": "JPG to PDF download modal"
+        "title": "Convert to PDF",
+        "desc": "Click Convert to PDF to stitch your images into structured, high-quality document pages.",
+        "image": "step-4-convert.webp",
+        "alt": "JPG to PDF conversion button"
+      },
+      {
+        "step": 5,
+        "title": "Download PDF Album",
+        "desc": "Preview the generated document and download the completed PDF file.",
+        "image": "step-5-download.webp",
+        "alt": "JPG to PDF download dialog"
       }
     ]
   },
@@ -671,31 +727,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload PDF Files",
-        "desc": "Open Merge PDF and locate the upload area. Drag and drop multiple PDF files or click to browse your storage.",
-        "image": "step-1-upload.webp",
-        "alt": "Merge PDF upload interface and file drop area"
+        "title": "Open Merge PDF",
+        "desc": "Launch the Merge PDF tool to access the multi-document compilation workspace.",
+        "image": "step-1-open.webp",
+        "alt": "Merge PDF empty workspace and drop area"
       },
       {
         "step": 2,
-        "title": "Review and Arrange File Sequence",
-        "desc": "Confirm the order of selected PDF files. The merged output will combine pages in this exact sequence.",
-        "image": "step-2-arrange.webp",
-        "alt": "Merge PDF file listing showing loaded sample documents"
+        "title": "Upload Multiple PDF Documents",
+        "desc": "Drag and drop two or more PDF files into the upload box or browse from your device.",
+        "image": "step-2-upload.webp",
+        "alt": "Merge PDF showing loaded PDF documents"
       },
       {
         "step": 3,
-        "title": "Merge the Documents",
-        "desc": "Click the Merge PDFs action button to initiate client-side page concatenation in memory.",
-        "image": "step-3-merge.webp",
-        "alt": "Merge PDF action button and processing indicator"
+        "title": "Arrange Document Sequence",
+        "desc": "Drag and reorder files to establish the exact sequence for your combined document.",
+        "image": "step-3-arrange.webp",
+        "alt": "Merge PDF document list with reordering handles"
       },
       {
         "step": 4,
-        "title": "Verify Preview and Download",
-        "desc": "Review the generated document in the review modal, then click Download to save your merged file.",
-        "image": "step-4-download.webp",
-        "alt": "Merge PDF download dialog and file confirmation"
+        "title": "Combine Documents",
+        "desc": "Click Merge PDFs to concatenate all pages directly in your browser memory.",
+        "image": "step-4-merge.webp",
+        "alt": "Merge PDF action button highlighted"
+      },
+      {
+        "step": 5,
+        "title": "Download Merged PDF",
+        "desc": "Preview the combined document and click Download to save the merged file to your computer.",
+        "image": "step-5-download.webp",
+        "alt": "Merge PDF completed download dialog"
       }
     ]
   },
@@ -741,31 +804,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Scanned Document",
-        "desc": "Open OCR PDF and select the image-based or scanned PDF document requiring text extraction.",
-        "image": "step-1-upload.webp",
-        "alt": "OCR PDF upload drop area"
+        "title": "Open OCR PDF",
+        "desc": "Open OCR PDF to recognize and extract selectable text from scanned documents.",
+        "image": "step-1-open.webp",
+        "alt": "OCR PDF landing screen"
       },
       {
         "step": 2,
-        "title": "Select Language and Page Scope",
-        "desc": "Select the recognition language (English, Spanish, French, German, etc.) and specific page ranges.",
-        "image": "step-2-settings.webp",
-        "alt": "OCR PDF language selection and page parameters"
+        "title": "Upload Scanned PDF",
+        "desc": "Select or drop the image-based PDF or scanned page into the tool.",
+        "image": "step-2-upload.webp",
+        "alt": "OCR PDF uploaded scan document"
       },
       {
         "step": 3,
-        "title": "Execute Optical Character Recognition",
-        "desc": "Click Extract Text to start the local Tesseract.js browser recognition worker.",
-        "image": "step-3-extract.webp",
-        "alt": "OCR PDF recognition processing"
+        "title": "Configure Language & Range",
+        "desc": "Choose the document language (e.g. English) and specify the page range to process.",
+        "image": "step-3-settings.webp",
+        "alt": "OCR PDF language selector and page range"
       },
       {
         "step": 4,
-        "title": "Copy or Download Extracted Text",
-        "desc": "Review recognized text in the interactive console. Click Copy Text or Download .txt to save.",
-        "image": "step-4-results.webp",
-        "alt": "OCR PDF extracted text display and export"
+        "title": "Run Optical Recognition",
+        "desc": "Click OCR PDF to perform optical character recognition directly in the browser.",
+        "image": "step-4-extract.webp",
+        "alt": "OCR PDF processing button"
+      },
+      {
+        "step": 5,
+        "title": "Review & Save Text",
+        "desc": "Inspect the recognized text output and download your searchable PDF or plain text file.",
+        "image": "step-5-results.webp",
+        "alt": "OCR PDF recognized text editor and download button"
       }
     ]
   },
@@ -811,31 +881,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Load PDF to Organize",
-        "desc": "Open Organize PDF and select any multi-page PDF document to view its page architecture.",
-        "image": "step-1-upload.webp",
-        "alt": "Organize PDF upload area"
+        "title": "Open Organize PDF",
+        "desc": "Open Organize PDF to inspect and visually rearrange document pages.",
+        "image": "step-1-open.webp",
+        "alt": "Organize PDF landing screen"
       },
       {
         "step": 2,
-        "title": "Inspect Visual Thumbnail Grid",
-        "desc": "View rendered page thumbnails. Easily identify pages that need reordering, rotation, or deletion.",
-        "image": "step-2-thumbnails.webp",
-        "alt": "Organize PDF visual page thumbnail grid"
+        "title": "Upload PDF Document",
+        "desc": "Upload your PDF to render high-resolution thumbnails for every page.",
+        "image": "step-2-upload.webp",
+        "alt": "Organize PDF thumbnail grid loaded"
       },
       {
         "step": 3,
-        "title": "Rearrange and Rotate Pages",
-        "desc": "Drag thumbnails to new positions, rotate individual pages by 90°, or use the Rotate All control.",
+        "title": "Drag to Reorder & Rotate",
+        "desc": "Click and drag page thumbnails into your preferred order, or use the rotate button on individual cards.",
         "image": "step-3-reorder.webp",
-        "alt": "Organize PDF reordering controls and save action"
+        "alt": "Organize PDF thumbnail drag and drop reordering"
       },
       {
         "step": 4,
-        "title": "Save and Download Organized PDF",
-        "desc": "Click Save Organized PDF to serialize the updated page order and download your document.",
-        "image": "step-4-download.webp",
-        "alt": "Organize PDF download ready modal"
+        "title": "Save Organized Order",
+        "desc": "Confirm the page layout order and compile your updated document.",
+        "image": "step-4-apply.webp",
+        "alt": "Organize PDF save and compile button"
+      },
+      {
+        "step": 5,
+        "title": "Download Organized PDF",
+        "desc": "Download the updated PDF with your custom page ordering preserved.",
+        "image": "step-5-download.webp",
+        "alt": "Organize PDF download dialog"
       }
     ]
   },
@@ -881,31 +958,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Select PDF Document",
-        "desc": "Open Add Page Numbers and upload the PDF that needs pagination.",
-        "image": "step-1-upload.webp",
-        "alt": "Add Page Numbers upload area"
+        "title": "Open Add Page Numbers",
+        "desc": "Open Add Page Numbers to stamp sequential page pagination across your document.",
+        "image": "step-1-open.webp",
+        "alt": "Add Page Numbers drop area"
       },
       {
         "step": 2,
-        "title": "Customize Position and Typography",
-        "desc": "Choose position (Bottom Center, Bottom Right, Top), numbering format, font size, and color.",
-        "image": "step-2-position.webp",
-        "alt": "Add Page Numbers stamp settings"
+        "title": "Upload PDF Document",
+        "desc": "Upload the PDF document requiring pagination stamps.",
+        "image": "step-2-upload.webp",
+        "alt": "Add Page Numbers document loaded"
       },
       {
         "step": 3,
-        "title": "Stamp Numbers onto Pages",
-        "desc": "Click Add Numbers to stamp calculated page numerals across all document pages.",
-        "image": "step-3-stamp.webp",
-        "alt": "Add Page Numbers action button"
+        "title": "Choose Position & Numbering",
+        "desc": "Select stamp position (Bottom Right/Center), numbering format ('Page X of Y'), and font color.",
+        "image": "step-3-position.webp",
+        "alt": "Add Page Numbers position and format controls"
       },
       {
         "step": 4,
-        "title": "Download Numbered PDF",
-        "desc": "Verify the page numbering in the review preview and download your paginated document.",
-        "image": "step-4-download.webp",
-        "alt": "Add Page Numbers download ready modal"
+        "title": "Stamp Numbers onto Pages",
+        "desc": "Click Add Page Numbers to render crisp vector pagination on all selected pages.",
+        "image": "step-4-stamp.webp",
+        "alt": "Add Page Numbers action button"
+      },
+      {
+        "step": 5,
+        "title": "Download Paginated PDF",
+        "desc": "Download the finished document with clean, professional page numbers.",
+        "image": "step-5-download.webp",
+        "alt": "Add Page Numbers download confirmation"
       }
     ]
   },
@@ -951,30 +1035,37 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload PDF with Tables",
-        "desc": "Open PDF to Excel and upload a PDF containing financial reports, schedules, or tabular data.",
-        "image": "step-1-upload.webp",
-        "alt": "PDF to Excel upload area"
+        "title": "Open PDF to Excel",
+        "desc": "Open PDF to Excel to extract numerical tables and financial records into spreadsheets.",
+        "image": "step-1-open.webp",
+        "alt": "PDF to Excel drop zone"
       },
       {
         "step": 2,
-        "title": "Set Column Detection and Preview",
-        "desc": "Select detection mode (Auto, Whitespace/Tabs, Line Delimited), choose XLSX or CSV, and click Preview Table.",
-        "image": "step-2-preview.webp",
-        "alt": "PDF to Excel column settings and table preview"
+        "title": "Upload Document with Tables",
+        "desc": "Upload the PDF file containing tabular data, invoices, or financial statements.",
+        "image": "step-2-upload.webp",
+        "alt": "PDF to Excel document loaded"
       },
       {
         "step": 3,
-        "title": "Export Tabular Data",
-        "desc": "Click Export to Excel to parse aligned columns and build a spreadsheet workbook.",
-        "image": "step-3-export.webp",
-        "alt": "PDF to Excel export action"
+        "title": "Preview Detected Columns",
+        "desc": "Inspect detected table column delimiters and select output format (XLSX or CSV).",
+        "image": "step-3-preview.webp",
+        "alt": "PDF to Excel table preview and column mode"
       },
       {
         "step": 4,
-        "title": "Download Formatted Spreadsheet",
-        "desc": "Download your structured Excel workbook (.xlsx) or comma-separated CSV file.",
-        "image": "step-4-download.webp",
+        "title": "Extract Spreadsheet Data",
+        "desc": "Click Convert to Excel to extract cell values and structured rows.",
+        "image": "step-4-export.webp",
+        "alt": "PDF to Excel convert button"
+      },
+      {
+        "step": 5,
+        "title": "Download Excel Workbook",
+        "desc": "Download the formatted .xlsx workbook with preserved numerical columns.",
+        "image": "step-5-download.webp",
         "alt": "PDF to Excel download modal"
       }
     ]
@@ -1021,31 +1112,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Source PDF",
-        "desc": "Open PDF to JPG and select the document you want to render into image files.",
-        "image": "step-1-upload.webp",
-        "alt": "PDF to JPG upload area"
+        "title": "Open PDF to JPG",
+        "desc": "Open PDF to JPG to extract high-resolution image files from document pages.",
+        "image": "step-1-open.webp",
+        "alt": "PDF to JPG initial screen"
       },
       {
         "step": 2,
-        "title": "Configure Image Format and Quality",
-        "desc": "Choose image format (JPG or PNG), resolution quality (Standard or High DPI), and page ranges.",
-        "image": "step-2-settings.webp",
-        "alt": "PDF to JPG image settings"
+        "title": "Upload PDF Document",
+        "desc": "Upload the PDF document you want to render into image files.",
+        "image": "step-2-upload.webp",
+        "alt": "PDF to JPG document details and page count"
       },
       {
         "step": 3,
-        "title": "Render Pages into Images",
-        "desc": "Click Convert to Images to rasterize vector pages into crisp standalone graphics.",
-        "image": "step-3-render.webp",
-        "alt": "PDF to JPG conversion action"
+        "title": "Select Format & Quality",
+        "desc": "Choose output format (JPG or PNG), image quality, and DPI resolution.",
+        "image": "step-3-settings.webp",
+        "alt": "PDF to JPG format and quality controls"
       },
       {
         "step": 4,
-        "title": "Download Image Files",
-        "desc": "Download individual page images or grab the complete document archive.",
-        "image": "step-4-download.webp",
-        "alt": "PDF to JPG download interface"
+        "title": "Render Pages to Images",
+        "desc": "Click Convert to JPG to rasterize each page at crisp display clarity.",
+        "image": "step-4-render.webp",
+        "alt": "PDF to JPG render action button"
+      },
+      {
+        "step": 5,
+        "title": "Download Images",
+        "desc": "Download individual page images or grab the entire set in a unified ZIP archive.",
+        "image": "step-5-download.webp",
+        "alt": "PDF to JPG download cards and ZIP button"
       }
     ]
   },
@@ -1091,31 +1189,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Document for Markdown",
-        "desc": "Open PDF to Markdown and select any structured text PDF document.",
-        "image": "step-1-upload.webp",
-        "alt": "PDF to Markdown upload area"
+        "title": "Open PDF to Markdown",
+        "desc": "Open PDF to Markdown to convert PDF documents into clean, structured Markdown syntax.",
+        "image": "step-1-open.webp",
+        "alt": "PDF to Markdown drop zone"
       },
       {
         "step": 2,
-        "title": "Configure Heading and List Detection",
-        "desc": "Enable heading detection, list recognition, and page break dividers (---).",
-        "image": "step-2-options.webp",
-        "alt": "PDF to Markdown parser settings"
+        "title": "Upload PDF Document",
+        "desc": "Drop your PDF file into the upload zone to parse its typography hierarchy.",
+        "image": "step-2-upload.webp",
+        "alt": "PDF to Markdown document loaded"
       },
       {
         "step": 3,
-        "title": "Convert to Markdown Syntax",
-        "desc": "Click Convert to Markdown to extract text hierarchy into clean GitHub-flavored markdown.",
-        "image": "step-3-convert.webp",
-        "alt": "PDF to Markdown conversion action"
+        "title": "Configure Formatting Options",
+        "desc": "Toggle automatic heading detection (# / ##), page break markers, and list formatting.",
+        "image": "step-3-options.webp",
+        "alt": "PDF to Markdown formatting toggles"
       },
       {
         "step": 4,
-        "title": "Edit and Download .md File",
-        "desc": "Review and edit the extracted markdown in the live text editor, then click Download .md.",
-        "image": "step-4-markdown.webp",
-        "alt": "PDF to Markdown editor and download"
+        "title": "Convert to Markdown",
+        "desc": "Click Convert to Markdown to generate clean Markdown syntax.",
+        "image": "step-4-convert.webp",
+        "alt": "PDF to Markdown convert button"
+      },
+      {
+        "step": 5,
+        "title": "Copy or Download Markdown",
+        "desc": "Review the formatted Markdown in the editor and copy to clipboard or download the .md file.",
+        "image": "step-5-markdown.webp",
+        "alt": "PDF to Markdown editor with output text"
       }
     ]
   },
@@ -1161,31 +1266,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Document for Archiving",
-        "desc": "Open PDF to PDF/A and upload the PDF file intended for long-term historical preservation.",
-        "image": "step-1-upload.webp",
-        "alt": "PDF to PDF/A upload area"
+        "title": "Open PDF to PDF/A",
+        "desc": "Open PDF to PDF/A to standardize files for long-term institutional and legal archiving.",
+        "image": "step-1-open.webp",
+        "alt": "PDF to PDF/A drop area"
       },
       {
         "step": 2,
-        "title": "Select PDF/A Level and Metadata",
-        "desc": "Choose your compliance level (PDF/A-1b, 2b, or 3b) and enter document title and author metadata.",
-        "image": "step-2-metadata.webp",
-        "alt": "PDF to PDF/A conformance settings"
+        "title": "Upload PDF Document",
+        "desc": "Select your PDF file to verify its structure for ISO archival compliance.",
+        "image": "step-2-upload.webp",
+        "alt": "PDF to PDF/A document loaded"
       },
       {
         "step": 3,
-        "title": "Inject Archival Dictionaries",
-        "desc": "Click Convert to PDF/A to rewrite the catalog, embed color profiles, and attach XMP metadata.",
-        "image": "step-3-convert.webp",
-        "alt": "PDF to PDF/A conversion action"
+        "title": "Configure Compliance Level",
+        "desc": "Choose ISO 19005 compliance profile (PDF/A-1b or PDF/A-2b) and enter document title.",
+        "image": "step-3-metadata.webp",
+        "alt": "PDF to PDF/A compliance options"
       },
       {
         "step": 4,
-        "title": "Download ISO-Standard PDF/A",
-        "desc": "Verify the archival compliance metadata and download your preserved PDF/A document.",
-        "image": "step-4-download.webp",
-        "alt": "PDF to PDF/A download modal"
+        "title": "Convert to Archival Standard",
+        "desc": "Click Convert to PDF/A to embed device-independent color spaces and fonts.",
+        "image": "step-4-convert.webp",
+        "alt": "PDF to PDF/A convert button"
+      },
+      {
+        "step": 5,
+        "title": "Download Certified PDF/A",
+        "desc": "Download the verified archival PDF certified for long-term preservation.",
+        "image": "step-5-download.webp",
+        "alt": "PDF to PDF/A download dialog"
       }
     ]
   },
@@ -1231,31 +1343,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Presentation PDF",
-        "desc": "Open PDF to PowerPoint and upload your PDF slides or presentation handout document.",
-        "image": "step-1-upload.webp",
-        "alt": "PDF to PowerPoint upload area"
+        "title": "Open PDF to PowerPoint",
+        "desc": "Open PDF to PowerPoint to turn PDF documents into interactive presentation slides.",
+        "image": "step-1-open.webp",
+        "alt": "PDF to PowerPoint drop zone"
       },
       {
         "step": 2,
-        "title": "Select Slide Sizing and Quality",
-        "desc": "Choose slide quality (Standard or High) and aspect ratio (Standard 4:3 or Widescreen 16:9).",
-        "image": "step-2-slides.webp",
-        "alt": "PDF to PowerPoint slide parameters"
+        "title": "Upload PDF Deck",
+        "desc": "Upload the PDF presentation file to detect slide page dimensions.",
+        "image": "step-2-upload.webp",
+        "alt": "PDF to PowerPoint presentation loaded"
       },
       {
         "step": 3,
-        "title": "Package into Presentation Slides",
-        "desc": "Click Export as PPTX to place each PDF page onto an individual presentation slide.",
-        "image": "step-3-export.webp",
-        "alt": "PDF to PowerPoint export button"
+        "title": "Set Slide Scaling",
+        "desc": "Configure slide dimensions and scaling options to match widescreen presentation formats.",
+        "image": "step-3-slides.webp",
+        "alt": "PDF to PowerPoint slide size options"
       },
       {
         "step": 4,
+        "title": "Export Presentation Slides",
+        "desc": "Click Convert to PowerPoint to convert each page into a presentation slide.",
+        "image": "step-4-export.webp",
+        "alt": "PDF to PowerPoint convert button"
+      },
+      {
+        "step": 5,
         "title": "Download PowerPoint File",
-        "desc": "Click Download to save your newly compiled .pptx slide deck.",
-        "image": "step-4-download.webp",
-        "alt": "PDF to PowerPoint download modal"
+        "desc": "Save the generated .pptx slide deck ready for presenting.",
+        "image": "step-5-download.webp",
+        "alt": "PDF to PowerPoint download confirmation"
       }
     ]
   },
@@ -1301,30 +1420,37 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Text-Based PDF",
-        "desc": "Open PDF to Word and select the document containing text you need in an editable format.",
-        "image": "step-1-upload.webp",
-        "alt": "PDF to Word upload area"
+        "title": "Open PDF to Word",
+        "desc": "Open PDF to Word to transform read-only PDF pages into editable Word documents.",
+        "image": "step-1-open.webp",
+        "alt": "PDF to Word drop area"
       },
       {
         "step": 2,
-        "title": "Choose Export Format",
-        "desc": "Select editable Word document (.docx), Rich Text Format (.rtf), or plain text (.txt).",
-        "image": "step-2-format.webp",
-        "alt": "PDF to Word export format options"
+        "title": "Upload PDF File",
+        "desc": "Drop the PDF file into the upload area to load its content streams.",
+        "image": "step-2-upload.webp",
+        "alt": "PDF to Word document loaded"
       },
       {
         "step": 3,
-        "title": "Extract Content and Structure",
-        "desc": "Click Convert to Word to extract paragraphs and recreate document layout in .docx format.",
-        "image": "step-3-extract.webp",
-        "alt": "PDF to Word extraction action"
+        "title": "Choose Export Options",
+        "desc": "Select output format (.docx) and configure paragraph layout preservation.",
+        "image": "step-3-format.webp",
+        "alt": "PDF to Word export settings"
       },
       {
         "step": 4,
-        "title": "Download Editable Word Document",
-        "desc": "Review extraction status and download your editable Microsoft Word file.",
-        "image": "step-4-download.webp",
+        "title": "Extract Text & Structure",
+        "desc": "Click Convert to Word to reconstruct headings, text blocks, and tables.",
+        "image": "step-4-extract.webp",
+        "alt": "PDF to Word convert button"
+      },
+      {
+        "step": 5,
+        "title": "Download Word Document",
+        "desc": "Download the editable .docx file to edit in Microsoft Word or Google Docs.",
+        "image": "step-5-download.webp",
         "alt": "PDF to Word download modal"
       }
     ]
@@ -1371,31 +1497,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload PowerPoint Presentation",
-        "desc": "Open PowerPoint to PDF and select your Microsoft PowerPoint presentation (.pptx).",
-        "image": "step-1-upload.webp",
-        "alt": "PowerPoint to PDF upload area"
+        "title": "Open PowerPoint to PDF",
+        "desc": "Open PowerPoint to PDF to convert presentation slides into portable documents.",
+        "image": "step-1-open.webp",
+        "alt": "PowerPoint to PDF drop zone"
       },
       {
         "step": 2,
-        "title": "Inspect Extracted Slides",
-        "desc": "Review slide previews and choose your preferred slide orientation and handout layout.",
-        "image": "step-2-slides.webp",
-        "alt": "PowerPoint to PDF slide layout settings"
+        "title": "Upload Slide Deck",
+        "desc": "Upload your Microsoft PowerPoint (.pptx) file to generate slide previews.",
+        "image": "step-2-upload.webp",
+        "alt": "PowerPoint to PDF presentation loaded"
       },
       {
         "step": 3,
-        "title": "Prepare Slide Pages",
-        "desc": "Click Convert to PDF to format slides for clean, paginated document rendering.",
-        "image": "step-3-convert.webp",
-        "alt": "PowerPoint to PDF conversion action"
+        "title": "Set Slide Aspect Ratio",
+        "desc": "Choose presentation dimensions (16:9 widescreen or 4:3 standard) and background color.",
+        "image": "step-3-slides.webp",
+        "alt": "PowerPoint to PDF layout options"
       },
       {
         "step": 4,
-        "title": "Save PDF from Print View",
-        "desc": "Use the browser print window to choose Save as PDF and save your presentation deck.",
-        "image": "step-4-print.webp",
-        "alt": "PowerPoint to PDF save instructions"
+        "title": "Convert Slides to PDF",
+        "desc": "Click Convert to PDF to package presentation slides into vector pages.",
+        "image": "step-4-convert.webp",
+        "alt": "PowerPoint to PDF convert button"
+      },
+      {
+        "step": 5,
+        "title": "Download PDF Slides",
+        "desc": "Review the converted slide deck and save your PDF presentation.",
+        "image": "step-5-print.webp",
+        "alt": "PowerPoint to PDF preview and download"
       }
     ]
   },
@@ -1441,31 +1574,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Confidential PDF",
-        "desc": "Open Protect PDF and drop your document into the upload area.",
-        "image": "step-1-upload.webp",
-        "alt": "Protect PDF upload drop area"
+        "title": "Open Protect PDF",
+        "desc": "Open Protect PDF to apply secure AES password encryption to your documents.",
+        "image": "step-1-open.webp",
+        "alt": "Protect PDF drop zone"
       },
       {
         "step": 2,
-        "title": "Set Password and Permissions",
-        "desc": "Enter a strong password, confirm it, and set document permissions for printing and copying.",
-        "image": "step-2-password.webp",
-        "alt": "Protect PDF password input and permission options"
+        "title": "Upload Confidential PDF",
+        "desc": "Drop the confidential PDF document into the secure upload area.",
+        "image": "step-2-upload.webp",
+        "alt": "Protect PDF document loaded"
       },
       {
         "step": 3,
-        "title": "Apply Document Encryption",
-        "desc": "Click Protect PDF to apply standard AES password encryption to the document stream.",
-        "image": "step-3-encrypt.webp",
-        "alt": "Protect PDF encryption action"
+        "title": "Set Password & Permissions",
+        "desc": "Enter a strong password, confirm it, and configure printing or copying permissions.",
+        "image": "step-3-password.webp",
+        "alt": "Protect PDF password and permission fields"
       },
       {
         "step": 4,
-        "title": "Download Encrypted File",
-        "desc": "Download your securely encrypted PDF and store your password in a safe location.",
-        "image": "step-4-download.webp",
-        "alt": "Protect PDF download ready confirmation"
+        "title": "Encrypt Document",
+        "desc": "Click Protect PDF to lock the document with 256-bit AES encryption.",
+        "image": "step-4-encrypt.webp",
+        "alt": "Protect PDF action button"
+      },
+      {
+        "step": 5,
+        "title": "Download Secured PDF",
+        "desc": "Save the encrypted PDF that now requires your password to open.",
+        "image": "step-5-download.webp",
+        "alt": "Protect PDF download modal"
       }
     ]
   },
@@ -1511,31 +1651,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Sensitive PDF",
-        "desc": "Open Redact PDF and select the document containing private numbers, names, or confidential text.",
-        "image": "step-1-upload.webp",
-        "alt": "Redact PDF upload area"
+        "title": "Open Redact PDF",
+        "desc": "Open Redact PDF to sanitize private data and confidential information.",
+        "image": "step-1-open.webp",
+        "alt": "Redact PDF drop area"
       },
       {
         "step": 2,
-        "title": "Inspect Interactive Redaction Canvas",
-        "desc": "Navigate to the sensitive page. The crosshair cursor is ready for drawing blackout boxes.",
-        "image": "step-2-canvas.webp",
-        "alt": "Redact PDF document canvas"
+        "title": "Upload Document for Redaction",
+        "desc": "Load the PDF containing sensitive personal numbers or confidential text.",
+        "image": "step-2-upload.webp",
+        "alt": "Redact PDF document loaded"
       },
       {
         "step": 3,
-        "title": "Draw Blackout Rectangles",
-        "desc": "Drag over private text to place opaque blackout rectangles, then click Save Redacted PDF.",
-        "image": "step-3-blackout.webp",
-        "alt": "Redact PDF applied blackout rectangles"
+        "title": "Draw Blackout Boxes",
+        "desc": "Click and drag blackout boxes over sensitive numbers, names, or photos.",
+        "image": "step-3-canvas.webp",
+        "alt": "Redact PDF canvas with blackout rectangles"
       },
       {
         "step": 4,
-        "title": "Download Permanently Redacted PDF",
-        "desc": "Verify that covered text is permanently flattened, then download your sanitized file.",
-        "image": "step-4-download.webp",
-        "alt": "Redact PDF download ready modal"
+        "title": "Apply Permanent Redactions",
+        "desc": "Click Apply Redactions to permanently purge underlying pixels and text streams.",
+        "image": "step-4-blackout.webp",
+        "alt": "Redact PDF apply button"
+      },
+      {
+        "step": 5,
+        "title": "Download Sanitized PDF",
+        "desc": "Download the redacted PDF guaranteed free of recoverable private content.",
+        "image": "step-5-download.webp",
+        "alt": "Redact PDF download modal"
       }
     ]
   },
@@ -1581,31 +1728,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Select PDF Document",
-        "desc": "Upload the PDF document from which you need to delete specific unwanted or blank pages.",
-        "image": "step-1-upload.webp",
-        "alt": "Remove Pages tool upload area"
+        "title": "Open Remove Pages",
+        "desc": "Open Remove Pages to delete unwanted or blank sheets from your document.",
+        "image": "step-1-open.webp",
+        "alt": "Remove Pages initial screen"
       },
       {
         "step": 2,
-        "title": "Specify Pages to Delete",
-        "desc": "Enter comma-separated page numbers or ranges to remove (such as 2 or 4-5).",
-        "image": "step-2-select-pages.webp",
-        "alt": "Remove Pages input showing targeted page numbers"
+        "title": "Upload PDF File",
+        "desc": "Upload the PDF document containing pages you want to eliminate.",
+        "image": "step-2-upload.webp",
+        "alt": "Remove Pages showing uploaded document details"
       },
       {
         "step": 3,
-        "title": "Strip Selected Pages",
-        "desc": "Click Remove Pages to rebuild the document stream excluding the targeted page numbers.",
-        "image": "step-3-remove.webp",
-        "alt": "Remove Pages processing action"
+        "title": "Select Pages to Remove",
+        "desc": "Enter the comma-separated page numbers (e.g. 2, 4) you want to permanently discard.",
+        "image": "step-3-select.webp",
+        "alt": "Remove Pages selection inputs and page indicator"
       },
       {
         "step": 4,
-        "title": "Download Trimmed PDF",
-        "desc": "Confirm the updated total page count in the result modal and download your cleaned PDF file.",
-        "image": "step-4-download.webp",
-        "alt": "Remove Pages download modal and completion"
+        "title": "Delete Selected Pages",
+        "desc": "Click Remove Pages to strip the selected pages from the document structure.",
+        "image": "step-4-remove.webp",
+        "alt": "Remove Pages action button ready to process"
+      },
+      {
+        "step": 5,
+        "title": "Download Cleaned PDF",
+        "desc": "Save the cleaned PDF file with the unwanted pages permanently removed.",
+        "image": "step-5-download.webp",
+        "alt": "Remove Pages download confirmation dialog"
       }
     ]
   },
@@ -1651,31 +1805,31 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Malformed PDF",
-        "desc": "Open Repair PDF and select the corrupt, damaged, or unreadable PDF document.",
+        "title": "Upload Damaged Document",
+        "desc": "Open Repair PDF and load the corrupted or unreadable document file.",
         "image": "step-1-upload.webp",
-        "alt": "Repair PDF upload area"
+        "alt": "Repair PDF upload screen with damaged file loaded"
       },
       {
         "step": 2,
-        "title": "Inspect Raw Buffer",
-        "desc": "The tool performs lenient binary parsing to reconstruct corrupted cross-reference tables.",
+        "title": "Inspect Structural Errors",
+        "desc": "Review detected broken cross-reference tables and corrupt internal object streams.",
         "image": "step-2-inspect.webp",
-        "alt": "Repair PDF document inspection state"
+        "alt": "Repair PDF structure analysis details"
       },
       {
         "step": 3,
-        "title": "Rebuild Document Stream",
-        "desc": "Click Repair PDF to reserialize the recovered objects into a clean, standardized PDF structure.",
+        "title": "Rebuild PDF Syntax",
+        "desc": "Click Repair PDF to reconstruct valid page objects and salvage readable content.",
         "image": "step-3-repair.webp",
-        "alt": "Repair PDF reconstruction button"
+        "alt": "Repair PDF rebuild button active"
       },
       {
         "step": 4,
         "title": "Download Recovered PDF",
-        "desc": "Verify that pages are readable in the preview, then click Download to save the recovered file.",
+        "desc": "Save the salvaged, reconstructed PDF document to your device.",
         "image": "step-4-download.webp",
-        "alt": "Repair PDF download ready modal"
+        "alt": "Repair PDF recovery completion dialog"
       }
     ]
   },
@@ -1721,30 +1875,37 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Sideways or Inverted PDF",
-        "desc": "Open Rotate PDF and select the document requiring orientation correction.",
-        "image": "step-1-upload.webp",
-        "alt": "Rotate PDF upload area"
+        "title": "Open Rotate PDF",
+        "desc": "Open Rotate PDF to fix upside-down or sideways pages across documents.",
+        "image": "step-1-open.webp",
+        "alt": "Rotate PDF drop zone"
       },
       {
         "step": 2,
-        "title": "Select Rotation Angle and Target",
-        "desc": "Choose 90° clockwise, 180°, or 270°, and apply to All pages, Even only, Odd only, or Custom pages.",
-        "image": "step-2-angle.webp",
-        "alt": "Rotate PDF angle and scope settings"
+        "title": "Upload PDF Document",
+        "desc": "Select or drop the PDF file whose orientation needs adjustment.",
+        "image": "step-2-upload.webp",
+        "alt": "Rotate PDF document loaded"
       },
       {
         "step": 3,
-        "title": "Update Page Rotation Metadata",
-        "desc": "Click Rotate PDF to instantly update the page rotation dictionary without recompressing images.",
-        "image": "step-3-rotate.webp",
-        "alt": "Rotate PDF action button"
+        "title": "Choose Rotation Direction",
+        "desc": "Select rotation angle (90° Clockwise, 180°, 270°) and target pages (All, Odd, Even).",
+        "image": "step-3-angle.webp",
+        "alt": "Rotate PDF angle and page selector"
       },
       {
         "step": 4,
-        "title": "Download Correctly Oriented PDF",
-        "desc": "Check the re-oriented document in the review preview and download your PDF.",
-        "image": "step-4-download.webp",
+        "title": "Apply Page Rotation",
+        "desc": "Click Rotate PDF to update the rotation metadata in the document dictionary.",
+        "image": "step-4-rotate.webp",
+        "alt": "Rotate PDF action button"
+      },
+      {
+        "step": 5,
+        "title": "Download Corrected PDF",
+        "desc": "Download your newly rotated PDF with pages saved in the right direction.",
+        "image": "step-5-download.webp",
         "alt": "Rotate PDF download modal"
       }
     ]
@@ -1791,31 +1952,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Capture or Upload Images",
-        "desc": "Start Scan to PDF. You can upload scanned photos (JPG, PNG, WebP) or activate your device camera.",
-        "image": "step-1-upload.webp",
-        "alt": "Scan to PDF camera and file upload interface"
+        "title": "Open Scan to PDF",
+        "desc": "Open Scan to PDF to turn camera captures or physical document scans into clean PDFs.",
+        "image": "step-1-open.webp",
+        "alt": "Scan to PDF camera and upload options"
       },
       {
         "step": 2,
-        "title": "Configure Page Layout and Filters",
-        "desc": "Choose paper format (A4, US Letter, Fit to Image) and optional contrast or grayscale filters.",
-        "image": "step-2-settings.webp",
-        "alt": "Scan to PDF configuration controls and image enhancements"
+        "title": "Snap Photo or Upload Images",
+        "desc": "Use your device webcam to capture pages directly or upload image scan files from storage.",
+        "image": "step-2-upload.webp",
+        "alt": "Scan to PDF image uploaded and previewed"
       },
       {
         "step": 3,
-        "title": "Compile Scanned Document",
-        "desc": "Click Create PDF to embed each scanned image onto an optimized page layout in memory.",
-        "image": "step-3-create.webp",
-        "alt": "Scan to PDF document generation button"
+        "title": "Configure Page Settings",
+        "desc": "Select document size (A4, Letter) and apply contrast enhancement or grayscale filters.",
+        "image": "step-3-settings.webp",
+        "alt": "Scan to PDF page format and filter settings"
       },
       {
         "step": 4,
-        "title": "Download Assembled PDF",
-        "desc": "Inspect the generated multi-page scanned document and download it to your local storage.",
-        "image": "step-4-download.webp",
-        "alt": "Scan to PDF download confirmation"
+        "title": "Generate Scanned PDF",
+        "desc": "Click Create PDF to package your digitized images into a standardized document.",
+        "image": "step-4-create.webp",
+        "alt": "Scan to PDF create button active"
+      },
+      {
+        "step": 5,
+        "title": "Download Digitized PDF",
+        "desc": "Download the high-clarity PDF document ready for filing or sharing.",
+        "image": "step-5-download.webp",
+        "alt": "Scan to PDF download confirmation dialog"
       }
     ]
   },
@@ -1861,31 +2029,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Document to Sign",
-        "desc": "Open Sign PDF and upload the contract, agreement, or form that requires your signature.",
-        "image": "step-1-upload.webp",
-        "alt": "Sign PDF upload area"
+        "title": "Open Sign PDF",
+        "desc": "Open Sign PDF to add legal digital signatures and initials to documents.",
+        "image": "step-1-open.webp",
+        "alt": "Sign PDF drop area"
       },
       {
         "step": 2,
-        "title": "Create Your Signature",
-        "desc": "Choose between the Draw signature pad or the Type mode with cursive calligraphy fonts.",
-        "image": "step-2-create-sig.webp",
-        "alt": "Sign PDF signature creation canvas"
+        "title": "Upload Document to Sign",
+        "desc": "Upload the contract, agreement, or form that requires your signature.",
+        "image": "step-2-upload.webp",
+        "alt": "Sign PDF document loaded"
       },
       {
         "step": 3,
-        "title": "Place and Position Signature",
-        "desc": "Click onto the target page canvas to stamp your signature, position it, and click Save Signed PDF.",
-        "image": "step-3-place-sig.webp",
-        "alt": "Sign PDF document page stamp placement"
+        "title": "Create Your Signature",
+        "desc": "Draw your signature on the pad, type with a cursive font, or upload a signature image.",
+        "image": "step-3-create-sig.webp",
+        "alt": "Sign PDF signature creation pad"
       },
       {
         "step": 4,
-        "title": "Download Legally Signed PDF",
-        "desc": "Review the signature placement in the result modal and download your signed document.",
-        "image": "step-4-download.webp",
-        "alt": "Sign PDF download ready confirmation"
+        "title": "Place Signature on Page",
+        "desc": "Drag and position your signature stamp precisely onto the document signature line.",
+        "image": "step-4-place-sig.webp",
+        "alt": "Sign PDF placed signature on document"
+      },
+      {
+        "step": 5,
+        "title": "Download Signed Document",
+        "desc": "Download your legally executed document with your embedded signature.",
+        "image": "step-5-download.webp",
+        "alt": "Sign PDF download modal"
       }
     ]
   },
@@ -1931,31 +2106,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Target PDF",
-        "desc": "Open Split PDF and select the multi-page PDF document you want to divide into separate files.",
-        "image": "step-1-upload.webp",
-        "alt": "Split PDF upload drop area"
+        "title": "Open Split PDF",
+        "desc": "Open the Split PDF tool to begin extracting or dividing document pages.",
+        "image": "step-1-open.webp",
+        "alt": "Split PDF drop zone and initial options"
       },
       {
         "step": 2,
-        "title": "Configure Split Mode and Ranges",
-        "desc": "Select your preferred mode: by page ranges (e.g. 1-2, 3), every page individually, or every N pages.",
-        "image": "step-2-select-pages.webp",
-        "alt": "Split PDF configuration options and page range input"
+        "title": "Upload Your Document",
+        "desc": "Select or drop the multi-page PDF document you need to split.",
+        "image": "step-2-upload.webp",
+        "alt": "Split PDF loaded document with page count"
       },
       {
         "step": 3,
-        "title": "Execute Document Split",
-        "desc": "Click the Split PDF button to extract the specified page ranges into separate document instances.",
-        "image": "step-3-split.webp",
-        "alt": "Split PDF processing action"
+        "title": "Choose Split Ranges",
+        "desc": "Specify page ranges (such as 1-2, 3) or select splitting into individual single pages.",
+        "image": "step-3-ranges.webp",
+        "alt": "Split PDF page range input and mode selection"
       },
       {
         "step": 4,
-        "title": "Download Output Documents",
-        "desc": "Review the generated splits and download your standalone PDF files directly to your device.",
-        "image": "step-4-download.webp",
-        "alt": "Split PDF download result interface"
+        "title": "Execute Page Split",
+        "desc": "Click Split PDF to separate the specified sections into distinct PDF files.",
+        "image": "step-4-split.webp",
+        "alt": "Split PDF action button and processing indicator"
+      },
+      {
+        "step": 5,
+        "title": "Download Split Documents",
+        "desc": "Save the generated individual PDF files or download the complete ZIP archive.",
+        "image": "step-5-download.webp",
+        "alt": "Split PDF download interface with separate files"
       }
     ]
   },
@@ -2001,31 +2183,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Document for Summary",
-        "desc": "Open AI Summarizer and upload the text-based PDF report or research paper.",
-        "image": "step-1-upload.webp",
-        "alt": "AI Summarizer upload drop area"
+        "title": "Open AI Summarizer",
+        "desc": "Open AI Summarizer to condense lengthy documents and research reports.",
+        "image": "step-1-open.webp",
+        "alt": "AI Summarizer drop area"
       },
       {
         "step": 2,
-        "title": "Select Summary Depth",
-        "desc": "Choose your desired summary style (Concise overview, Bulleted takeaways, or Detailed) and page limit.",
-        "image": "step-2-settings.webp",
-        "alt": "AI Summarizer style settings"
+        "title": "Upload Document for Summary",
+        "desc": "Upload the PDF document you want to extract key executive takeaways from.",
+        "image": "step-2-upload.webp",
+        "alt": "AI Summarizer document loaded"
       },
       {
         "step": 3,
-        "title": "Extract Text and Generate Summary",
-        "desc": "Click Summarize PDF to extract text and trigger structured analysis.",
-        "image": "step-3-summarize.webp",
-        "alt": "AI Summarizer extraction processing"
+        "title": "Select Summary Style & Pages",
+        "desc": "Choose summary format (Executive Summary, Bullet Points, or Quick Abstract) and page count.",
+        "image": "step-3-settings.webp",
+        "alt": "AI Summarizer style selector"
       },
       {
         "step": 4,
-        "title": "Review and Export Summary",
-        "desc": "Read the generated summary in the text console. Click Copy Text or Download .txt to save.",
-        "image": "step-4-results.webp",
-        "alt": "AI Summarizer summary output console"
+        "title": "Run AI Analysis",
+        "desc": "Click Summarize PDF to analyze document semantic structure and key themes.",
+        "image": "step-4-summarize.webp",
+        "alt": "AI Summarizer action button"
+      },
+      {
+        "step": 5,
+        "title": "Review & Copy Summary",
+        "desc": "Inspect the generated summary insights and copy to clipboard or export.",
+        "image": "step-5-results.webp",
+        "alt": "AI Summarizer results panel"
       }
     ]
   },
@@ -2071,31 +2260,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Document to Translate",
-        "desc": "Open Translate PDF and upload your multi-page foreign language document.",
-        "image": "step-1-upload.webp",
-        "alt": "Translate PDF upload drop area"
+        "title": "Open Translate PDF",
+        "desc": "Open Translate PDF to translate multilingual documents into your target language.",
+        "image": "step-1-open.webp",
+        "alt": "Translate PDF drop zone"
       },
       {
         "step": 2,
-        "title": "Select Language Pair",
-        "desc": "Choose your source language and target language from over 16 supported languages.",
-        "image": "step-2-languages.webp",
-        "alt": "Translate PDF language dropdowns"
+        "title": "Upload Foreign Language PDF",
+        "desc": "Upload the foreign-language document you need to translate.",
+        "image": "step-2-upload.webp",
+        "alt": "Translate PDF document loaded"
       },
       {
         "step": 3,
-        "title": "Process Document Translation",
-        "desc": "Click Translate PDF to extract text chunks and process translations.",
-        "image": "step-3-translate.webp",
-        "alt": "Translate PDF translation action"
+        "title": "Select Target Language",
+        "desc": "Select your source language (or Auto-Detect) and your desired target language.",
+        "image": "step-3-languages.webp",
+        "alt": "Translate PDF language selector dropdowns"
       },
       {
         "step": 4,
-        "title": "Review and Download Translation",
-        "desc": "Inspect the side-by-side translated text. Copy the text or export as a translated document.",
-        "image": "step-4-results.webp",
-        "alt": "Translate PDF translated text output"
+        "title": "Translate Document Content",
+        "desc": "Click Translate PDF to translate document text while preserving page formatting.",
+        "image": "step-4-translate.webp",
+        "alt": "Translate PDF action button"
+      },
+      {
+        "step": 5,
+        "title": "Review & Download Translation",
+        "desc": "Inspect the translated preview and download your document in the new language.",
+        "image": "step-5-results.webp",
+        "alt": "Translate PDF translated results view"
       }
     ]
   },
@@ -2141,30 +2337,37 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload Protected PDF",
-        "desc": "Open Unlock PDF and upload your password-protected PDF document.",
-        "image": "step-1-upload.webp",
-        "alt": "Unlock PDF upload area"
+        "title": "Open Unlock PDF",
+        "desc": "Open Unlock PDF to remove password restrictions from authorized documents.",
+        "image": "step-1-open.webp",
+        "alt": "Unlock PDF drop zone"
       },
       {
         "step": 2,
-        "title": "Enter Document Password",
-        "desc": "Type the authorized password needed to decrypt the internal document security handler.",
-        "image": "step-2-password.webp",
-        "alt": "Unlock PDF password input field"
+        "title": "Upload Protected PDF",
+        "desc": "Select or drop the encrypted PDF document requiring decryption.",
+        "image": "step-2-upload.webp",
+        "alt": "Unlock PDF protected document loaded"
       },
       {
         "step": 3,
-        "title": "Remove Password Restrictions",
-        "desc": "Click Unlock PDF to authenticate credentials and strip encryption restrictions.",
-        "image": "step-3-unlock.webp",
-        "alt": "Unlock PDF action button"
+        "title": "Enter Decryption Password",
+        "desc": "Type the authorized password to authenticate and decrypt document streams.",
+        "image": "step-3-password.webp",
+        "alt": "Unlock PDF password input"
       },
       {
         "step": 4,
-        "title": "Download Unlocked Document",
-        "desc": "Verify that the password prompt is removed and download your unrestricted PDF.",
-        "image": "step-4-download.webp",
+        "title": "Remove Encryption",
+        "desc": "Click Unlock PDF to remove the security filter and permissions restriction.",
+        "image": "step-4-unlock.webp",
+        "alt": "Unlock PDF action button"
+      },
+      {
+        "step": 5,
+        "title": "Download Unrestricted PDF",
+        "desc": "Download your decrypted PDF to view, edit, and print without password prompts.",
+        "image": "step-5-download.webp",
         "alt": "Unlock PDF download modal"
       }
     ]
@@ -2211,31 +2414,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Upload PDF Document",
-        "desc": "Open Add Watermark and drop your document into the upload target area.",
-        "image": "step-1-upload.webp",
-        "alt": "Add Watermark upload zone"
+        "title": "Open Add Watermark",
+        "desc": "Open Add Watermark to overlay copyright stamps or status notices.",
+        "image": "step-1-open.webp",
+        "alt": "Add Watermark drop zone"
       },
       {
         "step": 2,
-        "title": "Configure Watermark Text and Style",
-        "desc": "Type your custom watermark text, adjust transparency/opacity, font size, color, and angle.",
-        "image": "step-2-text.webp",
-        "alt": "Add Watermark text and opacity settings"
+        "title": "Upload PDF Document",
+        "desc": "Load the PDF document requiring a protective text or copyright watermark.",
+        "image": "step-2-upload.webp",
+        "alt": "Add Watermark document loaded"
       },
       {
         "step": 3,
-        "title": "Embed Watermark Across Pages",
-        "desc": "Click Add Watermark to stamp diagonal semi-transparent watermarks into each page.",
-        "image": "step-3-apply.webp",
-        "alt": "Add Watermark application action"
+        "title": "Enter Watermark Text & Style",
+        "desc": "Type custom watermark text (e.g. 'CONFIDENTIAL') and set opacity, angle, and size.",
+        "image": "step-3-text.webp",
+        "alt": "Add Watermark text and opacity controls"
       },
       {
         "step": 4,
+        "title": "Apply Watermark Overlay",
+        "desc": "Click Add Watermark to stamp the semi-transparent overlay across every page.",
+        "image": "step-4-apply.webp",
+        "alt": "Add Watermark action button"
+      },
+      {
+        "step": 5,
         "title": "Download Watermarked PDF",
-        "desc": "Inspect watermark visibility and contrast in the preview, then download your marked file.",
-        "image": "step-4-download.webp",
-        "alt": "Add Watermark download ready modal"
+        "desc": "Download your protected PDF with the custom watermark applied.",
+        "image": "step-5-download.webp",
+        "alt": "Add Watermark download modal"
       }
     ]
   },
@@ -2281,31 +2491,38 @@ window.PDFHUB_GUIDES = [
     "walkthrough": [
       {
         "step": 1,
-        "title": "Select Word Document",
-        "desc": "Open Word to PDF and upload your Microsoft Word (.docx) file.",
-        "image": "step-1-upload.webp",
-        "alt": "Word to PDF file upload interface"
+        "title": "Open Word to PDF",
+        "desc": "Open Word to PDF for private, local document conversion without uploading to remote servers.",
+        "image": "step-1-open.webp",
+        "alt": "Word to PDF drop area"
       },
       {
         "step": 2,
-        "title": "Configure Document Formatting",
-        "desc": "The file is parsed locally with Mammoth.js. Choose paper sizing (A4, Letter) and typography scale.",
-        "image": "step-2-options.webp",
-        "alt": "Word to PDF page and font configuration"
+        "title": "Upload Word Document",
+        "desc": "Drop your Microsoft Word (.docx) document into the upload workspace.",
+        "image": "step-2-upload.webp",
+        "alt": "Word to PDF document loaded"
       },
       {
         "step": 3,
-        "title": "Generate Print-Ready Layout",
-        "desc": "Click Convert to PDF to prepare a styled print view maintaining headings, lists, and tables.",
-        "image": "step-3-convert.webp",
-        "alt": "Word to PDF conversion button"
+        "title": "Set Page Dimensions & Fonts",
+        "desc": "Select page size, orientation, and typography scaling for clear reading.",
+        "image": "step-3-options.webp",
+        "alt": "Word to PDF formatting controls"
       },
       {
         "step": 4,
-        "title": "Save PDF via Browser Print",
-        "desc": "The browser print dialog opens automatically. Select Save as PDF as the destination printer.",
-        "image": "step-4-print.webp",
-        "alt": "Word to PDF print dialog instructions"
+        "title": "Convert Document",
+        "desc": "Click Convert to PDF to compile Word formatting into standardized vector pages.",
+        "image": "step-4-convert.webp",
+        "alt": "Word to PDF convert button"
+      },
+      {
+        "step": 5,
+        "title": "Download or Print PDF",
+        "desc": "Inspect the rendered layout in the preview frame and download your finished PDF.",
+        "image": "step-5-print.webp",
+        "alt": "Word to PDF completed document preview"
       }
     ]
   }

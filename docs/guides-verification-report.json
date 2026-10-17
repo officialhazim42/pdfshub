@@ -1,37 +1,46 @@
 {
-  "verifiedAt": "2026-10-17T07:13:39.224Z",
+  "verifiedAt": "2026-10-17T07:43:13.666Z",
   "allPassed": true,
   "totalGuides": 33,
+  "totalWalkthroughCards": 163,
+  "totalBrokenImages": 0,
   "results": [
     {
       "id": "compare-pdf",
       "name": "Compare PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/compare-pdf/",
       "h1": " Compare PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/compare-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/compare-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/compare-pdf/step-2-preview.webp",
+          "src": "../../assets/guides/compare-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/compare-pdf/step-3-compare.webp",
+          "src": "../../assets/guides/compare-pdf/step-3-preview.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/compare-pdf/step-4-diff.webp",
+          "src": "../../assets/guides/compare-pdf/step-4-compare.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/compare-pdf/step-5-diff.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -39,30 +48,37 @@
       "name": "Compress PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/compress-pdf/",
       "h1": " Compress PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/compress-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/compress-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/compress-pdf/step-2-settings.webp",
+          "src": "../../assets/guides/compress-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/compress-pdf/step-3-process.webp",
+          "src": "../../assets/guides/compress-pdf/step-3-settings.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/compress-pdf/step-4-download.webp",
+          "src": "../../assets/guides/compress-pdf/step-4-process.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/compress-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -70,30 +86,37 @@
       "name": "Crop PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/crop-pdf/",
       "h1": " Crop PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/crop-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/crop-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/crop-pdf/step-2-margins.webp",
+          "src": "../../assets/guides/crop-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/crop-pdf/step-3-crop.webp",
+          "src": "../../assets/guides/crop-pdf/step-3-margins.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/crop-pdf/step-4-download.webp",
+          "src": "../../assets/guides/crop-pdf/step-4-crop.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/crop-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -101,30 +124,37 @@
       "name": "Edit PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/edit-pdf/",
       "h1": " Edit PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/edit-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/edit-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/edit-pdf/step-2-toolbar.webp",
+          "src": "../../assets/guides/edit-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/edit-pdf/step-3-annotate.webp",
+          "src": "../../assets/guides/edit-pdf/step-3-toolbar.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/edit-pdf/step-4-download.webp",
+          "src": "../../assets/guides/edit-pdf/step-4-annotate.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/edit-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -132,30 +162,37 @@
       "name": "Excel to PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/excel-to-pdf/",
       "h1": " Excel to PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/excel-to-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/excel-to-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/excel-to-pdf/step-2-preview.webp",
+          "src": "../../assets/guides/excel-to-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/excel-to-pdf/step-3-convert.webp",
+          "src": "../../assets/guides/excel-to-pdf/step-3-preview.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/excel-to-pdf/step-4-print.webp",
+          "src": "../../assets/guides/excel-to-pdf/step-4-convert.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/excel-to-pdf/step-5-print.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -163,30 +200,37 @@
       "name": "Extract Pages",
       "guideUrl": "http://127.0.0.1:8000/guides/extract-pages/",
       "h1": " Extract Pages Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/extract-pages/step-1-upload.webp",
+          "src": "../../assets/guides/extract-pages/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/extract-pages/step-2-select-pages.webp",
+          "src": "../../assets/guides/extract-pages/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/extract-pages/step-3-extract.webp",
+          "src": "../../assets/guides/extract-pages/step-3-select.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/extract-pages/step-4-download.webp",
+          "src": "../../assets/guides/extract-pages/step-4-extract.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/extract-pages/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -194,30 +238,37 @@
       "name": "PDF Forms",
       "guideUrl": "http://127.0.0.1:8000/guides/forms-pdf/",
       "h1": " PDF Forms Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/forms-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/forms-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/forms-pdf/step-2-fields.webp",
+          "src": "../../assets/guides/forms-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/forms-pdf/step-3-fill.webp",
+          "src": "../../assets/guides/forms-pdf/step-3-fields.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/forms-pdf/step-4-download.webp",
+          "src": "../../assets/guides/forms-pdf/step-4-fill.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/forms-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -249,6 +300,8 @@
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -256,30 +309,37 @@
       "name": "JPG to PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/jpg-to-pdf/",
       "h1": " JPG to PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/jpg-to-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/jpg-to-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/jpg-to-pdf/step-2-layout.webp",
+          "src": "../../assets/guides/jpg-to-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/jpg-to-pdf/step-3-convert.webp",
+          "src": "../../assets/guides/jpg-to-pdf/step-3-layout.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/jpg-to-pdf/step-4-download.webp",
+          "src": "../../assets/guides/jpg-to-pdf/step-4-convert.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/jpg-to-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -287,30 +347,37 @@
       "name": "Merge PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/merge-pdf/",
       "h1": " Merge PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/merge-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/merge-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/merge-pdf/step-2-arrange.webp",
+          "src": "../../assets/guides/merge-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/merge-pdf/step-3-merge.webp",
+          "src": "../../assets/guides/merge-pdf/step-3-arrange.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/merge-pdf/step-4-download.webp",
+          "src": "../../assets/guides/merge-pdf/step-4-merge.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/merge-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -318,30 +385,37 @@
       "name": "OCR PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/ocr-pdf/",
       "h1": " OCR PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/ocr-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/ocr-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/ocr-pdf/step-2-settings.webp",
+          "src": "../../assets/guides/ocr-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/ocr-pdf/step-3-extract.webp",
+          "src": "../../assets/guides/ocr-pdf/step-3-settings.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/ocr-pdf/step-4-results.webp",
+          "src": "../../assets/guides/ocr-pdf/step-4-extract.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/ocr-pdf/step-5-results.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -349,16 +423,16 @@
       "name": "Organize PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/organize-pdf/",
       "h1": " Organize PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/organize-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/organize-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/organize-pdf/step-2-thumbnails.webp",
+          "src": "../../assets/guides/organize-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
@@ -368,11 +442,18 @@
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/organize-pdf/step-4-download.webp",
+          "src": "../../assets/guides/organize-pdf/step-4-apply.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/organize-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -380,30 +461,37 @@
       "name": "Add Page Numbers",
       "guideUrl": "http://127.0.0.1:8000/guides/page-numbers/",
       "h1": " Add Page Numbers Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/page-numbers/step-1-upload.webp",
+          "src": "../../assets/guides/page-numbers/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/page-numbers/step-2-position.webp",
+          "src": "../../assets/guides/page-numbers/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/page-numbers/step-3-stamp.webp",
+          "src": "../../assets/guides/page-numbers/step-3-position.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/page-numbers/step-4-download.webp",
+          "src": "../../assets/guides/page-numbers/step-4-stamp.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/page-numbers/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -411,30 +499,37 @@
       "name": "PDF to Excel",
       "guideUrl": "http://127.0.0.1:8000/guides/pdf-to-excel/",
       "h1": " PDF to Excel Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/pdf-to-excel/step-1-upload.webp",
+          "src": "../../assets/guides/pdf-to-excel/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-excel/step-2-preview.webp",
+          "src": "../../assets/guides/pdf-to-excel/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-excel/step-3-export.webp",
+          "src": "../../assets/guides/pdf-to-excel/step-3-preview.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-excel/step-4-download.webp",
+          "src": "../../assets/guides/pdf-to-excel/step-4-export.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/pdf-to-excel/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -442,30 +537,37 @@
       "name": "PDF to JPG",
       "guideUrl": "http://127.0.0.1:8000/guides/pdf-to-jpg/",
       "h1": " PDF to JPG Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/pdf-to-jpg/step-1-upload.webp",
+          "src": "../../assets/guides/pdf-to-jpg/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-jpg/step-2-settings.webp",
+          "src": "../../assets/guides/pdf-to-jpg/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-jpg/step-3-render.webp",
+          "src": "../../assets/guides/pdf-to-jpg/step-3-settings.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-jpg/step-4-download.webp",
+          "src": "../../assets/guides/pdf-to-jpg/step-4-render.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/pdf-to-jpg/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -473,30 +575,37 @@
       "name": "PDF to Markdown",
       "guideUrl": "http://127.0.0.1:8000/guides/pdf-to-markdown/",
       "h1": " PDF to Markdown Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/pdf-to-markdown/step-1-upload.webp",
+          "src": "../../assets/guides/pdf-to-markdown/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-markdown/step-2-options.webp",
+          "src": "../../assets/guides/pdf-to-markdown/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-markdown/step-3-convert.webp",
+          "src": "../../assets/guides/pdf-to-markdown/step-3-options.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-markdown/step-4-markdown.webp",
+          "src": "../../assets/guides/pdf-to-markdown/step-4-convert.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/pdf-to-markdown/step-5-markdown.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -504,30 +613,37 @@
       "name": "PDF to PDF/A",
       "guideUrl": "http://127.0.0.1:8000/guides/pdf-to-pdfa/",
       "h1": " PDF to PDF/A Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/pdf-to-pdfa/step-1-upload.webp",
+          "src": "../../assets/guides/pdf-to-pdfa/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-pdfa/step-2-metadata.webp",
+          "src": "../../assets/guides/pdf-to-pdfa/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-pdfa/step-3-convert.webp",
+          "src": "../../assets/guides/pdf-to-pdfa/step-3-metadata.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-pdfa/step-4-download.webp",
+          "src": "../../assets/guides/pdf-to-pdfa/step-4-convert.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/pdf-to-pdfa/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -535,30 +651,37 @@
       "name": "PDF to PowerPoint",
       "guideUrl": "http://127.0.0.1:8000/guides/pdf-to-ppt/",
       "h1": " PDF to PowerPoint Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/pdf-to-ppt/step-1-upload.webp",
+          "src": "../../assets/guides/pdf-to-ppt/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-ppt/step-2-slides.webp",
+          "src": "../../assets/guides/pdf-to-ppt/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-ppt/step-3-export.webp",
+          "src": "../../assets/guides/pdf-to-ppt/step-3-slides.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-ppt/step-4-download.webp",
+          "src": "../../assets/guides/pdf-to-ppt/step-4-export.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/pdf-to-ppt/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -566,30 +689,37 @@
       "name": "PDF to Word",
       "guideUrl": "http://127.0.0.1:8000/guides/pdf-to-word/",
       "h1": " PDF to Word Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/pdf-to-word/step-1-upload.webp",
+          "src": "../../assets/guides/pdf-to-word/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-word/step-2-format.webp",
+          "src": "../../assets/guides/pdf-to-word/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-word/step-3-extract.webp",
+          "src": "../../assets/guides/pdf-to-word/step-3-format.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/pdf-to-word/step-4-download.webp",
+          "src": "../../assets/guides/pdf-to-word/step-4-extract.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/pdf-to-word/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -597,30 +727,37 @@
       "name": "PowerPoint to PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/ppt-to-pdf/",
       "h1": " PowerPoint to PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/ppt-to-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/ppt-to-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/ppt-to-pdf/step-2-slides.webp",
+          "src": "../../assets/guides/ppt-to-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/ppt-to-pdf/step-3-convert.webp",
+          "src": "../../assets/guides/ppt-to-pdf/step-3-slides.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/ppt-to-pdf/step-4-print.webp",
+          "src": "../../assets/guides/ppt-to-pdf/step-4-convert.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/ppt-to-pdf/step-5-print.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -628,30 +765,37 @@
       "name": "Protect PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/protect-pdf/",
       "h1": " Protect PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/protect-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/protect-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/protect-pdf/step-2-password.webp",
+          "src": "../../assets/guides/protect-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/protect-pdf/step-3-encrypt.webp",
+          "src": "../../assets/guides/protect-pdf/step-3-password.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/protect-pdf/step-4-download.webp",
+          "src": "../../assets/guides/protect-pdf/step-4-encrypt.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/protect-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -659,30 +803,37 @@
       "name": "Redact PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/redact-pdf/",
       "h1": " Redact PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/redact-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/redact-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/redact-pdf/step-2-canvas.webp",
+          "src": "../../assets/guides/redact-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/redact-pdf/step-3-blackout.webp",
+          "src": "../../assets/guides/redact-pdf/step-3-canvas.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/redact-pdf/step-4-download.webp",
+          "src": "../../assets/guides/redact-pdf/step-4-blackout.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/redact-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -690,30 +841,37 @@
       "name": "Remove Pages",
       "guideUrl": "http://127.0.0.1:8000/guides/remove-pages/",
       "h1": " Remove Pages Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/remove-pages/step-1-upload.webp",
+          "src": "../../assets/guides/remove-pages/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/remove-pages/step-2-select-pages.webp",
+          "src": "../../assets/guides/remove-pages/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/remove-pages/step-3-remove.webp",
+          "src": "../../assets/guides/remove-pages/step-3-select.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/remove-pages/step-4-download.webp",
+          "src": "../../assets/guides/remove-pages/step-4-remove.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/remove-pages/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -745,6 +903,8 @@
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -752,30 +912,37 @@
       "name": "Rotate PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/rotate-pdf/",
       "h1": " Rotate PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/rotate-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/rotate-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/rotate-pdf/step-2-angle.webp",
+          "src": "../../assets/guides/rotate-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/rotate-pdf/step-3-rotate.webp",
+          "src": "../../assets/guides/rotate-pdf/step-3-angle.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/rotate-pdf/step-4-download.webp",
+          "src": "../../assets/guides/rotate-pdf/step-4-rotate.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/rotate-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -783,30 +950,37 @@
       "name": "Scan to PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/scan-to-pdf/",
       "h1": " Scan to PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/scan-to-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/scan-to-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/scan-to-pdf/step-2-settings.webp",
+          "src": "../../assets/guides/scan-to-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/scan-to-pdf/step-3-create.webp",
+          "src": "../../assets/guides/scan-to-pdf/step-3-settings.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/scan-to-pdf/step-4-download.webp",
+          "src": "../../assets/guides/scan-to-pdf/step-4-create.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/scan-to-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -814,30 +988,37 @@
       "name": "Sign PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/sign-pdf/",
       "h1": " Sign PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/sign-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/sign-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/sign-pdf/step-2-create-sig.webp",
+          "src": "../../assets/guides/sign-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/sign-pdf/step-3-place-sig.webp",
+          "src": "../../assets/guides/sign-pdf/step-3-create-sig.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/sign-pdf/step-4-download.webp",
+          "src": "../../assets/guides/sign-pdf/step-4-place-sig.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/sign-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -845,30 +1026,37 @@
       "name": "Split PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/split-pdf/",
       "h1": " Split PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/split-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/split-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/split-pdf/step-2-select-pages.webp",
+          "src": "../../assets/guides/split-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/split-pdf/step-3-split.webp",
+          "src": "../../assets/guides/split-pdf/step-3-ranges.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/split-pdf/step-4-download.webp",
+          "src": "../../assets/guides/split-pdf/step-4-split.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/split-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -876,30 +1064,37 @@
       "name": "AI Summarizer",
       "guideUrl": "http://127.0.0.1:8000/guides/summarize-pdf/",
       "h1": " AI Summarizer Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/summarize-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/summarize-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/summarize-pdf/step-2-settings.webp",
+          "src": "../../assets/guides/summarize-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/summarize-pdf/step-3-summarize.webp",
+          "src": "../../assets/guides/summarize-pdf/step-3-settings.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/summarize-pdf/step-4-results.webp",
+          "src": "../../assets/guides/summarize-pdf/step-4-summarize.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/summarize-pdf/step-5-results.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -907,30 +1102,37 @@
       "name": "Translate PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/translate-pdf/",
       "h1": " Translate PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/translate-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/translate-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/translate-pdf/step-2-languages.webp",
+          "src": "../../assets/guides/translate-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/translate-pdf/step-3-translate.webp",
+          "src": "../../assets/guides/translate-pdf/step-3-languages.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/translate-pdf/step-4-results.webp",
+          "src": "../../assets/guides/translate-pdf/step-4-translate.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/translate-pdf/step-5-results.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -938,30 +1140,37 @@
       "name": "Unlock PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/unlock-pdf/",
       "h1": " Unlock PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/unlock-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/unlock-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/unlock-pdf/step-2-password.webp",
+          "src": "../../assets/guides/unlock-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/unlock-pdf/step-3-unlock.webp",
+          "src": "../../assets/guides/unlock-pdf/step-3-password.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/unlock-pdf/step-4-download.webp",
+          "src": "../../assets/guides/unlock-pdf/step-4-unlock.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/unlock-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -969,30 +1178,37 @@
       "name": "Add Watermark",
       "guideUrl": "http://127.0.0.1:8000/guides/watermark-pdf/",
       "h1": " Add Watermark Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/watermark-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/watermark-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/watermark-pdf/step-2-text.webp",
+          "src": "../../assets/guides/watermark-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/watermark-pdf/step-3-apply.webp",
+          "src": "../../assets/guides/watermark-pdf/step-3-text.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/watermark-pdf/step-4-download.webp",
+          "src": "../../assets/guides/watermark-pdf/step-4-apply.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/watermark-pdf/step-5-download.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     },
     {
@@ -1000,30 +1216,37 @@
       "name": "Word to PDF",
       "guideUrl": "http://127.0.0.1:8000/guides/word-to-pdf/",
       "h1": " Word to PDF Guide",
-      "walkthroughCards": 4,
+      "walkthroughCards": 5,
       "brokenImages": 0,
       "imageStatuses": [
         {
-          "src": "../../assets/guides/word-to-pdf/step-1-upload.webp",
+          "src": "../../assets/guides/word-to-pdf/step-1-open.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/word-to-pdf/step-2-options.webp",
+          "src": "../../assets/guides/word-to-pdf/step-2-upload.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/word-to-pdf/step-3-convert.webp",
+          "src": "../../assets/guides/word-to-pdf/step-3-options.webp",
           "status": "OK",
           "naturalWidth": 1440
         },
         {
-          "src": "../../assets/guides/word-to-pdf/step-4-print.webp",
+          "src": "../../assets/guides/word-to-pdf/step-4-convert.webp",
+          "status": "OK",
+          "naturalWidth": 1440
+        },
+        {
+          "src": "../../assets/guides/word-to-pdf/step-5-print.webp",
           "status": "OK",
           "naturalWidth": 1440
         }
       ],
+      "lightboxTested": true,
+      "lightboxPassed": true,
       "error": null
     }
   ]
