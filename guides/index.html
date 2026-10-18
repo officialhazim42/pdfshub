@@ -1,1 +1,155 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="PDFHub User Guides & Tips with walkthroughs for every PDF tool."><title>PDFHub User Guides & Tips</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body><nav class="guides-nav"><a class="brand" href="../index.html">PDF<span>Hub</span></a><a class="nav-link" href="../index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> All tools</a></nav><main class="guide-shell"><header class="guide-hero"><span class="eyebrow">Learn by doing</span><h1>PDFHub User Guides &amp; Tips</h1><p>Learn how to use every PDFHub tool with simple instructions, visual walkthroughs, and practical tips.</p><label for="guideSearch" class="eyebrow">Search guides and tools...</label><div class="guide-tools"><input id="guideSearch" class="guide-input" type="search" placeholder="Search guides and tools..." autocomplete="off"></div></header><div id="filters" class="filter-row" aria-label="Guide categories"></div><section id="guideGrid" class="guide-grid" aria-live="polite"></section></main><footer class="site-footer">PDFHub guides are local reference pages. Review every generated document before using it.</footer><script src="data.js"></script><script src="index.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PDFHub User Guides &amp; Tips — Complete interactive visual walkthroughs and step-by-step tutorials for all 33 browser-based PDF tools.">
+  <meta name="theme-color" content="#07070d">
+  <link rel="icon" href="../favicons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../favicons/favicon.png">
+  <title>User Guides &amp; Tips – PDFHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../developer.css">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function(){
+      try {
+        const saved = localStorage.getItem('pdfhub-theme');
+        if (saved === 'light') {
+          document.documentElement.classList.add('light');
+          document.body?.classList.add('light');
+        }
+      } catch(e){}
+    })();
+  </script>
+</head>
+<body data-root="../">
+
+  <!-- SHARED PDFHUB NAV -->
+  <nav class="site-nav" role="navigation" aria-label="PDFHub Main Navigation">
+    <div class="nav-left">
+      <a class="logo" href="../index.html" title="PDFHub Home">
+        <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
+        <span>PDF HUB</span>
+      </a>
+      <span class="nav-divider" aria-hidden="true">/</span>
+      <span class="nav-badge">
+        <i class="fas fa-book-open" aria-hidden="true"></i>
+        <span>User Guides &amp; Tips</span>
+      </span>
+    </div>
+    <div class="nav-right">
+      <a class="nav-subtle-link" href="../index.html" title="Browse all 33 tools">
+        <i class="fas fa-th-large" aria-hidden="true"></i>
+        <span>All Tools</span>
+      </a>
+      <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark theme">
+        <span class="t-label" id="themeLabel">Dark</span>
+        <span class="toggle-track">
+          <span class="toggle-knob" id="themeKnob">
+            <i class="fas fa-moon"></i>
+          </span>
+        </span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteMenu" title="Open control center menu" aria-label="Open menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="site-menu" id="siteMenu" aria-hidden="true" role="navigation" aria-label="PDFHub control center">
+        <div class="menu-heading">
+          <span>PDFHub control center</span>
+          <small>Local only</small>
+        </div>
+        <form class="menu-search" id="menuSearch" role="search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools" autocomplete="off"/>
+          <button type="submit" title="Search"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </form>
+        <div class="menu-status">
+          <span><i class="fas fa-shield-halved" aria-hidden="true"></i> Runs in your browser</span>
+          <span class="menu-status-dot">●</span>
+          <span>No account needed</span>
+        </div>
+        <div class="menu-list">
+          <div class="menu-section-label">Workspace</div>
+          <a class="menu-action" href="../index.html">
+            <i class="fas fa-house" aria-hidden="true"></i><span>Home</span>
+          </a>
+          <a class="menu-action menu-featured" href="../menu-bar/dashboard.html" aria-label="Open your dashboard, recent activity, and notifications">
+            <span class="menu-feature-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></span>
+            <span class="menu-feature-copy">
+              <span class="menu-feature-title">Dashboard &amp; updates</span>
+              <span class="menu-feature-subtitle">Activity, recent tools, and notifications</span>
+            </span>
+            <span class="menu-feature-meta">
+              <span class="menu-feature-count" id="dashboardCount">0</span>
+              <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </span>
+          </a>
+          <a class="menu-action active-page" href="./">
+            <i class="fas fa-book-open" aria-hidden="true"></i>
+            <span>User Guides &amp; Tips</span>
+            <span class="menu-action-note">33 guides</span>
+          </a>
+          <a class="menu-action" href="../menu-bar/favorites.html">
+            <i class="fas fa-star" aria-hidden="true"></i><span>Favorites</span><span class="menu-action-note">Local</span>
+          </a>
+          <a class="menu-action" href="../menu-bar/history.html">
+            <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>History</span><span class="menu-action-note">Local</span>
+          </a>
+          <div class="menu-section-label" data-section="about">About PDFHub</div>
+          <a class="menu-action" href="../menu-bar/privacy.html">
+            <i class="fas fa-shield-halved" aria-hidden="true"></i><span>Privacy Center</span>
+          </a>
+          <a class="menu-action" href="../menu-bar/terms.html">
+            <i class="fas fa-file-contract" aria-hidden="true"></i><span>Terms and conditions</span>
+          </a>
+          <a class="menu-action" href="../menu-bar/about.html">
+            <i class="fas fa-circle-info" aria-hidden="true"></i><span>About us</span>
+          </a>
+        </div>
+        <p class="menu-note">Your tools, history, and preferences stay in this browser.</p>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT SHELL -->
+  <main class="guide-shell">
+    <header class="guide-hero">
+      <div class="guide-hero-badge">
+        <i class="fas fa-graduation-cap" aria-hidden="true"></i> Learn By Doing
+      </div>
+      <h1>PDFHub User Guides &amp; Tips</h1>
+      <p>Master all 33 browser-based PDF tools with step-by-step instructions, interactive high-resolution visual walkthroughs, common mistakes to avoid, troubleshooting fixes, and practical tips.</p>
+      <div class="guide-search-wrap">
+        <i class="fas fa-search si" aria-hidden="true"></i>
+        <input id="guideSearch" class="guide-input" type="search" placeholder="Search guides, tools, or workflows… (merge, compress, sign, ocr…)" aria-label="Search guides and tools" autocomplete="off">
+        <button class="clear-btn" id="guideSearchClear" type="button" aria-label="Clear search input"><i class="fas fa-xmark"></i></button>
+      </div>
+    </header>
+
+    <!-- CATEGORY FILTER PILLS -->
+    <div id="filters" class="filter-row" role="region" aria-label="Guide categories"></div>
+
+    <!-- 33 GUIDES GRID -->
+    <section id="guideGrid" class="guide-grid" aria-live="polite"></section>
+  </main>
+
+  <!-- CANONICAL SHARED FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="f-logo">PDFHub</div>
+    <div class="f-by">Built with ❤️ · Free forever · No sign-up · Files never leave your device</div>
+    <div class="f-bottom">
+      <span class="f-copy">©PDFHub</span><div class="f-dot"></div>
+      <span class="f-copy">by @officialhazim42</span><div class="f-dot"></div>
+      <span class="f-copy">All 33 tools free forever</span><div class="f-dot"></div>
+      <span class="f-copy">Your files never leave your device</span>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="shared-nav.js"></script>
+  <script src="index.js"></script>
+  <script src="../developer.js"></script>
+</body>
+</html>
