@@ -1,404 +1,497 @@
 {
-  "timestamp": "2026-10-17T07:41:47.762Z",
-  "viewport": {
-    "width": 1440,
-    "height": 1000
-  },
-  "toolsCaptured": 33,
+  "timestamp": "2026-10-18T16:06:59.701Z",
+  "totalTools": 33,
   "results": [
     {
       "id": "merge-pdf",
       "name": "Merge PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 8,
+      "captured": [
         "step-1-open.webp",
-        "step-2-upload.webp",
-        "step-3-arrange.webp",
-        "step-4-merge.webp",
-        "step-5-download.webp"
-      ]
+        "step-2-select.webp",
+        "step-3-list.webp",
+        "step-4-arrange.webp",
+        "step-5-merge.webp",
+        "step-6-processing.webp",
+        "step-7-preview.webp",
+        "step-8-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "split-pdf",
       "name": "Split PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-ranges.webp",
-        "step-4-split.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-mode.webp",
+        "step-4-ranges.webp",
+        "step-5-split.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "remove-pages",
       "name": "Remove Pages",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-select.webp",
-        "step-4-remove.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-info.webp",
+        "step-4-pages.webp",
+        "step-5-remove.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "extract-pages",
       "name": "Extract Pages",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-select.webp",
-        "step-4-extract.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-info.webp",
+        "step-4-pages.webp",
+        "step-5-extract.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "organize-pdf",
       "name": "Organize PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-reorder.webp",
-        "step-4-apply.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-grid.webp",
+        "step-4-drag.webp",
+        "step-5-rotate.webp",
+        "step-6-save.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "scan-to-pdf",
       "name": "Scan to PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
-        "step-2-upload.webp",
-        "step-3-settings.webp",
-        "step-4-create.webp",
-        "step-5-download.webp"
-      ]
+        "step-2-capture.webp",
+        "step-3-review.webp",
+        "step-4-size.webp",
+        "step-5-filter.webp",
+        "step-6-create.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "compress-pdf",
       "name": "Compress PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-settings.webp",
-        "step-4-process.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-level.webp",
+        "step-4-compress.webp",
+        "step-5-stats.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "repair-pdf",
       "name": "Repair PDF",
-      "stepCount": 4,
-      "generated": [
-        "step-1-upload.webp",
-        "step-2-inspect.webp",
-        "step-3-repair.webp",
-        "step-4-download.webp"
-      ]
+      "steps": 6,
+      "captured": [
+        "step-1-open.webp",
+        "step-2-upload.webp",
+        "step-3-diagnostics.webp",
+        "step-4-repair.webp",
+        "step-5-preview.webp",
+        "step-6-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "ocr-pdf",
       "name": "OCR PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-settings.webp",
-        "step-4-extract.webp",
-        "step-5-results.webp"
-      ]
+        "step-3-language.webp",
+        "step-4-range.webp",
+        "step-5-recognize.webp",
+        "step-6-review.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "jpg-to-pdf",
       "name": "JPG to PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-layout.webp",
-        "step-4-convert.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-list.webp",
+        "step-4-layout.webp",
+        "step-5-convert.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "word-to-pdf",
       "name": "Word to PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 6,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
         "step-3-options.webp",
         "step-4-convert.webp",
-        "step-5-print.webp"
-      ]
+        "step-5-preview.webp",
+        "step-6-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "ppt-to-pdf",
       "name": "PowerPoint to PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 6,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-slides.webp",
+        "step-3-layout.webp",
         "step-4-convert.webp",
-        "step-5-print.webp"
-      ]
+        "step-5-preview.webp",
+        "step-6-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "excel-to-pdf",
       "name": "Excel to PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-preview.webp",
-        "step-4-convert.webp",
-        "step-5-print.webp"
-      ]
+        "step-3-sheet.webp",
+        "step-4-orientation.webp",
+        "step-5-convert.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "html-to-pdf",
       "name": "HTML to PDF",
-      "stepCount": 4,
-      "generated": [
-        "step-1-mode.webp",
-        "step-2-input.webp",
-        "step-3-convert.webp",
-        "step-4-print.webp"
-      ]
+      "steps": 7,
+      "captured": [
+        "step-1-open.webp",
+        "step-2-mode.webp",
+        "step-3-input.webp",
+        "step-4-size.webp",
+        "step-5-convert.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "pdf-to-jpg",
       "name": "PDF to JPG",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-settings.webp",
-        "step-4-render.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-format.webp",
+        "step-4-range.webp",
+        "step-5-convert.webp",
+        "step-6-review.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "pdf-to-word",
       "name": "PDF to Word",
-      "stepCount": 5,
-      "generated": [
+      "steps": 6,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
         "step-3-format.webp",
-        "step-4-extract.webp",
-        "step-5-download.webp"
-      ]
+        "step-4-convert.webp",
+        "step-5-preview.webp",
+        "step-6-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "pdf-to-ppt",
       "name": "PDF to PowerPoint",
-      "stepCount": 5,
-      "generated": [
+      "steps": 6,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-slides.webp",
-        "step-4-export.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-dimensions.webp",
+        "step-4-convert.webp",
+        "step-5-preview.webp",
+        "step-6-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "pdf-to-excel",
       "name": "PDF to Excel",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-preview.webp",
-        "step-4-export.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-detection.webp",
+        "step-4-preview.webp",
+        "step-5-convert.webp",
+        "step-6-review.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "pdf-to-pdfa",
       "name": "PDF to PDF/A",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-metadata.webp",
-        "step-4-convert.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-level.webp",
+        "step-4-metadata.webp",
+        "step-5-convert.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "rotate-pdf",
       "name": "Rotate PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
         "step-3-angle.webp",
-        "step-4-rotate.webp",
-        "step-5-download.webp"
-      ]
+        "step-4-pages.webp",
+        "step-5-rotate.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "page-numbers",
       "name": "Add Page Numbers",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
         "step-3-position.webp",
-        "step-4-stamp.webp",
-        "step-5-download.webp"
-      ]
+        "step-4-format.webp",
+        "step-5-styling.webp",
+        "step-6-apply.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "watermark-pdf",
       "name": "Add Watermark",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
         "step-3-text.webp",
-        "step-4-apply.webp",
-        "step-5-download.webp"
-      ]
+        "step-4-styling.webp",
+        "step-5-color.webp",
+        "step-6-apply.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "crop-pdf",
       "name": "Crop PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-margins.webp",
-        "step-4-crop.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-target.webp",
+        "step-4-margins.webp",
+        "step-5-canvas.webp",
+        "step-6-crop.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "edit-pdf",
       "name": "Edit PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 8,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
         "step-3-toolbar.webp",
-        "step-4-annotate.webp",
-        "step-5-download.webp"
-      ]
+        "step-4-styling.webp",
+        "step-5-draw.webp",
+        "step-6-nav.webp",
+        "step-7-save.webp",
+        "step-8-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "forms-pdf",
       "name": "PDF Forms",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
         "step-3-fields.webp",
         "step-4-fill.webp",
-        "step-5-download.webp"
-      ]
+        "step-5-save.webp",
+        "step-6-preview.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "unlock-pdf",
       "name": "Unlock PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 6,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
         "step-3-password.webp",
         "step-4-unlock.webp",
-        "step-5-download.webp"
-      ]
+        "step-5-preview.webp",
+        "step-6-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "protect-pdf",
       "name": "Protect PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
         "step-3-password.webp",
-        "step-4-encrypt.webp",
-        "step-5-download.webp"
-      ]
+        "step-4-confirm.webp",
+        "step-5-permissions.webp",
+        "step-6-protect.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "sign-pdf",
       "name": "Sign PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-create-sig.webp",
-        "step-4-place-sig.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-mode.webp",
+        "step-4-create.webp",
+        "step-5-place.webp",
+        "step-6-save.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "redact-pdf",
       "name": "Redact PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-canvas.webp",
-        "step-4-blackout.webp",
-        "step-5-download.webp"
-      ]
+        "step-3-page.webp",
+        "step-4-box.webp",
+        "step-5-inspect.webp",
+        "step-6-save.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "compare-pdf",
       "name": "Compare PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
-        "step-2-upload.webp",
-        "step-3-preview.webp",
-        "step-4-compare.webp",
-        "step-5-diff.webp"
-      ]
+        "step-2-upload1.webp",
+        "step-3-upload2.webp",
+        "step-4-preview.webp",
+        "step-5-compare.webp",
+        "step-6-diff.webp",
+        "step-7-nav.webp"
+      ],
+      "error": null
     },
     {
       "id": "summarize-pdf",
       "name": "AI Summarizer",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-settings.webp",
-        "step-4-summarize.webp",
-        "step-5-results.webp"
-      ]
+        "step-3-style.webp",
+        "step-4-range.webp",
+        "step-5-summarize.webp",
+        "step-6-result.webp",
+        "step-7-export.webp"
+      ],
+      "error": null
     },
     {
       "id": "translate-pdf",
       "name": "Translate PDF",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-languages.webp",
-        "step-4-translate.webp",
-        "step-5-results.webp"
-      ]
+        "step-3-src.webp",
+        "step-4-tgt.webp",
+        "step-5-range.webp",
+        "step-6-translate.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     },
     {
       "id": "pdf-to-markdown",
       "name": "PDF to Markdown",
-      "stepCount": 5,
-      "generated": [
+      "steps": 7,
+      "captured": [
         "step-1-open.webp",
         "step-2-upload.webp",
-        "step-3-options.webp",
+        "step-3-toggles.webp",
         "step-4-convert.webp",
-        "step-5-markdown.webp"
-      ]
+        "step-5-preview.webp",
+        "step-6-copy.webp",
+        "step-7-download.webp"
+      ],
+      "error": null
     }
   ]
 }
