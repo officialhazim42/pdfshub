@@ -304,7 +304,7 @@
   // 5. INJECT / UPDATE CANONICAL FOOTER
   if (window.PDFHUB_NAV && typeof window.PDFHUB_NAV.buildFooterHTML === 'function') {
     const existingFooter = document.querySelector('footer.site-footer, footer');
-    const footerHTML = window.PDFHUB_NAV.buildFooterHTML();
+    const footerHTML = window.PDFHUB_NAV.buildFooterHTML({ siteRoot: siteRoot });
     if (existingFooter) {
       existingFooter.outerHTML = footerHTML;
     } else {

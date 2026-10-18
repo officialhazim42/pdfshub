@@ -7,7 +7,80 @@ function normalizeBrandLogo(){
 }
 
 function buildSiteFooter(){
-  return `<footer class="site-footer"><div class="f-logo">PDFHub</div><div class="f-by">Built with ❤️ · Free forever · No sign-up · Files never leave your device</div><div class="f-bottom"><span class="f-copy">©PDFHub</span><div class="f-dot"></div><span class="f-copy">by @officialhazim42</span><div class="f-dot"></div><span class="f-copy">All 33 tools free forever</span><div class="f-dot"></div><span class="f-copy">Your files never leave your device</span></div></footer>`;
+  return `<footer class="site-footer" role="contentinfo">
+  <div class="footer-shell">
+    <div class="footer-grid">
+      <!-- Brand & Mission -->
+      <div class="footer-col footer-brand">
+        <a class="footer-logo f-logo" href="../index.html">
+          <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
+          <span>PDF HUB</span>
+        </a>
+        <p class="footer-desc">
+          Free, private, browser-based PDF tools. Merge, split, compress, convert, edit, and secure documents 100% locally on your device without server uploads.
+        </p>
+        <div class="footer-badges">
+          <span class="footer-badge"><i class="fas fa-shield-halved" aria-hidden="true"></i> 100% Client-Side</span>
+          <span class="footer-badge"><i class="fas fa-bolt" aria-hidden="true"></i> Free &amp; Unlimited</span>
+        </div>
+      </div>
+
+      <!-- Core Tools -->
+      <div class="footer-col">
+        <h3 class="footer-title">PDF Tools</h3>
+        <ul class="footer-links pdfhub-footer-links">
+          <li><a href="merge.html">Merge PDF</a></li>
+          <li><a href="split.html">Split PDF</a></li>
+          <li><a href="compress.html">Compress PDF</a></li>
+          <li><a href="edit.html">Edit PDF</a></li>
+          <li><a href="sign.html">Sign PDF</a></li>
+          <li><a href="pdf-to-word.html">PDF to Word</a></li>
+          <li><a href="protect.html">Protect PDF</a></li>
+          <li><a href="../index.html">All 33 Tools →</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources & Guides -->
+      <div class="footer-col">
+        <h3 class="footer-title">Resources</h3>
+        <ul class="footer-links">
+          <li><a href="../guides/">User Guides &amp; Tips</a></li>
+          <li><a href="../guides/merge-pdf/">Merge PDF Guide</a></li>
+          <li><a href="../guides/compress-pdf/">Compress PDF Guide</a></li>
+          <li><a href="../guides/edit-pdf/">Edit PDF Guide</a></li>
+          <li><a href="../menu-bar/favorites.html">Favorite Tools</a></li>
+          <li><a href="../menu-bar/history.html">Tool History</a></li>
+        </ul>
+      </div>
+
+      <!-- Privacy & Legal -->
+      <div class="footer-col">
+        <h3 class="footer-title">Privacy &amp; Trust</h3>
+        <ul class="footer-links">
+          <li><a href="../menu-bar/privacy.html">Privacy Center</a></li>
+          <li><a href="../menu-bar/terms.html">Terms and Conditions</a></li>
+          <li><a href="../menu-bar/about.html">About PDFHub</a></li>
+          <li><a href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">Contact Support</a></li>
+        </ul>
+        <div class="footer-security-note">
+          <i class="fas fa-lock" aria-hidden="true"></i>
+          <span>Zero server storage. Files stay in your browser.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-copy">
+        <span>©PDFHub by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener noreferrer">@officialhazim42</a></span>
+        <span class="f-dot" aria-hidden="true"></span>
+        <span>All 33 tools free forever</span>
+        <span class="f-dot" aria-hidden="true"></span>
+        <span>Files never leave your device</span>
+      </div>
+    </div>
+  </div>
+</footer>`;
 }
 
 function normalizeSiteFooter(){
@@ -162,23 +235,91 @@ function ensureSiteMenu(){
   if(!container||document.getElementById('menuToggle'))return;
   const toggle=document.createElement('button');
   toggle.className='menu-toggle';toggle.id='menuToggle';toggle.type='button';toggle.title='Open menu';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','siteMenu');toggle.innerHTML='<i class="fas fa-bars"></i>';
-  const menu=document.createElement('div');menu.className='site-menu';menu.id='siteMenu';menu.setAttribute('aria-hidden','true');
-  menu.innerHTML=`<div class="menu-heading"><span>PDFHub control center</span><small>Private workspace</small></div><form class="menu-search" id="menuSearch"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools"/><button type="submit" title="Search tools"><i class="fas fa-arrow-right"></i></button></form><div class="menu-status"><span><i class="fas fa-shield-halved"></i> Runs in your browser</span><span class="menu-status-dot">●</span><span>No account needed</span></div><div class="menu-list"><div class="menu-section-label">Workspace</div><a class="menu-action menu-featured" href="../menu-bar/dashboard.html" aria-label="Open your dashboard, recent activity, and notifications"><span class="menu-feature-icon"><i class="fas fa-chart-line"></i></span><span class="menu-feature-copy"><span class="menu-feature-title">Dashboard &amp; updates</span><span class="menu-feature-subtitle">Activity, recent tools, and notifications</span></span><span class="menu-feature-meta"><span class="menu-feature-count" id="dashboardCount">${getHistoryTools().length}</span><i class="fas fa-arrow-up-right-from-square"></i></span></a><a class="menu-action" href="../guides/"><i class="fas fa-book-open"></i><span>User Guides &amp; Tips</span><span class="menu-action-note">33 guides</span></a><a class="menu-action" href="../menu-bar/favorites.html"><i class="fas fa-star"></i><span>Favorites</span><span class="menu-action-note">Local</span></a><a class="menu-action" href="../menu-bar/history.html"><i class="fas fa-clock-rotate-left"></i><span>History</span><span class="menu-action-note">Local</span></a><div class="menu-section-label">About PDFHub</div><a class="menu-action" href="../menu-bar/privacy.html"><i class="fas fa-shield-halved"></i><span>Privacy Center</span></a><a class="menu-action" href="../menu-bar/terms.html"><i class="fas fa-file-contract"></i><span>Terms and conditions</span></a><a class="menu-action" href="../menu-bar/about.html"><i class="fas fa-circle-info"></i><span>About us</span></a></div><p class="menu-note">Your files stay on this device. Search, convert, and download without uploading.</p>`;
-  menu.querySelector('.menu-theme-row')?.remove();
-  const homeLink=document.createElement('a');homeLink.className='menu-action';homeLink.href='../index.html';homeLink.innerHTML='<i class="fas fa-house"></i><span>Home</span>';menu.querySelector('.menu-list').prepend(homeLink);
+  const menu=document.createElement('div');menu.className='site-menu';menu.id='siteMenu';menu.setAttribute('aria-hidden','true');menu.setAttribute('role','navigation');menu.setAttribute('aria-label','PDFHub control center');
+  menu.innerHTML=`<div class="menu-header">
+    <div class="menu-heading">
+      <span>PDFHub control center</span>
+      <div class="menu-heading-actions">
+        <small>Private workspace</small>
+        <button class="menu-close-btn" id="menuCloseBtn" type="button" aria-label="Close menu" title="Close menu">
+          <i class="fas fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <form class="menu-search" id="menuSearch">
+      <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+      <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools"/>
+      <button type="submit" title="Search tools"><i class="fas fa-arrow-right"></i></button>
+    </form>
+    <div class="menu-status">
+      <span><i class="fas fa-shield-halved"></i> Runs in your browser</span>
+      <span class="menu-status-dot">●</span>
+      <span>No account needed</span>
+    </div>
+  </div>
+  <div class="menu-body" id="menuBody">
+    <div class="menu-list">
+      <div class="menu-section-label">Tools &amp; Guides</div>
+      <a class="menu-action" href="../index.html">
+        <i class="fas fa-house" aria-hidden="true"></i><span>Home</span>
+      </a>
+      <a class="menu-action" href="../guides/">
+        <i class="fas fa-book-open" aria-hidden="true"></i><span>User Guides &amp; Tips</span><span class="menu-action-note">33 guides</span>
+      </a>
+      <a class="menu-action" href="../menu-bar/favorites.html">
+        <i class="fas fa-star" aria-hidden="true"></i><span>Favorites</span><span class="menu-action-note">Local</span>
+      </a>
+      <a class="menu-action" href="../menu-bar/history.html">
+        <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>History</span><span class="menu-action-note">Local</span>
+      </a>
+      <div class="menu-section-label" data-section="about">Privacy &amp; About</div>
+      <a class="menu-action" href="../menu-bar/privacy.html">
+        <i class="fas fa-shield-halved" aria-hidden="true"></i><span>Privacy Center</span>
+      </a>
+      <a class="menu-action" href="../menu-bar/terms.html">
+        <i class="fas fa-file-contract" aria-hidden="true"></i><span>Terms and conditions</span>
+      </a>
+      <a class="menu-action" href="../menu-bar/about.html">
+        <i class="fas fa-circle-info" aria-hidden="true"></i><span>About us</span>
+      </a>
+      <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">
+        <i class="fas fa-envelope" aria-hidden="true"></i><span>Contact Support</span>
+      </a>
+    </div>
+    <p class="menu-note">Your files stay on this device. Search, convert, and download without uploading.</p>
+  </div>`;
   container.append(toggle,menu);
   const globalTheme=document.createElement('button');globalTheme.className='global-theme-toggle';globalTheme.id='globalThemeToggle';globalTheme.type='button';globalTheme.title='Toggle light/dark mode';globalTheme.innerHTML='<span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span>';globalTheme.onclick=toggleTheme;container.insertBefore(globalTheme,toggle);
   if(document.body.classList.contains('light')){globalTheme.querySelector('.t-label').textContent='Light';globalTheme.querySelector('.toggle-knob').innerHTML='<i class="fas fa-sun"></i>';}
   menu.querySelector('.menu-action[href$="history.html"]')?.setAttribute('aria-label',`Open tool history (${getHistoryTools().length} items)`);
   menu.querySelector('#menuSearch').addEventListener('submit',event=>{event.preventDefault();location.href='../index.html?search='+encodeURIComponent(menu.querySelector('#menuSearchInput').value);});
-  const close=()=>{menu.classList.remove('open');menu.setAttribute('aria-hidden','true');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open menu');toggle.title='Open menu';toggle.innerHTML='<i class="fas fa-bars"></i>';};
+  const close=()=>{
+    if(!menu.classList.contains('open'))return;
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden','true');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','Open menu');
+    toggle.title='Open menu';
+    toggle.innerHTML='<i class="fas fa-bars"></i>';
+    toggle.focus();
+  };
   toggle.setAttribute('aria-label','Open menu');menu.setAttribute('aria-hidden','true');
-  toggle.addEventListener('click',event=>{event.stopPropagation();if(menu.classList.contains('open'))close();else{menu.classList.add('open');menu.setAttribute('aria-hidden','false');toggle.setAttribute('aria-expanded','true');toggle.setAttribute('aria-label','Close menu');toggle.title='Close menu';toggle.innerHTML='<i class="fas fa-xmark"></i>';menu.querySelector('#menuSearchInput').focus();}});
-  menu.querySelectorAll('[data-menu-action]').forEach(action=>action.addEventListener('click',()=>{
-    if(action.dataset.menuAction==='dashboard')menu.querySelector('.menu-note').textContent=`${getHistoryTools().length} tool${getHistoryTools().length===1?'':'s'} in your local dashboard.`;
-  }));
+  toggle.addEventListener('click',event=>{
+    event.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{
+      menu.classList.add('open');
+      menu.setAttribute('aria-hidden','false');
+      toggle.setAttribute('aria-expanded','true');
+      toggle.setAttribute('aria-label','Close menu');
+      toggle.title='Close menu';
+      toggle.innerHTML='<i class="fas fa-xmark"></i>';
+      menu.querySelector('#menuSearchInput')?.focus();
+    }
+  });
+  menu.querySelector('#menuCloseBtn')?.addEventListener('click',event=>{event.stopPropagation();close();});
   document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))close();});
-  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu.classList.contains('open')){close();toggle.focus();}});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu.classList.contains('open')){close();}});
 }
 
 // ── DOWNLOAD MODAL ─────────────────────────────────────

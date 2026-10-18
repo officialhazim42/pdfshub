@@ -23,48 +23,73 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 /* NAV */
 nav{position:sticky;top:0;z-index:200;background:rgba(7,7,13,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 6%}
-.logo{display:inline-flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--a2));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px;text-decoration:none}.logo-mark{width:30px;height:30px;display:block;border-radius:8px;object-fit:cover;box-shadow:0 4px 16px rgba(124,106,255,.24)}
+.logo{display:inline-flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#7c6aff 0%,#38d9f5 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px;text-decoration:none}.logo-mark{width:30px;height:30px;display:block;border-radius:8px;object-fit:cover;box-shadow:0 4px 16px rgba(124,106,255,.24);filter:none!important;mix-blend-mode:normal!important}
+body.light .logo{background:linear-gradient(135deg,#5b47e0 0%,#0284c7 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.light .logo-mark{filter:none!important;mix-blend-mode:normal!important;box-shadow:0 2px 10px rgba(91,71,224,.2)}
 .nav-right{display:flex;align-items:center;gap:14px}
 .global-theme-toggle{display:flex;align-items:center;gap:8px;padding:4px 7px;border:1px solid var(--border);border-radius:9px;background:var(--s1);color:var(--text);cursor:pointer}
 .global-theme-toggle .t-label{font-size:.68rem;color:var(--text);font-weight:600}.global-theme-toggle .toggle-track{width:38px;height:22px}
 .menu-toggle{width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:10px;background:var(--s1);color:var(--text);cursor:pointer;font-size:1rem;transition:border-color .2s,transform .2s}
 .menu-toggle:hover,.menu-toggle[aria-expanded="true"]{border-color:var(--accent);transform:translateY(-1px)}
-.site-menu{position:absolute;top:calc(100% + 10px);right:6%;width:min(310px,calc(100vw - 28px));padding:14px;border:1px solid var(--border);border-radius:14px;background:rgba(15,15,26,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 44px rgba(0,0,0,.3);display:none;z-index:500}
-.site-menu.open{display:block;animation:menuIn .18s ease-out}
+.site-menu{position:absolute;top:calc(100% + 10px);right:6%;width:min(348px,calc(100vw - 28px));max-height:calc(100vh - 80px);padding:16px;border:1px solid rgba(124,106,255,.24);border-radius:18px;background:rgba(15,15,26,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 22px 60px rgba(0,0,0,.45);display:none;flex-direction:column;z-index:500;box-sizing:border-box;overflow:hidden}
+.site-menu.open{display:flex!important;animation:menuIn .18s cubic-bezier(0.16,1,0.3,1)}
 @keyframes menuIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
-.menu-heading{display:flex;align-items:center;justify-content:space-between;padding:4px 4px 12px;border-bottom:1px solid var(--border);font-family:'Syne',sans-serif;font-size:.82rem}
+.menu-header{flex-shrink:0;display:flex;flex-direction:column}
+.menu-heading{display:flex;align-items:center;justify-content:space-between;padding:2px 2px 10px;border-bottom:1px solid var(--border);font-family:'Syne',sans-serif;font-size:.86rem;font-weight:700}
 .menu-heading small{font:600 .62rem 'DM Sans',sans-serif;color:var(--a3);text-transform:uppercase;letter-spacing:1px}
-.menu-search{display:flex;gap:6px;padding-top:10px}
-.menu-search input{min-width:0;flex:1;padding:9px 10px;border:1px solid var(--border);border-radius:8px;background:var(--s2);color:var(--text);font:500 .76rem 'DM Sans',sans-serif;outline:none}
+.menu-heading-actions{display:flex;align-items:center;gap:8px}
+.menu-close-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--border);border-radius:8px;background:var(--s2);color:var(--muted);cursor:pointer;font-size:.72rem;transition:all .2s ease}
+.menu-close-btn:hover,.menu-close-btn:focus-visible{color:#fff;border-color:var(--accent);background:var(--accent)}
+body.light .menu-close-btn{background:var(--s2);border-color:var(--border);color:var(--muted)}
+body.light .menu-close-btn:hover,body.light .menu-close-btn:focus-visible{color:#fff;background:var(--accent)}
+.menu-search{display:flex;gap:6px;padding-top:10px;align-items:center;position:relative}
+.menu-search>i{position:absolute;left:10px;color:var(--muted);font-size:.72rem;pointer-events:none}
+.menu-search input{min-width:0;flex:1;padding:9px 10px 9px 28px;border:1px solid var(--border);border-radius:8px;background:var(--s2);color:var(--text);font:500 .76rem 'DM Sans',sans-serif;outline:none}
 .menu-search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,106,255,.14)}
 .menu-search button{width:36px;border:1px solid var(--accent);border-radius:8px;background:var(--accent);color:#fff;cursor:pointer}
-.menu-list{display:grid;gap:5px;padding-top:10px}
+.menu-status{display:flex;align-items:center;gap:6px;padding:10px 3px 1px;color:var(--muted);font-size:.61rem}.menu-status i{color:var(--a3);margin-right:2px}.menu-status-dot{color:var(--border);font-size:.5rem}.menu-section-label{padding:10px 9px 3px;color:var(--muted2);font-size:.59rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.menu-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-right:4px;margin-top:6px}
+.menu-body::-webkit-scrollbar{width:5px}
+.menu-body::-webkit-scrollbar-track{background:rgba(255,255,255,.03);border-radius:99px}
+.menu-body::-webkit-scrollbar-thumb{background:rgba(124,106,255,.35);border-radius:99px}
+.menu-body::-webkit-scrollbar-thumb:hover{background:rgba(124,106,255,.6)}
+.menu-list{display:grid;gap:5px;padding-top:6px}
 .menu-action{display:flex;align-items:center;gap:10px;width:100%;padding:10px 9px;border:0;border-radius:9px;background:transparent;color:var(--text);font:600 .78rem 'DM Sans',sans-serif;text-align:left;cursor:pointer;text-decoration:none}
 .menu-action:hover{background:#24243a;color:#fff}.menu-action i{width:18px;color:#9e91ff;text-align:center}.menu-action:hover i{color:#fff}
-.menu-action.menu-featured{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:11px;padding:12px;border:1px solid rgba(124,106,255,.24);background:linear-gradient(135deg,rgba(124,106,255,.13),rgba(56,217,245,.06));transition:border-color .2s,background .2s,transform .2s}
-.menu-action.menu-featured:hover{border-color:rgba(124,106,255,.55);background:linear-gradient(135deg,rgba(124,106,255,.2),rgba(56,217,245,.1));transform:translateY(-1px)}
-.menu-feature-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(124,106,255,.25);border-radius:12px;background:rgba(124,106,255,.14);color:#b8adff}
-.menu-feature-icon i{width:auto!important;color:inherit!important;font-size:1rem}
-.menu-feature-copy{min-width:0;display:grid;gap:4px;align-content:center}
-.menu-feature-title{color:var(--text);font-size:.8rem;font-weight:700;letter-spacing:.05px}
-.menu-feature-subtitle{color:var(--muted);font-size:.65rem;font-weight:400;line-height:1.4}
-.menu-feature-meta{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.7rem}
-.menu-feature-meta>i{width:auto!important;color:inherit!important;font-size:.66rem}
-.menu-feature-count{min-width:23px;padding:3px 6px;border:1px solid rgba(124,106,255,.24);border-radius:99px;background:rgba(124,106,255,.13);color:#c8c0ff;font-size:.65rem;font-weight:700;text-align:center}
 .menu-toggle:focus-visible,.global-theme-toggle:focus-visible,.menu-search button:focus-visible,.menu-action:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .menu-action .menu-badge{margin-left:auto;min-width:19px;padding:2px 6px;border-radius:99px;background:rgba(255,95,126,.14);color:var(--a2);font-size:.62rem;text-align:center}
+.menu-action-note{margin-left:auto;color:var(--muted);font-size:.6rem;font-weight:500}
 .menu-note{padding:8px 9px 2px;color:var(--muted);font-size:.66rem;line-height:1.5}
-.menu-theme-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px;border-radius:9px;background:rgba(124,106,255,.06);color:var(--muted);font-size:.74rem}
-.menu-theme-row>span{display:flex;align-items:center;gap:8px}.menu-theme-row>span i{color:var(--accent)}
-.menu-theme-row .theme-toggle{display:flex;align-items:center;gap:7px}.menu-theme-row .t-label{font-size:.65rem;color:var(--muted)}
 body.light .site-menu{background:rgba(255,255,255,.98);border-color:#d5d5e8}
 body.light .menu-search input{background:#ebebf5;border-color:#d5d5e8}
 body.light .menu-action:hover{background:var(--s2);color:var(--text)}
 body.light .menu-action:hover i{color:var(--accent)}
-body.light .menu-action.menu-featured:hover{background:linear-gradient(135deg,rgba(124,106,255,.12),rgba(56,160,200,.06));color:var(--text)}
-body.light .menu-feature-title{color:var(--text)}
-body.light .menu-feature-subtitle,body.light .menu-feature-meta{color:var(--muted)}
-body.light .menu-feature-count{color:#5142bd;background:rgba(124,106,255,.1)}
+.site-footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:60px 6% 36px;background:var(--bg);color:var(--text);margin-top:60px;transition:background .3s,border-color .3s}
+body.light .site-footer{background:#fff;border-color:var(--border)}
+.footer-shell{width:min(1200px,100%);margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1.2fr 1.2fr 1.2fr;gap:40px;margin-bottom:48px;text-align:left}
+.footer-col{display:flex;flex-direction:column}
+.footer-brand .footer-logo,.site-footer .f-logo{display:inline-flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-size:1.45rem;font-weight:800;background:linear-gradient(135deg,#7c6aff 0%,#38d9f5 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.5px;text-decoration:none;margin-bottom:14px}
+body.light .footer-brand .footer-logo,body.light .site-footer .f-logo{background:linear-gradient(135deg,#5b47e0 0%,#0284c7 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.footer-desc{font-size:.82rem;line-height:1.65;color:var(--muted);margin-bottom:18px;max-width:340px}
+.footer-badges{display:flex;flex-wrap:wrap;gap:8px}
+.footer-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:99px;font-size:.7rem;font-weight:700;border:1px solid rgba(124,106,255,.25);background:rgba(124,106,255,.08);color:var(--accent)}
+body.light .footer-badge{background:rgba(91,71,224,.08);border-color:rgba(91,71,224,.22);color:#5544cb}
+.footer-title{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.footer-links{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.footer-links li a{color:var(--muted);font-size:.8rem;font-weight:500;text-decoration:none;transition:color .2s,transform .2s;display:inline-block}
+.footer-links li a:hover,.footer-links li a:focus-visible{color:var(--accent);transform:translateX(2px)}
+body.light .footer-links li a:hover,body.light .footer-links li a:focus-visible{color:#5544cb}
+.footer-security-note{margin-top:18px;display:inline-flex;align-items:center;gap:7px;font-size:.72rem;color:var(--muted);line-height:1.4}
+.footer-security-note i{color:var(--a3)}
+.footer-bottom{padding-top:24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-align:center}
+.footer-bottom-copy{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:.76rem;color:var(--muted)}
+.footer-bottom-copy a{color:var(--accent);text-decoration:none;font-weight:600}
+.footer-bottom-copy a:hover{text-decoration:underline}
+.f-dot{width:4px;height:4px;border-radius:50%;background:var(--border);display:inline-block}
+.f-by,.f-bottom,.f-copy{display:none}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:580px){.footer-grid{grid-template-columns:1fr;gap:28px;text-align:left}.site-footer{padding:40px 16px 28px}.footer-bottom-copy{flex-direction:column;gap:6px}.footer-bottom-copy .f-dot{display:none}}
 
 .history-toggle{position:relative;display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:var(--s1);color:var(--text);cursor:pointer;user-select:none;transition:border-color .2s,transform .2s}
 .history-toggle:hover{border-color:var(--accent);transform:translateY(-1px)}
@@ -252,20 +277,43 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
   <div class="nav-right">
     <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode"><span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span></button>
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteMenu" title="Open menu"><i class="fas fa-bars"></i></button>
-    <div class="site-menu" id="siteMenu" aria-hidden="true">
-      <div class="menu-heading"><span>PDFHub control center</span><small>Local only</small></div>
-      <form class="menu-search" id="menuSearch"><input id="menuSearchInput" type="search" placeholder="Search tools..." aria-label="Search tools"/><button type="submit" title="Search"><i class="fas fa-arrow-right"></i></button></form>
-      <div class="menu-list">
-        <a class="menu-action" href="index.html"><i class="fas fa-house"></i><span>Home</span></a>
-        <a class="menu-action menu-featured" href="menu-bar/dashboard.html" aria-label="Open your dashboard, recent activity, and notifications"><span class="menu-feature-icon"><i class="fas fa-chart-line"></i></span><span class="menu-feature-copy"><span class="menu-feature-title">Dashboard &amp; updates</span><span class="menu-feature-subtitle">Activity, recent tools, and notifications</span></span><span class="menu-feature-meta"><span class="menu-feature-count" id="dashboardCount">0</span><i class="fas fa-arrow-up-right-from-square"></i></span></a>
-        <a class="menu-action" href="guides/"><i class="fas fa-book-open"></i><span>User Guides &amp; Tips</span><span class="menu-action-note">33 guides</span></a>
-        <a class="menu-action" href="menu-bar/favorites.html"><i class="fas fa-star"></i><span>Favorites</span><span class="menu-action-note">Local</span></a>
-        <a class="menu-action" href="menu-bar/history.html"><i class="fas fa-clock-rotate-left"></i><span>History</span></a>
-        <a class="menu-action" href="menu-bar/privacy.html"><i class="fas fa-shield-halved"></i><span>Privacy Center</span></a>
-        <a class="menu-action" href="menu-bar/terms.html"><i class="fas fa-file-contract"></i><span>Terms and conditions</span></a>
-        <a class="menu-action" href="menu-bar/about.html"><i class="fas fa-circle-info"></i><span>About us</span></a>
+    <div class="site-menu" id="siteMenu" aria-hidden="true" role="navigation" aria-label="PDFHub control center">
+      <div class="menu-header">
+        <div class="menu-heading">
+          <span>PDFHub control center</span>
+          <div class="menu-heading-actions">
+            <small>Private workspace</small>
+            <button class="menu-close-btn" id="menuCloseBtn" type="button" aria-label="Close menu" title="Close menu">
+              <i class="fas fa-xmark" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <form class="menu-search" id="menuSearch">
+          <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+          <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools"/>
+          <button type="submit" title="Search"><i class="fas fa-arrow-right"></i></button>
+        </form>
+        <div class="menu-status">
+          <span><i class="fas fa-shield-halved"></i> Runs in your browser</span>
+          <span class="menu-status-dot">●</span>
+          <span>No account needed</span>
+        </div>
       </div>
-      <p class="menu-note">Your tools, history, and preferences stay in this browser.</p>
+      <div class="menu-body" id="menuBody">
+        <div class="menu-list">
+          <div class="menu-section-label">Tools &amp; Guides</div>
+          <a class="menu-action" href="index.html"><i class="fas fa-house"></i><span>Home</span></a>
+          <a class="menu-action" href="guides/"><i class="fas fa-book-open"></i><span>User Guides &amp; Tips</span><span class="menu-action-note">33 guides</span></a>
+          <a class="menu-action" href="menu-bar/favorites.html"><i class="fas fa-star"></i><span>Favorites</span><span class="menu-action-note">Local</span></a>
+          <a class="menu-action" href="menu-bar/history.html"><i class="fas fa-clock-rotate-left"></i><span>History</span><span class="menu-action-note">Local</span></a>
+          <div class="menu-section-label" data-section="about">Privacy &amp; About</div>
+          <a class="menu-action" href="menu-bar/privacy.html"><i class="fas fa-shield-halved"></i><span>Privacy Center</span></a>
+          <a class="menu-action" href="menu-bar/terms.html"><i class="fas fa-file-contract"></i><span>Terms and conditions</span></a>
+          <a class="menu-action" href="menu-bar/about.html"><i class="fas fa-circle-info"></i><span>About us</span></a>
+          <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry"><i class="fas fa-envelope"></i><span>Contact Support</span></a>
+        </div>
+        <p class="menu-note">Your tools, history, and preferences stay in this browser.</p>
+      </div>
     </div>
   </div>
 </nav>
@@ -391,14 +439,78 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
 
 </main>
 
-<footer>
-  <div class="f-logo">PDFHub</div>
-  <div class="f-by">Built with ❤️ · Free forever · No sign-up · Files never leave your device</div>
-  <div class="f-bottom">
-    <span class="f-copy">©PDFHub</span><div class="f-dot"></div>
-    <span class="f-copy">by @officialhazim42</span><div class="f-dot"></div>
-    <span class="f-copy">All 33 tools free forever</span><div class="f-dot"></div>
-    <span class="f-copy">Your files never leave your device</span>
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-shell">
+    <div class="footer-grid">
+      <!-- Brand & Mission -->
+      <div class="footer-col footer-brand">
+        <a class="footer-logo f-logo" href="index.html">
+          <img class="logo-mark" src="favicons/favicon.png" alt="" aria-hidden="true"/>
+          <span>PDF HUB</span>
+        </a>
+        <p class="footer-desc">
+          Free, private, browser-based PDF tools. Merge, split, compress, convert, edit, and secure documents 100% locally on your device without server uploads.
+        </p>
+        <div class="footer-badges">
+          <span class="footer-badge"><i class="fas fa-shield-halved" aria-hidden="true"></i> 100% Client-Side</span>
+          <span class="footer-badge"><i class="fas fa-bolt" aria-hidden="true"></i> Free &amp; Unlimited</span>
+        </div>
+      </div>
+
+      <!-- Core Tools -->
+      <div class="footer-col">
+        <h3 class="footer-title">PDF Tools</h3>
+        <ul class="footer-links pdfhub-footer-links">
+          <li><a href="tools/merge.html">Merge PDF</a></li>
+          <li><a href="tools/split.html">Split PDF</a></li>
+          <li><a href="tools/compress.html">Compress PDF</a></li>
+          <li><a href="tools/edit.html">Edit PDF</a></li>
+          <li><a href="tools/sign.html">Sign PDF</a></li>
+          <li><a href="tools/pdf-to-word.html">PDF to Word</a></li>
+          <li><a href="tools/protect.html">Protect PDF</a></li>
+          <li><a href="index.html">All 33 Tools →</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources & Guides -->
+      <div class="footer-col">
+        <h3 class="footer-title">Resources</h3>
+        <ul class="footer-links">
+          <li><a href="guides/">User Guides &amp; Tips</a></li>
+          <li><a href="guides/merge-pdf/">Merge PDF Guide</a></li>
+          <li><a href="guides/compress-pdf/">Compress PDF Guide</a></li>
+          <li><a href="guides/edit-pdf/">Edit PDF Guide</a></li>
+          <li><a href="menu-bar/favorites.html">Favorite Tools</a></li>
+          <li><a href="menu-bar/history.html">Tool History</a></li>
+        </ul>
+      </div>
+
+      <!-- Privacy & Legal -->
+      <div class="footer-col">
+        <h3 class="footer-title">Privacy &amp; Trust</h3>
+        <ul class="footer-links">
+          <li><a href="menu-bar/privacy.html">Privacy Center</a></li>
+          <li><a href="menu-bar/terms.html">Terms and Conditions</a></li>
+          <li><a href="menu-bar/about.html">About PDFHub</a></li>
+          <li><a href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">Contact Support</a></li>
+        </ul>
+        <div class="footer-security-note">
+          <i class="fas fa-lock" aria-hidden="true"></i>
+          <span>Zero server storage. Files stay in your browser.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-copy">
+        <span>©PDFHub by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener noreferrer">@officialhazim42</a></span>
+        <span class="f-dot" aria-hidden="true"></span>
+        <span>All 33 tools free forever</span>
+        <span class="f-dot" aria-hidden="true"></span>
+        <span>Files never leave your device</span>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -522,8 +634,6 @@ function clearSearch(){
   doSearch('');
 }
 
-function getDashboardCount(){return getHistoryTools().length}
-function updateMenuState(){const count=document.getElementById('dashboardCount');if(count)count.textContent=getDashboardCount()}
 function toggleSiteMenu(force){
   const toggle=document.getElementById('menuToggle'),menu=document.getElementById('siteMenu');
   if(!toggle||!menu)return;
@@ -532,16 +642,17 @@ function toggleSiteMenu(force){
   toggle.innerHTML=open?'<i class="fas fa-xmark"></i>':'<i class="fas fa-bars"></i>';
   toggle.setAttribute('aria-label',open?'Close menu':'Open menu');toggle.title=open?'Close menu':'Open menu';
   if(open)menu.querySelector('#menuSearchInput')?.focus();
+  else toggle.focus();
 }
 function showMenuNotice(message){
   const note=document.querySelector('.menu-note');if(!note)return;
   note.textContent=message;setTimeout(()=>{note.textContent='Your tools, history, and preferences stay in this browser.'},2600);
 }
-document.getElementById('menuToggle')?.addEventListener('click',event=>{event.stopPropagation();toggleSiteMenu();updateMenuState()});
-document.getElementById('menuSearch')?.addEventListener('submit',event=>{event.preventDefault();const query=document.getElementById('menuSearchInput').value;toggleSiteMenu(false);document.getElementById('searchInput').value=query;doSearch(query);document.getElementById('searchInput').focus()});
-document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))toggleSiteMenu(false)});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.getElementById('siteMenu')?.classList.contains('open')){toggleSiteMenu(false);document.getElementById('menuToggle')?.focus()}});
-updateMenuState();
+document.getElementById('menuToggle')?.addEventListener('click',event=>{event.stopPropagation();toggleSiteMenu();});
+document.getElementById('menuCloseBtn')?.addEventListener('click',event=>{event.stopPropagation();toggleSiteMenu(false);});
+document.getElementById('menuSearch')?.addEventListener('submit',event=>{event.preventDefault();const query=document.getElementById('menuSearchInput').value;toggleSiteMenu(false);document.getElementById('searchInput').value=query;doSearch(query);document.getElementById('searchInput').focus();});
+document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))toggleSiteMenu(false);});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.getElementById('siteMenu')?.classList.contains('open')){toggleSiteMenu(false);}});
 const initialSearch=new URLSearchParams(location.search).get('search');
 if(initialSearch){document.getElementById('searchInput').value=initialSearch;doSearch(initialSearch)}
 

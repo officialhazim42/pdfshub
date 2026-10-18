@@ -15,14 +15,10 @@
   const enhanceMenu=()=>{
     const menu=document.getElementById('siteMenu');
     if(!menu)return;
+    const dashboard=menu.querySelector('.menu-action[href*="dashboard.html"]');
+    if(dashboard)dashboard.remove();
     if(!menu.querySelector('.menu-status')){
       menu.querySelector('.menu-search')?.insertAdjacentHTML('afterend','<div class="menu-status"><span><i class="fas fa-shield-halved"></i> Runs in your browser</span><span class="menu-status-dot">●</span><span>No account needed</span></div>');
-    }
-    const dashboard=menu.querySelector('.menu-action[href*="dashboard.html"]');
-    if(dashboard&&!menu.querySelector('.menu-section-label')){
-      dashboard.insertAdjacentHTML('beforebegin','<div class="menu-section-label">Workspace</div>');
-      const terms=menu.querySelector('.menu-action[href*="terms.html"]');
-      terms?.insertAdjacentHTML('beforebegin','<div class="menu-section-label" data-section="about">About PDFHub</div>');
     }
   };
   enhanceMenu();
@@ -38,13 +34,14 @@
   const siteRoot=document.body.dataset.root||root;
   const enhanceFooter=()=>{
     const footer=document.querySelector('footer');
-    if(!footer||footer.querySelector('.pdfhub-footer-links'))return;
+    if(!footer||footer.querySelector('.footer-grid')||footer.querySelector('.pdfhub-footer-links'))return;
     const links=[
       ['Tools',siteRoot+'index.html'],
-      ['Dashboard',siteRoot+'menu-bar/dashboard.html'],
+      ['Guides',siteRoot+'guides/'],
       ['History',siteRoot+'menu-bar/history.html'],
       ['About PDFHub',siteRoot+'menu-bar/about.html'],
       ['Terms',siteRoot+'menu-bar/terms.html'],
+      ['Privacy',siteRoot+'menu-bar/privacy.html'],
       ['Contact',`mailto:hazimbashirfaqeer@gmail.com?subject=${encodeURIComponent('PDFHub Inquiry')}`]
     ];
     const nav=document.createElement('nav');

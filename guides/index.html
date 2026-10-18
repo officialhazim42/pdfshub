@@ -56,59 +56,60 @@
         <i class="fas fa-bars" aria-hidden="true"></i>
       </button>
       <div class="site-menu" id="siteMenu" aria-hidden="true" role="navigation" aria-label="PDFHub control center">
-        <div class="menu-heading">
-          <span>PDFHub control center</span>
-          <small>Local only</small>
+        <div class="menu-header">
+          <div class="menu-heading">
+            <span>PDFHub control center</span>
+            <div class="menu-heading-actions">
+              <small>Private workspace</small>
+              <button class="menu-close-btn" id="menuCloseBtn" type="button" aria-label="Close menu" title="Close menu">
+                <i class="fas fa-xmark" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <form class="menu-search" id="menuSearch" role="search">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools" autocomplete="off"/>
+            <button type="submit" title="Search"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+          </form>
+          <div class="menu-status">
+            <span><i class="fas fa-shield-halved" aria-hidden="true"></i> Runs in your browser</span>
+            <span class="menu-status-dot">●</span>
+            <span>No account needed</span>
+          </div>
         </div>
-        <form class="menu-search" id="menuSearch" role="search">
-          <i class="fas fa-search" aria-hidden="true"></i>
-          <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools" autocomplete="off"/>
-          <button type="submit" title="Search"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
-        </form>
-        <div class="menu-status">
-          <span><i class="fas fa-shield-halved" aria-hidden="true"></i> Runs in your browser</span>
-          <span class="menu-status-dot">●</span>
-          <span>No account needed</span>
+        <div class="menu-body" id="menuBody">
+          <div class="menu-list">
+            <div class="menu-section-label">Tools &amp; Guides</div>
+            <a class="menu-action" href="../index.html">
+              <i class="fas fa-house" aria-hidden="true"></i><span>Home</span>
+            </a>
+            <a class="menu-action active-page" href="./">
+              <i class="fas fa-book-open" aria-hidden="true"></i>
+              <span>User Guides &amp; Tips</span>
+              <span class="menu-action-note">33 guides</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/favorites.html">
+              <i class="fas fa-star" aria-hidden="true"></i><span>Favorites</span><span class="menu-action-note">Local</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/history.html">
+              <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>History</span><span class="menu-action-note">Local</span>
+            </a>
+            <div class="menu-section-label" data-section="about">Privacy &amp; About</div>
+            <a class="menu-action" href="../menu-bar/privacy.html">
+              <i class="fas fa-shield-halved" aria-hidden="true"></i><span>Privacy Center</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/terms.html">
+              <i class="fas fa-file-contract" aria-hidden="true"></i><span>Terms and conditions</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/about.html">
+              <i class="fas fa-circle-info" aria-hidden="true"></i><span>About us</span>
+            </a>
+            <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">
+              <i class="fas fa-envelope" aria-hidden="true"></i><span>Contact Support</span>
+            </a>
+          </div>
+          <p class="menu-note">Your tools, history, and preferences stay in this browser.</p>
         </div>
-        <div class="menu-list">
-          <div class="menu-section-label">Workspace</div>
-          <a class="menu-action" href="../index.html">
-            <i class="fas fa-house" aria-hidden="true"></i><span>Home</span>
-          </a>
-          <a class="menu-action menu-featured" href="../menu-bar/dashboard.html" aria-label="Open your dashboard, recent activity, and notifications">
-            <span class="menu-feature-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></span>
-            <span class="menu-feature-copy">
-              <span class="menu-feature-title">Dashboard &amp; updates</span>
-              <span class="menu-feature-subtitle">Activity, recent tools, and notifications</span>
-            </span>
-            <span class="menu-feature-meta">
-              <span class="menu-feature-count" id="dashboardCount">0</span>
-              <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
-            </span>
-          </a>
-          <a class="menu-action active-page" href="./">
-            <i class="fas fa-book-open" aria-hidden="true"></i>
-            <span>User Guides &amp; Tips</span>
-            <span class="menu-action-note">33 guides</span>
-          </a>
-          <a class="menu-action" href="../menu-bar/favorites.html">
-            <i class="fas fa-star" aria-hidden="true"></i><span>Favorites</span><span class="menu-action-note">Local</span>
-          </a>
-          <a class="menu-action" href="../menu-bar/history.html">
-            <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>History</span><span class="menu-action-note">Local</span>
-          </a>
-          <div class="menu-section-label" data-section="about">About PDFHub</div>
-          <a class="menu-action" href="../menu-bar/privacy.html">
-            <i class="fas fa-shield-halved" aria-hidden="true"></i><span>Privacy Center</span>
-          </a>
-          <a class="menu-action" href="../menu-bar/terms.html">
-            <i class="fas fa-file-contract" aria-hidden="true"></i><span>Terms and conditions</span>
-          </a>
-          <a class="menu-action" href="../menu-bar/about.html">
-            <i class="fas fa-circle-info" aria-hidden="true"></i><span>About us</span>
-          </a>
-        </div>
-        <p class="menu-note">Your tools, history, and preferences stay in this browser.</p>
       </div>
     </div>
   </nav>
@@ -137,13 +138,77 @@
 
   <!-- CANONICAL SHARED FOOTER -->
   <footer class="site-footer" role="contentinfo">
-    <div class="f-logo">PDFHub</div>
-    <div class="f-by">Built with ❤️ · Free forever · No sign-up · Files never leave your device</div>
-    <div class="f-bottom">
-      <span class="f-copy">©PDFHub</span><div class="f-dot"></div>
-      <span class="f-copy">by @officialhazim42</span><div class="f-dot"></div>
-      <span class="f-copy">All 33 tools free forever</span><div class="f-dot"></div>
-      <span class="f-copy">Your files never leave your device</span>
+    <div class="footer-shell">
+      <div class="footer-grid">
+        <!-- Brand & Mission -->
+        <div class="footer-col footer-brand">
+          <a class="footer-logo f-logo" href="../index.html">
+            <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
+            <span>PDF HUB</span>
+          </a>
+          <p class="footer-desc">
+            Free, private, browser-based PDF tools. Merge, split, compress, convert, edit, and secure documents 100% locally on your device without server uploads.
+          </p>
+          <div class="footer-badges">
+            <span class="footer-badge"><i class="fas fa-shield-halved" aria-hidden="true"></i> 100% Client-Side</span>
+            <span class="footer-badge"><i class="fas fa-bolt" aria-hidden="true"></i> Free &amp; Unlimited</span>
+          </div>
+        </div>
+
+        <!-- Core Tools -->
+        <div class="footer-col">
+          <h3 class="footer-title">PDF Tools</h3>
+          <ul class="footer-links pdfhub-footer-links">
+            <li><a href="../tools/merge.html">Merge PDF</a></li>
+            <li><a href="../tools/split.html">Split PDF</a></li>
+            <li><a href="../tools/compress.html">Compress PDF</a></li>
+            <li><a href="../tools/edit.html">Edit PDF</a></li>
+            <li><a href="../tools/sign.html">Sign PDF</a></li>
+            <li><a href="../tools/pdf-to-word.html">PDF to Word</a></li>
+            <li><a href="../tools/protect.html">Protect PDF</a></li>
+            <li><a href="../index.html">All 33 Tools →</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & Guides -->
+        <div class="footer-col">
+          <h3 class="footer-title">Resources</h3>
+          <ul class="footer-links">
+            <li><a href="./">User Guides &amp; Tips</a></li>
+            <li><a href="merge-pdf/">Merge PDF Guide</a></li>
+            <li><a href="compress-pdf/">Compress PDF Guide</a></li>
+            <li><a href="edit-pdf/">Edit PDF Guide</a></li>
+            <li><a href="../menu-bar/favorites.html">Favorite Tools</a></li>
+            <li><a href="../menu-bar/history.html">Tool History</a></li>
+          </ul>
+        </div>
+
+        <!-- Privacy & Legal -->
+        <div class="footer-col">
+          <h3 class="footer-title">Privacy &amp; Trust</h3>
+          <ul class="footer-links">
+            <li><a href="../menu-bar/privacy.html">Privacy Center</a></li>
+            <li><a href="../menu-bar/terms.html">Terms and Conditions</a></li>
+            <li><a href="../menu-bar/about.html">About PDFHub</a></li>
+            <li><a href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">Contact Support</a></li>
+          </ul>
+          <div class="footer-security-note">
+            <i class="fas fa-lock" aria-hidden="true"></i>
+            <span>Zero server storage. Files stay in your browser.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-copy">
+          <span>©PDFHub by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener noreferrer">@officialhazim42</a></span>
+          <span class="f-dot" aria-hidden="true"></span>
+          <span>All 33 tools free forever</span>
+          <span class="f-dot" aria-hidden="true"></span>
+          <span>Files never leave your device</span>
+        </div>
+      </div>
     </div>
   </footer>
 
