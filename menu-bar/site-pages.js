@@ -6,19 +6,22 @@
   const footerHtml=`<footer class="site-footer" role="contentinfo">
   <div class="footer-shell">
     <div class="footer-grid">
+      <!-- 1. Brand Section -->
       <div class="footer-col footer-brand">
         <a class="footer-logo f-logo" href="${root}index.html">
           <img class="logo-mark" src="${root}favicons/favicon.png" alt="" aria-hidden="true"/>
           <span>PDF HUB</span>
         </a>
         <p class="footer-desc">
-          Free, private, browser-based PDF tools. Merge, split, compress, convert, edit, and secure documents 100% locally on your device without server uploads.
+          A focused, browser-first PDF suite with 33 tools for fast document work. Standard tools process files locally in your browser without requiring an account or server uploads.
         </p>
         <div class="footer-badges">
-          <span class="footer-badge"><i class="fas fa-shield-halved" aria-hidden="true"></i> 100% Client-Side</span>
-          <span class="footer-badge"><i class="fas fa-bolt" aria-hidden="true"></i> Free &amp; Unlimited</span>
+          <span class="footer-badge"><i class="fas fa-laptop-code" aria-hidden="true"></i> Client-Side Processing</span>
+          <span class="footer-badge"><i class="fas fa-user-slash" aria-hidden="true"></i> No Account Required</span>
         </div>
       </div>
+
+      <!-- 2. PDF Tools -->
       <div class="footer-col">
         <h3 class="footer-title">PDF Tools</h3>
         <ul class="footer-links pdfhub-footer-links">
@@ -29,9 +32,11 @@
           <li><a href="${root}tools/sign.html">Sign PDF</a></li>
           <li><a href="${root}tools/pdf-to-word.html">PDF to Word</a></li>
           <li><a href="${root}tools/protect.html">Protect PDF</a></li>
-          <li><a href="${root}index.html">All 33 Tools →</a></li>
+          <li><a class="footer-more-link" href="${root}index.html">All 33 Tools <span aria-hidden="true">→</span></a></li>
         </ul>
       </div>
+
+      <!-- 3. Resources -->
       <div class="footer-col">
         <h3 class="footer-title">Resources</h3>
         <ul class="footer-links">
@@ -43,27 +48,34 @@
           <li><a href="${root}menu-bar/history.html">Tool History</a></li>
         </ul>
       </div>
+
+      <!-- 4. Privacy & Legal -->
       <div class="footer-col">
-        <h3 class="footer-title">Privacy &amp; Trust</h3>
+        <h3 class="footer-title">Privacy &amp; Legal</h3>
         <ul class="footer-links">
           <li><a href="${root}menu-bar/privacy.html">Privacy Center</a></li>
-          <li><a href="${root}menu-bar/terms.html">Terms and Conditions</a></li>
+          <li><a href="${root}menu-bar/terms.html">Terms &amp; Conditions</a></li>
           <li><a href="${root}menu-bar/about.html">About PDFHub</a></li>
           <li><a href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">Contact Support</a></li>
         </ul>
         <div class="footer-security-note">
-          <i class="fas fa-lock" aria-hidden="true"></i>
-          <span>Zero server storage. Files stay in your browser.</span>
+          <i class="fas fa-shield-halved" aria-hidden="true"></i>
+          <span>Local browser processing for standard operations. Zero tracking cookies.</span>
         </div>
       </div>
     </div>
+
+    <!-- 5. Footer Bottom Row -->
     <div class="footer-bottom">
       <div class="footer-bottom-copy">
-        <span>©PDFHub by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener noreferrer">@officialhazim42</a></span>
+        <span>© 2026 PDFHub. Crafted by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener noreferrer">@officialhazim42</a></span>
+      </div>
+      <div class="footer-bottom-meta">
+        <span>33 Free Utilities</span>
         <span class="f-dot" aria-hidden="true"></span>
-        <span>All 33 tools free forever</span>
+        <span>Browser-First Processing</span>
         <span class="f-dot" aria-hidden="true"></span>
-        <span>Files never leave your device</span>
+        <span>Private by Design</span>
       </div>
     </div>
   </div>

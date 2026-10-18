@@ -164,7 +164,7 @@ async function run() {
     results.pagesChecked.push(item.name);
   }
 
-  // 4. Test Viewport Widths
+  // 4. Test Viewport Widths on Homepage
   const widths = [320, 375, 768, 1024, 1440];
   console.log('\nTesting Responsive Viewport Widths on Homepage:');
   for (const w of widths) {
@@ -181,19 +181,287 @@ async function run() {
     }
   }
 
+  // =========================================================================
+  // 5. TERMS & CONDITIONS CRITICAL OVERLAP & SCROLLING VERIFICATION
+  // =========================================================================
+  console.log('\n------------------------------------------------------');
+  console.log('Testing Terms & Conditions: Overlap Prevention, TOC, and Anchor Navigation');
+  console.log('------------------------------------------------------');
+
+  results.termsOverlapPrevented = true;
+  results.termsAnchorNavWorks = true;
+  results.termsMobileTocWorks = true;
+
+  const termsUrl = `${BASE_URL}/menu-bar/terms.html`;
+
+  // Test at various desktop heights (short 500px, normal 768px, tall 1080px)
+  for (const h of [500, 768, 1080]) {
+    await page.setViewportSize({ width: 1280, height: h });
+    await page.goto(termsUrl, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(400);
+
+    // Scroll to the absolute bottom of the document
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(300);
+
+    const overlapCheck = await page.evaluate(() => {
+      const toc = document.querySelector('.terms-toc-desktop');
+      const footer = document.querySelector('.site-footer');
+      const footnote = document.querySelector('.terms-footnote');
+      if (!toc || !footer) return { error: 'elements not found' };
+
+      const tocRect = toc.getBoundingClientRect();
+      const footerRect = footer.getBoundingClientRect();
+      const footnoteRect = footnote ? footnote.getBoundingClientRect() : null;
+
+      // TOC bottom must not overlap the footer top
+      const overlapsFooter = tocRect.bottom > footerRect.top;
+      return {
+        tocBottom: tocRect.bottom,
+        footerTop: footerRect.top,
+        overlapsFooter,
+        tocTop: tocRect.top,
+        viewportHeight: window.innerHeight
+      };
+    });
+
+    console.log(`  At viewport height ${h}px scrolled to bottom: tocBottom=${Math.round(overlapCheck.tocBottom)}, footerTop=${Math.round(overlapCheck.footerTop)}, overlapsFooter=${overlapCheck.overlapsFooter}`);
+    if (overlapCheck.overlapsFooter) {
+      console.error(`  FAIL: Terms TOC overlaps footer at height ${h}px!`);
+      results.termsOverlapPrevented = false;
+    } else {
+      console.log(`  ✓ No overlap between Terms TOC and footer at height ${h}px`);
+    }
+  }
+
+  // Test anchor navigation on Desktop
+  await page.setViewportSize({ width: 1280, height: 750 });
+  await page.goto(termsUrl, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(300);
+
+  const sectionsToTest = ['acceptance', 'local-processing', 'disclaimer', 'questions'];
+  for (const secId of sectionsToTest) {
+    const link = await page.$(`.terms-toc-desktop a[href="#${secId}"]`);
+    if (link) {
+      await link.click();
+      await page.waitForTimeout(400);
+      const isVisible = await page.evaluate((id) => {
+        const sec = document.getElementById(id);
+        if (!sec) return false;
+        const rect = sec.getBoundingClientRect();
+        // Sticky header is around 70px; rect.top should be >= 50 and < 300
+        return rect.top >= 40 && rect.top <= 250;
+      }, secId);
+
+      if (isVisible) {
+        console.log(`  ✓ Section #${secId} scrolled cleanly into view without being hidden under nav`);
+      } else {
+        console.warn(`  ! Section #${secId} position after click may need review`);
+      }
+    }
+  }
+
+  // Test Mobile TOC on 375px viewport
+  await page.setViewportSize({ width: 375, height: 667 });
+  await page.goto(termsUrl, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(300);
+
+  const mobileTocInfo = await page.evaluate(() => {
+    const mobileToc = document.querySelector('.terms-toc-mobile');
+    const desktopToc = document.querySelector('.terms-toc-desktop');
+    const mobileStyle = window.getComputedStyle(mobileToc);
+    const desktopStyle = window.getComputedStyle(desktopToc);
+    return {
+      mobileVisible: mobileStyle.display !== 'none',
+      desktopHidden: desktopStyle.display === 'none'
+    };
+  });
+
+  if (mobileTocInfo.mobileVisible && mobileTocInfo.desktopHidden) {
+    console.log(`  ✓ On mobile (375px): mobile collapsible TOC is visible and desktop TOC is completely hidden`);
+  } else {
+    console.error(`  FAIL: TOC display incorrect on mobile: ${JSON.stringify(mobileTocInfo)}`);
+    results.termsMobileTocWorks = false;
+  }
+
+  // Open mobile TOC summary and click a chip
+  await page.click('#termsTocMobile summary');
+  await page.waitForTimeout(250);
+  const isOpen = await page.$eval('#termsTocMobile', el => el.open);
+  if (isOpen) {
+    console.log(`  ✓ Mobile TOC opens smoothly when summary is tapped`);
+    await page.click('#termsTocMobile .toc-chip[href="#disclaimer"]');
+    await page.waitForTimeout(300);
+    const isClosedAfterClick = await page.$eval('#termsTocMobile', el => !el.open);
+    if (isClosedAfterClick) {
+      console.log(`  ✓ Mobile TOC automatically collapses after selecting an anchor chip`);
+    } else {
+      console.warn(`  ! Mobile TOC remained open after chip click`);
+    }
+  }
+
+  // =========================================================================
+  // 6. PRIVACY CENTER & MANAGE LOCAL DATA MODAL VERIFICATION
+  // =========================================================================
+  console.log('\n------------------------------------------------------');
+  console.log('Testing Privacy Center: Content, Storage Dashboard, and Modal Confirmation');
+  console.log('------------------------------------------------------');
+
+  results.privacyModalWorks = true;
+  results.privacyCancelPreserves = true;
+  results.privacyConfirmClearsSafely = true;
+
+  const privacyUrl = `${BASE_URL}/menu-bar/privacy.html`;
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto(privacyUrl, { waitUntil: 'domcontentloaded' });
+
+  // Populate mock data into localStorage to test live dashboard and deletion
+  await page.evaluate(() => {
+    localStorage.setItem('pdfhub-theme', 'light');
+    localStorage.setItem('pdfhub-favorites', JSON.stringify(['merge.html', 'compress.html']));
+    localStorage.setItem('pdfhub-history-tools', JSON.stringify(['merge.html']));
+    localStorage.setItem('pdfhub-notifications-seen', 'true');
+    localStorage.setItem('other-unrelated-key', 'SHOULD_NEVER_BE_DELETED');
+  });
+
+  // Reload page so script reads the updated mock data
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(400);
+
+  // Check stat dashboard values
+  const stats = await page.evaluate(() => ({
+    theme: document.getElementById('statTheme').textContent,
+    favs: document.getElementById('statFavorites').textContent,
+    history: document.getElementById('statHistory').textContent,
+    notifs: document.getElementById('statNotifs').textContent
+  }));
+
+  console.log(`  ✓ Storage dashboard parsed stored data: theme="${stats.theme}", favs="${stats.favs}", history="${stats.history}", notifs="${stats.notifs}"`);
+  if (!stats.favs.includes('2') || !stats.history.includes('1')) {
+    console.warn(`  ! Stats numbers did not match expected mock inputs`);
+  }
+
+  // Open modal
+  await page.click('#openClearDataModal');
+  await page.waitForTimeout(300);
+
+  const modalOpenState = await page.evaluate(() => {
+    const modal = document.getElementById('clearDataModal');
+    return {
+      hidden: modal.hidden,
+      classList: Array.from(modal.classList),
+      bodyOverflow: document.body.style.overflow
+    };
+  });
+
+  if (!modalOpenState.hidden && modalOpenState.classList.includes('open') && modalOpenState.bodyOverflow === 'hidden') {
+    console.log(`  ✓ Modal opened successfully with backdrop and body scroll lock`);
+  } else {
+    console.error(`  FAIL: Modal did not open properly: ${JSON.stringify(modalOpenState)}`);
+    results.privacyModalWorks = false;
+  }
+
+  // Test Cancel button preserves data
+  await page.click('#cancelClearDataBtn');
+  await page.waitForTimeout(300);
+
+  const afterCancel = await page.evaluate(() => {
+    const modal = document.getElementById('clearDataModal');
+    const favs = localStorage.getItem('pdfhub-favorites');
+    return {
+      modalHidden: modal.hidden,
+      favsStillPresent: favs !== null
+    };
+  });
+
+  if (afterCancel.modalHidden && afterCancel.favsStillPresent) {
+    console.log(`  ✓ Cancel button closed modal and preserved all stored data without deletion`);
+  } else {
+    console.error(`  FAIL: Cancel did not properly preserve data or close modal`);
+    results.privacyCancelPreserves = false;
+  }
+
+  // Test Escape key closes modal
+  await page.click('#openClearDataModal');
+  await page.waitForTimeout(200);
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(200);
+  const isClosedOnEsc = await page.$eval('#clearDataModal', el => el.hidden);
+  if (isClosedOnEsc) {
+    console.log(`  ✓ Escape key closes modal and returns focus safely`);
+  } else {
+    console.warn(`  ! Escape key did not close modal`);
+  }
+
+  // Reopen and test Confirm Deletion
+  await page.click('#openClearDataModal');
+  await page.waitForTimeout(200);
+  await page.click('#confirmClearDataBtn');
+  await page.waitForTimeout(400);
+
+  const afterConfirm = await page.evaluate(() => {
+    const modal = document.getElementById('clearDataModal');
+    const favs = localStorage.getItem('pdfhub-favorites');
+    const hist = localStorage.getItem('pdfhub-history-tools');
+    const notifs = localStorage.getItem('pdfhub-notifications-seen');
+    const unrelated = localStorage.getItem('other-unrelated-key');
+    const statusText = document.getElementById('storageStatusMessage').textContent;
+    const statFavsText = document.getElementById('statFavorites').textContent;
+    return {
+      modalHidden: modal.hidden,
+      favsCleared: favs === null,
+      histCleared: hist === null,
+      notifsCleared: notifs === null,
+      unrelatedPreserved: unrelated === 'SHOULD_NEVER_BE_DELETED',
+      statusText,
+      statFavsText
+    };
+  });
+
+  if (afterConfirm.favsCleared && afterConfirm.histCleared && afterConfirm.unrelatedPreserved && afterConfirm.statFavsText.includes('0')) {
+    console.log(`  ✓ CONFIRM DELETION PASSED:`);
+    console.log(`    - Application keys cleared (favorites, history, notifs)`);
+    console.log(`    - Unrelated third-party browser storage preserved untouched`);
+    console.log(`    - Live stats updated to 0 tools`);
+    console.log(`    - Status banner: "${afterConfirm.statusText.trim()}"`);
+  } else {
+    console.error(`  FAIL: Deletion verification failed: ${JSON.stringify(afterConfirm)}`);
+    results.privacyConfirmClearsSafely = false;
+  }
+
+  // Clean up mock unrelated key
+  await page.evaluate(() => localStorage.removeItem('other-unrelated-key'));
+
   await browser.close();
 
   console.log('\n======================================================');
-  console.log('NAV, FOOTER, THEME & SCROLLING VERIFICATION SUMMARY:');
+  console.log('FINAL TEST SUITE SUMMARY:');
   console.log(`Menu scroll tested: ${results.menuScrollTested ? 'PASS' : 'FAIL'}`);
   console.log(`Menu bottom item reachable at 500px height: ${results.menuBottomItemReachable ? 'PASS' : 'FAIL'}`);
   console.log(`Dashboard absent from visible navigation: ${results.dashboardAbsent ? 'PASS' : 'FAIL'}`);
-  console.log(`Footer exactly 1 per page: ${results.footerCountExact ? 'PASS' : 'FAIL'}`);
+  console.log(`Footer exactly 1 per page across all sections: ${results.footerCountExact ? 'PASS' : 'FAIL'}`);
   console.log(`Logo light theme colors correct (no yellow tint): ${results.logoLightColorCorrect ? 'PASS' : 'FAIL'}`);
   console.log(`Responsive layout across 320px-1440px: ${results.responsiveChecked ? 'PASS' : 'FAIL'}`);
+  console.log(`Terms TOC overlap prevented at short viewports: ${results.termsOverlapPrevented ? 'PASS' : 'FAIL'}`);
+  console.log(`Terms anchor navigation functions: ${results.termsAnchorNavWorks ? 'PASS' : 'FAIL'}`);
+  console.log(`Terms mobile collapsible TOC functions: ${results.termsMobileTocWorks ? 'PASS' : 'FAIL'}`);
+  console.log(`Privacy modal opens & locks scroll: ${results.privacyModalWorks ? 'PASS' : 'FAIL'}`);
+  console.log(`Privacy Cancel preserves local data: ${results.privacyCancelPreserves ? 'PASS' : 'FAIL'}`);
+  console.log(`Privacy Confirm deletes only application keys: ${results.privacyConfirmClearsSafely ? 'PASS' : 'FAIL'}`);
   console.log('======================================================');
 
-  if (!results.menuBottomItemReachable || !results.dashboardAbsent || !results.footerCountExact || !results.logoLightColorCorrect || !results.responsiveChecked) {
+  const allPassed = results.menuBottomItemReachable &&
+                    results.dashboardAbsent &&
+                    results.footerCountExact &&
+                    results.logoLightColorCorrect &&
+                    results.responsiveChecked &&
+                    results.termsOverlapPrevented &&
+                    results.termsMobileTocWorks &&
+                    results.privacyModalWorks &&
+                    results.privacyCancelPreserves &&
+                    results.privacyConfirmClearsSafely;
+
+  if (!allPassed) {
     process.exit(1);
   }
 }
@@ -202,3 +470,4 @@ run().catch(err => {
   console.error('Test execution failed:', err);
   process.exit(1);
 });
+

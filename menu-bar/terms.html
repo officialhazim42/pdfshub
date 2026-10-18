@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Terms and conditions for using PDFHub.">
+  <meta name="description" content="Terms and conditions for using PDFHub. Learn about permitted use, client-side processing, document ownership, and liability disclaimers.">
   <link rel="icon" href="../favicons/favicon.png" type="image/png">
-  <title>Terms and Conditions - PDFHub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Terms &amp; Conditions - PDFHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="site-pages.css">
+  <link rel="stylesheet" href="site-pages-polish.css">
 </head>
 <body data-root="../" data-page="terms">
   <div class="page-bg"></div>
   <nav>
-    <a class="logo" href="../index.html">PDFHub</a>
+    <a class="logo" href="../index.html">
+      <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
+      <span>PDF HUB</span>
+    </a>
     <div class="nav-right">
-      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" title="Open menu"><i class="fas fa-bars"></i></button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" title="Open menu" aria-label="Open menu"><i class="fas fa-bars"></i></button>
       <div class="site-menu" id="siteMenu">
         <div class="menu-header">
           <div class="menu-heading">
@@ -36,7 +40,7 @@
             <a class="menu-action" href="history.html"><i class="fas fa-clock-rotate-left"></i><span>History</span></a>
             <div class="menu-section-label" data-section="about">Privacy &amp; About</div>
             <a class="menu-action" href="privacy.html"><i class="fas fa-shield-halved"></i><span>Privacy Center</span></a>
-            <a class="menu-action" href="terms.html"><i class="fas fa-file-contract"></i><span>Terms and conditions</span></a>
+            <a class="menu-action active-page" href="terms.html"><i class="fas fa-file-contract"></i><span>Terms &amp; Conditions</span></a>
             <a class="menu-action" href="about.html"><i class="fas fa-circle-info"></i><span>About us</span></a>
             <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry"><i class="fas fa-envelope"></i><span>Contact Support</span></a>
           </div>
@@ -45,42 +49,239 @@
       </div>
     </div>
   </nav>
+
   <main class="page-main editorial-page terms-page">
     <header class="editorial-hero">
-      <span class="eyebrow">PDFHub policies</span>
+      <span class="eyebrow"><i class="fas fa-scale-balanced" aria-hidden="true"></i> Service Policies &amp; Terms</span>
       <h1>Terms &amp; Conditions</h1>
-      <p class="lead">Please read these terms before using PDFHub. They explain the conditions for accessing the website and its browser-based tools.</p>
-      <p class="terms-intro-note"><i class="fas fa-circle-info" aria-hidden="true"></i> By using PDFHub, you agree to the terms below. If you do not agree, please do not use the service.</p>
+      <div class="terms-meta-bar">
+        <span class="meta-pill"><i class="fas fa-calendar-check" aria-hidden="true"></i> Last Updated: October 2026</span>
+        <span class="meta-dot" aria-hidden="true">●</span>
+        <span class="meta-pill"><i class="fas fa-shield-halved" aria-hidden="true"></i> Client-Side Processing</span>
+        <span class="meta-dot" aria-hidden="true">●</span>
+        <span class="meta-pill"><i class="fas fa-user-slash" aria-hidden="true"></i> No Account Required</span>
+      </div>
+      <p class="lead">Please read these Terms &amp; Conditions carefully before using PDFHub. They govern your access to our static website, browser-based PDF utilities, and local preferences.</p>
+      <div class="terms-intro-note">
+        <i class="fas fa-circle-info" aria-hidden="true"></i>
+        <span>By accessing or using PDFHub, you acknowledge that you have read, understood, and agreed to these terms. If you do not agree, please discontinue using the service.</span>
+      </div>
     </header>
 
+    <!-- Mobile / Tablet Collapsible Table of Contents -->
+    <details class="terms-toc-mobile" id="termsTocMobile">
+      <summary class="terms-toc-summary">
+        <span class="toc-summary-title"><i class="fas fa-list-ol" aria-hidden="true"></i> In this document (9 Sections)</span>
+        <i class="fas fa-chevron-down toc-caret" aria-hidden="true"></i>
+      </summary>
+      <div class="terms-toc-mobile-grid">
+        <a class="toc-chip" href="#acceptance"><span class="toc-num">01</span><span>Acceptance of terms</span></a>
+        <a class="toc-chip" href="#permitted-use"><span class="toc-num">02</span><span>Permitted use</span></a>
+        <a class="toc-chip" href="#your-documents"><span class="toc-num">03</span><span>Your documents</span></a>
+        <a class="toc-chip" href="#local-processing"><span class="toc-num">04</span><span>Local processing</span></a>
+        <a class="toc-chip" href="#results"><span class="toc-num">05</span><span>Results &amp; accuracy</span></a>
+        <a class="toc-chip" href="#availability"><span class="toc-num">06</span><span>Availability &amp; changes</span></a>
+        <a class="toc-chip" href="#third-party"><span class="toc-num">07</span><span>Third-party services</span></a>
+        <a class="toc-chip" href="#disclaimer"><span class="toc-num">08</span><span>Disclaimer &amp; liability</span></a>
+        <a class="toc-chip" href="#questions"><span class="toc-num">09</span><span>Questions &amp; feedback</span></a>
+      </div>
+    </details>
+
     <div class="terms-layout">
-      <nav class="terms-toc" aria-label="Terms sections">
-        <h2>In this document</h2>
-        <a href="#acceptance">Acceptance</a>
-        <a href="#permitted-use">Permitted use</a>
-        <a href="#your-documents">Your documents</a>
-        <a href="#local-processing">Local processing</a>
-        <a href="#results">Results and accuracy</a>
-        <a href="#availability">Availability and changes</a>
-        <a href="#third-party">Third-party services</a>
-        <a href="#disclaimer">Disclaimer and liability</a>
-        <a href="#questions">Questions</a>
+      <!-- Desktop Constrained Sticky Table of Contents -->
+      <nav class="terms-toc-desktop" id="termsTocDesktop" aria-label="Table of contents">
+        <div class="toc-desktop-header">
+          <h2>In this document</h2>
+          <span class="toc-badge">9 Sections</span>
+        </div>
+        <div class="toc-desktop-links" id="termsNavLinks">
+          <a class="terms-nav-link active" href="#acceptance"><span class="link-num">01</span><span>Acceptance of terms</span></a>
+          <a class="terms-nav-link" href="#permitted-use"><span class="link-num">02</span><span>Permitted use</span></a>
+          <a class="terms-nav-link" href="#your-documents"><span class="link-num">03</span><span>Your documents &amp; rights</span></a>
+          <a class="terms-nav-link" href="#local-processing"><span class="link-num">04</span><span>Processing &amp; storage</span></a>
+          <a class="terms-nav-link" href="#results"><span class="link-num">05</span><span>Results &amp; accuracy</span></a>
+          <a class="terms-nav-link" href="#availability"><span class="link-num">06</span><span>Availability &amp; updates</span></a>
+          <a class="terms-nav-link" href="#third-party"><span class="link-num">07</span><span>Third-party services</span></a>
+          <a class="terms-nav-link" href="#disclaimer"><span class="link-num">08</span><span>Disclaimer &amp; liability</span></a>
+          <a class="terms-nav-link" href="#questions"><span class="link-num">09</span><span>Questions &amp; feedback</span></a>
+        </div>
       </nav>
 
-      <section class="legal-sections" aria-label="Terms and conditions">
-        <article class="legal-section" id="acceptance"><span class="legal-number">01</span><div><h2>Acceptance of these terms</h2><p>By accessing or using PDFHub, you agree to these terms. They apply to the website, its browser-based tools, the local dashboard, and related pages. If you do not agree, do not use the service.</p></div></article>
-        <article class="legal-section" id="permitted-use"><span class="legal-number">02</span><div><h2>Permitted use</h2><p>You may use PDFHub for lawful personal or professional work. Do not use the service to infringe intellectual property rights, evade access controls, distribute malware, violate another person's privacy, or carry out activity prohibited by applicable law.</p></div></article>
-        <article class="legal-section" id="your-documents"><span class="legal-number">03</span><div><h2>Your documents and responsibility</h2><p>You are responsible for the files you select and for having the rights and permissions needed to process them. Keep backups of original documents and review every generated file before sharing it or relying on it.</p></div></article>
-        <article class="legal-section" id="local-processing"><span class="legal-number">04</span><div><h2>Processing and browser storage</h2><p>Tools are designed to process files in your browser where supported, but processing may vary by tool and may use third-party resources. PDFHub stores preferences and tool history in your browser. On shared devices, clear local site data after handling sensitive work.</p></div></article>
-        <article class="legal-section" id="results"><span class="legal-number">05</span><div><h2>Results and accuracy</h2><p>Conversion, OCR, extraction, and AI-assisted results may contain omissions, errors, or formatting differences. PDFHub does not guarantee that an output is complete, accurate, accessible, or suitable for a particular legal, financial, medical, or business purpose. Verify important information against the original document.</p></div></article>
-        <article class="legal-section" id="availability"><span class="legal-number">06</span><div><h2>Availability and changes</h2><p>The service is provided without a guarantee of uninterrupted availability or suitability for a particular purpose. Features may change, be interrupted, or be removed as the project evolves. We may update these terms; continued use after an update means you accept the revised terms.</p></div></article>
-        <article class="legal-section" id="third-party"><span class="legal-number">07</span><div><h2>Third-party services</h2><p>Some pages may load fonts, icons, libraries, or other resources from third parties. Those services are outside PDFHub's control and may have their own terms and privacy practices. Review their terms when relevant.</p></div></article>
-        <article class="legal-section" id="disclaimer"><span class="legal-number">08</span><div><h2>Disclaimer and liability</h2><p>PDFHub is provided on an “as is” and “as available” basis. To the extent permitted by applicable law, PDFHub and its creator disclaim liability for data loss, business interruption, indirect damages, or reliance on generated output.</p></div></article>
-        <article class="legal-section" id="questions"><span class="legal-number">09</span><div><h2>Questions and feedback</h2><p>For questions or feedback, include the relevant tool or page, your browser, and a clear description of the issue. Use the creator contact links provided on the homepage.</p></div></article>
+      <!-- Legal Document Content Articles -->
+      <section class="legal-sections" aria-label="Terms and conditions sections">
+        <article class="legal-section" id="acceptance">
+          <div class="legal-section-header">
+            <span class="legal-number">01</span>
+            <h2>Acceptance of these terms</h2>
+          </div>
+          <div class="legal-section-body">
+            <p>By browsing, accessing, or using PDFHub (accessible at <code>pdfshub.smartstores.in</code>, <code>pdfshub.netlify.app</code>, or any official mirror), you agree to be bound by these Terms &amp; Conditions. These terms govern the entirety of the website, its 33 client-side tools, the local workspace, and any related guides or resources.</p>
+            <p>If you disagree with any part of these terms, you must discontinue your use of PDFHub immediately. We recommend saving or printing a copy of these terms for your personal records.</p>
+          </div>
+        </article>
+
+        <article class="legal-section" id="permitted-use">
+          <div class="legal-section-header">
+            <span class="legal-number">02</span>
+            <h2>Permitted and prohibited use</h2>
+          </div>
+          <div class="legal-section-body">
+            <p>PDFHub is provided for lawful personal, educational, and professional document management. You are free to process documents for yourself, your organization, or your clients subject to the following rules:</p>
+            <ul class="legal-list">
+              <li><strong>Lawful operations:</strong> You agree not to use PDFHub to infringe copyright, trademark, trade secret, or other intellectual property rights.</li>
+              <li><strong>No malicious activities:</strong> You may not upload or process files containing malware, worms, trojans, ransomware, or exploits designed to compromise browsers or users.</li>
+              <li><strong>No illegal bypassing:</strong> You may not use password-removal or unlock tools on documents for which you do not possess legal authorization or ownership.</li>
+              <li><strong>No automated abuse:</strong> You may not attempt denial-of-service attacks, automated scraping that degrades the hosting platform, or unauthorized circumvention of security controls.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="legal-section" id="your-documents">
+          <div class="legal-section-header">
+            <span class="legal-number">03</span>
+            <h2>Your documents and responsibilities</h2>
+          </div>
+          <div class="legal-section-body">
+            <p>You retain 100% ownership and copyright of all files and content that you open or create using PDFHub. PDFHub does not claim any intellectual property rights or licenses over your documents.</p>
+            <p>You are solely responsible for ensuring that:</p>
+            <ul class="legal-list">
+              <li>You hold the necessary legal rights, licenses, or permissions to manipulate the selected documents.</li>
+              <li>You maintain independent, secure backups of all original source files prior to performing modifications, conversions, or page deletions.</li>
+              <li>You review and inspect every converted or exported document for completeness and visual fidelity prior to sharing, filing, or relying upon it.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="legal-section" id="local-processing">
+          <div class="legal-section-header">
+            <span class="legal-number">04</span>
+            <h2>Processing model and browser storage</h2>
+          </div>
+          <div class="legal-section-body">
+            <p>PDFHub is designed as a browser-first application. For standard tools (including merge, split, compress, edit, convert, watermark, and sign), processing operations occur locally within your browser's execution memory using WebAssembly and JavaScript libraries. Original files are not transmitted to any PDFHub backend server.</p>
+            <p>For your convenience, PDFHub stores minimal local state in your browser's <code>localStorage</code> (such as your dark/light theme setting, pinned favorite tools, and recent tool shortcuts). This data resides exclusively on your local device. On public or shared computers, you should use the <a href="privacy.html#manage-local-data">Manage Local Data</a> control in the Privacy Center to clear this information before ending your session.</p>
+          </div>
+        </article>
+
+        <article class="legal-section" id="results">
+          <div class="legal-section-header">
+            <span class="legal-number">05</span>
+            <h2>Results, conversion accuracy and OCR</h2>
+          </div>
+          <div class="legal-section-body">
+            <p>While PDFHub uses industry-standard rendering and document engines (including pdf-lib, PDF.js, and Tesseract.js), automated transformations, OCR text extractions, layout conversions, and AI summaries are inherently subject to technical limitations.</p>
+            <p>Results may exhibit differences in font substitution, kerning, complex vector formatting, scanned image clarity, or text recognition accuracy. PDFHub does not guarantee that any generated output is error-free, legally valid, or suitable for court filing, financial audits, medical records, or contractual compliance. You must verify all critical output against your source document.</p>
+          </div>
+        </article>
+
+        <article class="legal-section" id="availability">
+          <div class="legal-section-header">
+            <span class="legal-number">06</span>
+            <h2>Availability, updates and changes</h2>
+          </div>
+          <div class="legal-section-body">
+            <p>PDFHub is offered on a free-to-use basis without service-level agreements (SLAs) or guarantees of uninterrupted, error-free uptime. We reserve the right to improve, modify, suspend, or discontinue individual tools, features, or website sections at any time without prior notice.</p>
+            <p>We may periodically update these Terms &amp; Conditions to reflect technical enhancements, architectural modifications, or legal obligations. The "Last Updated" date at the top of this page indicates the effective revision. Your continued use of the website following an update constitutes acceptance of the revised terms.</p>
+          </div>
+        </article>
+
+        <article class="legal-section" id="third-party">
+          <div class="legal-section-header">
+            <span class="legal-number">07</span>
+            <h2>Third-party services and CDN resources</h2>
+          </div>
+          <div class="legal-section-body">
+            <p>Certain features and styling depend on third-party public content delivery networks (CDNs) and APIs, including:</p>
+            <ul class="legal-list">
+              <li><strong>Cloudflare cdnjs:</strong> For delivering open-source JavaScript libraries (pdf-lib, pdf.js, font-awesome).</li>
+              <li><strong>Google Fonts:</strong> For serving web typography.</li>
+              <li><strong>Translation &amp; AI APIs:</strong> The Translate PDF tool connects to the MyMemory Translation API, and the AI Summarizer tool connects to configured external endpoints.</li>
+            </ul>
+            <p>Third-party resources operate under their own independent terms of service and privacy policies. PDFHub exercises no direct control over external service availability or external policies.</p>
+          </div>
+        </article>
+
+        <article class="legal-section" id="disclaimer">
+          <div class="legal-section-header">
+            <span class="legal-number">08</span>
+            <h2>Disclaimer of warranties and limitation of liability</h2>
+          </div>
+          <div class="legal-section-body">
+            <p>PDFHUB AND ALL ASSOCIATED TOOLS, CODE, AND DOCUMENTATION ARE PROVIDED STRICTLY ON AN <strong>“AS IS”</strong> AND <strong>“AS AVAILABLE”</strong> BASIS, WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING WITHOUT LIMITATION WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, OR NON-INFRINGEMENT.</p>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL PDFHUB, ITS CREATORS, CONTRIBUTORS, OR HOSTING PROVIDERS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, INCLUDING DAMAGES FOR LOSS OF PROFITS, LOSS OF DATA, DOCUMENT CORRUPTION, BUSINESS INTERRUPTION, OR RELIANCE UPON CONVERTED CONTENT, ARISING OUT OF OR IN CONNECTION WITH THE USE OR INABILITY TO USE THIS SERVICE.</p>
+          </div>
+        </article>
+
+        <article class="legal-section" id="questions">
+          <div class="legal-section-header">
+            <span class="legal-number">09</span>
+            <h2>Questions, feedback and inquiries</h2>
+          </div>
+          <div class="legal-section-body">
+            <p>If you have questions, bug reports, feature suggestions, or feedback concerning these terms or any PDFHub tool, please reach out with details about your browser, operating system, and the specific tool used:</p>
+            <div class="terms-contact-card">
+              <div class="contact-card-icon"><i class="fas fa-envelope-open-text" aria-hidden="true"></i></div>
+              <div class="contact-card-content">
+                <strong>Contact Developer</strong>
+                <p>Hazim Bashir Faqeer (@officialhazim42)</p>
+                <a class="contact-link" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Terms%20Inquiry">
+                  <span>hazimbashirfaqeer@gmail.com</span>
+                  <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
       </section>
     </div>
-    <p class="terms-footnote">These terms are provided for general informational purposes and do not replace advice from a qualified legal professional.</p>
+
+    <!-- Related Navigation Summary Card -->
+    <div class="terms-summary-card">
+      <div class="summary-card-text">
+        <h3><i class="fas fa-shield-halved" aria-hidden="true"></i> Your privacy is paramount</h3>
+        <p>Learn exactly how client-side processing isolates your files from network transmission, review our tool-by-tool privacy matrix, and manage your browser storage.</p>
+      </div>
+      <div class="summary-card-actions">
+        <a class="btn btn-secondary" href="privacy.html"><i class="fas fa-shield-halved" aria-hidden="true"></i> View Privacy Center</a>
+        <a class="btn btn-secondary" href="../index.html"><i class="fas fa-th-large" aria-hidden="true"></i> Explore All 33 Tools</a>
+      </div>
+    </div>
+
+    <p class="terms-footnote">Notice: These Terms &amp; Conditions are provided for general informational and website governance purposes and do not constitute formal legal counsel. For sensitive enterprise or regulated document workflows, consult your organization's legal compliance team.</p>
   </main>
+
   <script src="site-pages.js"></script>
+  <script>
+    // Smooth active section tracking for Terms TOC
+    (function(){
+      const links = document.querySelectorAll('#termsNavLinks .terms-nav-link');
+      const sections = document.querySelectorAll('.legal-section');
+      if (!links.length || !sections.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            links.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-100px 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(sec => observer.observe(sec));
+
+      // Close mobile dropdown when a chip is tapped
+      document.querySelectorAll('.terms-toc-mobile-grid .toc-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const details = document.getElementById('termsTocMobile');
+          if (details) details.open = false;
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

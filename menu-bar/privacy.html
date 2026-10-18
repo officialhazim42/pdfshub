@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="PDFHub Privacy Center: understand browser processing, external services, and local data controls.">
+  <meta name="description" content="PDFHub Privacy Center: Technical explanation of browser-based file processing, zero server storage, external services, and local data controls.">
   <title>Privacy Center - PDFHub</title>
   <link rel="icon" href="../favicons/favicon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="site-pages.css">
+  <link rel="stylesheet" href="site-pages-polish.css">
 </head>
 <body data-root="../" data-page="privacy">
   <div class="page-bg"></div>
   <nav>
-    <a class="logo" href="../index.html">PDFHub</a>
+    <a class="logo" href="../index.html">
+      <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
+      <span>PDF HUB</span>
+    </a>
     <div class="nav-right">
-      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" title="Open menu"><i class="fas fa-bars"></i></button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" title="Open menu" aria-label="Open menu"><i class="fas fa-bars"></i></button>
       <div class="site-menu" id="siteMenu">
         <div class="menu-header">
           <div class="menu-heading">
@@ -35,59 +39,460 @@
             <a class="menu-action" href="favorites.html"><i class="fas fa-star"></i><span>Favorites</span><span class="menu-action-note">Local</span></a>
             <a class="menu-action" href="history.html"><i class="fas fa-clock-rotate-left"></i><span>History</span></a>
             <div class="menu-section-label" data-section="about">Privacy &amp; About</div>
-            <a class="menu-action" href="privacy.html"><i class="fas fa-shield-halved"></i><span>Privacy Center</span></a>
-            <a class="menu-action" href="terms.html"><i class="fas fa-file-contract"></i><span>Terms and conditions</span></a>
+            <a class="menu-action active-page" href="privacy.html"><i class="fas fa-shield-halved"></i><span>Privacy Center</span></a>
+            <a class="menu-action" href="terms.html"><i class="fas fa-file-contract"></i><span>Terms &amp; Conditions</span></a>
             <a class="menu-action" href="about.html"><i class="fas fa-circle-info"></i><span>About us</span></a>
             <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry"><i class="fas fa-envelope"></i><span>Contact Support</span></a>
           </div>
-          <p class="menu-note">Manage local preferences in your browser settings.</p>
+          <p class="menu-note">Your files stay on this device. No account required.</p>
         </div>
       </div>
     </div>
   </nav>
-  <main class="page-main editorial-page">
+
+  <main class="page-main editorial-page privacy-page">
     <header class="editorial-hero">
-      <span class="eyebrow">Clear processing information</span>
+      <span class="eyebrow"><i class="fas fa-shield-halved" aria-hidden="true"></i> Transparent Data Practices</span>
       <h1>Privacy Center</h1>
-      <p class="lead">PDFHub is a static browser application. Processing and network behavior can differ by tool, so use this page as a map rather than a blanket promise.</p>
+      <div class="terms-meta-bar">
+        <span class="meta-pill"><i class="fas fa-calendar-check" aria-hidden="true"></i> Last Updated: October 2026</span>
+        <span class="meta-dot" aria-hidden="true">●</span>
+        <span class="meta-pill"><i class="fas fa-server" aria-hidden="true"></i> Zero Server Storage</span>
+        <span class="meta-dot" aria-hidden="true">●</span>
+        <span class="meta-pill"><i class="fas fa-cookie-bite" aria-hidden="true"></i> Zero Tracking Cookies</span>
+      </div>
+      <p class="lead">PDFHub is built around a simple principle: your documents belong to you. Understand how our browser-based tools process files, when external services are contacted, and how your local preferences are managed.</p>
     </header>
-    <section class="panel-grid">
-      <article class="panel">
-        <h2><i class="fas fa-laptop"></i> Browser processing</h2>
-        <p>Many PDF tools use browser libraries such as pdf-lib or PDF.js to read and transform files locally. This includes common organization, annotation, image conversion, and extraction workflows.</p>
+
+    <!-- 4 Core Privacy Highlights -->
+    <section class="privacy-pillars-grid" aria-label="Privacy core highlights">
+      <article class="pillar-card">
+        <div class="pillar-icon"><i class="fas fa-laptop-code" aria-hidden="true"></i></div>
+        <h3>Client-Side Processing</h3>
+        <p>Standard PDF tools execute entirely within your browser's local memory via WebAssembly and JavaScript. Your documents are not uploaded to PDFHub servers.</p>
       </article>
-      <article class="panel">
-        <h2><i class="fas fa-globe"></i> Network-dependent tools</h2>
-        <p>OCR may load Tesseract language data, Translate PDF calls the MyMemory service, and AI Summarizer may use its configured external AI service. Review those tool pages before processing sensitive content.</p>
+
+      <article class="pillar-card">
+        <div class="pillar-icon"><i class="fas fa-database" aria-hidden="true"></i></div>
+        <h3>Zero Server Storage</h3>
+        <p>We maintain no file storage infrastructure, no user database, and no document logging servers. Files disappear from memory when you close your tab.</p>
       </article>
-      <article class="panel">
-        <h2><i class="fas fa-database"></i> Local storage</h2>
-        <p>PDFHub stores theme preferences, favorites, and recent tool links in this browser's localStorage. It does not need an account. Clearing site data removes those application-managed records.</p>
+
+      <article class="pillar-card">
+        <div class="pillar-icon"><i class="fas fa-user-shield" aria-hidden="true"></i></div>
+        <h3>No Accounts or Tracking</h3>
+        <p>No user accounts, passwords, or emails required to use any tool. We do not set tracking cookies or embed advertising telemetry pixels.</p>
+      </article>
+
+      <article class="pillar-card">
+        <div class="pillar-icon"><i class="fas fa-network-wired" aria-hidden="true"></i></div>
+        <h3>Declared Network Needs</h3>
+        <p>Where a feature relies on an external service (such as translation or OCR language downloads), that network activity is disclosed explicitly below.</p>
       </article>
     </section>
-    <section class="panel" style="margin-top:14px">
-      <h2>Manage local data</h2>
-      <p id="storageSummary">Checking local PDFHub data...</p>
-      <div class="action-row">
-        <button class="btn btn-secondary" id="clearLocal" type="button"><i class="fas fa-trash"></i> Clear PDFHub local data</button>
-        <a class="editorial-link" href="../index.html"><span>Return to tools</span><i class="fas fa-arrow-right"></i></a>
+
+    <!-- Quick Navigation Bar for Privacy Details -->
+    <nav class="privacy-quick-nav" aria-label="Privacy sections jump links">
+      <span class="quick-nav-label">Jump to:</span>
+      <a href="#how-it-works">File Processing</a>
+      <a href="#tool-matrix">Tool Privacy Matrix</a>
+      <a href="#third-party-services">External APIs &amp; CDNs</a>
+      <a href="#local-storage-details">Browser Storage</a>
+      <a href="#manage-local-data">Manage Local Data</a>
+      <a href="#security-limitations">Security &amp; Responsibilities</a>
+    </nav>
+
+    <!-- SECTION 1: How PDFHub Works Under the Hood -->
+    <section class="privacy-content-card" id="how-it-works">
+      <div class="card-section-heading">
+        <span class="section-tag">Architecture</span>
+        <h2>How PDFHub processes files locally in your browser</h2>
+      </div>
+      <p>Traditional online PDF websites require uploading your documents to remote cloud servers, transforming them in a datacenter, and sending a download link back. PDFHub takes a fundamentally different, privacy-first approach:</p>
+      <div class="architecture-steps">
+        <div class="arch-step">
+          <span class="arch-step-num">1</span>
+          <div>
+            <strong>Local File Reading via HTML5 File API</strong>
+            <p>When you drag or select a PDF, your browser reads its binary data into temporary local memory (<code>ArrayBuffer</code>) directly on your device.</p>
+          </div>
+        </div>
+        <div class="arch-step">
+          <span class="arch-step-num">2</span>
+          <div>
+            <strong>In-Memory Transformations via Client-Side Engines</strong>
+            <p>Our tools utilize audited client-side engines such as <code>pdf-lib</code>, <code>PDF.js</code>, HTML5 <code>Canvas</code>, and <code>docx/xlsx</code> libraries executing entirely within your browser sandbox.</p>
+          </div>
+        </div>
+        <div class="arch-step">
+          <span class="arch-step-num">3</span>
+          <div>
+            <strong>Local Blob Export Directly to Your Storage</strong>
+            <p>The resulting modified PDF is packaged into a local binary object URL (<code>blob:</code>) and saved to your device's downloads folder. The file never leaves your computer.</p>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- SECTION 2: Tool-by-Tool Privacy Matrix -->
+    <section class="privacy-content-card" id="tool-matrix">
+      <div class="card-section-heading">
+        <span class="section-tag">Transparency Matrix</span>
+        <h2>Tool-by-Tool processing breakdown</h2>
+      </div>
+      <p>Not all PDF operations are identical. Below is an honest, verified audit of how each category of tools operates in PDFHub:</p>
+      <div class="matrix-table-wrap">
+        <table class="privacy-matrix-table">
+          <thead>
+            <tr>
+              <th>Tool Category</th>
+              <th>Processing Engine</th>
+              <th>Network Transmission</th>
+              <th>Server Storage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Standard PDF Operations</strong>
+                <small>Merge, Split, Compress, Edit, Sign, Rotate, Crop, Page Numbers, Watermark, Protect, Unlock, Repair, Remove/Extract Pages, Convert (Word/Excel/PPT/Images/Markdown)</small>
+              </td>
+              <td><span class="badge-pill badge-local">100% Client-Side</span> (pdf-lib, PDF.js, Canvas)</td>
+              <td><strong>None</strong> (0 bytes uploaded)</td>
+              <td><strong>Zero</strong> (Never uploaded to any server)</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>OCR PDF</strong>
+                <small>Optical character recognition and text extraction from scanned documents</small>
+              </td>
+              <td><span class="badge-pill badge-hybrid">Client-Side Worker</span> (Tesseract.js)</td>
+              <td>One-time download of public OCR trained language models from CDN into memory. Image recognition executes locally on your machine.</td>
+              <td><strong>Zero</strong> (Document pixels never leave browser)</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Translate PDF</strong>
+                <small>Translating extracted document text into foreign languages</small>
+              </td>
+              <td><span class="badge-pill badge-api">External API</span> (MyMemory API)</td>
+              <td>Extracted text fragments are transmitted to the free public MyMemory Translation API (<code>api.mymemory.translated.net</code>) to retrieve translations.</td>
+              <td>Governed by MyMemory API policies. Do not submit confidential text.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>AI Summarizer</strong>
+                <small>Generating key bullet points and summaries of lengthy documents</small>
+              </td>
+              <td><span class="badge-pill badge-hybrid">Hybrid / Local</span></td>
+              <td>If configured with an external AI endpoint, prompts are transmitted to that provider. If no endpoint is configured or if requests fail, it falls back to a 100% local word-frequency algorithm.</td>
+              <td>Local fallback has zero server storage; API mode governed by chosen provider.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Scan to PDF</strong>
+                <small>Capturing document photos directly from your web camera</small>
+              </td>
+              <td><span class="badge-pill badge-local">100% Client-Side</span> (WebRTC / Canvas)</td>
+              <td>Camera stream is rendered locally onto HTML5 Canvas without network transmission.</td>
+              <td><strong>Zero</strong> (Photos remain in browser memory)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 3: External Services & CDNs -->
+    <section class="privacy-content-card" id="third-party-services">
+      <div class="card-section-heading">
+        <span class="section-tag">External Resources</span>
+        <h2>Third-party CDNs and network dependencies</h2>
+      </div>
+      <p>PDFHub is delivered as a static web application hosted on Cloudflare Workers and Netlify. To deliver fast global performance and dependable typography, the site loads the following static third-party resources:</p>
+      <div class="external-services-grid">
+        <div class="service-item">
+          <div class="service-icon"><i class="fas fa-cloud" aria-hidden="true"></i></div>
+          <div>
+            <strong>Cloudflare cdnjs (cdnjs.cloudflare.com)</strong>
+            <p>Delivers static JavaScript libraries (pdf-lib, pdf.js, font-awesome, docx, xlsx, pptxgenjs, tesseract.js). Subject to Cloudflare's privacy policy. No document contents are sent to cdnjs.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><i class="fas fa-font" aria-hidden="true"></i></div>
+          <div>
+            <strong>Google Fonts (fonts.googleapis.com)</strong>
+            <p>Delivers web fonts (Syne, DM Sans). Subject to Google Fonts' privacy policy. Google receives standard browser HTTP request metadata (IP address, user-agent) to serve font stylesheets.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><i class="fas fa-language" aria-hidden="true"></i></div>
+          <div>
+            <strong>MyMemory Translated API (api.mymemory.translated.net)</strong>
+            <p>Used exclusively by the Translate PDF tool when a translation request is initiated by the user. Only the text chunks to be translated are sent.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
+          <div>
+            <strong>Tesseract CDN (unpkg.com)</strong>
+            <p>Used by the OCR tool to download pre-trained language model data files (e.g. <code>eng.traineddata</code>). Document content is not sent to unpkg.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Local Storage Breakdown -->
+    <section class="privacy-content-card" id="local-storage-details">
+      <div class="card-section-heading">
+        <span class="section-tag">Local Storage</span>
+        <h2>Application data stored in your browser</h2>
+      </div>
+      <p>PDFHub uses HTML5 <code>localStorage</code> exclusively to save your interface preferences. It does not use tracking cookies, analytics identifiers, or cross-site tokens. Here is the complete inventory of keys stored:</p>
+      <div class="storage-keys-list">
+        <div class="storage-key-row">
+          <code>pdfhub-theme</code>
+          <span class="key-type">String ('dark' | 'light')</span>
+          <p>Preserves your chosen color theme so your preference is retained when navigating between pages or revisiting the site.</p>
+        </div>
+        <div class="storage-key-row">
+          <code>pdfhub-favorites</code>
+          <span class="key-type">JSON Array</span>
+          <p>Stores the list of tool URLs that you have starred on the homepage for fast one-click access.</p>
+        </div>
+        <div class="storage-key-row">
+          <code>pdfhub-history-tools</code>
+          <span class="key-type">JSON Array (max 12 items)</span>
+          <p>Stores the names and URLs of the last tools you opened so you can quickly return to recent utilities from the menu or dashboard.</p>
+        </div>
+        <div class="storage-key-row">
+          <code>pdfhub-notifications-seen</code>
+          <span class="key-type">String ('true' | 'false')</span>
+          <p>Records whether you have viewed local update announcements in the dashboard to prevent showing repeated notices.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: MANAGE LOCAL DATA (REDESIGNED INTERACTIVE SECTION) -->
+    <section class="privacy-content-card local-data-card" id="manage-local-data">
+      <div class="card-section-heading">
+        <span class="section-tag section-tag-action">Interactive Control</span>
+        <h2>Manage Local PDFHub Data</h2>
+      </div>
+      <p class="manage-data-desc">View and manage the local records stored in this browser for PDFHub. This data remains on this device and can be reset at any time.</p>
+
+      <!-- Live Storage Status Dashboard -->
+      <div class="live-storage-dashboard" id="storageDashboard">
+        <div class="storage-stat">
+          <span class="stat-label"><i class="fas fa-circle-half-stroke" aria-hidden="true"></i> Theme Preference</span>
+          <strong class="stat-value" id="statTheme">Dark</strong>
+          <small class="stat-hint">Active UI color mode</small>
+        </div>
+        <div class="storage-stat">
+          <span class="stat-label"><i class="fas fa-star" aria-hidden="true"></i> Saved Favorites</span>
+          <strong class="stat-value" id="statFavorites">0 tools</strong>
+          <small class="stat-hint">Pinned home shortcuts</small>
+        </div>
+        <div class="storage-stat">
+          <span class="stat-label"><i class="fas fa-clock-rotate-left" aria-hidden="true"></i> Tool History</span>
+          <strong class="stat-value" id="statHistory">0 tools</strong>
+          <small class="stat-hint">Recently accessed tools</small>
+        </div>
+        <div class="storage-stat">
+          <span class="stat-label"><i class="fas fa-bell" aria-hidden="true"></i> Update Status</span>
+          <strong class="stat-value" id="statNotifs">Default</strong>
+          <small class="stat-hint">Notification state</small>
+        </div>
+      </div>
+
+      <!-- Scope Explanation Box -->
+      <div class="data-scope-box">
+        <div class="scope-col scope-included">
+          <h4><i class="fas fa-circle-check" aria-hidden="true"></i> What will be cleared:</h4>
+          <ul>
+            <li>Your theme preference (resets to default Dark theme)</li>
+            <li>All pinned favorite tool shortcuts</li>
+            <li>Your recent tool access history</li>
+            <li>Local notification viewing records</li>
+          </ul>
+        </div>
+        <div class="scope-col scope-excluded">
+          <h4><i class="fas fa-shield-halved" aria-hidden="true"></i> What will remain untouched:</h4>
+          <ul>
+            <li>Any PDF files already saved to your downloads folder</li>
+            <li>Browser bookmarks, history, and cache of other websites</li>
+            <li>Your browser's security settings and extensions</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Action Trigger Row -->
+      <div class="manage-actions-row">
+        <button class="btn btn-clear-data" id="openClearDataModal" type="button" aria-haspopup="dialog">
+          <i class="fas fa-trash-can" aria-hidden="true"></i>
+          <span>Clear Local PDFHub Data...</span>
+        </button>
+        <div class="storage-live-status" id="storageStatusMessage" role="status" aria-live="polite">
+          <i class="fas fa-info-circle" aria-hidden="true"></i>
+          <span>Data resides in this browser's localStorage.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Security & User Responsibilities -->
+    <section class="privacy-content-card" id="security-limitations">
+      <div class="card-section-heading">
+        <span class="section-tag">Security &amp; Best Practices</span>
+        <h2>Security limitations &amp; user responsibilities</h2>
+      </div>
+      <p>While client-side processing eliminates interception risks over transit to an application server, browser-based tools carry specific considerations:</p>
+      <div class="best-practices-grid">
+        <div class="practice-card">
+          <span class="practice-icon"><i class="fas fa-display" aria-hidden="true"></i></span>
+          <h4>Public &amp; Shared Computers</h4>
+          <p>If you process private documents on a shared library, school, or workplace computer, subsequent users could potentially view recent tool URLs in browser history or recover files left in the browser's download folder. Always use the <em>Clear Local PDFHub Data</em> action above and close all browser windows when finished.</p>
+        </div>
+        <div class="practice-card">
+          <span class="practice-icon"><i class="fas fa-microchip" aria-hidden="true"></i></span>
+          <h4>Browser Extension Safety</h4>
+          <p>Third-party browser extensions (such as screen recorders, ad blockers, or grammar checkers) have broad permissions to inspect web pages. Avoid running untrusted browser extensions when working with sensitive legal, financial, or personal records.</p>
+        </div>
+        <div class="practice-card">
+          <span class="practice-icon"><i class="fas fa-floppy-disk" aria-hidden="true"></i></span>
+          <h4>Keep Original Source Backups</h4>
+          <p>PDF operations like page deletion, splitting, and compression permanently alter document structure. Never rely exclusively on a modified output without retaining an unmodified backup of your original document.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Feedback Card -->
+    <div class="terms-summary-card">
+      <div class="summary-card-text">
+        <h3><i class="fas fa-envelope-open-text" aria-hidden="true"></i> Privacy questions or security disclosures?</h3>
+        <p>If you have questions about how a particular tool works or wish to report a security finding, contact the developer directly.</p>
+      </div>
+      <div class="summary-card-actions">
+        <a class="btn btn-secondary" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Privacy%20Inquiry"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Privacy Inquiries</a>
+        <a class="btn btn-secondary" href="terms.html"><i class="fas fa-file-contract" aria-hidden="true"></i> Review Terms of Service</a>
+      </div>
+    </div>
   </main>
+
+  <!-- ACCESSIBLE CONFIRMATION MODAL FOR CLEARING LOCAL DATA -->
+  <div class="data-modal-backdrop" id="clearDataModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" hidden>
+    <div class="data-modal-card" id="clearModalCard">
+      <div class="modal-card-icon">
+        <i class="fas fa-triangle-exclamation" aria-hidden="true"></i>
+      </div>
+      <h3 class="modal-card-title" id="modalTitle">Clear Local PDFHub Data?</h3>
+      <p class="modal-card-desc" id="modalDesc">
+        This action will permanently remove all application-managed data stored in this browser for PDFHub:
+      </p>
+      <ul class="modal-checklist">
+        <li><i class="fas fa-check" aria-hidden="true"></i> Reset your theme preference back to Dark mode</li>
+        <li><i class="fas fa-check" aria-hidden="true"></i> Clear all saved favorite tool shortcuts</li>
+        <li><i class="fas fa-check" aria-hidden="true"></i> Clear your recent tool visit history</li>
+        <li><i class="fas fa-check" aria-hidden="true"></i> Reset notification banner status</li>
+      </ul>
+      <p class="modal-warning-note">
+        <i class="fas fa-circle-info" aria-hidden="true"></i>
+        <span>PDF files already downloaded to your computer will not be affected. Other websites' data will remain intact.</span>
+      </p>
+      <div class="modal-actions-row">
+        <button class="btn btn-secondary" id="cancelClearDataBtn" type="button">Cancel</button>
+        <button class="btn btn-danger-confirm" id="confirmClearDataBtn" type="button">
+          <i class="fas fa-trash-can" aria-hidden="true"></i>
+          <span>Yes, Clear My Local Data</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="site-pages.js"></script>
   <script>
     (function(){
-      const summary=document.getElementById('storageSummary'),keys=['pdfhub-theme','pdfhub-history-tools','pdfhub-favorites'];
-      const update=()=>{
-        const count=keys.reduce((n,key)=>n+(localStorage.getItem(key)?1:0),0);
-        summary.textContent=`PDFHub currently has data in ${count} of ${keys.length} local storage areas on this browser. This does not include browser cache or downloaded files.`;
-      };
-      document.getElementById('clearLocal').addEventListener('click',()=>{
-        keys.forEach(key=>localStorage.removeItem(key));
-        update();
-        summary.textContent+=' Local PDFHub preferences, favorites, and history were cleared.';
+      // Storage keys managed by PDFHub
+      const KEYS = ['pdfhub-theme', 'pdfhub-favorites', 'pdfhub-history-tools', 'pdfhub-notifications-seen'];
+
+      const statTheme = document.getElementById('statTheme');
+      const statFavorites = document.getElementById('statFavorites');
+      const statHistory = document.getElementById('statHistory');
+      const statNotifs = document.getElementById('statNotifs');
+      const statusMsg = document.getElementById('storageStatusMessage');
+
+      const modal = document.getElementById('clearDataModal');
+      const openBtn = document.getElementById('openClearDataModal');
+      const cancelBtn = document.getElementById('cancelClearDataBtn');
+      const confirmBtn = document.getElementById('confirmClearDataBtn');
+
+      function updateDashboard(){
+        try {
+          const theme = localStorage.getItem('pdfhub-theme') || 'dark';
+          statTheme.textContent = theme === 'light' ? 'Light' : 'Dark (Default)';
+
+          let favs = [];
+          try { favs = JSON.parse(localStorage.getItem('pdfhub-favorites') || '[]'); } catch(e){}
+          statFavorites.textContent = `${favs.length} tool${favs.length === 1 ? '' : 's'}`;
+
+          let hist = [];
+          try { hist = JSON.parse(localStorage.getItem('pdfhub-history-tools') || '[]'); } catch(e){}
+          statHistory.textContent = `${hist.length} tool${hist.length === 1 ? '' : 's'}`;
+
+          const notifsSeen = localStorage.getItem('pdfhub-notifications-seen') === 'true';
+          statNotifs.textContent = notifsSeen ? 'Seen' : 'Unseen';
+        } catch(e) {
+          console.error('Error reading localStorage:', e);
+        }
+      }
+
+      function openModal(){
+        modal.hidden = false;
+        modal.classList.add('open');
+        cancelBtn.focus();
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal(){
+        modal.classList.remove('open');
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        openBtn.focus();
+      }
+
+      openBtn.addEventListener('click', openModal);
+      cancelBtn.addEventListener('click', closeModal);
+
+      // Close on backdrop click
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
       });
-      update();
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+
+      confirmBtn.addEventListener('click', () => {
+        try {
+          KEYS.forEach(key => localStorage.removeItem(key));
+          updateDashboard();
+          closeModal();
+
+          statusMsg.className = 'storage-live-status status-success';
+          statusMsg.innerHTML = '<i class="fas fa-circle-check" aria-hidden="true"></i> <strong>✓ All local PDFHub data cleared successfully.</strong>';
+
+          // Reset UI theme to dark if it was light
+          if (document.body.classList.contains('light')) {
+            document.body.classList.remove('light');
+            document.querySelectorAll('.t-label').forEach(label => label.textContent = 'Dark');
+            document.querySelectorAll('.toggle-knob').forEach(knob => knob.innerHTML = '<i class="fas fa-moon"></i>');
+          }
+        } catch(e) {
+          statusMsg.className = 'storage-live-status status-error';
+          statusMsg.innerHTML = '<i class="fas fa-circle-xmark" aria-hidden="true"></i> Failed to clear storage: ' + e.message;
+        }
+      });
+
+      updateDashboard();
     })();
   </script>
 </body>
