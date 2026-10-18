@@ -1,5 +1,14 @@
 {
+  "name": "pdfshub",
+  "version": "1.0.0",
+  "description": "PDFHub — 33 Free Browser-Based PDF Tools",
   "scripts": {
+    "build": "node scripts/build-dist.mjs",
+    "preview": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:dry-run": "wrangler deploy --dry-run",
+    "validate:assets": "node scripts/validate-deployment-assets.mjs",
+    "test:guides": "node scripts/verify-guides.mjs",
     "capture:guides": "node scripts/capture-tool-guides.mjs"
   },
   "devDependencies": {
@@ -8,6 +17,7 @@
     "pdf-lib": "^1.17.1",
     "playwright": "^1.64.1",
     "pptxgenjs": "^4.0.1",
+    "wrangler": "^4.151.1",
     "xlsx": "^0.18.5"
   }
 }

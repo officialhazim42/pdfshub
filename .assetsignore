@@ -1,0 +1,28 @@
+# Cloudflare Workers Static Assets Ignore File
+# Excludes development-only files, dependencies, and test artifacts from static deployment
+
+# Dependencies and lockfiles
+node_modules/
+node_modules
+package.json
+package-lock.json
+
+# Cloudflare and environment
+.wrangler/
+.env
+.env.*
+
+# Version control
+.git/
+.gitignore
+
+# Development scripts, tests, and documentation
+scripts/
+docs/
+.capture-samples/
+README.md
+
+# Operating system and temporary files
+.DS_Store
+Thumbs.db
+*.log
