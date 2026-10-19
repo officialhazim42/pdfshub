@@ -6,6 +6,7 @@ Welcome to the official technical and user documentation for **PDFHub** (33 Free
 - **Alternative Deployment:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 - **Source Code Repository:** [github.com/officialhazim42/pdfshub](https://github.com/officialhazim42/pdfshub)
 - **Web Documentation Portal:** [/docs/index.html](index.html)
+- **Download Complete PDF Manual:** [pdfhub-complete-documentation.pdf](pdfhub-complete-documentation.pdf) *(75-Page A4 Publication Manual)*
 
 ---
 
@@ -13,6 +14,7 @@ Welcome to the official technical and user documentation for **PDFHub** (33 Free
 
 | Document | Description |
 | :--- | :--- |
+| **[Downloadable PDF Manual](pdfhub-complete-documentation.pdf)** | **Complete 75-Page Print-Ready PDF Manual** covering all 33 tools, privacy, and architecture. |
 | **[Documentation Index](documentation-index.md)** | Master catalog and directory of all 33 tools and technical articles. |
 | **[Getting Started](getting-started.md)** | Quick-start guide for browser usage, PWA installation, and workflows. |
 | **[Website Overview & Architecture](website-overview.md)** | System design, static routing, theme tokens, and client runtime. |

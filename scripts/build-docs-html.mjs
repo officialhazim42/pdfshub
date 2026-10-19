@@ -325,6 +325,13 @@ const html = `<!doctype html>
         </div>
       </div>
 
+      <!-- Download Complete PDF Documentation Action -->
+      <div style="margin: 0 auto 28px; text-align: center;">
+        <a class="tool-btn-primary" href="pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation.pdf" style="display: inline-flex; width: auto; padding: 13px 28px; font-size: 0.95rem; border-radius: 99px; box-shadow: 0 4px 20px rgba(124,106,255,0.35); text-decoration: none;">
+          <i class="fas fa-file-pdf" aria-hidden="true"></i> Download Complete PDF Documentation Manual (75 Pages, A4)
+        </a>
+      </div>
+
       <!-- Master Search Bar -->
       <div class="doc-search-wrapper">
         <i class="fas fa-search doc-search-icon" aria-hidden="true"></i>
@@ -757,6 +764,13 @@ const html = `<!doctype html>
             <div>
               <strong>accessibility.md</strong>
               <div style="font-size: 0.72rem; color: var(--muted);">WCAG 2.1 AA Compliance</div>
+            </div>
+          </a>
+          <a class="md-doc-card" href="pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation.pdf" style="border-color: var(--accent); background: var(--accent-light);">
+            <i class="fas fa-file-pdf" style="color: var(--a2);"></i>
+            <div>
+              <strong>pdfhub-complete-documentation.pdf</strong>
+              <div style="font-size: 0.72rem; color: var(--accent); font-weight: 700;">Complete 75-Page PDF Manual</div>
             </div>
           </a>
         </div>

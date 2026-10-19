@@ -6,6 +6,8 @@ Welcome to the central documentation index for PDFHub. Every implemented tool, a
 
 ## Part 1: Architecture & Technical Foundations
 
+0. **[Complete Downloadable PDF Documentation Manual (75 Pages)](pdfhub-complete-documentation.pdf)**  
+   *Comprehensive, publication-grade, print-ready A4 PDF book containing all 33 tool specifications, privacy models, architecture, troubleshooting, and deployment guides.*
 1. **[Getting Started Guide](getting-started.md)**  
    *Overview of PDFHub, accessing web tools, mobile and desktop PWA installation, and navigating workspaces.*
 2. **[Website Architecture & Overview](website-overview.md)**  
