@@ -41,6 +41,7 @@
         <h3 class="footer-title">Resources</h3>
         <ul class="footer-links">
           <li><a href="${root}guides/">User Guides &amp; Tips</a></li>
+          <li><a href="${root}install/">Install PDFHub App</a></li>
           <li><a href="${root}guides/merge-pdf/">Merge PDF Guide</a></li>
           <li><a href="${root}guides/compress-pdf/">Compress PDF Guide</a></li>
           <li><a href="${root}guides/edit-pdf/">Edit PDF Guide</a></li>
@@ -109,6 +110,7 @@
   if(menu&&!menu.querySelector('.menu-section-label:not([data-section])')){menu.querySelector('.menu-list')?.insertAdjacentHTML('afterbegin','<div class="menu-section-label">Tools &amp; Guides</div>');}
   if(menu&&!menu.querySelector('.menu-action[href$="guides/"]')){const guides=document.createElement('a');guides.className='menu-action';guides.href=root+'guides/';guides.innerHTML='<i class="fas fa-book-open"></i><span>User Guides &amp; Tips</span><span class="menu-action-note">33 guides</span>';menu.querySelector('.menu-list')?.insertBefore(guides,menu.querySelector('.menu-action[href$="history.html"]'));}
   if(menu&&!menu.querySelector('.menu-action[href$="favorites.html"]')){const favorites=document.createElement('a');favorites.className='menu-action';favorites.href=root+'menu-bar/favorites.html';favorites.innerHTML='<i class="fas fa-star"></i><span>Favorites</span><span class="menu-action-note">Local</span>';menu.querySelector('.menu-list')?.insertBefore(favorites,menu.querySelector('.menu-action[href$="history.html"]'));}
+  if(menu&&!menu.querySelector('.menu-action[href$="install/"]')){const install=document.createElement('a');install.className='menu-action';install.href=root+'install/';install.innerHTML='<i class="fas fa-download"></i><span>Install App</span><span class="menu-action-note">PWA</span>';menu.querySelector('.menu-list')?.insertBefore(install,menu.querySelector('.menu-section-label[data-section="about"]'));}
   if(menu&&!menu.querySelector('.menu-action[href$="privacy.html"]')){const privacy=document.createElement('a');privacy.className='menu-action';privacy.href=root+'menu-bar/privacy.html';privacy.innerHTML='<i class="fas fa-shield-halved"></i><span>Privacy Center</span>';menu.querySelector('.menu-list')?.append(privacy);}
   if(menu&&!menu.querySelector('a[href^="mailto:"]')){const contact=document.createElement('a');contact.className='menu-action';contact.href='mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry';contact.innerHTML='<i class="fas fa-envelope"></i><span>Contact Support</span>';menu.querySelector('.menu-list')?.append(contact);}
   if(menu&&!menu.querySelector('.menu-header')){

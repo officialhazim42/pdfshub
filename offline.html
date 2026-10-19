@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="PDFHub is currently operating in offline mode. Access previously loaded tools or reconnect to use network features."/>
+  <meta name="theme-color" content="#07070d"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="PDFHub"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <link rel="icon" href="favicons/favicon-32x32.png" sizes="32x32" type="image/png"/>
+  <link rel="icon" href="favicons/icon-192.png" sizes="192x192" type="image/png"/>
+  <link rel="apple-touch-icon" href="favicons/apple-touch-icon.png"/>
+  <title>Offline Mode – PDFHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="developer.css"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #07070d; --s1: #0f0f1a; --s2: #161625; --border: #252538;
+      --text: #eeeef8; --muted: #8c8ca8;
+      --accent: #7c6aff; --a2: #ff5f7e; --a3: #00e5a0; --a4: #ffb347; --a5: #38d9f5;
+    }
+    body.light {
+      --bg: #f5f5fa; --s1: #ffffff; --s2: #ececf5; --border: #dcdce8;
+      --text: #1a1a2e; --muted: #5e5e78;
+      --accent: #5b47e0;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      transition: background 0.3s, color 0.3s;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(124,106,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .offline-card {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+      width: 100%;
+      background: rgba(15, 15, 26, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 44px 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+    body.light .offline-card {
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 20px 50px rgba(91, 71, 224, 0.1);
+    }
+    .offline-icon-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(124,106,255,0.18), rgba(56,217,245,0.18));
+      border: 1px solid rgba(124,106,255,0.3);
+      color: var(--accent);
+      font-size: 2.2rem;
+    }
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #7c6aff 0%, #38d9f5 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      text-decoration: none;
+    }
+    body.light .logo-badge {
+      background: linear-gradient(135deg, #5b47e0 0%, #0284c7 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .offline-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 179, 71, 0.12);
+      border: 1px solid rgba(255, 179, 71, 0.28);
+      color: var(--a4);
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .offline-status i { font-size: 0.72rem; }
+    .offline-features {
+      text-align: left;
+      background: var(--s2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      font-size: 0.85rem;
+    }
+    .offline-features h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .offline-features ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+    .offline-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .offline-features li i {
+      color: var(--a3);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .offline-features li.caution i {
+      color: var(--a4);
+    }
+    .offline-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(124, 106, 255, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(124, 106, 255, 0.45);
+    }
+    .btn-secondary {
+      background: var(--s2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .offline-footer-note {
+      margin-top: 24px;
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body data-root="./">
+  <div class="offline-card">
+    <a class="logo-badge" href="index.html">
+      <img class="logo-mark" src="favicons/favicon.png" alt="" aria-hidden="true"/>
+      <span>PDF HUB</span>
+    </a>
+    <div class="offline-icon-wrap" aria-hidden="true">
+      <i class="fas fa-wifi-slash"></i>
+    </div>
+    <div class="offline-status">
+      <i class="fas fa-circle-dot"></i> Working Offline
+    </div>
+    <h1>You are currently offline</h1>
+    <p>The page or feature you requested is not yet cached in this browser. PDFHub is designed with offline-first client architecture for previously visited tools.</p>
+
+    <div class="offline-features">
+      <h2>Offline Capabilities &amp; Limitations</h2>
+      <ul>
+        <li>
+          <i class="fas fa-check-circle"></i>
+          <span>Previously cached tools (like Merge, Split, Compress, Rotate) continue to execute client-side inside your browser.</span>
+        </li>
+        <li>
+          <i class="fas fa-check-circle"></i>
+          <span>Your local tool history, favorites, and dark/light preferences remain accessible on this device.</span>
+        </li>
+        <li class="caution">
+          <i class="fas fa-triangle-exclamation"></i>
+          <span>External library resources, AI summarizer, and live translation features require an active internet connection.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="offline-actions">
+      <button class="btn btn-primary" type="button" onclick="window.location.reload()">
+        <i class="fas fa-arrow-rotate-right"></i> Retry Connection
+      </button>
+      <a class="btn btn-secondary" href="index.html">
+        <i class="fas fa-house"></i> PDFHub Home
+      </a>
+      <a class="btn btn-secondary" href="menu-bar/history.html">
+        <i class="fas fa-clock-rotate-left"></i> Cached History
+      </a>
+    </div>
+
+    <div class="offline-footer-note">
+      PDFHub · Zero file uploads · Safe local document processing
+    </div>
+  </div>
+  <script src="developer.js"></script>
+</body>
+</html>

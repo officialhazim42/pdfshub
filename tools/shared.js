@@ -45,6 +45,7 @@ function buildSiteFooter(){
         <h3 class="footer-title">Resources</h3>
         <ul class="footer-links">
           <li><a href="../guides/">User Guides &amp; Tips</a></li>
+          <li><a href="../install/">Install PDFHub App</a></li>
           <li><a href="../guides/merge-pdf/">Merge PDF Guide</a></li>
           <li><a href="../guides/compress-pdf/">Compress PDF Guide</a></li>
           <li><a href="../guides/edit-pdf/">Edit PDF Guide</a></li>
@@ -274,6 +275,9 @@ function ensureSiteMenu(){
       </a>
       <a class="menu-action" href="../menu-bar/history.html">
         <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>History</span><span class="menu-action-note">Local</span>
+      </a>
+      <a class="menu-action" href="../install/">
+        <i class="fas fa-download" aria-hidden="true"></i><span>Install App</span><span class="menu-action-note">PWA</span>
       </a>
       <div class="menu-section-label" data-section="about">Privacy &amp; About</div>
       <a class="menu-action" href="../menu-bar/privacy.html">

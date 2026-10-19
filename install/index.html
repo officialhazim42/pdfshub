@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="How to install PDFHub on Android, iPhone, iPad, Windows PC, macOS, and Linux. Step-by-step PWA installation guide for fast, offline-ready PDF tools."/>
+  <meta name="theme-color" content="#07070d"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="PDFHub"/>
+  <meta name="application-name" content="PDFHub"/>
+  <link rel="manifest" href="../manifest.webmanifest"/>
+  <link rel="icon" href="../favicons/favicon-32x32.png" sizes="32x32" type="image/png"/>
+  <link rel="icon" href="../favicons/icon-192.png" sizes="192x192" type="image/png"/>
+  <link rel="apple-touch-icon" href="../favicons/apple-touch-icon.png"/>
+  <title>Install PDFHub App – Android, iOS, Windows &amp; Mac</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../developer.css"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #07070d; --s1: #0f0f1a; --s2: #161625; --border: #252538;
+      --text: #eeeef8; --muted: #8c8ca8;
+      --accent: #7c6aff; --a2: #ff5f7e; --a3: #00e5a0; --a4: #ffb347; --a5: #38d9f5;
+    }
+    body.light {
+      --bg: #f5f5fa; --s1: #ffffff; --s2: #ececf5; --border: #dcdce8;
+      --text: #1a1a2e; --muted: #5e5e78;
+      --accent: #5b47e0;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 75% 55% at 15% 10%, rgba(124,106,255,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse 65% 50% at 85% 90%, rgba(56,217,245,0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav.site-nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(7,7,13,0.92);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      height: 62px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    body.light nav.site-nav {
+      background: rgba(255,255,255,0.94);
+      border-color: var(--border);
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: 'Syne', sans-serif; font-size: 1.45rem; font-weight: 800;
+      background: linear-gradient(135deg, #7c6aff 0%, #38d9f5 100%);
+      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px; text-decoration: none;
+    }
+    body.light .logo {
+      background: linear-gradient(135deg, #5b47e0 0%, #0284c7 100%);
+      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .logo-mark { width: 30px; height: 30px; border-radius: 8px; object-fit: cover; }
+    .nav-divider { color: var(--border); font-size: 0.9rem; }
+    .nav-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 999px;
+      background: rgba(124,106,255,0.12); border: 1px solid rgba(124,106,255,0.28);
+      color: var(--accent); font-size: 0.72rem; font-weight: 700;
+    }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-back-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border-radius: 10px;
+      background: var(--s1); border: 1px solid var(--border);
+      color: var(--text); font-size: 0.8rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .nav-back-link:hover { border-color: var(--accent); color: var(--accent); }
+    .global-theme-toggle {
+      display: flex; align-items: center; gap: 8px;
+      padding: 4px 7px; border: 1px solid var(--border); border-radius: 9px;
+      background: var(--s1); color: var(--text); cursor: pointer;
+    }
+    .toggle-track {
+      width: 38px; height: 22px; border-radius: 99px; background: var(--s2);
+      border: 1px solid var(--border); position: relative; display: flex; align-items: center; padding: 2px;
+    }
+    .toggle-knob {
+      width: 16px; height: 16px; border-radius: 50%; background: var(--accent);
+      color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.58rem;
+      transition: transform 0.2s;
+    }
+    body.light .toggle-knob { transform: translateX(16px); }
+
+    .menu-toggle {
+      width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border); border-radius: 10px; background: var(--s1); color: var(--text);
+      cursor: pointer; font-size: 1rem;
+    }
+
+    /* CONTROL CENTER MENU */
+    .site-menu {
+      position: absolute; top: calc(100% + 10px); right: 6%;
+      width: min(348px, calc(100vw - 28px)); max-height: calc(100vh - 80px);
+      padding: 16px; border: 1px solid rgba(124,106,255,0.24); border-radius: 18px;
+      background: rgba(15,15,26,0.98); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.45); display: none; flex-direction: column; z-index: 500;
+    }
+    .site-menu.open { display: flex !important; }
+    body.light .site-menu { background: rgba(255,255,255,0.98); border-color: #d5d5e8; }
+    .menu-header { display: flex; flex-direction: column; flex-shrink: 0; }
+    .menu-heading { display: flex; align-items: center; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-family: 'Syne', sans-serif; font-size: 0.86rem; font-weight: 700; }
+    .menu-heading small { font: 600 0.62rem 'DM Sans', sans-serif; color: var(--a3); text-transform: uppercase; letter-spacing: 1px; }
+    .menu-heading-actions { display: flex; align-items: center; gap: 8px; }
+    .menu-close-btn { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border: 1px solid var(--border); border-radius: 8px; background: var(--s2); color: var(--muted); cursor: pointer; }
+    .menu-search { display: flex; gap: 6px; padding-top: 10px; align-items: center; position: relative; }
+    .menu-search > i { position: absolute; left: 10px; color: var(--muted); font-size: 0.72rem; }
+    .menu-search input { width: 100%; padding: 9px 10px 9px 28px; border: 1px solid var(--border); border-radius: 8px; background: var(--s2); color: var(--text); font-size: 0.76rem; outline: none; }
+    .menu-search button { width: 36px; height: 34px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; }
+    .menu-status { display: flex; align-items: center; gap: 6px; padding: 10px 3px 2px; color: var(--muted); font-size: 0.61rem; }
+    .menu-status i { color: var(--a3); }
+    .menu-status-dot { color: var(--border); }
+    .menu-body { flex: 1; overflow-y: auto; padding-right: 4px; margin-top: 8px; }
+    .menu-section-label { padding: 10px 9px 3px; color: var(--muted); font-size: 0.59rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .menu-list { display: grid; gap: 4px; }
+    .menu-action {
+      display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px;
+      border: 0; border-radius: 9px; background: transparent; color: var(--text);
+      font-size: 0.78rem; font-weight: 600; text-decoration: none; cursor: pointer; text-align: left;
+    }
+    .menu-action:hover { background: #24243a; color: #fff; }
+    body.light .menu-action:hover { background: var(--s2); color: var(--text); }
+    .menu-action i { width: 18px; color: #9e91ff; text-align: center; }
+    .menu-action-note { margin-left: auto; color: var(--muted); font-size: 0.6rem; }
+    .menu-badge { margin-left: auto; padding: 2px 7px; border-radius: 99px; background: rgba(0,229,160,0.15); color: var(--a3); font-size: 0.62rem; font-weight: 700; }
+    .menu-note { padding: 10px 9px 2px; color: var(--muted); font-size: 0.66rem; line-height: 1.5; }
+
+    /* INSTALL PAGE HERO */
+    .install-container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+      position: relative;
+      z-index: 10;
+    }
+    .install-hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px;
+      background: rgba(124,106,255,0.12); border: 1px solid rgba(124,106,255,0.25);
+      color: var(--accent); font-size: 0.8rem; font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .install-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.8px;
+      margin-bottom: 16px;
+    }
+    .install-hero h1 span {
+      background: linear-gradient(135deg, #7c6aff 0%, #38d9f5 100%);
+      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    body.light .install-hero h1 span {
+      background: linear-gradient(135deg, #5b47e0 0%, #0284c7 100%);
+      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .install-hero p {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 32px;
+    }
+
+    /* STATUS & INTERACTIVE CARD */
+    .install-status-card {
+      background: var(--s1);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .install-status-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #7c6aff, #38d9f5, #00e5a0);
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px;
+      font-size: 0.8rem; font-weight: 700;
+    }
+    .status-pill.ready {
+      background: rgba(0,229,160,0.12); border: 1px solid rgba(0,229,160,0.3); color: var(--a3);
+    }
+    .status-pill.installed {
+      background: rgba(56,217,245,0.12); border: 1px solid rgba(56,217,245,0.3); color: var(--a5);
+    }
+    .status-pill.manual {
+      background: rgba(255,179,71,0.12); border: 1px solid rgba(255,179,71,0.3); color: var(--a4);
+    }
+    .status-text {
+      font-size: 0.96rem;
+      color: var(--text);
+      max-width: 520px;
+      line-height: 1.5;
+    }
+    .status-actions {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 12px 24px; border-radius: 12px;
+      font-size: 0.92rem; font-weight: 700; cursor: pointer; text-decoration: none;
+      transition: all 0.2s ease; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 6px 20px rgba(124,106,255,0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,106,255,0.5);
+    }
+    .btn-secondary {
+      background: var(--s2); color: var(--text); border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent); transform: translateY(-2px);
+    }
+
+    /* DEVICE TABS */
+    .platform-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .platform-tab {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 12px;
+      background: var(--s1); border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .platform-tab:hover {
+      border-color: var(--accent); color: var(--text);
+    }
+    .platform-tab.active {
+      background: rgba(124,106,255,0.14); border-color: var(--accent); color: #fff;
+    }
+    body.light .platform-tab.active {
+      background: rgba(91,71,224,0.12); color: var(--accent);
+    }
+
+    /* GUIDE CARDS */
+    .guide-panel {
+      display: none;
+      background: var(--s1);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin-bottom: 48px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+    }
+    .guide-panel.active { display: block; animation: fadeIn 0.25s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .panel-header {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+      padding-bottom: 20px; border-bottom: 1px solid var(--border);
+    }
+    .panel-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(124,106,255,0.12); border: 1px solid rgba(124,106,255,0.25);
+      color: var(--accent); font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .panel-title h2 {
+      font-family: 'Syne', sans-serif; font-size: 1.35rem; font-weight: 800; margin-bottom: 4px;
+    }
+    .panel-title p {
+      font-size: 0.86rem; color: var(--muted);
+    }
+
+    /* STEPS */
+    .steps-list {
+      list-style: none;
+      display: grid;
+      gap: 18px;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--s2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 10px;
+      background: var(--accent); color: #fff;
+      font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-body {
+      flex: 1;
+    }
+    .step-body strong {
+      display: block; font-size: 0.96rem; font-weight: 700; color: var(--text); margin-bottom: 4px;
+    }
+    .step-body p {
+      font-size: 0.86rem; color: var(--muted); line-height: 1.55;
+    }
+    .step-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 3px 9px; border-radius: 6px;
+      background: rgba(255,255,255,0.08); border: 1px solid var(--border);
+      font-size: 0.78rem; font-family: monospace; color: var(--text);
+    }
+    body.light .step-badge {
+      background: #e4e4f0;
+    }
+
+    .callout-box {
+      margin-top: 24px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: rgba(124,106,255,0.08);
+      border: 1px solid rgba(124,106,255,0.22);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .callout-box i {
+      color: var(--accent); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0;
+    }
+    .callout-box strong { color: var(--text); }
+
+    /* TROUBLESHOOTING & FAQ */
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin: 48px 0 24px;
+      text-align: left;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 768px) {
+      .faq-grid { grid-template-columns: 1fr; }
+      .install-container { padding: 32px 16px 60px; }
+      .guide-panel { padding: 24px 18px; }
+    }
+    .faq-card {
+      background: var(--s1);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: left;
+    }
+    .faq-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .faq-card h3 i {
+      color: var(--accent); font-size: 0.88rem;
+    }
+    .faq-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.58;
+    }
+
+    /* FOOTER */
+    .site-footer {
+      position: relative; z-index: 10;
+      border-top: 1px solid var(--border);
+      padding: 64px max(20px, 6%) 36px;
+      background: var(--bg); color: var(--text);
+      margin-top: 72px;
+    }
+    .footer-shell { max-width: 1200px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1.15fr; gap: 48px; margin-bottom: 48px; text-align: left; }
+    @media (max-width: 960px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 580px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-col { display: flex; flex-direction: column; }
+    .footer-brand .footer-logo {
+      display: inline-flex; align-items: center; gap: 10px; font-family: 'Syne', sans-serif; font-size: 1.45rem; font-weight: 800;
+      background: linear-gradient(135deg, #7c6aff 0%, #38d9f5 100%);
+      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-decoration: none; margin-bottom: 14px;
+    }
+    body.light .footer-brand .footer-logo {
+      background: linear-gradient(135deg, #5b47e0 0%, #0284c7 100%);
+      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .footer-desc { font-size: 0.83rem; line-height: 1.68; color: var(--muted); margin-bottom: 18px; }
+    .footer-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .footer-badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 99px;
+      font-size: 0.7rem; font-weight: 700; border: 1px solid rgba(124,106,255,0.25); background: rgba(124,106,255,0.08); color: var(--accent);
+    }
+    .footer-title { font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700; margin-bottom: 16px; letter-spacing: 0.8px; text-transform: uppercase; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { color: var(--muted); font-size: 0.82rem; text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-security-note {
+      margin-top: 16px; display: flex; align-items: flex-start; gap: 8px; font-size: 0.72rem; color: var(--muted);
+      line-height: 1.45; padding: 8px 10px; border-radius: 8px; background: rgba(0,229,160,0.04); border: 1px solid rgba(0,229,160,0.16);
+    }
+    .footer-security-note i { color: var(--a3); margin-top: 2px; }
+    .footer-bottom {
+      padding-top: 26px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px; font-size: 0.76rem; color: var(--muted);
+    }
+    .footer-bottom-copy a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .footer-bottom-meta { display: flex; align-items: center; gap: 10px; }
+    .f-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: 0.5; }
+  </style>
+</head>
+<body data-root="../">
+  <!-- SITE NAV -->
+  <nav class="site-nav" role="navigation" aria-label="PDFHub Navigation">
+    <div class="nav-left">
+      <a class="logo" href="../index.html" title="PDFHub Home">
+        <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
+        <span>PDF HUB</span>
+      </a>
+      <span class="nav-divider" aria-hidden="true">/</span>
+      <span class="nav-badge">
+        <i class="fas fa-download" aria-hidden="true"></i>
+        <span>Install App</span>
+      </span>
+    </div>
+    <div class="nav-right">
+      <a class="nav-back-link" href="../index.html" title="Back to PDF Tools">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+        <span>All 33 Tools</span>
+      </a>
+      <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark theme">
+        <span class="t-label" id="themeLabel">Dark</span>
+        <span class="toggle-track">
+          <span class="toggle-knob" id="themeKnob">
+            <i class="fas fa-moon"></i>
+          </span>
+        </span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteMenu" title="Open control center menu" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="site-menu" id="siteMenu" aria-hidden="true" role="navigation" aria-label="PDFHub control center">
+        <div class="menu-header">
+          <div class="menu-heading">
+            <span>PDFHub control center</span>
+            <div class="menu-heading-actions">
+              <small>Local workspace</small>
+              <button type="button" class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu" title="Close menu">
+                <i class="fas fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+          <form class="menu-search" id="menuSearch" role="search">
+            <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+            <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools" autocomplete="off"/>
+            <button type="submit" title="Search"><i class="fas fa-arrow-right"></i></button>
+          </form>
+          <div class="menu-status">
+            <span><i class="fas fa-shield-halved"></i> Runs in your browser</span>
+            <span class="menu-status-dot">●</span>
+            <span>No account needed</span>
+          </div>
+        </div>
+        <div class="menu-body" id="menuBody">
+          <div class="menu-section-label">Tools &amp; Guides</div>
+          <div class="menu-list">
+            <a class="menu-action" href="../index.html">
+              <i class="fas fa-house" aria-hidden="true"></i><span>Home</span>
+            </a>
+            <a class="menu-action" href="../guides/">
+              <i class="fas fa-book-open" aria-hidden="true"></i><span>User Guides &amp; Tips</span><span class="menu-action-note">33 guides</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/favorites.html">
+              <i class="fas fa-star" aria-hidden="true"></i><span>Favorite Tools</span><span class="menu-action-note">Local</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/history.html">
+              <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>Tool History</span><span class="menu-action-note">Local</span>
+            </a>
+            <a class="menu-action" href="./" style="color:var(--accent);">
+              <i class="fas fa-download" aria-hidden="true"></i><span>Install PDFHub</span><span class="menu-badge">PWA</span>
+            </a>
+          </div>
+          <div class="menu-section-label">Privacy &amp; About</div>
+          <div class="menu-list">
+            <a class="menu-action" href="../menu-bar/privacy.html">
+              <i class="fas fa-shield-halved" aria-hidden="true"></i><span>Privacy Center</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/terms.html">
+              <i class="fas fa-file-contract" aria-hidden="true"></i><span>Terms &amp; Conditions</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/about.html">
+              <i class="fas fa-circle-info" aria-hidden="true"></i><span>About Us</span>
+            </a>
+            <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">
+              <i class="fas fa-envelope" aria-hidden="true"></i><span>Contact Support</span>
+            </a>
+          </div>
+          <p class="menu-note">Your tools, history, and preferences stay in this browser.</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- INSTALL CONTAINER -->
+  <main class="install-container">
+    <header class="install-hero">
+      <div class="hero-kicker">
+        <i class="fas fa-bolt" aria-hidden="true"></i> Progressive Web Application
+      </div>
+      <h1>Install PDFHub on <span>Any Device</span></h1>
+      <p>Install PDFHub directly to your home screen, desktop, or dock. Enjoy instant launches, distraction-free standalone windows, zero app store sign-ups, and fast offline access.</p>
+    </header>
+
+    <!-- INTERACTIVE INSTALL CARD -->
+    <section class="install-status-card" id="installStatusCard" aria-live="polite">
+      <div class="status-pill ready" id="statusPill">
+        <i class="fas fa-circle-dot" aria-hidden="true"></i> <span id="statusLabel">Ready to Install</span>
+      </div>
+      <p class="status-text" id="statusDescription">
+        PDFHub can be installed as a standalone app in just one tap. Select your device below for tailored instructions.
+      </p>
+      <div class="status-actions" id="statusActions">
+        <button class="btn btn-primary" id="nativeInstallBtn" type="button" style="display:none;">
+          <i class="fas fa-download" aria-hidden="true"></i> <span>Install PDFHub Now</span>
+        </button>
+        <button class="btn btn-secondary" id="copyUrlBtn" type="button">
+          <i class="fas fa-copy" aria-hidden="true"></i> <span>Copy Web Address</span>
+        </button>
+        <a class="btn btn-secondary" href="../index.html">
+          <i class="fas fa-house" aria-hidden="true"></i> <span>Browse 33 Tools</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- DEVICE TABS -->
+    <div class="platform-tabs" role="tablist" aria-label="Installation platform tabs">
+      <button class="platform-tab active" data-platform="android" role="tab" aria-selected="true" aria-controls="guideAndroid" id="tabAndroid">
+        <i class="fab fa-android" aria-hidden="true"></i> Android
+      </button>
+      <button class="platform-tab" data-platform="ios" role="tab" aria-selected="false" aria-controls="guideIos" id="tabIos">
+        <i class="fab fa-apple" aria-hidden="true"></i> iPhone &amp; iPad
+      </button>
+      <button class="platform-tab" data-platform="windows" role="tab" aria-selected="false" aria-controls="guideWindows" id="tabWindows">
+        <i class="fab fa-windows" aria-hidden="true"></i> Windows PC
+      </button>
+      <button class="platform-tab" data-platform="mac" role="tab" aria-selected="false" aria-controls="guideMac" id="tabMac">
+        <i class="fas fa-laptop" aria-hidden="true"></i> macOS
+      </button>
+      <button class="platform-tab" data-platform="linux" role="tab" aria-selected="false" aria-controls="guideLinux" id="tabLinux">
+        <i class="fab fa-linux" aria-hidden="true"></i> Linux
+      </button>
+    </div>
+
+    <!-- 1. ANDROID PANEL -->
+    <section class="guide-panel active" id="guideAndroid" role="tabpanel" aria-labelledby="tabAndroid">
+      <div class="panel-header">
+        <div class="panel-icon"><i class="fab fa-android"></i></div>
+        <div class="panel-title">
+          <h2>Android Installation (Chrome &amp; Edge)</h2>
+          <p>Installs directly from your mobile browser with home screen &amp; app drawer icons.</p>
+        </div>
+      </div>
+      <ol class="steps-list">
+        <li class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Open PDFHub in Google Chrome or Edge</strong>
+            <p>Ensure you are visiting <span class="step-badge">pdfshub.smartstores.in</span> in standard browsing mode.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Tap the Install Banner or Browser Menu</strong>
+            <p>If an "Add PDFHub to Home screen" banner appears at the bottom, tap it. Otherwise, tap the <span class="step-badge">⋮</span> (three dots) menu in the top-right corner of Chrome.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Select "Install app" or "Add to Home screen"</strong>
+            <p>In the dropdown menu, locate and tap <strong>Install app</strong> (or <strong>Add to Home screen</strong> in Samsung Internet).</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <strong>Confirm Installation</strong>
+            <p>Tap <strong>Install</strong> in the dialog. The PDFHub icon will appear on your Home Screen and in your application drawer, launching without browser URL bars.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="callout-box">
+        <i class="fas fa-circle-info"></i>
+        <div>
+          <strong>Samsung Internet or Firefox users:</strong> Tap the hamburger menu <span class="step-badge">☰</span> or three dots <span class="step-badge">⋮</span> and choose <strong>Add page to &gt; Home screen</strong>.
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. iOS / iPHONE & iPAD PANEL -->
+    <section class="guide-panel" id="guideIos" role="tabpanel" aria-labelledby="tabIos">
+      <div class="panel-header">
+        <div class="panel-icon"><i class="fab fa-apple"></i></div>
+        <div class="panel-title">
+          <h2>iPhone &amp; iPad Installation (Apple Safari)</h2>
+          <p>Apple iOS requires Safari's native "Add to Home Screen" feature for PWA installation.</p>
+        </div>
+      </div>
+      <ol class="steps-list">
+        <li class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Open in Apple Safari</strong>
+            <p>If you are currently reading this in Chrome, Firefox, or an in-app browser on iOS, tap <strong>Copy Web Address</strong> above, open <strong>Safari</strong>, and paste the URL.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Tap the Share Button</strong>
+            <p>Tap the <strong>Share</strong> icon <span class="step-badge"><i class="fas fa-arrow-up-from-bracket"></i></span> located in the bottom toolbar on iPhone, or in the top navigation bar on iPad.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Choose "Add to Home Screen"</strong>
+            <p>Scroll down the share sheet options and tap <strong>Add to Home Screen</strong> <span class="step-badge"><i class="fas fa-square-plus"></i></span>.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <strong>Confirm and Tap "Add"</strong>
+            <p>Confirm the app name is "PDFHub" and tap <strong>Add</strong> in the top-right corner. The PDFHub icon is now pinned to your Home Screen with instant full-screen execution.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="callout-box">
+        <i class="fas fa-lightbulb"></i>
+        <div>
+          <strong>iPadOS Note:</strong> iPadOS supports full split-screen multitasking with installed PWAs, allowing you to drag documents directly into PDFHub alongside Files or Notes!
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. WINDOWS PC PANEL -->
+    <section class="guide-panel" id="guideWindows" role="tabpanel" aria-labelledby="tabWindows">
+      <div class="panel-header">
+        <div class="panel-icon"><i class="fab fa-windows"></i></div>
+        <div class="panel-title">
+          <h2>Windows 11 / 10 Installation (Edge &amp; Chrome)</h2>
+          <p>Run PDFHub as a standalone desktop application with taskbar pinning and window framing.</p>
+        </div>
+      </div>
+      <ol class="steps-list">
+        <li class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>In Microsoft Edge:</strong>
+            <p>Click the <strong>App Available</strong> icon <span class="step-badge"><i class="fas fa-desktop"></i></span> on the right side of the URL address bar, or click <strong>Settings (...) &gt; Apps &gt; Install PDFHub</strong>.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>In Google Chrome:</strong>
+            <p>Click the <strong>Install</strong> icon <span class="step-badge"><i class="fas fa-download"></i></span> in the address bar, or click <span class="step-badge">⋮</span> &gt; <strong>Cast, save, and share &gt; Install PDFHub</strong>.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Pin to Taskbar &amp; Start Menu</strong>
+            <p>When the installation prompt appears, check "Pin to taskbar" and "Pin to Start" for convenient single-click launching.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="callout-box">
+        <i class="fas fa-shield-halved"></i>
+        <div>
+          <strong>Standalone Window:</strong> PDFHub will launch in its own clean window without tabs or search bars, maintaining complete keyboard shortcuts and private local file access.
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. macOS PANEL -->
+    <section class="guide-panel" id="guideMac" role="tabpanel" aria-labelledby="tabMac">
+      <div class="panel-header">
+        <div class="panel-icon"><i class="fas fa-laptop"></i></div>
+        <div class="panel-title">
+          <h2>macOS Installation (Safari 17+ or Chrome)</h2>
+          <p>Add PDFHub directly to your Mac Dock or Applications folder.</p>
+        </div>
+      </div>
+      <ol class="steps-list">
+        <li class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>In Safari (macOS Sonoma 14+):</strong>
+            <p>In the top menu bar, click <strong>File &gt; Add to Dock...</strong>. Confirm the title "PDFHub" and click <strong>Add</strong>.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>In Chrome or Edge on Mac:</strong>
+            <p>Click the install icon in the URL bar or navigate to <strong>Menu &gt; Install PDFHub</strong> to save it directly into your Mac's Applications folder.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 5. LINUX PANEL -->
+    <section class="guide-panel" id="guideLinux" role="tabpanel" aria-labelledby="tabLinux">
+      <div class="panel-header">
+        <div class="panel-icon"><i class="fab fa-linux"></i></div>
+        <div class="panel-title">
+          <h2>Linux Desktop Installation</h2>
+          <p>Integrates seamlessly with GNOME, KDE, and modern desktop application launchers.</p>
+        </div>
+      </div>
+      <ol class="steps-list">
+        <li class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>In Chromium or Google Chrome:</strong>
+            <p>Click the install icon in the Omnibox or choose <strong>Menu &gt; Install PDFHub</strong>.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Desktop Launcher (.desktop file):</strong>
+            <p>The system automatically registers a desktop entry so you can launch PDFHub through your application drawer or Super/Windows key search.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- TROUBLESHOOTING & FAQ -->
+    <h2 class="section-title">Troubleshooting &amp; FAQs</h2>
+    <div class="faq-grid">
+      <div class="faq-card">
+        <h3><i class="fas fa-question-circle"></i> Why don't I see an install button?</h3>
+        <p>Browsers hide the native install prompt if the app is already installed, if you are browsing in Private/Incognito mode, or if you are using an in-app browser (such as inside Twitter/Instagram). Use your browser's standard menu instead.</p>
+      </div>
+      <div class="faq-card">
+        <h3><i class="fas fa-wifi"></i> Does PDFHub work offline?</h3>
+        <p>Yes, for core client-side PDF operations! Previously loaded tools (like Merge, Split, Compress, Rotate, and Crop) work locally in your browser without requiring an active internet connection.</p>
+      </div>
+      <div class="faq-card">
+        <h3><i class="fas fa-shield-halved"></i> Are my PDF documents private?</h3>
+        <p>100% private. Standard operations process your files in client-side WebAssembly and JavaScript directly on your device. Your documents are never uploaded to a remote server.</p>
+      </div>
+      <div class="faq-card">
+        <h3><i class="fas fa-trash-can"></i> How do I uninstall or reinstall?</h3>
+        <p>In Chrome/Edge desktop: Click the <span class="step-badge">⋮</span> menu in the app title bar and select <strong>Uninstall PDFHub</strong>. On Android or iOS: Long-press the PDFHub home icon and tap <strong>Remove</strong> or <strong>Uninstall</strong>.</p>
+      </div>
+    </div>
+
+    <!-- CALL TO ACTION ROW -->
+    <div style="text-align:center; margin-top:20px;">
+      <a class="btn btn-primary" href="../index.html">
+        <i class="fas fa-arrow-left"></i> Return to PDFHub Tools
+      </a>
+      <a class="btn btn-secondary" href="../guides/" style="margin-left:12px;">
+        <i class="fas fa-book-open"></i> View 33 Tool Guides
+      </a>
+    </div>
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-shell">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a class="footer-logo f-logo" href="../index.html">
+            <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
+            <span>PDF HUB</span>
+          </a>
+          <p class="footer-desc">
+            A focused, browser-first PDF suite with 33 tools for fast document work. Standard tools process files locally in your browser without requiring an account or server uploads.
+          </p>
+          <div class="footer-badges">
+            <span class="footer-badge"><i class="fas fa-laptop-code" aria-hidden="true"></i> Client-Side Processing</span>
+            <span class="footer-badge"><i class="fas fa-user-slash" aria-hidden="true"></i> No Account Required</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-title">PDF Tools</h3>
+          <ul class="footer-links pdfhub-footer-links">
+            <li><a href="../tools/merge.html">Merge PDF</a></li>
+            <li><a href="../tools/split.html">Split PDF</a></li>
+            <li><a href="../tools/compress.html">Compress PDF</a></li>
+            <li><a href="../tools/edit.html">Edit PDF</a></li>
+            <li><a href="../tools/sign.html">Sign PDF</a></li>
+            <li><a href="../tools/pdf-to-word.html">PDF to Word</a></li>
+            <li><a href="../tools/protect.html">Protect PDF</a></li>
+            <li><a href="../index.html">All 33 Tools &rarr;</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-title">Resources</h3>
+          <ul class="footer-links">
+            <li><a href="../guides/">User Guides &amp; Tips</a></li>
+            <li><a href="./">Install PDFHub App</a></li>
+            <li><a href="../menu-bar/favorites.html">Favorite Tools</a></li>
+            <li><a href="../menu-bar/history.html">Tool History</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-title">Privacy &amp; Legal</h3>
+          <ul class="footer-links">
+            <li><a href="../menu-bar/privacy.html">Privacy Center</a></li>
+            <li><a href="../menu-bar/terms.html">Terms &amp; Conditions</a></li>
+            <li><a href="../menu-bar/about.html">About PDFHub</a></li>
+            <li><a href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">Contact Support</a></li>
+          </ul>
+          <div class="footer-security-note">
+            <i class="fas fa-shield-halved" aria-hidden="true"></i>
+            <span>Local browser processing for standard operations. Zero tracking cookies.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-copy">
+          <span>&copy; 2026 PDFHub. Crafted by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener noreferrer">@officialhazim42</a></span>
+        </div>
+        <div class="footer-bottom-meta">
+          <span>33 Free Utilities</span>
+          <span class="f-dot" aria-hidden="true"></span>
+          <span>Installable PWA</span>
+          <span class="f-dot" aria-hidden="true"></span>
+          <span>Private by Design</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../developer.js"></script>
+  <script>
+    // Tab switching
+    const tabs = document.querySelectorAll('.platform-tab');
+    const panels = document.querySelectorAll('.guide-panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const target = document.getElementById('guide' + tab.dataset.platform.charAt(0).toUpperCase() + tab.dataset.platform.slice(1));
+        if (target) target.classList.add('active');
+      });
+    });
+
+    // Device-aware initial tab selection hint
+    (function detectPlatformHint() {
+      const ua = navigator.userAgent || '';
+      let detected = 'windows';
+      if (/android/i.test(ua)) detected = 'android';
+      else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) detected = 'ios';
+      else if (/macintosh|mac os x/i.test(ua)) detected = 'mac';
+      else if (/linux/i.test(ua)) detected = 'linux';
+
+      const initialTab = document.querySelector(`.platform-tab[data-platform="${detected}"]`);
+      if (initialTab) initialTab.click();
+    })();
+
+    // Copy URL button
+    document.getElementById('copyUrlBtn')?.addEventListener('click', async () => {
+      const url = window.location.origin + '/';
+      try {
+        await navigator.clipboard.writeText(url);
+        const btn = document.getElementById('copyUrlBtn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> <span>Copied Link!</span>';
+        setTimeout(() => btn.innerHTML = orig, 2400);
+      } catch (e) {
+        alert('Copy this link to install in Safari: ' + url);
+      }
+    });
+
+    // Native install button hookup
+    const nativeBtn = document.getElementById('nativeInstallBtn');
+    const statusPill = document.getElementById('statusPill');
+    const statusLabel = document.getElementById('statusLabel');
+    const statusDesc = document.getElementById('statusDescription');
+
+    function updateInstallState() {
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      if (isStandalone) {
+        statusPill.className = 'status-pill installed';
+        statusLabel.textContent = 'App Installed ✓';
+        statusDesc.textContent = 'PDFHub is installed and operating as a standalone application on this device.';
+        if (nativeBtn) nativeBtn.style.display = 'none';
+        return;
+      }
+      if (window.__pdfhubInstallPrompt) {
+        statusPill.className = 'status-pill ready';
+        statusLabel.textContent = 'Install Ready';
+        statusDesc.textContent = 'Your browser supports instant 1-tap installation. Click below to install PDFHub now.';
+        if (nativeBtn) {
+          nativeBtn.style.display = 'inline-flex';
+          nativeBtn.onclick = async () => {
+            const prompt = window.__pdfhubInstallPrompt;
+            if (!prompt) return;
+            prompt.prompt();
+            const choice = await prompt.userChoice;
+            if (choice.outcome === 'accepted') {
+              window.__pdfhubInstallPrompt = null;
+              updateInstallState();
+            }
+          };
+        }
+      }
+    }
+
+    window.addEventListener('pdfhub-install-available', updateInstallState);
+    window.addEventListener('appinstalled', updateInstallState);
+    updateInstallState();
+
+    // Menu toggle in header
+    document.getElementById('menuToggle')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const menu = document.getElementById('siteMenu');
+      if (menu) menu.classList.toggle('open');
+    });
+    document.getElementById('menuCloseBtn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.getElementById('siteMenu')?.classList.remove('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#siteMenu') && !e.target.closest('#menuToggle')) {
+        document.getElementById('siteMenu')?.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

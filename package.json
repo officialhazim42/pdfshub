@@ -8,6 +8,9 @@
     "deploy": "wrangler deploy",
     "deploy:dry-run": "wrangler deploy --dry-run",
     "validate:assets": "node scripts/validate-deployment-assets.mjs",
+    "test:pwa": "node scripts/test-pwa-suite.mjs",
+    "test:tools": "node scripts/test-pdf-tools-e2e.mjs",
+    "generate:icons": "node scripts/generate-pwa-icons.mjs",
     "test:guides": "node scripts/verify-guides.mjs",
     "capture:guides": "node scripts/capture-tool-guides.mjs"
   },

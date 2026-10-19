@@ -12,6 +12,112 @@
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f4f4f8':'#07070d');
   };
   applyTheme(localStorage.getItem('pdfhub-theme')||'dark');
+  const siteRoot=document.body.dataset.root||root;
+
+  // PWA Manifest and Meta Tags
+  const ensurePwaMeta=()=>{
+    const head=document.head;if(!head)return;
+    if(!head.querySelector('link[rel="manifest"]')){
+      const manifest=document.createElement('link');manifest.rel='manifest';manifest.href=siteRoot+'manifest.webmanifest';head.appendChild(manifest);
+    }
+    if(!head.querySelector('link[rel="apple-touch-icon"]')){
+      const appleTouch=document.createElement('link');appleTouch.rel='apple-touch-icon';appleTouch.href=siteRoot+'favicons/apple-touch-icon.png';head.appendChild(appleTouch);
+    }
+    const metaList=[
+      ['mobile-web-app-capable','yes'],
+      ['apple-mobile-web-app-capable','yes'],
+      ['apple-mobile-web-app-status-bar-style','black-translucent'],
+      ['apple-mobile-web-app-title','PDFHub'],
+      ['application-name','PDFHub']
+    ];
+    for(const [name,content] of metaList){
+      if(!head.querySelector(`meta[name="${name}"]`)){
+        const meta=document.createElement('meta');meta.name=name;meta.content=content;head.appendChild(meta);
+      }
+    }
+  };
+  ensurePwaMeta();
+
+  // PWA Install State & Detection
+  let deferredPrompt=null;
+  const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+
+  const updateInstallMenuAction=()=>{
+    const menu=document.getElementById('siteMenu');
+    if(!menu)return;
+    const existing=menu.querySelector('.menu-action-install-wrap');
+    if(existing)existing.remove();
+
+    const wrap=document.createElement('div');
+    wrap.className='menu-action-install-wrap';
+
+    if(isStandalone()){
+      wrap.innerHTML=`<a class="menu-action" href="${siteRoot}install/"><i class="fas fa-circle-check" aria-hidden="true" style="color:var(--a3);"></i><span>App Installed</span><span class="menu-action-note">PWA</span></a>`;
+    }else if(deferredPrompt){
+      const btn=document.createElement('button');
+      btn.type='button';btn.className='menu-action';
+      btn.innerHTML=`<i class="fas fa-download" aria-hidden="true" style="color:var(--accent);"></i><span>Install App</span><span class="menu-badge">Free</span>`;
+      btn.addEventListener('click',async e=>{
+        e.preventDefault();
+        if(!deferredPrompt)return;
+        deferredPrompt.prompt();
+        const choice=await deferredPrompt.userChoice;
+        if(choice&&choice.outcome==='accepted'){
+          deferredPrompt=null;
+          window.__pdfhubInstallPrompt=null;
+        }
+        updateInstallMenuAction();
+      });
+      wrap.appendChild(btn);
+    }else{
+      wrap.innerHTML=`<a class="menu-action" href="${siteRoot}install/"><i class="fas fa-download" aria-hidden="true" style="color:var(--accent);"></i><span>Install PDFHub</span><span class="menu-action-note">Guide</span></a>`;
+    }
+
+    const historyLink=menu.querySelector('.menu-action[href*="history.html"]');
+    if(historyLink&&historyLink.parentNode){
+      historyLink.parentNode.insertBefore(wrap,historyLink.nextSibling);
+    }else{
+      const list=menu.querySelector('.menu-list');
+      if(list)list.appendChild(wrap);
+    }
+  };
+
+  window.addEventListener('beforeinstallprompt',event=>{
+    event.preventDefault();
+    deferredPrompt=event;
+    window.__pdfhubInstallPrompt=event;
+    window.dispatchEvent(new CustomEvent('pdfhub-install-available'));
+    updateInstallMenuAction();
+  });
+
+  window.addEventListener('appinstalled',()=>{
+    deferredPrompt=null;
+    window.__pdfhubInstallPrompt=null;
+    window.dispatchEvent(new CustomEvent('pdfhub-app-installed'));
+    updateInstallMenuAction();
+  });
+
+  // Service Worker Registration
+  const registerSW=()=>{
+    if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost' || location.hostname==='127.0.0.1')){
+      navigator.serviceWorker.register(siteRoot+'sw.js',{scope:siteRoot})
+        .then(reg=>{
+          reg.addEventListener('updatefound',()=>{
+            const newWorker=reg.installing;
+            if(newWorker){
+              newWorker.addEventListener('statechange',()=>{
+                if(newWorker.state==='installed' && navigator.serviceWorker.controller){
+                  window.dispatchEvent(new CustomEvent('pdfhub-update-available',{detail:{registration:reg}}));
+                }
+              });
+            }
+          });
+        })
+        .catch(err=>console.warn('[PDFHub PWA] Service worker registration failed:',err));
+    }
+  };
+  if(document.readyState==='complete')registerSW();else window.addEventListener('load',registerSW);
+
   const enhanceMenu=()=>{
     const menu=document.getElementById('siteMenu');
     if(!menu)return;
@@ -20,8 +126,10 @@
     if(!menu.querySelector('.menu-status')){
       menu.querySelector('.menu-search')?.insertAdjacentHTML('afterend','<div class="menu-status"><span><i class="fas fa-shield-halved"></i> Runs in your browser</span><span class="menu-status-dot">●</span><span>No account needed</span></div>');
     }
+    updateInstallMenuAction();
   };
   enhanceMenu();
+
   if(!window.__pdfhubThemeWrapped){
     window.toggleTheme=()=>{
       const next=document.body.classList.contains('light')?'dark':'light';
@@ -31,13 +139,14 @@
     window.__pdfhubThemeWrapped=true;
     window.addEventListener('storage',event=>{if(event.key==='pdfhub-theme')applyTheme(event.newValue||'dark');});
   }
-  const siteRoot=document.body.dataset.root||root;
+
   const enhanceFooter=()=>{
     const footer=document.querySelector('footer');
     if(!footer||footer.querySelector('.footer-grid')||footer.querySelector('.pdfhub-footer-links'))return;
     const links=[
       ['Tools',siteRoot+'index.html'],
       ['Guides',siteRoot+'guides/'],
+      ['Install App',siteRoot+'install/'],
       ['History',siteRoot+'menu-bar/history.html'],
       ['About PDFHub',siteRoot+'menu-bar/about.html'],
       ['Terms',siteRoot+'menu-bar/terms.html'],

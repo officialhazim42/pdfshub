@@ -18,6 +18,10 @@ const productionItems = [
   'developer.css',
   'developer.js',
   'sw.js',
+  'manifest.webmanifest',
+  'manifest.json',
+  'offline.html',
+  'install',
   'assets',
   'favicons',
   'guides',
@@ -91,10 +95,37 @@ function verifyDist(dir) {
 }
 verifyDist(dist);
 
-// Verify key entry points
+// Verify key entry points and PWA requirements
 if (!fs.existsSync(path.join(dist, 'index.html'))) {
   throw new Error('Verification failed: dist/index.html is missing!');
 }
+if (!fs.existsSync(path.join(dist, 'manifest.webmanifest'))) {
+  throw new Error('Verification failed: dist/manifest.webmanifest is missing!');
+}
+if (!fs.existsSync(path.join(dist, 'sw.js'))) {
+  throw new Error('Verification failed: dist/sw.js is missing!');
+}
+if (!fs.existsSync(path.join(dist, 'offline.html'))) {
+  throw new Error('Verification failed: dist/offline.html is missing!');
+}
+if (!fs.existsSync(path.join(dist, 'install', 'index.html'))) {
+  throw new Error('Verification failed: dist/install/index.html is missing!');
+}
+
+const requiredIcons = [
+  'icon-192.png',
+  'icon-512.png',
+  'icon-maskable-192.png',
+  'icon-maskable-512.png',
+  'apple-touch-icon.png',
+  'favicon.png'
+];
+for (const icon of requiredIcons) {
+  if (!fs.existsSync(path.join(dist, 'favicons', icon))) {
+    throw new Error(`Verification failed: PWA icon dist/favicons/${icon} is missing!`);
+  }
+}
+
 const toolCount = fs.readdirSync(path.join(dist, 'tools')).filter(f => f.endsWith('.html')).length;
 if (toolCount < 33) {
   throw new Error(`Verification failed: Expected 33 tools in dist/tools, found ${toolCount}`);
@@ -106,6 +137,7 @@ if (guideCount < 33) {
 
 const mbTotal = (totalSizeBytes / (1024 * 1024)).toFixed(2);
 console.log(`✓ Production dist generated successfully: ${copiedCount} files (${mbTotal} MB)`);
+console.log(`✓ PWA manifest, service worker, offline shell, and icons verified in dist`);
 console.log(`✓ All 33 tools verified in dist/tools/`);
 console.log(`✓ All 33 guides verified in dist/guides/`);
 console.log(`✓ node_modules, workerd, and development files are 100% excluded.`);

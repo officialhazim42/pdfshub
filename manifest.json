@@ -1,0 +1,91 @@
+{
+  "name": "PDFHub — Free PDF Tools",
+  "short_name": "PDFHub",
+  "description": "33 free browser-based PDF tools. Merge, split, compress, convert, edit, and sign PDFs locally and privately in your browser.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "theme_color": "#07070d",
+  "background_color": "#07070d",
+  "orientation": "any",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/favicons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Merge PDF",
+      "short_name": "Merge",
+      "description": "Combine multiple PDF documents into one single file",
+      "url": "/tools/merge.html",
+      "icons": [
+        {
+          "src": "/favicons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Compress PDF",
+      "short_name": "Compress",
+      "description": "Reduce PDF file size while keeping visual quality",
+      "url": "/tools/compress.html",
+      "icons": [
+        {
+          "src": "/favicons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "PDF to Word",
+      "short_name": "PDF to Word",
+      "description": "Convert PDF documents to editable Microsoft Word files",
+      "url": "/tools/pdf-to-word.html",
+      "icons": [
+        {
+          "src": "/favicons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "User Guides & Tips",
+      "short_name": "Guides",
+      "description": "Visual walkthroughs and tips for all 33 PDF tools",
+      "url": "/guides/",
+      "icons": [
+        {
+          "src": "/favicons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

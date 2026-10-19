@@ -45,6 +45,27 @@ if (!fs.existsSync(path.join(dist, 'index.html'))) {
 }
 console.log('✓ Production dist directory verified: dist/index.html');
 
+// 3b. Verify PWA Assets in dist
+const pwaFiles = [
+  'manifest.webmanifest',
+  'manifest.json',
+  'sw.js',
+  'offline.html',
+  'install/index.html',
+  'favicons/icon-192.png',
+  'favicons/icon-512.png',
+  'favicons/icon-maskable-192.png',
+  'favicons/icon-maskable-512.png',
+  'favicons/apple-touch-icon.png'
+];
+for (const pwaFile of pwaFiles) {
+  if (!fs.existsSync(path.join(dist, pwaFile))) {
+    console.error(`ERROR: Critical PWA asset missing in dist: ${pwaFile}`);
+    process.exit(1);
+  }
+}
+console.log('✓ PWA core verified in dist: manifest, service worker, offline shell, install page, and app icons');
+
 // 4. Verify 33 Tools in dist
 const toolsDir = path.join(dist, 'tools');
 const toolFiles = fs.readdirSync(toolsDir).filter(f => f.endsWith('.html'));
