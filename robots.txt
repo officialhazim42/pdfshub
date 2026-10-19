@@ -1,0 +1,11 @@
+# PDFHub Robots Configuration
+# Canonical Domain: https://pdfshub.netlify.app/
+
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+
+# Canonical XML Sitemap
+Sitemap: https://pdfshub.netlify.app/sitemap.xml

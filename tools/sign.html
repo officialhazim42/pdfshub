@@ -1,24 +1,90 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Sign PDF – PDFHub</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="shared.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<style>
-#sigCanvas{background:#fff;border:1px solid var(--border);border-radius:10px;cursor:crosshair;touch-action:none;width:100%;max-width:500px;display:block;}
-.sig-tabs{display:flex;gap:8px;margin-bottom:12px}
-.sig-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border);background:var(--s2);color:var(--muted);cursor:pointer;font-size:.82rem;font-family:'DM Sans',sans-serif;transition:all .2s}
-.sig-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-#typeInput{width:100%;max-width:500px;font-size:1.8rem;padding:10px 14px;background:#fff;color:#000;border:1px solid var(--border);border-radius:10px;font-family:cursive;outline:none}
-#pdfViewer{position:relative;display:inline-block}
-#pdfViewer canvas{border:1px solid var(--border);border-radius:8px;max-width:100%}
-.sig-overlay{position:absolute;cursor:move;border:2px dashed var(--accent);border-radius:4px;display:flex;align-items:center;justify-content:center;background:rgba(124,106,255,.08);user-select:none;min-width:120px;min-height:40px}
-.sig-overlay img{max-width:100%;max-height:100%;pointer-events:none}
-.sig-overlay .del-sig{position:absolute;top:-10px;right:-10px;background:var(--a2);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:.65rem;cursor:pointer}
-#pgNav{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:.85rem}
-#pgNav button{background:var(--s2);border:1px solid var(--border);color:var(--text);padding:5px 12px;border-radius:7px;cursor:pointer}
-</style>
-<script src="shared.js"></script>
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Sign PDF Online – Draw, Type &amp; Insert Digital Signature | PDFHub</title>
+  <meta name="description" content="Sign PDF contracts and forms digitally. Draw your signature, upload a signature image, or type your name with zero server uploads."/>
+  <link rel="canonical" href="https://pdfshub.netlify.app/tools/sign.html"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+  <meta name="theme-color" content="#07070d"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="PDFHub"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Sign PDF Online – Draw, Type &amp; Insert Digital Signature | PDFHub"/>
+  <meta property="og:description" content="Sign PDF contracts and forms digitally. Draw your signature, upload a signature image, or type your name with zero server uploads."/>
+  <meta property="og:url" content="https://pdfshub.netlify.app/tools/sign.html"/>
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Sign PDF – PDFHub"/>
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Sign PDF Online – Draw, Type &amp; Insert Digital Signature | PDFHub"/>
+  <meta name="twitter:description" content="Sign PDF contracts and forms digitally. Draw your signature, upload a signature image, or type your name with zero server uploads."/>
+  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+
+  <link rel="icon" href="../favicons/favicon.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="../favicons/favicon.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="shared.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/sign.html#app",
+      "url": "https://pdfshub.netlify.app/tools/sign.html",
+      "name": "Sign PDF – PDFHub",
+      "description": "Sign PDF contracts and forms digitally. Draw your signature, upload a signature image, or type your name with zero server uploads.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and choose Draw or Type.",
+        "Create your signature, then navigate to the target page.",
+        "Click the page to place the signature and drag it into position if needed.",
+        "Select Save Signed PDF and review placement before sending it."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Sign PDF",
+          "item": "https://pdfshub.netlify.app/tools/sign.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head><body>
 <div id="dlModal"></div>
 <nav>
@@ -122,7 +188,7 @@ function renderPlacedSigs(){
   signatures.filter(s=>s.page===curPage).forEach((s,gi)=>{
     const idx=signatures.indexOf(s);
     const el=document.createElement('div');el.className='sig-overlay';el.style.cssText=`left:${s.x-s.w/2}px;top:${s.y-s.h/2}px;width:${s.w}px;height:${s.h}px;`;
-    el.innerHTML=`<img src="${s.dataUrl}"/><button class="del-sig" onclick="removeSig(${idx})"><i class="fas fa-times"></i></button>`;
+    el.innerHTML=`<img src="${s.dataUrl}" alt="Digital signature preview"/><button class="del-sig" onclick="removeSig(${idx})"><i class="fas fa-times"></i></button>`;
     makeDraggable(el,s,idx);viewer.appendChild(el);
   });
 }
@@ -154,5 +220,65 @@ async function saveSigned(){
     showStatus('✓ Signed PDF saved!','success');
   }catch(e){showStatus('Error: '+e.message,'error')}
 }
-</script><div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
+</script>
+
+
+
+
+
+
+<!-- On-Page SEO Educational & Content Section -->
+<section class="tool-seo-content" aria-labelledby="aboutToolHeading">
+  <div class="tool-seo-card">
+    <h2 id="aboutToolHeading">About Sign PDF</h2>
+    <p>Sign PDF creates a drawn or typed signature, lets you click to place it on pages, and embeds the signature image in the exported document.</p>
+
+    <h3>How to Use Sign PDF Online</h3>
+    <ol class="tool-steps-list">
+      <li>Upload a PDF and choose Draw or Type.</li>
+      <li>Create your signature, then navigate to the target page.</li>
+      <li>Click the page to place the signature and drag it into position if needed.</li>
+      <li>Select Save Signed PDF and review placement before sending it.</li>
+    </ol>
+
+    <div class="tool-feature-grid">
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-shield-halved" aria-hidden="true" style="color:var(--a3)"></i> 100% Client-Side Privacy</h4>
+        <p>Files process in local browser memory via WebAssembly. Your documents are never uploaded to remote servers.</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-file-circle-check" aria-hidden="true" style="color:var(--accent)"></i> Supported Input</h4>
+        <p>One PDF and a drawn or typed signature</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-bolt" aria-hidden="true" style="color:var(--a4)"></i> Output Result</h4>
+        <p>A signed PDF</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-lightbulb" aria-hidden="true" style="color:var(--a5)"></i> Practical Pro-Tip</h4>
+        <p>Keep the signature size consistent and place it away from existing text.</p>
+      </div>
+    </div>
+
+    <div class="tool-guide-cta">
+      <div>
+        <h3>Need Visual Step-by-Step Guidance?</h3>
+        <p>Explore our complete walkthrough for Sign PDF with full interface screenshots, option reference, and troubleshooting FAQs.</p>
+      </div>
+      <a class="tool-guide-btn" href="../guides/sign-pdf/">
+        <i class="fas fa-book-open" aria-hidden="true"></i> Read Sign PDF Guide
+      </a>
+    </div>
+
+    
+    <div class="related-tools-box">
+      <h4>Related PDF Utilities</h4>
+      <div class="related-tools-chips">
+        <a class="related-tool-chip" href="edit.html"><i class="fas fa-edit"></i> <span>Edit PDF</span></a><a class="related-tool-chip" href="forms.html"><i class="fas fa-wpforms"></i> <span>PDF Forms</span></a><a class="related-tool-chip" href="protect.html"><i class="fas fa-lock"></i> <span>Protect PDF</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
 </body></html>

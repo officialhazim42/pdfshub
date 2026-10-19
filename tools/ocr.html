@@ -1,11 +1,90 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>OCR PDF – PDFHub</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="shared.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<style>#ocrResult{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:16px;font-size:.85rem;line-height:1.7;white-space:pre-wrap;max-height:400px;overflow-y:auto;display:none}</style>
-<script src="shared.js"></script>
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>OCR PDF Online – Optical Character Recognition &amp; Text Extraction | PDFHub</title>
+  <meta name="description" content="Extract searchable text from scanned PDFs and document images using browser-based Optical Character Recognition (OCR)."/>
+  <link rel="canonical" href="https://pdfshub.netlify.app/tools/ocr.html"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+  <meta name="theme-color" content="#07070d"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="PDFHub"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="OCR PDF Online – Optical Character Recognition &amp; Text Extraction | PDFHub"/>
+  <meta property="og:description" content="Extract searchable text from scanned PDFs and document images using browser-based Optical Character Recognition (OCR)."/>
+  <meta property="og:url" content="https://pdfshub.netlify.app/tools/ocr.html"/>
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="OCR PDF – PDFHub"/>
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="OCR PDF Online – Optical Character Recognition &amp; Text Extraction | PDFHub"/>
+  <meta name="twitter:description" content="Extract searchable text from scanned PDFs and document images using browser-based Optical Character Recognition (OCR)."/>
+  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+
+  <link rel="icon" href="../favicons/favicon.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="../favicons/favicon.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="shared.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/ocr.html#app",
+      "url": "https://pdfshub.netlify.app/tools/ocr.html",
+      "name": "OCR PDF – PDFHub",
+      "description": "Extract searchable text from scanned PDFs and document images using browser-based Optical Character Recognition (OCR).",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a scanned PDF.",
+        "Choose the recognition language and optional pages or ranges.",
+        "Select Extract Text and wait while each page is recognized.",
+        "Review the text, then copy it or download the TXT file."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "OCR PDF",
+          "item": "https://pdfshub.netlify.app/tools/ocr.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head><body>
 <div id="dlModal"></div>
 <nav>
@@ -90,5 +169,65 @@ async function go(){
 }
 function copyText(){navigator.clipboard.writeText(extractedText).then(()=>showStatus('✓ Copied to clipboard!','success'));}
 function downloadTxt(){downloadBlob(new Blob([extractedText],{type:'text/plain'}),'ocr-text.txt');}
-</script><div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
+</script>
+
+
+
+
+
+
+<!-- On-Page SEO Educational & Content Section -->
+<section class="tool-seo-content" aria-labelledby="aboutToolHeading">
+  <div class="tool-seo-card">
+    <h2 id="aboutToolHeading">About OCR PDF</h2>
+    <p>OCR PDF renders selected pages and sends the images through the locally loaded Tesseract.js worker. It returns recognized text rather than a searchable PDF.</p>
+
+    <h3>How to Use OCR PDF Online</h3>
+    <ol class="tool-steps-list">
+      <li>Upload a scanned PDF.</li>
+      <li>Choose the recognition language and optional pages or ranges.</li>
+      <li>Select Extract Text and wait while each page is recognized.</li>
+      <li>Review the text, then copy it or download the TXT file.</li>
+    </ol>
+
+    <div class="tool-feature-grid">
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-shield-halved" aria-hidden="true" style="color:var(--a3)"></i> 100% Client-Side Privacy</h4>
+        <p>Files process in local browser memory via WebAssembly. Your documents are never uploaded to remote servers.</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-file-circle-check" aria-hidden="true" style="color:var(--accent)"></i> Supported Input</h4>
+        <p>A scanned PDF</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-bolt" aria-hidden="true" style="color:var(--a4)"></i> Output Result</h4>
+        <p>Recognized text for copy or TXT download</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-lightbulb" aria-hidden="true" style="color:var(--a5)"></i> Practical Pro-Tip</h4>
+        <p>Clear, high-resolution scans and the correct language improve recognition.</p>
+      </div>
+    </div>
+
+    <div class="tool-guide-cta">
+      <div>
+        <h3>Need Visual Step-by-Step Guidance?</h3>
+        <p>Explore our complete walkthrough for OCR PDF with full interface screenshots, option reference, and troubleshooting FAQs.</p>
+      </div>
+      <a class="tool-guide-btn" href="../guides/ocr-pdf/">
+        <i class="fas fa-book-open" aria-hidden="true"></i> Read OCR PDF Guide
+      </a>
+    </div>
+
+    
+    <div class="related-tools-box">
+      <h4>Related PDF Utilities</h4>
+      <div class="related-tools-chips">
+        <a class="related-tool-chip" href="pdf-to-markdown.html"><i class="fas fa-file-code"></i> <span>PDF to Markdown</span></a><a class="related-tool-chip" href="pdf-to-word.html"><i class="fas fa-file-word"></i> <span>PDF to Word</span></a><a class="related-tool-chip" href="summarize.html"><i class="fas fa-robot"></i> <span>AI Summarizer</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
 </body></html>

@@ -1,18 +1,89 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Scan to PDF – PDFHub</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="shared.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<style>
-#camArea{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px;text-align:center}
-video{width:100%;max-width:480px;border-radius:8px;background:#000}
-#snapCanvas{display:none}
-.snap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin:12px 0}
-.snap-item{position:relative}
-.snap-item img{width:100%;border-radius:6px;border:1px solid var(--border)}
-.snap-item button{position:absolute;top:2px;right:2px;background:var(--a2);color:#fff;border:none;border-radius:4px;width:18px;height:18px;font-size:.6rem;cursor:pointer}
-</style>
-<script src="shared.js"></script>
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Scan to PDF Online – Capture Documents via Camera | PDFHub</title>
+  <meta name="description" content="Use your device camera or scanner to capture physical documents, enhance contrast, and save them as multi-page PDFs."/>
+  <link rel="canonical" href="https://pdfshub.netlify.app/tools/scan-to-pdf.html"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+  <meta name="theme-color" content="#07070d"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="PDFHub"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Scan to PDF Online – Capture Documents via Camera | PDFHub"/>
+  <meta property="og:description" content="Use your device camera or scanner to capture physical documents, enhance contrast, and save them as multi-page PDFs."/>
+  <meta property="og:url" content="https://pdfshub.netlify.app/tools/scan-to-pdf.html"/>
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Scan to PDF – PDFHub"/>
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Scan to PDF Online – Capture Documents via Camera | PDFHub"/>
+  <meta name="twitter:description" content="Use your device camera or scanner to capture physical documents, enhance contrast, and save them as multi-page PDFs."/>
+  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+
+  <link rel="icon" href="../favicons/favicon.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="../favicons/favicon.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="shared.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/scan-to-pdf.html#app",
+      "url": "https://pdfshub.netlify.app/tools/scan-to-pdf.html",
+      "name": "Scan to PDF – PDFHub",
+      "description": "Use your device camera or scanner to capture physical documents, enhance contrast, and save them as multi-page PDFs.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Choose Start Camera and grant permission, or upload document images.",
+        "Capture or add all pages and remove any incorrect image from the grid.",
+        "Choose Fit image, A4, or Letter and an enhancement.",
+        "Select Create PDF and review every scanned page."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Scan to PDF",
+          "item": "https://pdfshub.netlify.app/tools/scan-to-pdf.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head><body>
 <div id="dlModal"></div>
 <nav>
@@ -62,7 +133,7 @@ async function startCamera(){try{stream=await navigator.mediaDevices.getUserMedi
 function stopCamera(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;video.srcObject=null;document.getElementById('camBtn').style.display='';document.getElementById('snapBtn').style.display='none';document.getElementById('stopBtn').style.display='none';}}
 function snap(){sc.width=video.videoWidth;sc.height=video.videoHeight;sCtx.drawImage(video,0,0);sc.toBlob(blob=>addImages([new File([blob],'scan-'+(images.length+1)+'.jpg',{type:'image/jpeg'})]),'image/jpeg',0.92);}
 function addImages(files){images=[...images,...files.map(f=>({file:f,dataUrl:null}))];images.forEach((img,i)=>{if(!img.dataUrl){const r=new FileReader();r.onload=e=>{img.dataUrl=e.target.result;renderGrid();};r.readAsDataURL(img.file);}});renderGrid();}
-function renderGrid(){const g=document.getElementById('snapGrid');g.innerHTML='';images.forEach((img,i)=>{if(!img.dataUrl)return;const d=document.createElement('div');d.className='snap-item';d.innerHTML=`<img src="${img.dataUrl}"/><button onclick="removeImg(${i})"><i class="fas fa-times"></i></button>`;g.appendChild(d);});document.getElementById('opts').style.display=images.length?'block':'none';document.getElementById('goBtn').disabled=!images.length;}
+function renderGrid(){const g=document.getElementById('snapGrid');g.innerHTML='';images.forEach((img,i)=>{if(!img.dataUrl)return;const d=document.createElement('div');d.className='snap-item';d.innerHTML=`<img src="${img.dataUrl}" alt="Scanned document page ${i+1}"/><button onclick="removeImg(${i})"><i class="fas fa-times"></i></button>`;g.appendChild(d);});document.getElementById('opts').style.display=images.length?'block':'none';document.getElementById('goBtn').disabled=!images.length;}
 function removeImg(i){images.splice(i,1);renderGrid();}
 function clearAll(){images=[];renderGrid();}
 function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
@@ -87,5 +158,65 @@ async function go(){
   }catch(e){showStatus('Error: '+e.message,'error')}
   btn.disabled=false;
 }
-</script><div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
+</script>
+
+
+
+
+
+
+<!-- On-Page SEO Educational & Content Section -->
+<section class="tool-seo-content" aria-labelledby="aboutToolHeading">
+  <div class="tool-seo-card">
+    <h2 id="aboutToolHeading">About Scan to PDF</h2>
+    <p>Scan to PDF uses the camera when permitted or accepts uploaded images, optionally applies grayscale or high contrast, and embeds each image on a page.</p>
+
+    <h3>How to Use Scan to PDF Online</h3>
+    <ol class="tool-steps-list">
+      <li>Choose Start Camera and grant permission, or upload document images.</li>
+      <li>Capture or add all pages and remove any incorrect image from the grid.</li>
+      <li>Choose Fit image, A4, or Letter and an enhancement.</li>
+      <li>Select Create PDF and review every scanned page.</li>
+    </ol>
+
+    <div class="tool-feature-grid">
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-shield-halved" aria-hidden="true" style="color:var(--a3)"></i> 100% Client-Side Privacy</h4>
+        <p>Files process in local browser memory via WebAssembly. Your documents are never uploaded to remote servers.</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-file-circle-check" aria-hidden="true" style="color:var(--accent)"></i> Supported Input</h4>
+        <p>Camera captures or JPG/PNG/WebP images</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-bolt" aria-hidden="true" style="color:var(--a4)"></i> Output Result</h4>
+        <p>A multi-page scanned PDF</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-lightbulb" aria-hidden="true" style="color:var(--a5)"></i> Practical Pro-Tip</h4>
+        <p>Use even lighting and keep the camera parallel to the page.</p>
+      </div>
+    </div>
+
+    <div class="tool-guide-cta">
+      <div>
+        <h3>Need Visual Step-by-Step Guidance?</h3>
+        <p>Explore our complete walkthrough for Scan to PDF with full interface screenshots, option reference, and troubleshooting FAQs.</p>
+      </div>
+      <a class="tool-guide-btn" href="../guides/scan-to-pdf/">
+        <i class="fas fa-book-open" aria-hidden="true"></i> Read Scan to PDF Guide
+      </a>
+    </div>
+
+    
+    <div class="related-tools-box">
+      <h4>Related PDF Utilities</h4>
+      <div class="related-tools-chips">
+        <a class="related-tool-chip" href="jpg-to-pdf.html"><i class="fas fa-image"></i> <span>JPG to PDF</span></a><a class="related-tool-chip" href="ocr.html"><i class="fas fa-spell-check"></i> <span>OCR PDF</span></a><a class="related-tool-chip" href="pdf-to-jpg.html"><i class="fas fa-file-image"></i> <span>PDF to JPG</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
 </body></html>

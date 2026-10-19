@@ -1,22 +1,90 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Organize PDF – PDFHub</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="shared.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<style>
-#pagesGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-bottom:20px}
-.pg-card{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:8px;text-align:center;cursor:grab;position:relative;user-select:none;transition:box-shadow .2s,border-color .2s}
-.pg-card.dragging{opacity:.4;border-color:var(--accent)}
-.pg-card.over{border-color:var(--accent);box-shadow:0 0 0 2px rgba(124,106,255,.4)}
-.pg-card canvas{width:100%;border-radius:6px}
-.pg-num{font-size:.72rem;color:var(--muted);margin-top:5px}
-.pg-card .del-pg{position:absolute;top:4px;right:4px;background:var(--a2);color:#fff;border:none;border-radius:4px;width:20px;height:20px;font-size:.6rem;cursor:pointer;display:none;align-items:center;justify-content:center}
-.pg-card:hover .del-pg{display:flex}
-.pg-card .rot-pg{position:absolute;top:4px;left:4px;background:var(--accent);color:#fff;border:none;border-radius:4px;width:20px;height:20px;font-size:.6rem;cursor:pointer;display:none;align-items:center;justify-content:center}
-.pg-card:hover .rot-pg{display:flex}
-</style>
-<script src="shared.js"></script>
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Organize PDF Pages Online – Reorder, Rotate &amp; Sort | PDFHub</title>
+  <meta name="description" content="Rearrange, delete, rotate, and sort PDF pages with an intuitive visual grid. Instant private processing with zero file uploads."/>
+  <link rel="canonical" href="https://pdfshub.netlify.app/tools/organize.html"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+  <meta name="theme-color" content="#07070d"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="PDFHub"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Organize PDF Pages Online – Reorder, Rotate &amp; Sort | PDFHub"/>
+  <meta property="og:description" content="Rearrange, delete, rotate, and sort PDF pages with an intuitive visual grid. Instant private processing with zero file uploads."/>
+  <meta property="og:url" content="https://pdfshub.netlify.app/tools/organize.html"/>
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Organize PDF – PDFHub"/>
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Organize PDF Pages Online – Reorder, Rotate &amp; Sort | PDFHub"/>
+  <meta name="twitter:description" content="Rearrange, delete, rotate, and sort PDF pages with an intuitive visual grid. Instant private processing with zero file uploads."/>
+  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+
+  <link rel="icon" href="../favicons/favicon.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="../favicons/favicon.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="shared.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/organize.html#app",
+      "url": "https://pdfshub.netlify.app/tools/organize.html",
+      "name": "Organize PDF – PDFHub",
+      "description": "Rearrange, delete, rotate, and sort PDF pages with an intuitive visual grid. Instant private processing with zero file uploads.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and wait for the thumbnail grid.",
+        "Drag thumbnails to change their order.",
+        "Use the rotate or delete controls on individual pages, or Rotate All.",
+        "Select Save Organized PDF and verify the page sequence."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Organize PDF",
+          "item": "https://pdfshub.netlify.app/tools/organize.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head><body>
 <div id="dlModal"></div>
 <nav>
@@ -103,5 +171,65 @@ async function save(){
     document.getElementById('pbar').style.width='100%';showStatus('✓ Saved!','success');
   }catch(e){showStatus('Error: '+e.message,'error')}
 }
-</script><div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
+</script>
+
+
+
+
+
+
+<!-- On-Page SEO Educational & Content Section -->
+<section class="tool-seo-content" aria-labelledby="aboutToolHeading">
+  <div class="tool-seo-card">
+    <h2 id="aboutToolHeading">About Organize PDF</h2>
+    <p>Organize PDF renders page thumbnails so you can drag pages into a new order, rotate individual pages, delete pages, or rotate all pages.</p>
+
+    <h3>How to Use Organize PDF Online</h3>
+    <ol class="tool-steps-list">
+      <li>Upload a PDF and wait for the thumbnail grid.</li>
+      <li>Drag thumbnails to change their order.</li>
+      <li>Use the rotate or delete controls on individual pages, or Rotate All.</li>
+      <li>Select Save Organized PDF and verify the page sequence.</li>
+    </ol>
+
+    <div class="tool-feature-grid">
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-shield-halved" aria-hidden="true" style="color:var(--a3)"></i> 100% Client-Side Privacy</h4>
+        <p>Files process in local browser memory via WebAssembly. Your documents are never uploaded to remote servers.</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-file-circle-check" aria-hidden="true" style="color:var(--accent)"></i> Supported Input</h4>
+        <p>One PDF</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-bolt" aria-hidden="true" style="color:var(--a4)"></i> Output Result</h4>
+        <p>A reordered PDF</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-lightbulb" aria-hidden="true" style="color:var(--a5)"></i> Practical Pro-Tip</h4>
+        <p>Use the page labels after every reorder to confirm the final sequence.</p>
+      </div>
+    </div>
+
+    <div class="tool-guide-cta">
+      <div>
+        <h3>Need Visual Step-by-Step Guidance?</h3>
+        <p>Explore our complete walkthrough for Organize PDF with full interface screenshots, option reference, and troubleshooting FAQs.</p>
+      </div>
+      <a class="tool-guide-btn" href="../guides/organize-pdf/">
+        <i class="fas fa-book-open" aria-hidden="true"></i> Read Organize PDF Guide
+      </a>
+    </div>
+
+    
+    <div class="related-tools-box">
+      <h4>Related PDF Utilities</h4>
+      <div class="related-tools-chips">
+        <a class="related-tool-chip" href="merge.html"><i class="fas fa-object-group"></i> <span>Merge PDF</span></a><a class="related-tool-chip" href="rotate.html"><i class="fas fa-redo"></i> <span>Rotate PDF</span></a><a class="related-tool-chip" href="remove-pages.html"><i class="fas fa-trash-alt"></i> <span>Remove Pages</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
 </body></html>

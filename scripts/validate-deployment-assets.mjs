@@ -66,6 +66,16 @@ for (const pwaFile of pwaFiles) {
 }
 console.log('✓ PWA core verified in dist: manifest, service worker, offline shell, install page, and app icons');
 
+// 3c. Verify SEO Assets in dist
+const seoFiles = ['robots.txt', 'sitemap.xml', '_redirects'];
+for (const seoFile of seoFiles) {
+  if (!fs.existsSync(path.join(dist, seoFile))) {
+    console.error(`ERROR: Critical SEO asset missing in dist: ${seoFile}`);
+    process.exit(1);
+  }
+}
+console.log('✓ SEO core verified in dist: robots.txt, sitemap.xml, and Netlify _redirects');
+
 // 4. Verify 33 Tools in dist
 const toolsDir = path.join(dist, 'tools');
 const toolFiles = fs.readdirSync(toolsDir).filter(f => f.endsWith('.html'));

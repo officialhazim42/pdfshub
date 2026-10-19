@@ -26,7 +26,10 @@ const productionItems = [
   'favicons',
   'guides',
   'tools',
-  'menu-bar'
+  'menu-bar',
+  'robots.txt',
+  'sitemap.xml',
+  '_redirects'
 ];
 
 function copyRecursive(src, dest) {
@@ -110,6 +113,15 @@ if (!fs.existsSync(path.join(dist, 'offline.html'))) {
 }
 if (!fs.existsSync(path.join(dist, 'install', 'index.html'))) {
   throw new Error('Verification failed: dist/install/index.html is missing!');
+}
+if (!fs.existsSync(path.join(dist, 'robots.txt'))) {
+  throw new Error('Verification failed: dist/robots.txt is missing!');
+}
+if (!fs.existsSync(path.join(dist, 'sitemap.xml'))) {
+  throw new Error('Verification failed: dist/sitemap.xml is missing!');
+}
+if (!fs.existsSync(path.join(dist, '_redirects'))) {
+  throw new Error('Verification failed: dist/_redirects is missing!');
 }
 
 const requiredIcons = [

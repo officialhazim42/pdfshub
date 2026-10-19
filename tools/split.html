@@ -1,13 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Split PDF – PDFHub</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="shared.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<script src="shared.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Split PDF Online – Separate PDF Pages into Individual Files | PDFHub</title>
+  <meta name="description" content="Divide large PDF files into smaller documents. Extract specific page ranges or split into individual single-page files."/>
+  <link rel="canonical" href="https://pdfshub.netlify.app/tools/split.html"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+  <meta name="theme-color" content="#07070d"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="PDFHub"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Split PDF Online – Separate PDF Pages into Individual Files | PDFHub"/>
+  <meta property="og:description" content="Divide large PDF files into smaller documents. Extract specific page ranges or split into individual single-page files."/>
+  <meta property="og:url" content="https://pdfshub.netlify.app/tools/split.html"/>
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Split PDF – PDFHub"/>
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Split PDF Online – Separate PDF Pages into Individual Files | PDFHub"/>
+  <meta name="twitter:description" content="Divide large PDF files into smaller documents. Extract specific page ranges or split into individual single-page files."/>
+  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+
+  <link rel="icon" href="../favicons/favicon.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="../favicons/favicon.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="shared.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/split.html#app",
+      "url": "https://pdfshub.netlify.app/tools/split.html",
+      "name": "Split PDF – PDFHub",
+      "description": "Divide large PDF files into smaller documents. Extract specific page ranges or split into individual single-page files.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and choose a split mode.",
+        "Enter ranges or a group size when the chosen mode needs it.",
+        "Select Split PDF and wait for each group to be created.",
+        "Open the resulting files and verify their names and page ranges."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Split PDF",
+          "item": "https://pdfshub.netlify.app/tools/split.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <div id="dlModal"></div>
@@ -119,5 +197,65 @@ async function splitPDF(){
 }
 function download(bytes,name){const blob=new Blob([bytes],{type:'application/pdf'});downloadBlob(blob,name);}
 </script>
+
+
+
+
+
+
+
+<!-- On-Page SEO Educational & Content Section -->
+<section class="tool-seo-content" aria-labelledby="aboutToolHeading">
+  <div class="tool-seo-card">
+    <h2 id="aboutToolHeading">About Split PDF</h2>
+    <p>Split PDF copies selected page groups into separate files. It supports explicit ranges, one file per page, and every-N-pages grouping.</p>
+
+    <h3>How to Use Split PDF Online</h3>
+    <ol class="tool-steps-list">
+      <li>Upload a PDF and choose a split mode.</li>
+      <li>Enter ranges or a group size when the chosen mode needs it.</li>
+      <li>Select Split PDF and wait for each group to be created.</li>
+      <li>Open the resulting files and verify their names and page ranges.</li>
+    </ol>
+
+    <div class="tool-feature-grid">
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-shield-halved" aria-hidden="true" style="color:var(--a3)"></i> 100% Client-Side Privacy</h4>
+        <p>Files process in local browser memory via WebAssembly. Your documents are never uploaded to remote servers.</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-file-circle-check" aria-hidden="true" style="color:var(--accent)"></i> Supported Input</h4>
+        <p>One PDF and split settings</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-bolt" aria-hidden="true" style="color:var(--a4)"></i> Output Result</h4>
+        <p>One or more PDF downloads</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-lightbulb" aria-hidden="true" style="color:var(--a5)"></i> Practical Pro-Tip</h4>
+        <p>Use explicit ranges when the output groups need different sizes.</p>
+      </div>
+    </div>
+
+    <div class="tool-guide-cta">
+      <div>
+        <h3>Need Visual Step-by-Step Guidance?</h3>
+        <p>Explore our complete walkthrough for Split PDF with full interface screenshots, option reference, and troubleshooting FAQs.</p>
+      </div>
+      <a class="tool-guide-btn" href="../guides/split-pdf/">
+        <i class="fas fa-book-open" aria-hidden="true"></i> Read Split PDF Guide
+      </a>
+    </div>
+
+    
+    <div class="related-tools-box">
+      <h4>Related PDF Utilities</h4>
+      <div class="related-tools-chips">
+        <a class="related-tool-chip" href="extract-pages.html"><i class="fas fa-file-export"></i> <span>Extract Pages</span></a><a class="related-tool-chip" href="remove-pages.html"><i class="fas fa-trash-alt"></i> <span>Remove Pages</span></a><a class="related-tool-chip" href="merge.html"><i class="fas fa-object-group"></i> <span>Merge PDF</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
 </body></html>

@@ -3,15 +3,123 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Redact PDF Guide — Visual step-by-step walkthrough, tips, troubleshooting, and FAQs.">
+  <title>Redact PDF Guide &amp; Tutorial – Step-by-Step Walkthrough | PDFHub</title>
+  <meta name="description" content="Complete visual guide and tutorial for Redact PDF on PDFHub. Draw black rectangles over sensitive areas and export a flattened PDF. Learn exact controls, step walkthroughs, tips, and troubleshooting.">
+  <link rel="canonical" href="https://pdfshub.netlify.app/guides/redact-pdf/">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#07070d">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="PDFHub">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Redact PDF Guide &amp; Tutorial – Step-by-Step Walkthrough | PDFHub">
+  <meta property="og:description" content="Complete visual guide and tutorial for Redact PDF on PDFHub. Draw black rectangles over sensitive areas and export a flattened PDF. Learn exact controls, step walkthroughs, tips, and troubleshooting.">
+  <meta property="og:url" content="https://pdfshub.netlify.app/guides/redact-pdf/">
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Redact PDF Guide – PDFHub">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Redact PDF Guide &amp; Tutorial – Step-by-Step Walkthrough | PDFHub">
+  <meta name="twitter:description" content="Complete visual guide and tutorial for Redact PDF on PDFHub. Draw black rectangles over sensitive areas and export a flattened PDF. Learn exact controls, step walkthroughs, tips, and troubleshooting.">
+  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png">
+
   <link rel="icon" href="../../favicons/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="../../favicons/favicon.png">
-  <title>Redact PDF Guide &amp; Walkthrough – PDFHub</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../../developer.css">
   <link rel="stylesheet" href="../styles.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://pdfshub.netlify.app/guides/redact-pdf/#article",
+      "url": "https://pdfshub.netlify.app/guides/redact-pdf/",
+      "headline": "Redact PDF Guide & Walkthrough",
+      "description": "Complete visual guide and tutorial for Redact PDF on PDFHub. Draw black rectangles over sensitive areas and export a flattened PDF. Learn exact controls, step walkthroughs, tips, and troubleshooting.",
+      "author": {
+        "@type": "Person",
+        "name": "Hazim Bashir",
+        "url": "https://github.com/officialhazim42"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "PDFHub",
+        "url": "https://pdfshub.netlify.app/",
+        "logo": "https://pdfshub.netlify.app/favicons/favicon.png"
+      },
+      "mainEntityOfPage": "https://pdfshub.netlify.app/guides/redact-pdf/",
+      "about": {
+        "@type": "WebApplication",
+        "name": "Redact PDF",
+        "url": "https://pdfshub.netlify.app/tools/redact.html"
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://pdfshub.netlify.app/guides/redact-pdf/#howto",
+      "name": "How to use Redact PDF",
+      "description": "Redact PDF renders pages for marking, then draws black rectangles into the output PDF. Inspect the exported copy carefully before sharing.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Step 1",
+          "text": "Upload a PDF and choose a page."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Step 2",
+          "text": "Drag over every sensitive region to create a black box."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Step 3",
+          "text": "Move through pages and repeat as needed; use Clear Page to start a page again."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Step 4",
+          "text": "Select Save Redacted PDF and verify the result in a separate viewer."
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "User Guides & Tips",
+          "item": "https://pdfshub.netlify.app/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Redact PDF Guide",
+          "item": "https://pdfshub.netlify.app/guides/redact-pdf/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
   <script>
     (function(){
       try {
@@ -25,7 +133,556 @@
   </script>
 </head>
 <body data-root="../../" data-guide="redact-pdf">
-  <main class="guide-shell" id="guideDetail"></main>
+  <main class="guide-shell" id="guideDetail">
+
+      <!-- BREADCRUMBS -->
+      <nav class="guide-breadcrumbs" aria-label="Breadcrumb">
+        <a href="../../index.html"><i class="fas fa-house" aria-hidden="true"></i> Home</a>
+        <span class="crumb-sep" aria-hidden="true">/</span>
+        <a href="../"><i class="fas fa-book-open" aria-hidden="true"></i> User Guides &amp; Tips</a>
+        <span class="crumb-sep" aria-hidden="true">/</span>
+        <span class="crumb-current">Redact PDF</span>
+      </nav>
+
+      <!-- HERO SECTION -->
+      <header class="guide-detail-hero">
+        <div class="guide-hero-badge">
+          <i class="fas fa-eraser" aria-hidden="true"></i>
+          <span>Secure PDF · 7 min read</span>
+        </div>
+        <h1 class="guide-title">Redact PDF Guide &amp; Walkthrough</h1>
+        <p class="guide-lead">Draw black rectangles over sensitive areas and export a flattened PDF.</p>
+        <div class="detail-actions">
+          <a class="guide-btn primary" href="../../tools/redact.html">
+            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Open This Tool
+          </a>
+          <a class="guide-btn" href="../">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i> All Guides
+          </a>
+          <button type="button" class="guide-btn accent" id="heroStartTourBtn">
+            <i class="fas fa-images" aria-hidden="true"></i> Fullscreen Walkthrough
+          </button>
+        </div>
+      </header>
+
+      <!-- STICKY QUICK GUIDE SECTION NAVIGATION -->
+      <nav class="guide-quick-nav" id="guideQuickNav" aria-label="Guide section navigation">
+        <div class="quick-nav-track">
+          <a class="quick-nav-link active" href="#section-overview"><i class="fas fa-circle-info" aria-hidden="true"></i> Overview</a>
+          <a class="quick-nav-link" href="#section-instructions"><i class="fas fa-list-ol" aria-hidden="true"></i> Instructions</a>
+          <a class="quick-nav-link" href="#section-walkthrough"><i class="fas fa-images" aria-hidden="true"></i> Walkthrough <span class="nav-count">7</span></a>
+          <a class="quick-nav-link" href="#section-tips"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tips</a>
+          <a class="quick-nav-link" href="#section-mistakes"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Common Mistakes</a>
+          <a class="quick-nav-link" href="#section-trouble"><i class="fas fa-wrench" aria-hidden="true"></i> Troubleshooting</a>
+          <a class="quick-nav-link" href="#section-faq"><i class="fas fa-circle-question" aria-hidden="true"></i> FAQs</a>
+          <a class="quick-nav-link" href="#section-related"><i class="fas fa-layer-group" aria-hidden="true"></i> Related Tools</a>
+        </div>
+      </nav>
+
+      <!-- MAIN CONTENT LAYOUT -->
+      <div class="detail-layout">
+        <div class="detail-main">
+
+          <!-- 1. OVERVIEW & BEFORE YOU START -->
+          <section class="guide-section" id="section-overview">
+            <div class="guide-section-header">
+              <i class="fas fa-circle-info" aria-hidden="true"></i>
+              <h2>Tool Overview &amp; Requirements</h2>
+            </div>
+            <p>Redact PDF renders pages for marking, then draws black rectangles into the output PDF. Inspect the exported copy carefully before sharing.</p>
+            <div class="facts">
+              <div class="fact">
+                <strong><i class="fas fa-file-import" aria-hidden="true"></i> Input</strong>
+                <span>One PDF and drawn redaction areas</span>
+              </div>
+              <div class="fact">
+                <strong><i class="fas fa-file-export" aria-hidden="true"></i> Output</strong>
+                <span>A redacted PDF</span>
+              </div>
+              <div class="fact">
+                <strong><i class="fas fa-shield-halved" aria-hidden="true"></i> Requirements</strong>
+                <span>One readable PDF is required. Redaction coordinates are based on the rendered page and must cover the complete sensitive area.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. STEP-BY-STEP INSTRUCTIONS -->
+          <section class="guide-section" id="section-instructions">
+            <div class="guide-section-header">
+              <i class="fas fa-list-ol" aria-hidden="true"></i>
+              <h2>Step-by-Step Instructions</h2>
+            </div>
+            <p>Follow these essential instructions to achieve optimal results when using Redact PDF:</p>
+            <ol class="guide-step-list">
+              <li>Upload a PDF and choose a page.</li>
+              <li>Drag over every sensitive region to create a black box.</li>
+              <li>Move through pages and repeat as needed; use Clear Page to start a page again.</li>
+              <li>Select Save Redacted PDF and verify the result in a separate viewer.</li>
+            </ol>
+          </section>
+
+          <!-- 3. VISUAL WALKTHROUGH SECTION -->
+          <section class="guide-section visual-walkthrough-section" id="section-walkthrough">
+            <div class="walk-section-header">
+              <div>
+                <span class="walk-eyebrow"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Interactive Tutorial</span>
+                <h2>Visual Step-by-Step Walkthrough</h2>
+                <p class="walk-subtitle">Follow these real interface screenshots captured directly from Redact PDF. Every step highlights the exact buttons, selections, and downloads. Click any screenshot or "Launch Fullscreen Viewer" to inspect in high resolution.</p>
+              </div>
+              <div class="walk-tour-action">
+                <button type="button" class="guide-btn primary walk-start-tour-btn" id="startTourBtn" aria-label="Launch interactive full-screen walkthrough">
+                  <i class="fas fa-play" aria-hidden="true"></i> Launch Fullscreen Viewer
+                </button>
+              </div>
+            </div>
+
+            <!-- Step Progress Navigation Bar -->
+            <div class="walk-progress-nav" id="walkProgressNav" role="navigation" aria-label="Walkthrough steps">
+              <div class="walk-progress-track">
+                <div class="walk-progress-bar" id="walkProgressBar" style="width: 14%;"></div>
+              </div>
+              <div class="walk-step-chips" id="walkStepChips">
+                
+    <button type="button" class="walk-step-chip active" data-step-target="0" aria-label="Jump to Step 1: Open Redact PDF">
+      <span class="chip-num">1</span>
+      <span class="chip-title">Open Redact PDF</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="1" aria-label="Jump to Step 2: Upload Sensitive PDF">
+      <span class="chip-num">2</span>
+      <span class="chip-title">Upload Sensitive PDF</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="2" aria-label="Jump to Step 3: Select Target Page">
+      <span class="chip-num">3</span>
+      <span class="chip-title">Select Target Page</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="3" aria-label="Jump to Step 4: Draw Blackout Redaction Box">
+      <span class="chip-num">4</span>
+      <span class="chip-title">Draw Blackout Redaction Box</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="4" aria-label="Jump to Step 5: Inspect Redaction Coverage">
+      <span class="chip-num">5</span>
+      <span class="chip-title">Inspect Redaction Coverage</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="5" aria-label="Jump to Step 6: Click Save Redacted PDF">
+      <span class="chip-num">6</span>
+      <span class="chip-title">Click Save Redacted PDF</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="6" aria-label="Jump to Step 7: Download Sanitized PDF">
+      <span class="chip-num">7</span>
+      <span class="chip-title">Download Sanitized PDF</span>
+    </button>
+              </div>
+            </div>
+
+            <div class="walkthrough" id="walkthroughGrid">
+              
+      <article class="walk-card" id="walkCard-0" data-step="1">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 1 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Upload Drop Zone (#drop)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="0" aria-label="Enlarge screenshot for Step 1: Open Redact PDF" aria-haspopup="dialog">
+          <img src="../../assets/guides/redact-pdf/step-1-open.webp" alt="Redact PDF landing screen" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/redact-pdf/step-1-open.webp';">
+          <span class="walk-badge">Step 1</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Open Redact PDF</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Open Redact PDF to permanently black out and sanitize private, personal, or financial data.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">The drop area accepts any PDF document containing confidential information.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Click or drop your PDF document into the workspace.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Redaction permanently deletes the underlying text and vectors, preventing data recovery.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="-1" disabled aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">1 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="1"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-1" data-step="2">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 2 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> File Browser (#fin)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="1" aria-label="Enlarge screenshot for Step 2: Upload Sensitive PDF" aria-haspopup="dialog">
+          <img src="../../assets/guides/redact-pdf/step-2-upload.webp" alt="Redact PDF document loaded into editor" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/redact-pdf/step-2-open.webp';">
+          <span class="walk-badge">Step 2</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Upload Sensitive PDF</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Select your confidential PDF file from your storage.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">The document renders in the interactive redaction canvas viewer.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Locate the sensitive text blocks on the page.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Redaction is irreversible; keep an unmodified backup of your original file.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="0"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">2 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="2"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-2" data-step="3">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 3 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Page Switcher (changePage)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="2" aria-label="Enlarge screenshot for Step 3: Select Target Page" aria-haspopup="dialog">
+          <img src="../../assets/guides/redact-pdf/step-3-page.webp" alt="Redact PDF page selection" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/redact-pdf/step-3-open.webp';">
+          <span class="walk-badge">Step 3</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Select Target Page</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Navigate to the exact page where confidential text or numbers appear.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">The canvas viewer displays the active page with full document legibility.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Identify social security numbers, bank details, or private names.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">You can redact multiple pages across the document in one session.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="1"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">3 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="3"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-3" data-step="4">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 4 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Redaction Canvas (#editor, canvas)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="3" aria-label="Enlarge screenshot for Step 4: Draw Blackout Redaction Box" aria-haspopup="dialog">
+          <img src="../../assets/guides/redact-pdf/step-4-box.webp" alt="Redact PDF drawing blackout box" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/redact-pdf/step-4-open.webp';">
+          <span class="walk-badge">Step 4</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Draw Blackout Redaction Box</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Click and drag a blackout rectangle directly over the private text.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">An opaque solid black box covers the confidential content entirely.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Ensure the box covers all digits and surrounding text.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Drag slightly past the edges of sensitive text to ensure full coverage.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="2"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">4 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="4"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-4" data-step="5">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 5 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Blackout Overlay Preview</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="4" aria-label="Enlarge screenshot for Step 5: Inspect Redaction Coverage" aria-haspopup="dialog">
+          <img src="../../assets/guides/redact-pdf/step-5-inspect.webp" alt="Redact PDF inspection of blackout coverage" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/redact-pdf/step-5-open.webp';">
+          <span class="walk-badge">Step 5</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Inspect Redaction Coverage</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Review the drawn blackout boxes to confirm nothing sensitive is exposed.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">Solid blackout blocks conceal all private numbers and names completely.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Add additional redaction boxes if other sections need sanitization.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Check headers and footnotes for repeated account numbers or IDs.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="3"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">5 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="5"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-5" data-step="6">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 6 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Save Action Button (button.btn-primary)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="5" aria-label="Enlarge screenshot for Step 6: Click Save Redacted PDF" aria-haspopup="dialog">
+          <img src="../../assets/guides/redact-pdf/step-6-save.webp" alt="Redact PDF save action button" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/redact-pdf/step-6-open.webp';">
+          <span class="walk-badge">Step 6</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Click Save Redacted PDF</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Click the primary &quot;Save Redacted PDF&quot; button.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">The redaction engine removes the underlying text stream and bakes solid black vectors.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Wait for the preview frame to render.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Text beneath redaction boxes cannot be highlighted, searched, or extracted by any tool.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="4"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">6 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="6"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-6" data-step="7">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 7 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Download Dialog (#dlModal .btn-success)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="6" aria-label="Enlarge screenshot for Step 7: Download Sanitized PDF" aria-haspopup="dialog">
+          <img src="../../assets/guides/redact-pdf/step-7-download.webp" alt="Redact PDF download dialog" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/redact-pdf/step-7-open.webp';">
+          <span class="walk-badge">Step 7</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Download Sanitized PDF</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Click &quot;Download&quot; to save your permanently sanitized PDF.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">The download modal confirms your redacted document is safe for public release.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Save the sanitized PDF to your files.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Your sanitized document is now legally safe for public filings or third-party audits.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="5"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">7 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="7" disabled aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+            </div>
+          </section>
+
+          <!-- 4. TIPS & BEST PRACTICES -->
+          <section class="guide-section" id="section-tips">
+            <div class="guide-section-header">
+              <i class="fas fa-lightbulb" aria-hidden="true"></i>
+              <h2>Tips &amp; Best Practices</h2>
+            </div>
+            <ul class="tips-list">
+              <li><i class="fas fa-circle-check" aria-hidden="true"></i><span>Cover complete lines and nearby identifying context, not just the visible word.</span></li>
+              <li><i class="fas fa-circle-check" aria-hidden="true"></i><span>Search or select text in the exported PDF to confirm sensitive content is no longer exposed.</span></li>
+            </ul>
+          </section>
+
+          <!-- 5. COMMON MISTAKES -->
+          <section class="guide-section" id="section-mistakes">
+            <div class="guide-section-header">
+              <i class="fas fa-triangle-exclamation" aria-hidden="true"></i>
+              <h2>Common Mistakes to Avoid</h2>
+            </div>
+            <ul class="mistakes-list">
+              <li><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><span>Redacting only a screenshot layer or forgetting another page.</span></li>
+              <li><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><span>Sharing the source PDF instead of the redacted output.</span></li>
+            </ul>
+          </section>
+
+          <!-- 6. TROUBLESHOOTING -->
+          <section class="guide-section" id="section-trouble">
+            <div class="guide-section-header">
+              <i class="fas fa-wrench" aria-hidden="true"></i>
+              <h2>Troubleshooting &amp; FAQ</h2>
+            </div>
+            <div class="trouble-list">
+              <div class="trouble-item"><i class="fas fa-circle-exclamation" aria-hidden="true"></i><p>If a box is misplaced, clear that page and redraw.</p></div>
+              <div class="trouble-item"><i class="fas fa-circle-exclamation" aria-hidden="true"></i><p>If text can still be selected outside a box, expand the redaction area and export again.</p></div>
+            </div>
+          </section>
+
+          <!-- 7. FREQUENTLY ASKED QUESTIONS -->
+          <section class="guide-section" id="section-faq">
+            <div class="guide-section-header">
+              <i class="fas fa-circle-question" aria-hidden="true"></i>
+              <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+              
+                <details class="faq-item">
+                  <summary class="faq-question"><strong>Is redaction reversible?</strong></summary>
+                  <p class="faq-answer">Treat the exported result as permanent, but retain the source privately.</p>
+                </details>
+              
+                <details class="faq-item">
+                  <summary class="faq-question"><strong>Does it detect sensitive text automatically?</strong></summary>
+                  <p class="faq-answer">No, marking is manual.</p>
+                </details>
+            </div>
+          </section>
+
+          <!-- 8. RELATED TOOLS -->
+          
+          <section class="guide-section" id="section-related">
+            <div class="guide-section-header">
+              <i class="fas fa-layer-group" aria-hidden="true"></i>
+              <h2>Related PDF Tools &amp; Guides</h2>
+            </div>
+            <div class="related-grid">
+              
+      <a class="related-card" href="../protect-pdf/">
+        <span><i class="fas fa-lock" aria-hidden="true"></i> Protect PDF</span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      <a class="related-card" href="../edit-pdf/">
+        <span><i class="fas fa-edit" aria-hidden="true"></i> Edit PDF</span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      <a class="related-card" href="../forms-pdf/">
+        <span><i class="fas fa-wpforms" aria-hidden="true"></i> PDF Forms</span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+  </main>
   <script src="../data.js"></script>
   <script src="../shared-nav.js"></script>
   <script src="../guide.js"></script>

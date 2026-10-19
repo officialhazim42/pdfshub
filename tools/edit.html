@@ -1,24 +1,90 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Edit PDF – PDFHub</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="shared.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<style>
-#toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding:12px;background:var(--s2);border:1px solid var(--border);border-radius:12px}
-.tool-btn{padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--s1);color:var(--muted);cursor:pointer;font-size:.8rem;font-family:'DM Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:6px}
-.tool-btn.active,.tool-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-#canvasWrap{position:relative;display:inline-block;cursor:crosshair}
-#pdfCanvas{border:1px solid var(--border);border-radius:8px;max-width:100%}
-#drawCanvas{position:absolute;top:0;left:0;border-radius:8px;pointer-events:all}
-#pgNav{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:.85rem}
-#pgNav button{background:var(--s2);border:1px solid var(--border);color:var(--text);padding:5px 12px;border-radius:7px;cursor:pointer}
-.tool-opt{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted)}
-.tool-opt input[type=color]{width:28px;height:28px;border:none;border-radius:4px;cursor:pointer;background:none;padding:0}
-.tool-opt input[type=range]{width:80px}
-#textInput{position:absolute;background:transparent;border:1px dashed var(--accent);color:#000;font-size:16px;padding:2px 4px;outline:none;min-width:100px;display:none;z-index:10}
-</style>
-<script src="shared.js"></script>
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Edit PDF Online – Add Text, Images &amp; Annotations | PDFHub</title>
+  <meta name="description" content="Annotate and edit PDF files in your browser. Add custom text, signatures, geometric shapes, and highlight content without uploading documents."/>
+  <link rel="canonical" href="https://pdfshub.netlify.app/tools/edit.html"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+  <meta name="theme-color" content="#07070d"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="PDFHub"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Edit PDF Online – Add Text, Images &amp; Annotations | PDFHub"/>
+  <meta property="og:description" content="Annotate and edit PDF files in your browser. Add custom text, signatures, geometric shapes, and highlight content without uploading documents."/>
+  <meta property="og:url" content="https://pdfshub.netlify.app/tools/edit.html"/>
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Edit PDF – PDFHub"/>
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Edit PDF Online – Add Text, Images &amp; Annotations | PDFHub"/>
+  <meta name="twitter:description" content="Annotate and edit PDF files in your browser. Add custom text, signatures, geometric shapes, and highlight content without uploading documents."/>
+  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+
+  <link rel="icon" href="../favicons/favicon.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="../favicons/favicon.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="shared.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/edit.html#app",
+      "url": "https://pdfshub.netlify.app/tools/edit.html",
+      "name": "Edit PDF – PDFHub",
+      "description": "Annotate and edit PDF files in your browser. Add custom text, signatures, geometric shapes, and highlight content without uploading documents.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and wait for the first page to render.",
+        "Choose Pen, Text, Highlight, Rectangle, Line, or Eraser.",
+        "Click or drag on the page to add annotations; move through pages with the page controls.",
+        "Save Edited PDF and review the flattened annotations in the output."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Edit PDF",
+          "item": "https://pdfshub.netlify.app/tools/edit.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head><body>
 <div id="dlModal"></div>
 <nav>
@@ -171,5 +237,65 @@ async function saveEdited(){
     showStatus('✓ Saved!','success');
   }catch(e){showStatus('Error: '+e.message,'error')}
 }
-</script><div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
+</script>
+
+
+
+
+
+
+<!-- On-Page SEO Educational & Content Section -->
+<section class="tool-seo-content" aria-labelledby="aboutToolHeading">
+  <div class="tool-seo-card">
+    <h2 id="aboutToolHeading">About Edit PDF</h2>
+    <p>Edit PDF renders a page for annotation and lets you draw, type text, highlight, add rectangles or lines, and erase drawn marks before saving.</p>
+
+    <h3>How to Use Edit PDF Online</h3>
+    <ol class="tool-steps-list">
+      <li>Upload a PDF and wait for the first page to render.</li>
+      <li>Choose Pen, Text, Highlight, Rectangle, Line, or Eraser.</li>
+      <li>Click or drag on the page to add annotations; move through pages with the page controls.</li>
+      <li>Save Edited PDF and review the flattened annotations in the output.</li>
+    </ol>
+
+    <div class="tool-feature-grid">
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-shield-halved" aria-hidden="true" style="color:var(--a3)"></i> 100% Client-Side Privacy</h4>
+        <p>Files process in local browser memory via WebAssembly. Your documents are never uploaded to remote servers.</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-file-circle-check" aria-hidden="true" style="color:var(--accent)"></i> Supported Input</h4>
+        <p>One PDF</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-bolt" aria-hidden="true" style="color:var(--a4)"></i> Output Result</h4>
+        <p>An annotated PDF</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-lightbulb" aria-hidden="true" style="color:var(--a5)"></i> Practical Pro-Tip</h4>
+        <p>Zoom your browser before placing small annotations.</p>
+      </div>
+    </div>
+
+    <div class="tool-guide-cta">
+      <div>
+        <h3>Need Visual Step-by-Step Guidance?</h3>
+        <p>Explore our complete walkthrough for Edit PDF with full interface screenshots, option reference, and troubleshooting FAQs.</p>
+      </div>
+      <a class="tool-guide-btn" href="../guides/edit-pdf/">
+        <i class="fas fa-book-open" aria-hidden="true"></i> Read Edit PDF Guide
+      </a>
+    </div>
+
+    
+    <div class="related-tools-box">
+      <h4>Related PDF Utilities</h4>
+      <div class="related-tools-chips">
+        <a class="related-tool-chip" href="sign.html"><i class="fas fa-signature"></i> <span>Sign PDF</span></a><a class="related-tool-chip" href="redact.html"><i class="fas fa-eraser"></i> <span>Redact PDF</span></a><a class="related-tool-chip" href="forms.html"><i class="fas fa-wpforms"></i> <span>PDF Forms</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
 </body></html>

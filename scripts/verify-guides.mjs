@@ -8,9 +8,47 @@ const match = dataJs.match(/window\.PDFHUB_GUIDES\s*=\s*(\[[\s\S]*?\]);/);
 if (!match) throw new Error('Could not parse guides from guides/data.js');
 const guides = (new Function(`return ${match[1]}`))();
 
-const baseUrl = 'http://127.0.0.1:8000';
+import http from 'node:http';
+
+const mimeTypes = {
+  '.html': 'text/html',
+  '.css': 'text/css',
+  '.js': 'text/javascript',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.svg': 'image/svg+xml'
+};
+
+let server;
+const port = 8144;
+const baseUrl = `http://127.0.0.1:${port}`;
+
+async function startServer() {
+  return new Promise((resolve) => {
+    server = http.createServer((req, res) => {
+      let reqPath = req.url.split('?')[0];
+      if (reqPath.endsWith('/')) reqPath += 'index.html';
+      let filePath = path.join(root, reqPath);
+      if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+        filePath = path.join(filePath, 'index.html');
+      }
+      if (!fs.existsSync(filePath)) {
+        res.writeHead(404);
+        res.end('Not found');
+        return;
+      }
+      const ext = path.extname(filePath).toLowerCase();
+      res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'application/octet-stream' });
+      fs.createReadStream(filePath).pipe(res);
+    });
+    server.listen(port, () => resolve());
+  });
+}
 
 async function runCompleteVerification() {
+  await startServer();
   console.log(`======================================================================`);
   console.log(`STARTING COMPLETE INTEGRATION VERIFICATION FOR PDFHUB GUIDES`);
   console.log(`Checking Landing Page (/guides/) + All ${guides.length} Individual Tool Guide Routes`);
@@ -489,6 +527,8 @@ async function runCompleteVerification() {
   console.log(`Total Broken Images: ${totalBrokenImages}`);
   console.log(`Full report saved to: ${reportPath}`);
   console.log(`======================================================================\n`);
+
+  if (server) server.close();
 
   if (landingResult.errors.length > 0 || totalPassedGuides !== guides.length) {
     process.exit(1);

@@ -12,7 +12,9 @@
     "test:tools": "node scripts/test-pdf-tools-e2e.mjs",
     "generate:icons": "node scripts/generate-pwa-icons.mjs",
     "test:guides": "node scripts/verify-guides.mjs",
-    "capture:guides": "node scripts/capture-tool-guides.mjs"
+    "capture:guides": "node scripts/capture-tool-guides.mjs",
+    "audit:seo": "node scripts/audit-seo.mjs",
+    "build:seo": "node scripts/build-seo-suite.mjs && node scripts/generate-sitemap.mjs"
   },
   "devDependencies": {
     "docx": "^9.11.0",

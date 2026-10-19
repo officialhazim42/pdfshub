@@ -1,21 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>PDF to Markdown – PDFHub</title>
-<link rel="icon" href="../favicons/favicon.png" type="image/png"/>
-<link rel="apple-touch-icon" href="../favicons/favicon.png"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="shared.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="shared.js"></script>
-<style>
-#markdownBox{width:100%;min-height:360px;resize:vertical;background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:18px;color:var(--text);font:400 .85rem/1.7 'DM Sans',sans-serif;outline:none;display:none;tab-size:2}
-#markdownBox:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,106,255,.15)}
-.markdown-note{margin-top:12px;color:var(--muted);font-size:.76rem;line-height:1.6}
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>PDF to Markdown Converter – Convert PDF to Clean MD | PDFHub</title>
+  <meta name="description" content="Extract clean, structured Markdown from PDF documents. Preserve headings, lists, tables, and formatting for notes and documentation."/>
+  <link rel="canonical" href="https://pdfshub.netlify.app/tools/pdf-to-markdown.html"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+  <meta name="theme-color" content="#07070d"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="PDFHub"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="PDF to Markdown Converter – Convert PDF to Clean MD | PDFHub"/>
+  <meta property="og:description" content="Extract clean, structured Markdown from PDF documents. Preserve headings, lists, tables, and formatting for notes and documentation."/>
+  <meta property="og:url" content="https://pdfshub.netlify.app/tools/pdf-to-markdown.html"/>
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="PDF to Markdown – PDFHub"/>
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="PDF to Markdown Converter – Convert PDF to Clean MD | PDFHub"/>
+  <meta name="twitter:description" content="Extract clean, structured Markdown from PDF documents. Preserve headings, lists, tables, and formatting for notes and documentation."/>
+  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png"/>
+
+  <link rel="icon" href="../favicons/favicon.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="../favicons/favicon.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="shared.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/pdf-to-markdown.html#app",
+      "url": "https://pdfshub.netlify.app/tools/pdf-to-markdown.html",
+      "name": "PDF to Markdown – PDFHub",
+      "description": "Extract clean, structured Markdown from PDF documents. Preserve headings, lists, tables, and formatting for notes and documentation.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a text-based PDF.",
+        "Choose whether to add page separators and detect headings and lists.",
+        "Select Convert to Markdown and review the editable output.",
+        "Copy the Markdown or select Download .md."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PDF to Markdown",
+          "item": "https://pdfshub.netlify.app/tools/pdf-to-markdown.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <div id="dlModal"></div>
@@ -123,6 +193,66 @@ async function go(){
 function copyMarkdown(){navigator.clipboard.writeText(document.getElementById('markdownBox').value).then(()=>showStatus('Markdown copied to clipboard.','success'))}
 function downloadMarkdown(){const name=file.name.replace(/\.pdf$/i,'')+'.md';downloadBlob(new Blob([document.getElementById('markdownBox').value],{type:'text/markdown;charset=utf-8'}),name)}
 </script>
+
+
+
+
+
+
+
+<!-- On-Page SEO Educational & Content Section -->
+<section class="tool-seo-content" aria-labelledby="aboutToolHeading">
+  <div class="tool-seo-card">
+    <h2 id="aboutToolHeading">About PDF to Markdown</h2>
+    <p>PDF to Markdown extracts text with PDF.js, optionally detects headings and lists, and provides an editable output before downloading.</p>
+
+    <h3>How to Use PDF to Markdown Online</h3>
+    <ol class="tool-steps-list">
+      <li>Upload a text-based PDF.</li>
+      <li>Choose whether to add page separators and detect headings and lists.</li>
+      <li>Select Convert to Markdown and review the editable output.</li>
+      <li>Copy the Markdown or select Download .md.</li>
+    </ol>
+
+    <div class="tool-feature-grid">
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-shield-halved" aria-hidden="true" style="color:var(--a3)"></i> 100% Client-Side Privacy</h4>
+        <p>Files process in local browser memory via WebAssembly. Your documents are never uploaded to remote servers.</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-file-circle-check" aria-hidden="true" style="color:var(--accent)"></i> Supported Input</h4>
+        <p>A text-based PDF</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-bolt" aria-hidden="true" style="color:var(--a4)"></i> Output Result</h4>
+        <p>Editable Markdown text and .md file</p>
+      </div>
+      <div class="tool-feature-box">
+        <h4><i class="fas fa-lightbulb" aria-hidden="true" style="color:var(--a5)"></i> Practical Pro-Tip</h4>
+        <p>Review heading detection because visual layout cannot always be inferred from PDF text order.</p>
+      </div>
+    </div>
+
+    <div class="tool-guide-cta">
+      <div>
+        <h3>Need Visual Step-by-Step Guidance?</h3>
+        <p>Explore our complete walkthrough for PDF to Markdown with full interface screenshots, option reference, and troubleshooting FAQs.</p>
+      </div>
+      <a class="tool-guide-btn" href="../guides/pdf-to-markdown/">
+        <i class="fas fa-book-open" aria-hidden="true"></i> Read PDF to Markdown Guide
+      </a>
+    </div>
+
+    
+    <div class="related-tools-box">
+      <h4>Related PDF Utilities</h4>
+      <div class="related-tools-chips">
+        <a class="related-tool-chip" href="ocr.html"><i class="fas fa-spell-check"></i> <span>OCR PDF</span></a><a class="related-tool-chip" href="pdf-to-word.html"><i class="fas fa-file-word"></i> <span>PDF to Word</span></a><a class="related-tool-chip" href="summarize.html"><i class="fas fa-robot"></i> <span>AI Summarizer</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
 </body>
 </html>

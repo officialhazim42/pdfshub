@@ -286,3 +286,172 @@ body.light .footer-security-note i{color:#0284c7}
 @media(max-width:960px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px}.footer-brand{grid-column:1/-1;max-width:520px}}
 @media(max-width:580px){.footer-grid{grid-template-columns:1fr;gap:28px;text-align:left}.site-footer{padding:44px 20px 32px;margin-top:48px}.footer-bottom{flex-direction:column;align-items:center;text-align:center;gap:10px}.footer-bottom-meta{justify-content:center}}
 canvas{display:none}
+
+/* ── TOOL SEO ON-PAGE CONTENT ── */
+.tool-seo-content {
+  width: min(840px, 92%);
+  margin: 44px auto 0;
+  text-align: left;
+}
+.tool-seo-card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+}
+body.light .tool-seo-card {
+  background: #ffffff;
+  border-color: #e2e2ec;
+  box-shadow: 0 6px 20px rgba(91,71,224,0.06);
+}
+.tool-seo-card h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.tool-seo-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 20px 0 10px;
+  color: var(--text);
+}
+.tool-seo-card p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+.tool-steps-list {
+  padding-left: 20px;
+  margin: 0 0 18px;
+  display: grid;
+  gap: 10px;
+}
+.tool-steps-list li {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+.tool-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+@media (max-width: 600px) {
+  .tool-feature-grid { grid-template-columns: 1fr; }
+}
+.tool-feature-box {
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+body.light .tool-feature-box {
+  background: #f8f8fc;
+  border-color: #e4e4ee;
+}
+.tool-feature-box h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tool-feature-box p {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+}
+.tool-guide-cta {
+  background: linear-gradient(135deg, rgba(124,106,255,0.1), rgba(56,217,245,0.06));
+  border: 1px solid rgba(124,106,255,0.25);
+  border-radius: 16px;
+  padding: 24px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+body.light .tool-guide-cta {
+  background: linear-gradient(135deg, rgba(91,71,224,0.06), rgba(2,132,199,0.05));
+  border-color: rgba(91,71,224,0.2);
+}
+.tool-guide-cta h3 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+}
+.tool-guide-cta p {
+  margin: 0;
+  font-size: 0.84rem;
+}
+.tool-guide-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  flex-shrink: 0;
+}
+.tool-guide-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124,106,255,0.4);
+}
+.related-tools-box {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.related-tools-box h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+.related-tools-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.related-tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--s2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.related-tool-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+body.light .related-tool-chip {
+  background: #f0f0f6;
+  border-color: #dcdce8;
+}

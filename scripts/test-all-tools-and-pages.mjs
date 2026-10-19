@@ -58,6 +58,11 @@ server.listen(8099, '127.0.0.1', async () => {
       errors.push({ url: page.url(), consoleError: msg.text() });
     }
   });
+  page.on('response', resp => {
+    if (resp.status() >= 400) {
+      console.log(`[HTTP ${resp.status()}] ${resp.url()} requested by ${page.url()}`);
+    }
+  });
 
   const urlsToTest = [
     '/',

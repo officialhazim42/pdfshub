@@ -3,15 +3,123 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="PDF to Markdown Guide — Visual step-by-step walkthrough, tips, troubleshooting, and FAQs.">
+  <title>PDF to Markdown Guide &amp; Tutorial – Step-by-Step Walkthrough | PDFHub</title>
+  <meta name="description" content="Complete visual guide and tutorial for PDF to Markdown on PDFHub. Extract selectable PDF text into editable Markdown with optional headings. Learn exact controls, step walkthroughs, tips, and troubleshooting.">
+  <link rel="canonical" href="https://pdfshub.netlify.app/guides/pdf-to-markdown/">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#07070d">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="PDFHub">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="PDF to Markdown Guide &amp; Tutorial – Step-by-Step Walkthrough | PDFHub">
+  <meta property="og:description" content="Complete visual guide and tutorial for PDF to Markdown on PDFHub. Extract selectable PDF text into editable Markdown with optional headings. Learn exact controls, step walkthroughs, tips, and troubleshooting.">
+  <meta property="og:url" content="https://pdfshub.netlify.app/guides/pdf-to-markdown/">
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PDF to Markdown Guide – PDFHub">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PDF to Markdown Guide &amp; Tutorial – Step-by-Step Walkthrough | PDFHub">
+  <meta name="twitter:description" content="Complete visual guide and tutorial for PDF to Markdown on PDFHub. Extract selectable PDF text into editable Markdown with optional headings. Learn exact controls, step walkthroughs, tips, and troubleshooting.">
+  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png">
+
   <link rel="icon" href="../../favicons/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="../../favicons/favicon.png">
-  <title>PDF to Markdown Guide &amp; Walkthrough – PDFHub</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../../developer.css">
   <link rel="stylesheet" href="../styles.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://pdfshub.netlify.app/guides/pdf-to-markdown/#article",
+      "url": "https://pdfshub.netlify.app/guides/pdf-to-markdown/",
+      "headline": "PDF to Markdown Guide & Walkthrough",
+      "description": "Complete visual guide and tutorial for PDF to Markdown on PDFHub. Extract selectable PDF text into editable Markdown with optional headings. Learn exact controls, step walkthroughs, tips, and troubleshooting.",
+      "author": {
+        "@type": "Person",
+        "name": "Hazim Bashir",
+        "url": "https://github.com/officialhazim42"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "PDFHub",
+        "url": "https://pdfshub.netlify.app/",
+        "logo": "https://pdfshub.netlify.app/favicons/favicon.png"
+      },
+      "mainEntityOfPage": "https://pdfshub.netlify.app/guides/pdf-to-markdown/",
+      "about": {
+        "@type": "WebApplication",
+        "name": "PDF to Markdown",
+        "url": "https://pdfshub.netlify.app/tools/pdf-to-markdown.html"
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://pdfshub.netlify.app/guides/pdf-to-markdown/#howto",
+      "name": "How to use PDF to Markdown",
+      "description": "PDF to Markdown extracts text with PDF.js, optionally detects headings and lists, and provides an editable output before downloading.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Step 1",
+          "text": "Upload a text-based PDF."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Step 2",
+          "text": "Choose whether to add page separators and detect headings and lists."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Step 3",
+          "text": "Select Convert to Markdown and review the editable output."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Step 4",
+          "text": "Copy the Markdown or select Download .md."
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "User Guides & Tips",
+          "item": "https://pdfshub.netlify.app/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PDF to Markdown Guide",
+          "item": "https://pdfshub.netlify.app/guides/pdf-to-markdown/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
   <script>
     (function(){
       try {
@@ -25,7 +133,556 @@
   </script>
 </head>
 <body data-root="../../" data-guide="pdf-to-markdown">
-  <main class="guide-shell" id="guideDetail"></main>
+  <main class="guide-shell" id="guideDetail">
+
+      <!-- BREADCRUMBS -->
+      <nav class="guide-breadcrumbs" aria-label="Breadcrumb">
+        <a href="../../index.html"><i class="fas fa-house" aria-hidden="true"></i> Home</a>
+        <span class="crumb-sep" aria-hidden="true">/</span>
+        <a href="../"><i class="fas fa-book-open" aria-hidden="true"></i> User Guides &amp; Tips</a>
+        <span class="crumb-sep" aria-hidden="true">/</span>
+        <span class="crumb-current">PDF to Markdown</span>
+      </nav>
+
+      <!-- HERO SECTION -->
+      <header class="guide-detail-hero">
+        <div class="guide-hero-badge">
+          <i class="fas fa-file-code" aria-hidden="true"></i>
+          <span>Extract Content · 5 min read</span>
+        </div>
+        <h1 class="guide-title">PDF to Markdown Guide &amp; Walkthrough</h1>
+        <p class="guide-lead">Extract selectable PDF text into editable Markdown with optional headings.</p>
+        <div class="detail-actions">
+          <a class="guide-btn primary" href="../../tools/pdf-to-markdown.html">
+            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Open This Tool
+          </a>
+          <a class="guide-btn" href="../">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i> All Guides
+          </a>
+          <button type="button" class="guide-btn accent" id="heroStartTourBtn">
+            <i class="fas fa-images" aria-hidden="true"></i> Fullscreen Walkthrough
+          </button>
+        </div>
+      </header>
+
+      <!-- STICKY QUICK GUIDE SECTION NAVIGATION -->
+      <nav class="guide-quick-nav" id="guideQuickNav" aria-label="Guide section navigation">
+        <div class="quick-nav-track">
+          <a class="quick-nav-link active" href="#section-overview"><i class="fas fa-circle-info" aria-hidden="true"></i> Overview</a>
+          <a class="quick-nav-link" href="#section-instructions"><i class="fas fa-list-ol" aria-hidden="true"></i> Instructions</a>
+          <a class="quick-nav-link" href="#section-walkthrough"><i class="fas fa-images" aria-hidden="true"></i> Walkthrough <span class="nav-count">7</span></a>
+          <a class="quick-nav-link" href="#section-tips"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tips</a>
+          <a class="quick-nav-link" href="#section-mistakes"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Common Mistakes</a>
+          <a class="quick-nav-link" href="#section-trouble"><i class="fas fa-wrench" aria-hidden="true"></i> Troubleshooting</a>
+          <a class="quick-nav-link" href="#section-faq"><i class="fas fa-circle-question" aria-hidden="true"></i> FAQs</a>
+          <a class="quick-nav-link" href="#section-related"><i class="fas fa-layer-group" aria-hidden="true"></i> Related Tools</a>
+        </div>
+      </nav>
+
+      <!-- MAIN CONTENT LAYOUT -->
+      <div class="detail-layout">
+        <div class="detail-main">
+
+          <!-- 1. OVERVIEW & BEFORE YOU START -->
+          <section class="guide-section" id="section-overview">
+            <div class="guide-section-header">
+              <i class="fas fa-circle-info" aria-hidden="true"></i>
+              <h2>Tool Overview &amp; Requirements</h2>
+            </div>
+            <p>PDF to Markdown extracts text with PDF.js, optionally detects headings and lists, and provides an editable output before downloading.</p>
+            <div class="facts">
+              <div class="fact">
+                <strong><i class="fas fa-file-import" aria-hidden="true"></i> Input</strong>
+                <span>A text-based PDF</span>
+              </div>
+              <div class="fact">
+                <strong><i class="fas fa-file-export" aria-hidden="true"></i> Output</strong>
+                <span>Editable Markdown text and .md file</span>
+              </div>
+              <div class="fact">
+                <strong><i class="fas fa-shield-halved" aria-hidden="true"></i> Requirements</strong>
+                <span>Text-based PDFs work best. Scanned PDFs should go through OCR first.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. STEP-BY-STEP INSTRUCTIONS -->
+          <section class="guide-section" id="section-instructions">
+            <div class="guide-section-header">
+              <i class="fas fa-list-ol" aria-hidden="true"></i>
+              <h2>Step-by-Step Instructions</h2>
+            </div>
+            <p>Follow these essential instructions to achieve optimal results when using PDF to Markdown:</p>
+            <ol class="guide-step-list">
+              <li>Upload a text-based PDF.</li>
+              <li>Choose whether to add page separators and detect headings and lists.</li>
+              <li>Select Convert to Markdown and review the editable output.</li>
+              <li>Copy the Markdown or select Download .md.</li>
+            </ol>
+          </section>
+
+          <!-- 3. VISUAL WALKTHROUGH SECTION -->
+          <section class="guide-section visual-walkthrough-section" id="section-walkthrough">
+            <div class="walk-section-header">
+              <div>
+                <span class="walk-eyebrow"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Interactive Tutorial</span>
+                <h2>Visual Step-by-Step Walkthrough</h2>
+                <p class="walk-subtitle">Follow these real interface screenshots captured directly from PDF to Markdown. Every step highlights the exact buttons, selections, and downloads. Click any screenshot or "Launch Fullscreen Viewer" to inspect in high resolution.</p>
+              </div>
+              <div class="walk-tour-action">
+                <button type="button" class="guide-btn primary walk-start-tour-btn" id="startTourBtn" aria-label="Launch interactive full-screen walkthrough">
+                  <i class="fas fa-play" aria-hidden="true"></i> Launch Fullscreen Viewer
+                </button>
+              </div>
+            </div>
+
+            <!-- Step Progress Navigation Bar -->
+            <div class="walk-progress-nav" id="walkProgressNav" role="navigation" aria-label="Walkthrough steps">
+              <div class="walk-progress-track">
+                <div class="walk-progress-bar" id="walkProgressBar" style="width: 14%;"></div>
+              </div>
+              <div class="walk-step-chips" id="walkStepChips">
+                
+    <button type="button" class="walk-step-chip active" data-step-target="0" aria-label="Jump to Step 1: Open PDF to Markdown">
+      <span class="chip-num">1</span>
+      <span class="chip-title">Open PDF to Markdown</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="1" aria-label="Jump to Step 2: Upload Documentation PDF">
+      <span class="chip-num">2</span>
+      <span class="chip-title">Upload Documentation PDF</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="2" aria-label="Jump to Step 3: Configure Formatting Toggles">
+      <span class="chip-num">3</span>
+      <span class="chip-title">Configure Formatting Toggles</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="3" aria-label="Jump to Step 4: Click Convert to Markdown">
+      <span class="chip-num">4</span>
+      <span class="chip-title">Click Convert to Markdown</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="4" aria-label="Jump to Step 5: Review Formatted Markdown">
+      <span class="chip-num">5</span>
+      <span class="chip-title">Review Formatted Markdown</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="5" aria-label="Jump to Step 6: Click Copy Markdown">
+      <span class="chip-num">6</span>
+      <span class="chip-title">Click Copy Markdown</span>
+    </button>
+
+    <button type="button" class="walk-step-chip " data-step-target="6" aria-label="Jump to Step 7: Download .md File">
+      <span class="chip-num">7</span>
+      <span class="chip-title">Download .md File</span>
+    </button>
+              </div>
+            </div>
+
+            <div class="walkthrough" id="walkthroughGrid">
+              
+      <article class="walk-card" id="walkCard-0" data-step="1">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 1 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Upload Drop Zone (#drop)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="0" aria-label="Enlarge screenshot for Step 1: Open PDF to Markdown" aria-haspopup="dialog">
+          <img src="../../assets/guides/pdf-to-markdown/step-1-open.webp" alt="PDF to Markdown landing screen" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/pdf-to-markdown/step-1-open.webp';">
+          <span class="walk-badge">Step 1</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Open PDF to Markdown</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Open PDF to Markdown to convert technical docs, specifications, or whitepapers into clean Markdown (.md).</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">The upload drop area accepts any PDF document containing headings and code.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Click to select or drag your PDF document into the workspace.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Markdown format is ideal for GitHub READMEs, documentation wikis, and LLM prompts.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="-1" disabled aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">1 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="1"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-1" data-step="2">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 2 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> File Browser (#fin)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="1" aria-label="Enlarge screenshot for Step 2: Upload Documentation PDF" aria-haspopup="dialog">
+          <img src="../../assets/guides/pdf-to-markdown/step-2-upload.webp" alt="PDF to Markdown file loaded" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/pdf-to-markdown/step-2-open.webp';">
+          <span class="walk-badge">Step 2</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Upload Documentation PDF</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Select your technical or structured PDF from your device.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">The document loads and total page count is detected.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Configure heading and page break options.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Documents with bold headers and bullet points convert cleanly into # headings and - lists.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="0"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">2 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="2"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-2" data-step="3">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 3 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Toggles (#headings, #pageBreaks)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="2" aria-label="Enlarge screenshot for Step 3: Configure Formatting Toggles" aria-haspopup="dialog">
+          <img src="../../assets/guides/pdf-to-markdown/step-3-toggles.webp" alt="PDF to Markdown formatting toggles" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/pdf-to-markdown/step-3-open.webp';">
+          <span class="walk-badge">Step 3</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Configure Formatting Toggles</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Enable &quot;Detect Headings&quot; (#, ##) and choose whether to insert &quot;Page Separators&quot; (---).</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">Toggles configure the Markdown parser to preserve document hierarchy.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Enable both options for clean documentation with clear chapter divisions.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Page separators (---) make it easy to trace Markdown sections back to original PDF pages.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="1"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">3 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="3"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-3" data-step="4">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 4 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Convert Action Button (#goBtn)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="3" aria-label="Enlarge screenshot for Step 4: Click Convert to Markdown" aria-haspopup="dialog">
+          <img src="../../assets/guides/pdf-to-markdown/step-4-convert.webp" alt="PDF to Markdown convert button active" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/pdf-to-markdown/step-4-open.webp';">
+          <span class="walk-badge">Step 4</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Click Convert to Markdown</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Click the primary &quot;Convert to Markdown&quot; button.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">The parser analyzes font weights, font sizes, and paragraph spacings to construct Markdown syntax.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Wait for the Markdown output pane to populate.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Code blocks and monospace text are automatically detected and wrapped in backticks.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="2"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">4 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="4"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-4" data-step="5">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 5 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Markdown Viewer (#mdResult)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="4" aria-label="Enlarge screenshot for Step 5: Review Formatted Markdown" aria-haspopup="dialog">
+          <img src="../../assets/guides/pdf-to-markdown/step-5-preview.webp" alt="PDF to Markdown editor preview pane" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/pdf-to-markdown/step-5-open.webp';">
+          <span class="walk-badge">Step 5</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Review Formatted Markdown</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Inspect the generated Markdown in the code editor preview pane.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">Syntax highlighting displays headers (#), bullet lists, code blocks, and formatted text.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Scroll through the text to verify that sections parsed accurately.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">You can make inline edits directly in the text pane before saving.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="3"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">5 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="5"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-5" data-step="6">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 6 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Copy Button (button onclick=&quot;copyMarkdown()&quot;)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="5" aria-label="Enlarge screenshot for Step 6: Click Copy Markdown" aria-haspopup="dialog">
+          <img src="../../assets/guides/pdf-to-markdown/step-6-copy.webp" alt="PDF to Markdown copy button" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/pdf-to-markdown/step-6-open.webp';">
+          <span class="walk-badge">Step 6</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Click Copy Markdown</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Click the secondary &quot;Copy Markdown&quot; button.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">A notification confirms that the full raw Markdown text is copied to your clipboard.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Paste directly into your GitHub repo, Obsidian, Notion, or chat.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Copied Markdown is immediately ready for documentation repositories.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="4"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">6 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="6"  aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+
+      <article class="walk-card" id="walkCard-6" data-step="7">
+        <div class="walk-card-header">
+          <span class="walk-step-pill"><i class="fas fa-list-check" aria-hidden="true"></i> Step 7 of 7</span>
+          <span class="walk-control-badge" title="Target Interface Element"><i class="fas fa-crosshairs" aria-hidden="true"></i> Download Button (button onclick=&quot;downloadMarkdown()&quot;)</span>
+        </div>
+        <button type="button" class="walk-media-btn" data-step-index="6" aria-label="Enlarge screenshot for Step 7: Download .md File" aria-haspopup="dialog">
+          <img src="../../assets/guides/pdf-to-markdown/step-7-download.webp" alt="PDF to Markdown download button" width="1440" height="1000" loading="lazy" class="walk-img" onerror="this.onerror=null;this.src='../../assets/guides/pdf-to-markdown/step-7-open.webp';">
+          <span class="walk-badge">Step 7</span>
+          <span class="walk-zoom-hint"><i class="fas fa-magnifying-glass-plus" aria-hidden="true"></i> Click to zoom</span>
+        </button>
+        <div class="walk-content">
+          <h3 class="walk-title">Download .md File</h3>
+          <div class="walk-field-group">
+            <div class="walk-field what-to-do">
+              <span class="walk-field-badge"><i class="fas fa-hand-pointer" aria-hidden="true"></i> What to do:</span>
+              <p class="walk-field-desc">Click the primary &quot;Download .md&quot; button to save the Markdown file to your device.</p>
+            </div>
+            
+            <div class="walk-field what-you-see">
+              <span class="walk-field-badge"><i class="fas fa-eye" aria-hidden="true"></i> What you will see:</span>
+              <p class="walk-field-desc">The browser initiates a clean download of your formatted documentation file.</p>
+            </div>
+            
+            <div class="walk-field next-action">
+              <span class="walk-field-badge"><i class="fas fa-arrow-right" aria-hidden="true"></i> Next:</span>
+              <p class="walk-field-desc">Save the .md file in your project or docs directory.</p>
+            </div>
+            
+            <div class="walk-field tip-box">
+              <span class="walk-field-badge"><i class="fas fa-lightbulb" aria-hidden="true"></i> Tip:</span>
+              <p class="walk-field-desc">Your document is now in standard plaintext Markdown format with zero vendor lock-in.</p>
+            </div>
+          </div>
+        </div>
+        <div class="walk-card-footer">
+          <button type="button" class="walk-nav-btn prev-step" data-target-step="5"  aria-label="Go to previous step">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <span class="walk-step-indicator">7 / 7</span>
+          <button type="button" class="walk-nav-btn next-step" data-target-step="7" disabled aria-label="Go to next step">
+            Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+            </div>
+          </section>
+
+          <!-- 4. TIPS & BEST PRACTICES -->
+          <section class="guide-section" id="section-tips">
+            <div class="guide-section-header">
+              <i class="fas fa-lightbulb" aria-hidden="true"></i>
+              <h2>Tips &amp; Best Practices</h2>
+            </div>
+            <ul class="tips-list">
+              <li><i class="fas fa-circle-check" aria-hidden="true"></i><span>Review heading detection because visual layout cannot always be inferred from PDF text order.</span></li>
+              <li><i class="fas fa-circle-check" aria-hidden="true"></i><span>Clean up tables and complex layouts manually.</span></li>
+            </ul>
+          </section>
+
+          <!-- 5. COMMON MISTAKES -->
+          <section class="guide-section" id="section-mistakes">
+            <div class="guide-section-header">
+              <i class="fas fa-triangle-exclamation" aria-hidden="true"></i>
+              <h2>Common Mistakes to Avoid</h2>
+            </div>
+            <ul class="mistakes-list">
+              <li><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><span>Assuming scanned pages contain selectable text.</span></li>
+              <li><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><span>Downloading without reviewing line order.</span></li>
+            </ul>
+          </section>
+
+          <!-- 6. TROUBLESHOOTING -->
+          <section class="guide-section" id="section-trouble">
+            <div class="guide-section-header">
+              <i class="fas fa-wrench" aria-hidden="true"></i>
+              <h2>Troubleshooting &amp; FAQ</h2>
+            </div>
+            <div class="trouble-list">
+              <div class="trouble-item"><i class="fas fa-circle-exclamation" aria-hidden="true"></i><p>If the result is empty, run OCR or use a PDF with selectable text.</p></div>
+              <div class="trouble-item"><i class="fas fa-circle-exclamation" aria-hidden="true"></i><p>If paragraphs are out of order, the source layout may not expose reading order.</p></div>
+            </div>
+          </section>
+
+          <!-- 7. FREQUENTLY ASKED QUESTIONS -->
+          <section class="guide-section" id="section-faq">
+            <div class="guide-section-header">
+              <i class="fas fa-circle-question" aria-hidden="true"></i>
+              <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+              
+                <details class="faq-item">
+                  <summary class="faq-question"><strong>Can I edit the generated Markdown?</strong></summary>
+                  <p class="faq-answer">Yes, the output is an editable text area.</p>
+                </details>
+              
+                <details class="faq-item">
+                  <summary class="faq-question"><strong>Does it preserve images?</strong></summary>
+                  <p class="faq-answer">It focuses on extracted text and Markdown structure.</p>
+                </details>
+            </div>
+          </section>
+
+          <!-- 8. RELATED TOOLS -->
+          
+          <section class="guide-section" id="section-related">
+            <div class="guide-section-header">
+              <i class="fas fa-layer-group" aria-hidden="true"></i>
+              <h2>Related PDF Tools &amp; Guides</h2>
+            </div>
+            <div class="related-grid">
+              
+      <a class="related-card" href="../ocr-pdf/">
+        <span><i class="fas fa-spell-check" aria-hidden="true"></i> OCR PDF</span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      <a class="related-card" href="../pdf-to-word/">
+        <span><i class="fas fa-file-word" aria-hidden="true"></i> PDF to Word</span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      <a class="related-card" href="../summarize-pdf/">
+        <span><i class="fas fa-robot" aria-hidden="true"></i> AI Summarizer</span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+  </main>
   <script src="../data.js"></script>
   <script src="../shared-nav.js"></script>
   <script src="../guide.js"></script>
