@@ -32,6 +32,57 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/pdf-to-excel.html#app",
+      "url": "https://pdfshub.netlify.app/tools/pdf-to-excel.html",
+      "name": "PDF to Excel – PDFHub",
+      "description": "Convert PDF documents and tabular data into editable Microsoft Excel spreadsheets (.xlsx). Private client-side extraction.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload the PDF containing a table or aligned text.",
+        "Choose pages, column detection, and output format.",
+        "Use Preview Table to inspect the extracted rows.",
+        "Select Export to Excel and verify totals and column alignment."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PDF to Excel",
+          "item": "https://pdfshub.netlify.app/tools/pdf-to-excel.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -250,6 +301,9 @@ async function go(){
   btn.disabled=false;
 }
 </script>
+
+
+
 
 
 

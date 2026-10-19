@@ -270,6 +270,9 @@ function ensureSiteMenu(){
       <a class="menu-action" href="../guides/">
         <i class="fas fa-book-open" aria-hidden="true"></i><span>User Guides &amp; Tips</span><span class="menu-action-note">33 guides</span>
       </a>
+      <a class="menu-action" href="../docs/">
+        <i class="fas fa-book-bookmark" aria-hidden="true"></i><span>Documentation</span><span class="menu-action-note">Docs Hub</span>
+      </a>
       <a class="menu-action" href="../menu-bar/favorites.html">
         <i class="fas fa-star" aria-hidden="true"></i><span>Favorites</span><span class="menu-action-note">Local</span>
       </a>

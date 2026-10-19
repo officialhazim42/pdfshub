@@ -30,6 +30,57 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/excel-to-pdf.html#app",
+      "url": "https://pdfshub.netlify.app/tools/excel-to-pdf.html",
+      "name": "Excel to PDF – PDFHub",
+      "description": "Convert Excel spreadsheets (.xls, .xlsx) into clean, printable PDF documents directly in your browser. No registration or server storage.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Choose an XLSX, XLS, or CSV file.",
+        "Select the sheet to export and review the table preview.",
+        "Choose portrait or landscape and A4 or Letter.",
+        "Select Convert to PDF, then choose Save as PDF in the print dialog."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Excel to PDF",
+          "item": "https://pdfshub.netlify.app/tools/excel-to-pdf.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -202,6 +253,24 @@ ${tableHtml}
 
 
 
+
+
+<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
+</body></html>`;
+
+    const w=window.open('','_blank','width=1000,height=750');
+    w.document.write(printHtml);
+    w.document.close();
+    w.onload=()=>setTimeout(()=>{
+      w.print();
+      document.getElementById('pbar').style.width='100%';
+      showStatus('✓ Print dialog opened — select "Save as PDF" as printer!','success');
+    },400);
+    btn.disabled=false;
+  }catch(e){showStatus('Error: '+e.message,'error');btn.disabled=false;}
+}
+</script>
+
 <!-- On-Page SEO Educational & Content Section -->
 <section class="tool-seo-content" aria-labelledby="aboutToolHeading">
   <div class="tool-seo-card">
@@ -255,20 +324,5 @@ ${tableHtml}
   </div>
 </section>
 
-<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
-</body></html>`;
-
-    const w=window.open('','_blank','width=1000,height=750');
-    w.document.write(printHtml);
-    w.document.close();
-    w.onload=()=>setTimeout(()=>{
-      w.print();
-      document.getElementById('pbar').style.width='100%';
-      showStatus('✓ Print dialog opened — select "Save as PDF" as printer!','success');
-    },400);
-    btn.disabled=false;
-  }catch(e){showStatus('Error: '+e.message,'error');btn.disabled=false;}
-}
-</script>
 <div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
 </body></html>

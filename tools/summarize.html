@@ -31,6 +31,57 @@
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/summarize.html#app",
+      "url": "https://pdfshub.netlify.app/tools/summarize.html",
+      "name": "AI Summarizer – PDFHub",
+      "description": "Generate concise summaries and key takeaways from lengthy PDF reports, academic papers, and legal documents.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and choose a summary style.",
+        "Set the maximum number of pages to process.",
+        "Select Summarize PDF and wait for extraction and the service response.",
+        "Review the summary against the original, then copy or download it."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Summarizer",
+          "item": "https://pdfshub.netlify.app/tools/summarize.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -280,6 +331,9 @@ function renderSummary(text, style){
 function copySummary(){navigator.clipboard.writeText(summaryText).then(()=>showStatus('✓ Copied!','success'));}
 function downloadSummary(){downloadBlob(new Blob([summaryText],{type:'text/plain'}),'summary.txt');}
 </script>
+
+
+
 
 
 

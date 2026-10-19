@@ -18,7 +18,6 @@ package-lock.json
 
 # Development scripts, tests, and documentation
 scripts/
-docs/
 .capture-samples/
 README.md
 

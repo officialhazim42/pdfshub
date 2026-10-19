@@ -55,7 +55,7 @@ if (fs.existsSync(sitemapPath)) {
   for (const m of locMatches) {
     sitemapUrls.push(m[1]);
   }
-  assert(sitemapUrls.length === 72, `sitemap.xml must contain exactly 72 verified URLs (found ${sitemapUrls.length})`);
+  assert(sitemapUrls.length === 73, `sitemap.xml must contain exactly 73 verified URLs (found ${sitemapUrls.length})`);
   assert(sitemapUrls.every(u => u.startsWith(domain)), 'All sitemap URLs must use canonical domain');
 }
 
@@ -68,12 +68,13 @@ if (fs.existsSync(ogImagePath)) {
   assert(stat.size > 10000, `favicons/og-image.png must be non-empty (size: ${stat.size} bytes)`);
 }
 
-// 5. Audit all 72 Canonical HTML Pages
-console.log('5. Auditing all 72 canonical public pages for metadata, canonicals, H1s, schema, and links...');
+// 5. Audit all 73 Canonical HTML Pages
+console.log('5. Auditing all 73 canonical public pages for metadata, canonicals, H1s, schema, and links...');
 
 const pagesToAudit = [
   { url: `${domain}/`, file: path.join(root, 'index.html') },
   { url: `${domain}/guides/`, file: path.join(root, 'guides', 'index.html') },
+  { url: `${domain}/docs/`, file: path.join(root, 'docs', 'index.html') },
   { url: `${domain}/menu-bar/about.html`, file: path.join(root, 'menu-bar', 'about.html') },
   { url: `${domain}/install/`, file: path.join(root, 'install', 'index.html') },
   { url: `${domain}/menu-bar/privacy.html`, file: path.join(root, 'menu-bar', 'privacy.html') },
@@ -103,7 +104,7 @@ for (const d of fs.readdirSync(guidesDir)) {
   }
 }
 
-assert(pagesToAudit.length === 72, `Total public canonical pages must be 72 (found ${pagesToAudit.length})`);
+assert(pagesToAudit.length === 73, `Total public canonical pages must be 73 (found ${pagesToAudit.length})`);
 
 const seenTitles = new Map();
 const seenDescriptions = new Map();

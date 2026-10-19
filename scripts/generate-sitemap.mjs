@@ -31,6 +31,14 @@ routes.push({
   priority: '0.9'
 });
 
+// 2b. Documentation Portal
+routes.push({
+  url: `${domain}/docs/`,
+  lastmod: getISODate(path.join(root, 'docs', 'index.html')),
+  changefreq: 'weekly',
+  priority: '0.9'
+});
+
 // 3. 33 Tools
 const toolsDir = path.join(root, 'tools');
 const toolFiles = fs.readdirSync(toolsDir)

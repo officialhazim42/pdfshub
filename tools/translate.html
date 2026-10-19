@@ -32,6 +32,57 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/translate.html#app",
+      "url": "https://pdfshub.netlify.app/tools/translate.html",
+      "name": "Translate PDF – PDFHub",
+      "description": "Translate PDF content into multiple languages while maintaining paragraph structure and formatting.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and choose source and target languages.",
+        "Enter pages or ranges, or leave the field blank for the allowed page limit.",
+        "Select Translate PDF and wait for each page’s text to be processed.",
+        "Review names, numbers, and terminology before copying or saving the translation."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Translate PDF",
+          "item": "https://pdfshub.netlify.app/tools/translate.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -313,6 +364,9 @@ async function savePDF(){
   }catch(e){showStatus('Error creating PDF: '+e.message,'error')}
 }
 </script>
+
+
+
 
 
 

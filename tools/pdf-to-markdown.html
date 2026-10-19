@@ -33,6 +33,57 @@
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/pdf-to-markdown.html#app",
+      "url": "https://pdfshub.netlify.app/tools/pdf-to-markdown.html",
+      "name": "PDF to Markdown – PDFHub",
+      "description": "Extract clean, structured Markdown from PDF documents. Preserve headings, lists, tables, and formatting for notes and documentation.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a text-based PDF.",
+        "Choose whether to add page separators and detect headings and lists.",
+        "Select Convert to Markdown and review the editable output.",
+        "Copy the Markdown or select Download .md."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PDF to Markdown",
+          "item": "https://pdfshub.netlify.app/tools/pdf-to-markdown.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -193,6 +244,9 @@ async function go(){
 function copyMarkdown(){navigator.clipboard.writeText(document.getElementById('markdownBox').value).then(()=>showStatus('Markdown copied to clipboard.','success'))}
 function downloadMarkdown(){const name=file.name.replace(/\.pdf$/i,'')+'.md';downloadBlob(new Blob([document.getElementById('markdownBox').value],{type:'text/markdown;charset=utf-8'}),name)}
 </script>
+
+
+
 
 
 

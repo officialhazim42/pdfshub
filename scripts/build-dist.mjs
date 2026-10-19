@@ -25,6 +25,7 @@ const productionItems = [
   'assets',
   'favicons',
   'guides',
+  'docs',
   'tools',
   'menu-bar',
   'robots.txt',
@@ -76,7 +77,7 @@ inspectDir(dist);
 
 // 4. Strict assertions on dist
 const MAX_ALLOWED_ASSET_SIZE = 25 * 1024 * 1024; // 25 MiB Cloudflare limit
-const forbiddenNames = ['node_modules', '.git', '.github', 'workerd', '.capture-samples', 'scripts', 'docs'];
+const forbiddenNames = ['node_modules', '.git', '.github', 'workerd', '.capture-samples', 'scripts'];
 
 function verifyDist(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -145,6 +146,13 @@ if (toolCount < 33) {
 const guideCount = fs.readdirSync(path.join(dist, 'guides')).filter(f => fs.statSync(path.join(dist, 'guides', f)).isDirectory()).length;
 if (guideCount < 33) {
   throw new Error(`Verification failed: Expected 33 guides in dist/guides, found ${guideCount}`);
+}
+if (!fs.existsSync(path.join(dist, 'docs', 'index.html'))) {
+  throw new Error('Verification failed: dist/docs/index.html is missing!');
+}
+const docToolCount = fs.readdirSync(path.join(dist, 'docs', 'tools')).filter(f => f.endsWith('.md')).length;
+if (docToolCount < 33) {
+  throw new Error(`Verification failed: Expected 33 tool docs in dist/docs/tools, found ${docToolCount}`);
 }
 
 const mbTotal = (totalSizeBytes / (1024 * 1024)).toFixed(2);

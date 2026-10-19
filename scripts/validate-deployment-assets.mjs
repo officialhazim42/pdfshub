@@ -94,8 +94,21 @@ if (guideDirs.length < 33) {
 }
 console.log(`✓ User Guides verified in dist: ${guideDirs.length} guide routes in dist/guides/`);
 
+// 5b. Verify Documentation Suite in dist
+const docsDistDir = path.join(dist, 'docs');
+if (!fs.existsSync(path.join(docsDistDir, 'index.html'))) {
+  console.error('ERROR: Expected docs/index.html in dist');
+  process.exit(1);
+}
+const toolDocFiles = fs.readdirSync(path.join(docsDistDir, 'tools')).filter(f => f.endsWith('.md'));
+if (toolDocFiles.length < 33) {
+  console.error(`ERROR: Expected 33 tool docs in dist/docs/tools, found ${toolDocFiles.length}`);
+  process.exit(1);
+}
+console.log(`✓ Documentation verified in dist: docs/index.html and ${toolDocFiles.length} tool docs in dist/docs/tools/`);
+
 // 6. Verify Complete Exclusion of node_modules, workerd, and dev artifacts
-const forbidden = ['node_modules', '.git', '.github', 'workerd', '.capture-samples', 'scripts', 'docs'];
+const forbidden = ['node_modules', '.git', '.github', 'workerd', '.capture-samples', 'scripts'];
 let totalDistFiles = 0;
 let oversizedFiles = [];
 const MAX_ALLOWED = 25 * 1024 * 1024;

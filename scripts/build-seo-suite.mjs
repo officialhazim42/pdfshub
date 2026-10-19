@@ -235,7 +235,12 @@ for (const [toolFile, cfg] of Object.entries(toolSeoConfig)) {
     continue;
   }
 
-  let html = fs.readFileSync(toolFilePath, 'utf8');
+  let html;
+  try {
+    html = child_process.execSync(`git show HEAD:tools/${toolFile}`, { encoding: 'utf8' });
+  } catch (e) {
+    html = fs.readFileSync(toolFilePath, 'utf8');
+  }
 
   // Related tools chips HTML
   const relatedChips = (guide.related || []).map(relId => {
@@ -402,11 +407,20 @@ ${JSON.stringify(toolJsonLd, null, 2)}
   // Remove any previously inserted tool-seo-content
   html = html.replace(/<!-- On-Page SEO Educational & Content Section -->[\s\S]*?<\/section>/i, '');
 
-  // Insert before `<div class="tool-footer">` or before `</body>`
-  if (html.includes('<div class="tool-footer">')) {
-    html = html.replace('<div class="tool-footer">', `${seoContentBlock}\n<div class="tool-footer">`);
-  } else if (html.includes('</body>')) {
-    html = html.replace('</body>', `${seoContentBlock}\n</body>`);
+  // Insert before the LAST `<div class="tool-footer">` or before the LAST `</body>`
+  const lastFooterIdx = html.lastIndexOf('<div class="tool-footer">');
+  if (lastFooterIdx !== -1) {
+    html = html.slice(0, lastFooterIdx) + `${seoContentBlock}\n` + html.slice(lastFooterIdx);
+  } else {
+    const lastBodyIdx = html.lastIndexOf('</body>');
+    if (lastBodyIdx !== -1) {
+      html = html.slice(0, lastBodyIdx) + `${seoContentBlock}\n` + html.slice(lastBodyIdx);
+    }
+  }
+
+  // Ensure docx uses index.umd.js for browser compatibility
+  if (toolFile === 'pdf-to-word.html') {
+    html = html.replace('docx@8.5.0/build/index.js', 'docx@8.5.0/build/index.umd.js');
   }
 
   fs.writeFileSync(toolFilePath, html, 'utf8');

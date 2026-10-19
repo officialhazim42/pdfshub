@@ -32,6 +32,57 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/pdf-to-ppt.html#app",
+      "url": "https://pdfshub.netlify.app/tools/pdf-to-ppt.html",
+      "name": "PDF to PowerPoint – PDFHub",
+      "description": "Convert PDF slides and presentations into editable Microsoft PowerPoint (.pptx) decks directly in your web browser.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and choose pages, slide quality, and slide size.",
+        "Review the generated page thumbnails.",
+        "Select Export as PPTX.",
+        "Open the presentation and check image scale and slide order."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PDF to PowerPoint",
+          "item": "https://pdfshub.netlify.app/tools/pdf-to-ppt.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -241,6 +292,9 @@ async function buildPptxManually(){
   document.getElementById('pbar').style.width='100%';showStatus(`✓ Exported ${slideImages.length} slides as PPTX!`,'success');
 }
 </script>
+
+
+
 
 
 

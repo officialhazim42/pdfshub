@@ -31,6 +31,57 @@
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/pdf-to-word.html#app",
+      "url": "https://pdfshub.netlify.app/tools/pdf-to-word.html",
+      "name": "PDF to Word – PDFHub",
+      "description": "Convert PDF documents into editable Microsoft Word (.docx) files. Fast, private client-side conversion without email requirements.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and select the pages to convert.",
+        "Choose DOCX, RTF, or plain text.",
+        "Select Convert to Word and wait for text extraction.",
+        "Open the output and compare important formatting with the PDF."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PDF to Word",
+          "item": "https://pdfshub.netlify.app/tools/pdf-to-word.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -210,6 +261,9 @@ async function go(){
   btn.disabled=false;
 }
 </script>
+
+
+
 
 
 

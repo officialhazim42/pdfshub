@@ -31,6 +31,57 @@
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/compress.html#app",
+      "url": "https://pdfshub.netlify.app/tools/compress.html",
+      "name": "Compress PDF – PDFHub",
+      "description": "Reduce PDF file size quickly while preserving document clarity. Select low, medium, or high compression levels with local browser execution.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Open Compress PDF and select one PDF.",
+        "Choose Low, Medium, or High compression.",
+        "Select Compress PDF and wait for the generated file.",
+        "Compare the displayed output size with the original and review the PDF before sharing it."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Compress PDF",
+          "item": "https://pdfshub.netlify.app/tools/compress.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -141,6 +192,9 @@ async function go(){
   btn.disabled=false;
 }
 </script>
+
+
+
 
 
 

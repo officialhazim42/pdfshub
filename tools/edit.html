@@ -32,6 +32,57 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/edit.html#app",
+      "url": "https://pdfshub.netlify.app/tools/edit.html",
+      "name": "Edit PDF – PDFHub",
+      "description": "Annotate and edit PDF files in your browser. Add custom text, signatures, geometric shapes, and highlight content without uploading documents.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and wait for the first page to render.",
+        "Choose Pen, Text, Highlight, Rectangle, Line, or Eraser.",
+        "Click or drag on the page to add annotations; move through pages with the page controls.",
+        "Save Edited PDF and review the flattened annotations in the output."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Edit PDF",
+          "item": "https://pdfshub.netlify.app/tools/edit.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -238,6 +289,9 @@ async function saveEdited(){
   }catch(e){showStatus('Error: '+e.message,'error')}
 }
 </script>
+
+
+
 
 
 

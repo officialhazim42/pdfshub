@@ -33,6 +33,57 @@
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/merge.html#app",
+      "url": "https://pdfshub.netlify.app/tools/merge.html",
+      "name": "Merge PDF – PDFHub",
+      "description": "Combine multiple PDF files into a single organized document. Drag and drop to reorder pages with fast, private client-side processing.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Select or drop two or more PDFs.",
+        "Review the file list and remove any incorrect file.",
+        "Confirm the list order is the desired page order.",
+        "Select Merge PDFs and review the combined download."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Merge PDF",
+          "item": "https://pdfshub.netlify.app/tools/merge.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -158,6 +209,9 @@ async function mergePDFs(){
 }
 function download(bytes,name){const blob=new Blob([bytes],{type:'application/pdf'});downloadBlob(blob,name);}
 </script>
+
+
+
 
 
 

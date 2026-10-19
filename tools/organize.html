@@ -32,6 +32,57 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/organize.html#app",
+      "url": "https://pdfshub.netlify.app/tools/organize.html",
+      "name": "Organize PDF – PDFHub",
+      "description": "Rearrange, delete, rotate, and sort PDF pages with an intuitive visual grid. Instant private processing with zero file uploads.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and wait for the thumbnail grid.",
+        "Drag thumbnails to change their order.",
+        "Use the rotate or delete controls on individual pages, or Rotate All.",
+        "Select Save Organized PDF and verify the page sequence."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Organize PDF",
+          "item": "https://pdfshub.netlify.app/tools/organize.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -172,6 +223,9 @@ async function save(){
   }catch(e){showStatus('Error: '+e.message,'error')}
 }
 </script>
+
+
+
 
 
 

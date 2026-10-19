@@ -32,6 +32,57 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/ocr.html#app",
+      "url": "https://pdfshub.netlify.app/tools/ocr.html",
+      "name": "OCR PDF – PDFHub",
+      "description": "Extract searchable text from scanned PDFs and document images using browser-based Optical Character Recognition (OCR).",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a scanned PDF.",
+        "Choose the recognition language and optional pages or ranges.",
+        "Select Extract Text and wait while each page is recognized.",
+        "Review the text, then copy it or download the TXT file."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "OCR PDF",
+          "item": "https://pdfshub.netlify.app/tools/ocr.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -170,6 +221,9 @@ async function go(){
 function copyText(){navigator.clipboard.writeText(extractedText).then(()=>showStatus('✓ Copied to clipboard!','success'));}
 function downloadTxt(){downloadBlob(new Blob([extractedText],{type:'text/plain'}),'ocr-text.txt');}
 </script>
+
+
+
 
 
 

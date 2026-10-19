@@ -30,6 +30,57 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/word-to-pdf.html#app",
+      "url": "https://pdfshub.netlify.app/tools/word-to-pdf.html",
+      "name": "Word to PDF – PDFHub",
+      "description": "Convert Microsoft Word documents (.doc, .docx) into pristine PDF files directly in your browser with zero server uploads.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Select a DOCX file.",
+        "Choose page size and font size.",
+        "Select Convert to PDF and wait for the print-ready page.",
+        "Choose Save as PDF in the print dialog and inspect the result."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Word to PDF",
+          "item": "https://pdfshub.netlify.app/tools/word-to-pdf.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -192,6 +243,29 @@ async function go(){
 
 
 
+
+
+<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
+</body></html>`;
+
+    const printWin=window.open('','_blank','width=900,height=700');
+    printWin.document.write(printHtml);
+    printWin.document.close();
+    printWin.onload=()=>{
+      setTimeout(()=>{
+        printWin.print();
+        document.getElementById('pbar').style.width='100%';
+        showStatus('✓ Print dialog opened — choose "Save as PDF" as printer to download!','success');
+      },400);
+    };
+    btn.disabled=false;
+  }catch(e){
+    showStatus('Error: '+e.message+'. Make sure it\'s a valid .docx file.','error');
+    btn.disabled=false;
+  }
+}
+</script>
+
 <!-- On-Page SEO Educational & Content Section -->
 <section class="tool-seo-content" aria-labelledby="aboutToolHeading">
   <div class="tool-seo-card">
@@ -245,25 +319,5 @@ async function go(){
   </div>
 </section>
 
-<div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
-</body></html>`;
-
-    const printWin=window.open('','_blank','width=900,height=700');
-    printWin.document.write(printHtml);
-    printWin.document.close();
-    printWin.onload=()=>{
-      setTimeout(()=>{
-        printWin.print();
-        document.getElementById('pbar').style.width='100%';
-        showStatus('✓ Print dialog opened — choose "Save as PDF" as printer to download!','success');
-      },400);
-    };
-    btn.disabled=false;
-  }catch(e){
-    showStatus('Error: '+e.message+'. Make sure it\'s a valid .docx file.','error');
-    btn.disabled=false;
-  }
-}
-</script>
 <div class="tool-footer"><a class="tf-logo" href="../index.html">PDFHub</a><p>Created by <strong>@officialhazim42</strong> · Free forever · No sign-up · No uploads to server</p></div>
 </body></html>

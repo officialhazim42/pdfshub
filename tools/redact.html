@@ -32,6 +32,57 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="shared.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pdfshub.netlify.app/tools/redact.html#app",
+      "url": "https://pdfshub.netlify.app/tools/redact.html",
+      "name": "Redact PDF – PDFHub",
+      "description": "Permanently redact sensitive text, numbers, and private content from PDF documents. Client-side sanitization prevents data leakage.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript and modern browser WebAssembly capabilities.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Upload a PDF and choose a page.",
+        "Drag over every sensitive region to create a black box.",
+        "Move through pages and repeat as needed; use Clear Page to start a page again.",
+        "Select Save Redacted PDF and verify the result in a separate viewer."
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://pdfshub.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://pdfshub.netlify.app/#tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Redact PDF",
+          "item": "https://pdfshub.netlify.app/tools/redact.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -155,6 +206,9 @@ async function saveRedacted(){
   }catch(e){showStatus('Error: '+e.message,'error')}
 }
 </script>
+
+
+
 
 
 

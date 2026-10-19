@@ -94,6 +94,9 @@
           <a class="menu-action" href="${siteRoot}menu-bar/history.html">
             <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>Tool History</span><span class="menu-action-note">Local</span>
           </a>
+          <a class="menu-action" href="${siteRoot}docs/">
+            <i class="fas fa-book-bookmark" aria-hidden="true"></i><span>Documentation</span><span class="menu-action-note">Docs Hub</span>
+          </a>
           <a class="menu-action" href="${siteRoot}install/">
             <i class="fas fa-download" aria-hidden="true"></i><span>Install App</span><span class="menu-action-note">PWA</span>
           </a>
@@ -161,6 +164,7 @@
         <h3 class="footer-title">Resources</h3>
         <ul class="footer-links">
           <li><a href="${siteRoot}guides/">User Guides &amp; Tips</a></li>
+          <li><a href="${siteRoot}docs/">Documentation Hub</a></li>
           <li><a href="${siteRoot}install/">Install PDFHub App</a></li>
           <li><a href="${siteRoot}guides/merge-pdf/">Merge PDF Guide</a></li>
           <li><a href="${siteRoot}guides/compress-pdf/">Compress PDF Guide</a></li>
