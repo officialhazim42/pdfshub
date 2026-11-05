@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="pdf-password.js"></script>
   <script src="shared.js"></script>
   <script type="application/ld+json">
 {
@@ -174,12 +175,20 @@ fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
 drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
 drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
 async function loadFile(f){
-  file=f;showStatus('Loading…','info');
-  const ab=await f.arrayBuffer();pdfJsDoc=await pdfjsLib.getDocument({data:ab}).promise;
-  pageOrder=Array.from({length:pdfJsDoc.numPages},(_,i)=>i+1);
-  pageRotations=new Array(pdfJsDoc.numPages).fill(0);
-  document.getElementById('editor').style.display='block';drop.style.display='none';
-  showStatus('','');renderGrid();
+  file=f;showStatus('Checking file…','info');
+  try{
+    const auth=await PDFPasswordManager.ensureAuthenticated(f);
+    if(auth.cancelled){
+      showStatus('Password required to process this file.','error');
+      return;
+    }
+    showStatus('Loading pages…','info');
+    pdfJsDoc=await PDFPasswordManager.openPdfJs(f);
+    pageOrder=Array.from({length:pdfJsDoc.numPages},(_,i)=>i+1);
+    pageRotations=new Array(pdfJsDoc.numPages).fill(0);
+    document.getElementById('editor').style.display='block';drop.style.display='none';
+    showStatus('','');renderGrid();
+  }catch(e){showStatus('Error: '+e.message,'error')}
 }
 async function renderGrid(){
   const grid=document.getElementById('pagesGrid');grid.innerHTML='';
@@ -210,7 +219,7 @@ function showStatus(msg,type){const s=document.getElementById('status');s.textCo
 async function save(){
   showStatus('Saving…','info');document.getElementById('prog').classList.add('show');document.getElementById('pbar').style.width='10%';
   try{
-    const ab=await file.arrayBuffer();const src=await PDFLib.PDFDocument.load(ab,{ignoreEncryption:true});
+    const src=await PDFPasswordManager.openPdfLib(file);
     const out=await PDFLib.PDFDocument.create();
     const indices=pageOrder.map(n=>n-1);const copied=await out.copyPages(src,indices);
     copied.forEach((p,i)=>{

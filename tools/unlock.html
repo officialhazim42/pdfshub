@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="pdf-password.js"></script>
   <script src="shared.js"></script>
   <script type="application/ld+json">
 {
@@ -164,24 +165,61 @@
   <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
 </div>
 <script>
-let file=null;
+let file=null, isEncrypted=false;
 const drop=document.getElementById('drop'),fin=document.getElementById('fin');
 fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
 drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
 drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
-function loadFile(f){file=f;document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span></div>`;document.getElementById('opts').style.display='block';document.getElementById('goBtn').disabled=false;}
+async function loadFile(f){
+  file=f;
+  showStatus('Analyzing PDF…','info');
+  isEncrypted=await PDFPasswordManager.detectEncryptedPDF(f);
+  const sizeMb=(f.size/1024/1024).toFixed(2);
+  const badge=isEncrypted
+    ? '<span class="enc-badge"><i class="fas fa-lock"></i> Protected</span>'
+    : '<span class="unlocked-badge"><i class="fas fa-check-circle"></i> Unprotected</span>';
+  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf"></i><span class="fn">${f.name}</span><span class="fs">${sizeMb} MB</span>${badge}</div>`;
+  document.getElementById('opts').style.display='block';
+  document.getElementById('goBtn').disabled=false;
+  if(!isEncrypted){
+    showStatus('Notice: This PDF does not have password protection. You can proceed to save a clean, restriction-free copy.','info');
+  }else{
+    const cached=PDFPasswordManager.getCachedPassword(f);
+    if(cached)document.getElementById('pw').value=cached;
+    showStatus('This document is password-protected. Enter its password to decrypt and unlock.','info');
+  }
+}
 function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
 async function go(){
-  const btn=document.getElementById('goBtn');btn.disabled=true;document.getElementById('prog').classList.add('show');document.getElementById('pbar').style.width='30%';showStatus('Unlocking…','info');
+  const btn=document.getElementById('goBtn');
+  btn.disabled=true;
+  document.getElementById('prog').classList.add('show');
+  document.getElementById('pbar').style.width='25%';
+  showStatus('Authenticating and unlocking…','info');
   try{
-    const pw=document.getElementById('pw').value;
-    const ab=await file.arrayBuffer();
-    const doc=await PDFLib.PDFDocument.load(ab,{password:pw||undefined,ignoreEncryption:false});
-    document.getElementById('pbar').style.width='80%';
-    const bytes=await doc.save();
-    downloadBlob(new Blob([bytes],{type:'application/pdf'}),'unlocked.pdf',(bytes.length/1024/1024).toFixed(2));
-    document.getElementById('pbar').style.width='100%';showStatus('✓ Unlocked! Download started.','success');
-  }catch(e){showStatus('Error: Wrong password or unsupported encryption. '+e.message,'error')}
+    let pw=document.getElementById('pw').value;
+    if(isEncrypted&&!pw){
+      pw=await PDFPasswordManager.requestPDFPassword({file});
+      if(!pw){
+        showStatus('Password is required to unlock this document.','error');
+        btn.disabled=false;
+        document.getElementById('prog').classList.remove('show');
+        return;
+      }
+      document.getElementById('pw').value=pw;
+    }
+    document.getElementById('pbar').style.width='65%';
+    const unlockedBytes=await PDFPasswordManager.unlockPdfBytes(file,pw);
+    document.getElementById('pbar').style.width='90%';
+    const outName=file.name?file.name.replace(/\.pdf$/i,'')+'-unlocked.pdf':'unlocked.pdf';
+    downloadBlob(new Blob([unlockedBytes],{type:'application/pdf'}),outName);
+    document.getElementById('pbar').style.width='100%';
+    showStatus('✓ Unlocked! Download started. Your file is now free of encryption and passwords.','success');
+  }catch(e){
+    let msg=e.message||'Unlock failed';
+    if(msg.includes('Wrong password')) msg='Incorrect password for this PDF. Please check the password and try again.';
+    showStatus('Error: '+msg,'error');
+  }
   btn.disabled=false;
 }
 </script>

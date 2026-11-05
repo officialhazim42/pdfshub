@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="pdf-password.js"></script>
   <script src="shared.js"></script>
   <script type="application/ld+json">
 {
@@ -173,11 +174,19 @@ fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
 drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
 drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
 async function loadFile(f){
-  file=f;showStatus('Loading PDF…','info');
-  const ab=await f.arrayBuffer();
-  pdfDoc=await pdfjsLib.getDocument({data:ab}).promise;
-  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf"></i><span class="fn">${f.name}</span><span class="fs">${pdfDoc.numPages} pages</span></div>`;
-  document.getElementById('opts').style.display='block';document.getElementById('goBtn').disabled=false;showStatus('','');
+  file=f;showStatus('Checking file…','info');
+  try{
+    const auth=await PDFPasswordManager.ensureAuthenticated(f);
+    if(auth.cancelled){
+      showStatus('Password required to process this file.','error');
+      return;
+    }
+    showStatus('Loading PDF…','info');
+    pdfDoc=await PDFPasswordManager.openPdfJs(f);
+    const badge=auth.isEncrypted?'<span class="unlocked-badge"><i class="fas fa-unlock"></i> Authenticated</span>':'';
+    document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf"></i><span class="fn">${f.name}</span><span class="fs">${pdfDoc.numPages} pages</span>${badge}</div>`;
+    document.getElementById('opts').style.display='block';document.getElementById('goBtn').disabled=false;showStatus('','');
+  }catch(e){showStatus('Error: '+e.message,'error')}
 }
 function parsePages(str,max){if(!str.trim())return Array.from({length:max},(_,i)=>i+1);const set=new Set();str.split(',').forEach(r=>{r=r.trim();if(r.includes('-')){const[a,b]=r.split('-').map(Number);for(let i=a;i<=Math.min(b,max);i++)set.add(i);}else{const n=parseInt(r);if(n>=1&&n<=max)set.add(n);}});return[...set].sort((a,b)=>a-b);}
 function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status '+(msg?'show ':'')+type}

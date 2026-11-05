@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Watermark Technical Documentation &amp; User Guide | PDFHub</title>
+  <meta name="description" content="Authoritative technical specification and step-by-step user guide for Add Watermark on PDFHub. Stamp custom text across every page with opacity, color, angle, and size controls. 100% browser-based execution.">
+  <link rel="canonical" href="https://pdfshub.netlify.app/docs/tools/watermark-pdf.html"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#07070d">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:site_name" content="PDFHub">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Add Watermark Documentation &amp; Guide | PDFHub">
+  <meta property="og:description" content="Stamp custom text across every page with opacity, color, angle, and size controls. Browser-based processing with zero server uploads.">
+  <meta property="og:url" content="https://pdfshub.netlify.app/docs/tools/watermark-pdf.html">
+  <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png">
+
+  <link rel="icon" href="../../favicons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../favicons/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../developer.css">
+  <link rel="stylesheet" href="../styles.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "@id": "https://pdfshub.netlify.app/docs/tools/watermark-pdf.html#article",
+        "url": "https://pdfshub.netlify.app/docs/tools/watermark-pdf.html",
+        "headline": "Add Watermark Technical Documentation & User Guide",
+        "description": "Stamp custom text across every page with opacity, color, angle, and size controls.",
+        "author": { "@type": "Person", "name": "Hazim Bashir", "url": "https://github.com/officialhazim42" },
+        "publisher": { "@type": "Organization", "name": "PDFHub", "url": "https://pdfshub.netlify.app/" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pdfshub.netlify.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://pdfshub.netlify.app/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "Tools", "item": "https://pdfshub.netlify.app/docs/all-tools-reference.html" },
+          { "@type": "ListItem", "position": 4, "name": "Add Watermark", "item": "https://pdfshub.netlify.app/docs/tools/watermark-pdf.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body data-depth="2">
+
+  
+  <nav class="site-nav" role="navigation" aria-label="PDFHub Documentation Navigation">
+    <div class="nav-left">
+      <button class="sidebar-toggle-btn" id="sidebarToggle" type="button" aria-label="Toggle navigation sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a class="logo" href="../../index.html" title="PDFHub Home">
+        <img class="logo-mark" src="../../favicons/favicon.png" alt="" aria-hidden="true"/>
+        <span>PDF HUB</span>
+      </a>
+      <span class="nav-divider" aria-hidden="true">/</span>
+      <span class="nav-badge">
+        <i class="fas fa-book-bookmark" aria-hidden="true"></i>
+        <span>Docs</span>
+      </span>
+    </div>
+
+    <div class="nav-center">
+      <button class="nav-search-btn" type="button" aria-label="Search documentation (Press Ctrl+K)">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <span>Search documentation...</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+    </div>
+
+    <div class="nav-right">
+      <a class="nav-subtle-link" href="../../index.html" title="Browse all 33 tools">
+        <i class="fas fa-th-large" aria-hidden="true"></i>
+        <span>Tools</span>
+      </a>
+      <a class="nav-btn-manual" href="../pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf" title="Download 75-Page Complete Technical Manual">
+        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+        <span>Download PDF</span>
+      </a>
+      <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle theme">
+        <span class="t-label" id="themeLabel">Dark</span>
+        <span class="toggle-track">
+          <span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span>
+        </span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteMenu" title="Open control center menu" aria-label="Open menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <!-- PDFHUB CONTROL CENTER DRAWER -->
+      <div class="site-menu" id="siteMenu" aria-hidden="true" role="navigation" aria-label="PDFHub control center">
+        <div class="menu-header">
+          <div class="menu-heading">
+            <span>PDFHub control center</span>
+            <div class="menu-heading-actions">
+              <small>Private workspace</small>
+              <button class="menu-close-btn" id="menuCloseBtn" type="button" aria-label="Close menu" title="Close menu">
+                <i class="fas fa-xmark" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <form class="menu-search" id="menuSearch" role="search">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools" autocomplete="off"/>
+            <button type="submit" title="Search"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+          </form>
+          <div class="menu-status">
+            <span><i class="fas fa-shield-halved" aria-hidden="true"></i> Runs in your browser</span>
+            <span class="menu-status-dot">●</span>
+            <span>No account needed</span>
+          </div>
+        </div>
+        <div class="menu-body" id="menuBody">
+          <div class="menu-list">
+            <div class="menu-section-label">Tools &amp; Guides</div>
+            <a class="menu-action" href="../../index.html">
+              <i class="fas fa-house" aria-hidden="true"></i><span>Home</span>
+            </a>
+            <a class="menu-action" href="../../guides/">
+              <i class="fas fa-book-open" aria-hidden="true"></i>
+              <span>User Guides &amp; Tips</span>
+              <span class="menu-action-note">33 guides</span>
+            </a>
+            <a class="menu-action active-page" href="../index.html">
+              <i class="fas fa-book-bookmark" aria-hidden="true"></i>
+              <span>Documentation</span>
+              <span class="menu-action-note">Docs Hub</span>
+            </a>
+            <a class="menu-action" href="../../install/">
+              <i class="fas fa-download" aria-hidden="true"></i><span>Install PWA</span>
+            </a>
+            <a class="menu-action" href="../../menu-bar/favorites.html">
+              <i class="fas fa-star" aria-hidden="true"></i><span>Favorites</span><span class="menu-action-note">Local</span>
+            </a>
+            <a class="menu-action" href="../../menu-bar/history.html">
+              <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>History</span><span class="menu-action-note">Local</span>
+            </a>
+            <div class="menu-section-label" data-section="about">Privacy &amp; About</div>
+            <a class="menu-action" href="../../menu-bar/privacy.html">
+              <i class="fas fa-shield-halved" aria-hidden="true"></i><span>Privacy Center</span>
+            </a>
+            <a class="menu-action" href="../../menu-bar/terms.html">
+              <i class="fas fa-file-contract" aria-hidden="true"></i><span>Terms and conditions</span>
+            </a>
+            <a class="menu-action" href="../../menu-bar/about.html">
+              <i class="fas fa-circle-info" aria-hidden="true"></i><span>About us</span>
+            </a>
+            <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">
+              <i class="fas fa-envelope" aria-hidden="true"></i><span>Contact Support</span>
+            </a>
+          </div>
+          <p class="menu-note">Your tools, history, and preferences stay in this browser.</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+
+  <div class="docs-layout">
+    
+    <aside class="docs-sidebar-left" id="docsSidebarLeft" aria-label="Documentation Navigation">
+      <div class="sidebar-search-box">
+        <button class="sidebar-search-btn" type="button" aria-label="Open search dialog">
+          <span><i class="fas fa-search" aria-hidden="true"></i> Quick Search...</span>
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-group">
+          <div class="sidebar-group-title"><span>Core Documentation</span><i class="fas fa-chevron-down"></i></div>
+          <ul class="sidebar-group-items">
+            <li><a class="sidebar-link " href="../index.html"><i class="fas fa-house"></i><span>Documentation Home</span></a></li>
+            <li><a class="sidebar-link " href="../getting-started.html"><i class="fas fa-rocket"></i><span>Getting Started</span></a></li><li><a class="sidebar-link " href="../project-overview.html"><i class="fas fa-compass"></i><span>Project Overview</span></a></li><li><a class="sidebar-link " href="../system-architecture.html"><i class="fas fa-diagram-project"></i><span>System Architecture</span></a></li><li><a class="sidebar-link " href="../technology-stack.html"><i class="fas fa-layer-group"></i><span>Technology Stack</span></a></li><li><a class="sidebar-link " href="../privacy-and-data-processing.html"><i class="fas fa-shield-halved"></i><span>Privacy &amp; Data Processing</span></a></li><li><a class="sidebar-link " href="../supported-formats.html"><i class="fas fa-file-lines"></i><span>Supported File Formats</span></a></li><li><a class="sidebar-link " href="../hardware-requirements.html"><i class="fas fa-microchip"></i><span>Hardware &amp; Memory Limits</span></a></li><li><a class="sidebar-link " href="../all-tools-reference.html"><i class="fas fa-table-list"></i><span>Complete Tools Reference</span></a></li><li><a class="sidebar-link " href="../troubleshooting.html"><i class="fas fa-wrench"></i><span>Troubleshooting Guide</span></a></li><li><a class="sidebar-link " href="../faq.html"><i class="fas fa-circle-question"></i><span>Frequently Asked Questions</span></a></li><li><a class="sidebar-link " href="../pwa-offline.html"><i class="fas fa-wifi"></i><span>PWA &amp; Offline Capabilities</span></a></li><li><a class="sidebar-link " href="../developer-guide.html"><i class="fas fa-code"></i><span>Developer Documentation</span></a></li><li><a class="sidebar-link " href="../installation-setup.html"><i class="fas fa-terminal"></i><span>Installation &amp; Setup</span></a></li><li><a class="sidebar-link " href="../build-and-deployment.html"><i class="fas fa-cloud-arrow-up"></i><span>Build &amp; Deployment</span></a></li><li><a class="sidebar-link " href="../testing-and-qa.html"><i class="fas fa-vial-circle-check"></i><span>Testing &amp; Quality Assurance</span></a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-group">
+          <div class="sidebar-group-title"><span>All 33 PDF Tools</span><i class="fas fa-chevron-down"></i></div>
+          <div class="sidebar-group-items">
+            
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Organize PDF (6)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="../compare-pdf.html"><i class="fas fa-not-equal"></i><span>Compare PDF</span></a></li><li><a class="sidebar-link " href="../extract-pages.html"><i class="fas fa-file-export"></i><span>Extract Pages</span></a></li><li><a class="sidebar-link " href="../merge-pdf.html"><i class="fas fa-object-group"></i><span>Merge PDF</span></a></li><li><a class="sidebar-link " href="../organize-pdf.html"><i class="fas fa-th-large"></i><span>Organize PDF</span></a></li><li><a class="sidebar-link " href="../remove-pages.html"><i class="fas fa-trash-alt"></i><span>Remove Pages</span></a></li><li><a class="sidebar-link " href="../split-pdf.html"><i class="fas fa-cut"></i><span>Split PDF</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Optimize PDF (4)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="../compress-pdf.html"><i class="fas fa-compress-alt"></i><span>Compress PDF</span></a></li><li><a class="sidebar-link " href="../ocr-pdf.html"><i class="fas fa-spell-check"></i><span>OCR PDF</span></a></li><li><a class="sidebar-link " href="../pdf-to-pdfa.html"><i class="fas fa-archive"></i><span>PDF to PDF/A</span></a></li><li><a class="sidebar-link " href="../repair-pdf.html"><i class="fas fa-wrench"></i><span>Repair PDF</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Convert to PDF (6)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="../excel-to-pdf.html"><i class="fas fa-file-excel"></i><span>Excel to PDF</span></a></li><li><a class="sidebar-link " href="../html-to-pdf.html"><i class="fas fa-code"></i><span>HTML to PDF</span></a></li><li><a class="sidebar-link " href="../jpg-to-pdf.html"><i class="fas fa-image"></i><span>JPG to PDF</span></a></li><li><a class="sidebar-link " href="../ppt-to-pdf.html"><i class="fas fa-file-powerpoint"></i><span>PowerPoint to PDF</span></a></li><li><a class="sidebar-link " href="../scan-to-pdf.html"><i class="fas fa-camera"></i><span>Scan to PDF</span></a></li><li><a class="sidebar-link " href="../word-to-pdf.html"><i class="fas fa-file-word"></i><span>Word to PDF</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Convert from PDF (4)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="../pdf-to-excel.html"><i class="fas fa-file-excel"></i><span>PDF to Excel</span></a></li><li><a class="sidebar-link " href="../pdf-to-jpg.html"><i class="fas fa-file-image"></i><span>PDF to JPG</span></a></li><li><a class="sidebar-link " href="../pdf-to-ppt.html"><i class="fas fa-file-powerpoint"></i><span>PDF to PowerPoint</span></a></li><li><a class="sidebar-link " href="../pdf-to-word.html"><i class="fas fa-file-word"></i><span>PDF to Word</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Edit &amp; Annotate (7)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="../crop-pdf.html"><i class="fas fa-crop-alt"></i><span>Crop PDF</span></a></li><li><a class="sidebar-link " href="../edit-pdf.html"><i class="fas fa-edit"></i><span>Edit PDF</span></a></li><li><a class="sidebar-link " href="../forms-pdf.html"><i class="fas fa-wpforms"></i><span>PDF Forms</span></a></li><li><a class="sidebar-link " href="../page-numbers.html"><i class="fas fa-list-ol"></i><span>Add Page Numbers</span></a></li><li><a class="sidebar-link " href="../rotate-pdf.html"><i class="fas fa-redo"></i><span>Rotate PDF</span></a></li><li><a class="sidebar-link " href="../sign-pdf.html"><i class="fas fa-signature"></i><span>Sign PDF</span></a></li><li><a class="sidebar-link active" href="../watermark-pdf.html"><i class="fas fa-stamp"></i><span>Add Watermark</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>PDF Security (3)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="../protect-pdf.html"><i class="fas fa-lock"></i><span>Protect PDF</span></a></li><li><a class="sidebar-link " href="../redact-pdf.html"><i class="fas fa-eraser"></i><span>Redact PDF</span></a></li><li><a class="sidebar-link " href="../unlock-pdf.html"><i class="fas fa-lock-open"></i><span>Unlock PDF</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>PDF Intelligence (3)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="../pdf-to-markdown.html"><i class="fas fa-file-code"></i><span>PDF to Markdown</span></a></li><li><a class="sidebar-link " href="../summarize-pdf.html"><i class="fas fa-robot"></i><span>AI Summarizer</span></a></li><li><a class="sidebar-link " href="../translate-pdf.html"><i class="fas fa-language"></i><span>Translate PDF</span></a></li></ul>
+    
+          </div>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer-cta">
+        <a class="sidebar-btn-download" href="../pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf">
+          <i class="fas fa-file-pdf"></i> Download Manual (75p)
+        </a>
+        <a class="sidebar-btn-download" style="background:transparent;border-color:var(--border);color:var(--muted);" href="../pdfhub-complete-documentation.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-arrow-up-right-from-square"></i> Open PDF in Tab
+        </a>
+      </div>
+    </aside>
+  
+
+    <main class="docs-main-content">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb navigation">
+        <a href="../index.html">Docs</a>
+        <span class="sep">/</span>
+        <a href="../all-tools-reference.html">Tools Reference</a>
+        <span class="sep">/</span>
+        <span class="sep">Edit PDF</span>
+        <span class="sep">/</span>
+        <span class="current">Add Watermark</span>
+      </nav>
+
+      <article class="docs-article">
+        <header class="docs-header">
+          <span class="docs-category-tag"><i class="fas fa-tag"></i> Edit PDF</span>
+          <h1 class="docs-title">Add Watermark</h1>
+          <p class="docs-lead">Stamp custom text across every page with opacity, color, angle, and size controls.</p>
+
+          <div class="docs-actions-bar">
+            <a class="btn-open-live-tool" href="../../tools/watermark.html" title="Open live tool in browser">
+              <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
+            </a>
+            <a class="btn-download-pdf" href="../pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf" title="Download Complete Documentation Manual">
+              <i class="fas fa-file-pdf"></i> Download 75-Page Manual
+            </a>
+            <a class="btn-download-pdf" href="../pdfhub-complete-documentation.pdf" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-eye"></i> View PDF
+            </a>
+          </div>
+        </header>
+
+        <!-- Technical Specification Matrix -->
+        <section id="technical-specifications">
+          <h2><i class="fas fa-microchip"></i> Key Technical Specifications</h2>
+          <div class="specs-card-grid">
+            <div class="spec-item">
+              <span class="spec-item-label">Production Route</span>
+              <span class="spec-item-value"><code>/tools/watermark.html</code></span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-item-label">Processing Engine</span>
+              <span class="spec-item-value"><code>pdf-lib (page.drawText with rotation &amp; opacity)</code></span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-item-label">Supported Inputs</span>
+              <span class="spec-item-value">Single PDF document (.pdf)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-item-label">Supported Outputs</span>
+              <span class="spec-item-value">Watermarked PDF document (watermarked.pdf)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-item-label">Memory Bound</span>
+              <span class="spec-item-value">Client RAM bound</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-item-label">Privacy Model</span>
+              <span class="spec-item-value"><span class="tool-privacy-tag local"><i class="fas fa-shield-halved"></i> 100% Client-Side Local Memory</span></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Overview & Purpose -->
+        <section id="overview-and-purpose">
+          <h2><i class="fas fa-circle-info"></i> 1. Overview &amp; Purpose</h2>
+          <p>Add Watermark draws the text you provide across every page using the selected style settings.</p>
+          <p>
+            Add Watermark is specifically engineered to eliminate the confidentiality risks of third-party cloud converters. By executing entirely in the user's browser runtime, sensitive legal dossiers, financial balance sheets, and personal records remain strictly confined to local device RAM.
+          </p>
+        </section>
+
+        <!-- Key Functionality -->
+        <section id="key-functionality">
+          <h2><i class="fas fa-gears"></i> 2. Key Functionality &amp; Capabilities</h2>
+          <ul>
+            <li><strong>Zero Latency Execution:</strong> Documents are processed instantaneously without waiting for network file uploads or remote queue processing.</li>
+            <li><strong>Format Compatibility:</strong> Built on robust parser specifications capable of handling modern PDF standards (v1.3 through v2.0).</li>
+            <li><strong>Hardware Acceleration:</strong> Utilizes client-side WebAssembly, multi-core Web Workers, and HTML5 Canvas pipelines for maximal throughput.</li>
+            <li><strong>Non-Destructive Operations:</strong> Original files remain unmodified on disk; resulting binaries are generated in isolated memory buffers.</li>
+          </ul>
+        </section>
+
+        <!-- Step-by-Step Instructions with Real Screenshots -->
+        <section id="step-by-step-guide">
+          <h2><i class="fas fa-list-ol"></i> 3. Step-by-Step Visual Instructions</h2>
+          <p>Follow the visual walkthrough below to execute Add Watermark in your browser:</p>
+          <div class="steps-walkthrough-grid">
+            
+      <div class="step-card">
+        <div class="step-card-header">
+          <span class="step-badge">1</span>
+          <h3 class="step-card-title">Open Tool &amp; Workspace</h3>
+        </div>
+        <div class="step-image-wrap" title="Click to view full screenshot">
+          <img class="screenshot-img" src="../images/watermark-pdf-step-1.png" alt="Add Watermark Step 1 – Open Tool &amp; Workspace" loading="lazy"/>
+          <div class="step-image-overlay"><span><i class="fas fa-magnifying-glass-plus"></i> Enlarge</span></div>
+        </div>
+        <p class="step-instruction">Upload a PDF and enter the text to stamp.</p>
+        <span class="step-tip"><i class="fas fa-lightbulb"></i> Watermarks protect intellectual property and identify draft or confidential versions.</span>
+      </div>
+    
+      <div class="step-card">
+        <div class="step-card-header">
+          <span class="step-badge">2</span>
+          <h3 class="step-card-title">Select &amp; Load Document</h3>
+        </div>
+        <div class="step-image-wrap" title="Click to view full screenshot">
+          <img class="screenshot-img" src="../images/watermark-pdf-step-2.png" alt="Add Watermark Step 2 – Select &amp; Load Document" loading="lazy"/>
+          <div class="step-image-overlay"><span><i class="fas fa-magnifying-glass-plus"></i> Enlarge</span></div>
+        </div>
+        <p class="step-instruction">Choose font size, opacity, color, and angle.</p>
+        <span class="step-tip"><i class="fas fa-lightbulb"></i> Watermarks are stamped across all pages uniformly in one pass.</span>
+      </div>
+    
+      <div class="step-card">
+        <div class="step-card-header">
+          <span class="step-badge">3</span>
+          <h3 class="step-card-title">Configure Options &amp; Parameters</h3>
+        </div>
+        <div class="step-image-wrap" title="Click to view full screenshot">
+          <img class="screenshot-img" src="../images/watermark-pdf-step-3.png" alt="Add Watermark Step 3 – Configure Options &amp; Parameters" loading="lazy"/>
+          <div class="step-image-overlay"><span><i class="fas fa-magnifying-glass-plus"></i> Enlarge</span></div>
+        </div>
+        <p class="step-instruction">Select Add Watermark.</p>
+        <span class="step-tip"><i class="fas fa-lightbulb"></i> Keep text concise (1-3 words) for the clearest diagonal stamp.</span>
+      </div>
+    
+      <div class="step-card">
+        <div class="step-card-header">
+          <span class="step-badge">4</span>
+          <h3 class="step-card-title">Execute &amp; Download Result</h3>
+        </div>
+        <div class="step-image-wrap" title="Click to view full screenshot">
+          <img class="screenshot-img" src="../images/watermark-pdf-step-4.png" alt="Add Watermark Step 4 – Execute &amp; Download Result" loading="lazy"/>
+          <div class="step-image-overlay"><span><i class="fas fa-magnifying-glass-plus"></i> Enlarge</span></div>
+        </div>
+        <p class="step-instruction">Review every page for readability and placement before sharing.</p>
+        <span class="step-tip"><i class="fas fa-lightbulb"></i> A 45-degree diagonal angle runs across the full body of the page for maximum security.</span>
+      </div>
+    
+          </div>
+        </section>
+
+        <!-- Execution Workflow & Pipeline -->
+        <section id="execution-workflow">
+          <h2><i class="fas fa-diagram-project"></i> 4. Execution Workflow &amp; Underlying Pipeline</h2>
+          <p>What happens under the hood when you trigger document processing:</p>
+          <div class="pipeline-box">
+            <p>Calculates page center coordinates, computes bounding box of watermark text string, applies rotation angle (45° diagonal or 0° horizontal), sets opacity transparency (0.1 to 0.8), stamps text across every page, and saves PDF.</p>
+            <div class="pipeline-trigger">
+              <strong>Primary Action Trigger:</strong> <code>Add Watermark (#goBtn)</code>
+            </div>
+          </div>
+        </section>
+
+        <!-- Practical Use Cases -->
+        <section id="practical-use-cases">
+          <h2><i class="fas fa-briefcase"></i> 5. Practical Use Cases</h2>
+          <div class="use-cases-grid">
+            
+    <div class="use-case-card">
+      <h4><i class="fas fa-circle-check"></i> Primary Production Workflow</h4>
+      <p>Stamping &quot;CONFIDENTIAL&quot;, &quot;DRAFT&quot;, or company copyright text across sensitive business documents before circulation.</p>
+    </div>
+  
+    <div class="use-case-card">
+      <h4><i class="fas fa-circle-check"></i> Academic &amp; Educational Work</h4>
+      <p>Ideal for educators and researchers preparing materials, compiling coursework, or standardizing multi-format student submissions.</p>
+    </div>
+  
+    <div class="use-case-card">
+      <h4><i class="fas fa-circle-check"></i> Personal Document Archive</h4>
+      <p>Safeguard tax filings, contracts, and medical records by performing all transformations in offline-capable local memory.</p>
+    </div>
+  
+          </div>
+        </section>
+
+        <!-- Best Practices & Common Mistakes -->
+        <section id="best-practices-and-mistakes">
+          <h2><i class="fas fa-shield-check"></i> 6. Best Practices &amp; Common Mistakes</h2>
+          <div class="pro-con-grid">
+            <div class="pro-box">
+              <h4><i class="fas fa-check-circle"></i> Recommended Best Practices</h4>
+              <ul><li>Use low opacity when the underlying content must remain readable.</li><li>Test on a copy before applying a mark to an important source.</li></ul>
+            </div>
+            <div class="con-box">
+              <h4><i class="fas fa-triangle-exclamation"></i> Common Pitfalls to Avoid</h4>
+              <ul><li>Using text that covers critical content.</li><li>Forgetting that the mark is applied to every page.</li></ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Troubleshooting & Error Recovery -->
+        <section id="troubleshooting">
+          <h2><i class="fas fa-wrench"></i> 7. Troubleshooting &amp; Error Recovery</h2>
+          <div class="doc-table-wrapper">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Observed Issue / Error</th>
+                  <th>Root Cause &amp; Verified Technical Solution</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+      <tr>
+        <td><strong>Setting opacity too high (1.0) obscuring text underneath</strong></td>
+        <td>Use 0.15 to 0.3 for subtle background watermark.</td>
+      </tr>
+    
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Privacy & Data Handling -->
+        <section id="privacy-and-data-handling">
+          <h2><i class="fas fa-user-shield"></i> 8. Privacy &amp; Data Handling</h2>
+          <div class="doc-callout tip">
+            <i class="fas fa-lock"></i>
+            <div>
+              <strong>Privacy Architecture Verification:</strong>
+              <p style="margin:4px 0 0;font-size:0.86rem;">This tool runs 100% locally in your browser RAM using client-side WebAssembly and JavaScript engines. No files or document metadata are ever uploaded to a remote server.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Frequently Asked Questions -->
+        <section id="faqs">
+          <h2><i class="fas fa-circle-question"></i> 9. Frequently Asked Questions</h2>
+          <div class="faq-accordion">
+            
+      <div class="faq-item open">
+        <button class="faq-question" type="button">
+          <span>Can I watermark only selected pages?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <p>The current tool applies it to every page.</p>
+        </div>
+      </div>
+    
+      <div class="faq-item ">
+        <button class="faq-question" type="button">
+          <span>Does PDFHub add developer branding as a watermark?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <p>No. User-entered watermark text is the only watermark feature.</p>
+        </div>
+      </div>
+    
+          </div>
+        </section>
+
+        <!-- Action CTA -->
+        <section style="margin:40px 0;padding:28px;background:var(--s2);border-radius:var(--radius-md);border:1px solid var(--border);text-align:center;">
+          <h3 style="font-size:1.3rem;margin-bottom:8px;">Ready to use Add Watermark?</h3>
+          <p style="margin-bottom:18px;">Start processing your PDF files right now. Free, private, and instantaneous.</p>
+          <a class="btn-open-live-tool" style="display:inline-flex;" href="../../tools/watermark.html">
+            <i class="fas fa-arrow-up-right-from-square"></i> Launch Add Watermark Now
+          </a>
+        </section>
+
+        <!-- Previous / Next Navigation -->
+        <nav class="prev-next-nav" aria-label="Tool pagination">
+          <a class="prev-next-card prev" href="unlock-pdf.html">
+            <span class="prev-next-label"><i class="fas fa-arrow-left"></i> Previous Tool</span>
+            <span class="prev-next-title">Unlock PDF</span>
+          </a>
+          <a class="prev-next-card next" href="word-to-pdf.html">
+            <span class="prev-next-label">Next Tool <i class="fas fa-arrow-right"></i></span>
+            <span class="prev-next-title">Word to PDF</span>
+          </a>
+        </nav>
+      </article>
+    </main>
+
+    <!-- Right Sidebar (On This Page Table of Contents) -->
+    <aside class="docs-sidebar-right" aria-label="On this page navigation">
+      <div class="toc-heading"><i class="fas fa-align-left"></i> On this page</div>
+      <ul class="toc-list" id="tocList">
+        <li class="toc-item h2"><a href="#technical-specifications">Specifications</a></li>
+        <li class="toc-item h2"><a href="#overview-and-purpose">1. Overview &amp; Purpose</a></li>
+        <li class="toc-item h2"><a href="#key-functionality">2. Key Functionality</a></li>
+        <li class="toc-item h2"><a href="#step-by-step-guide">3. Step-by-Step Guide</a></li>
+        <li class="toc-item h2"><a href="#execution-workflow">4. Execution Workflow</a></li>
+        <li class="toc-item h2"><a href="#practical-use-cases">5. Practical Use Cases</a></li>
+        <li class="toc-item h2"><a href="#best-practices-and-mistakes">6. Best Practices</a></li>
+        <li class="toc-item h2"><a href="#troubleshooting">7. Troubleshooting</a></li>
+        <li class="toc-item h2"><a href="#privacy-and-data-handling">8. Privacy Model</a></li>
+        <li class="toc-item h2"><a href="#faqs">9. FAQs</a></li>
+      </ul>
+
+      <div class="right-sidebar-box">
+        <h4>Manual &amp; Resources</h4>
+        <ul class="right-sidebar-links">
+          <li><a href="../pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf"><i class="fas fa-file-pdf"></i> Download PDF (75p)</a></li>
+          <li><a href="../pdfhub-complete-documentation.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open in New Tab</a></li>
+          <li><a href="https://github.com/officialhazim42/pdfshub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View GitHub Repo</a></li>
+          <li><a href="../../tools/watermark.html"><i class="fas fa-wrench"></i> Open Tool Live</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-shell">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="../../index.html">
+            <img class="logo-mark" src="../../favicons/favicon.png" alt="" aria-hidden="true"/>
+            <span>PDF HUB</span>
+          </a>
+          <p style="margin-top:6px;font-size:0.8rem;color:var(--muted);">33 Free Browser-Based PDF Tools. 100% Client-Side RAM Processing. Zero Server Storage.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Docs Home</a>
+          <a href="../getting-started.html">Getting Started</a>
+          <a href="../all-tools-reference.html">Tools Matrix</a>
+          <a href="../privacy-and-data-processing.html">Privacy</a>
+          <a href="../developer-guide.html">Developer</a>
+          <a href="../pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf">Download Manual (PDF)</a>
+          <a href="https://github.com/officialhazim42/pdfshub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 PDFHub. Crafted by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">@officialhazim42</a></span>
+        <div style="display:flex;gap:12px;color:var(--muted2);">
+          <span>WCAG 2.1 AA Compliant</span>
+          <span>•</span>
+          <span>75-Page Complete Manual</span>
+          <span>•</span>
+          <span>v1.0.0 Production</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+
+  <script src="../docs.js"></script>
+</body>
+</html>

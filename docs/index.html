@@ -9,22 +9,13 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#07070d">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:site_name" content="PDFHub">
   <meta property="og:type" content="website">
   <meta property="og:title" content="PDFHub Documentation Portal – Architecture, Tools &amp; Technical Reference">
-  <meta property="og:description" content="Authoritative technical documentation and user guides for PDFHub's 33 client-side tools. Inspect browser runtime architecture, privacy models, formats, and API references.">
+  <meta property="og:description" content="Authoritative technical documentation and user guides for PDFHub's 33 client-side tools.">
   <meta property="og:url" content="https://pdfshub.netlify.app/docs/">
   <meta property="og:image" content="https://pdfshub.netlify.app/favicons/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PDFHub Documentation Portal">
-
-  <!-- Twitter / X -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PDFHub Documentation Portal – Architecture &amp; Tools Reference">
-  <meta name="twitter:description" content="Authoritative technical documentation and user guides for PDFHub's 33 client-side tools. Inspect browser runtime architecture, privacy models, formats, and API references.">
-  <meta name="twitter:image" content="https://pdfshub.netlify.app/favicons/og-image.png">
 
   <link rel="icon" href="../favicons/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="../favicons/favicon.png">
@@ -33,7 +24,6 @@
   <link rel="stylesheet" href="../developer.css">
   <link rel="stylesheet" href="styles.css">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -44,56 +34,28 @@
         "url": "https://pdfshub.netlify.app/docs/",
         "headline": "PDFHub Documentation Portal – Architecture, Tools & Technical Reference",
         "description": "Comprehensive technical architecture, data processing specifications, and tool directories for 33 browser-based PDF utilities.",
-        "author": {
-          "@type": "Person",
-          "name": "Hazim Bashir",
-          "url": "https://github.com/officialhazim42"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "PDFHub",
-          "url": "https://pdfshub.netlify.app/",
-          "logo": "https://pdfshub.netlify.app/favicons/favicon.png"
-        },
-        "mainEntityOfPage": "https://pdfshub.netlify.app/docs/"
+        "author": { "@type": "Person", "name": "Hazim Bashir", "url": "https://github.com/officialhazim42" },
+        "publisher": { "@type": "Organization", "name": "PDFHub", "url": "https://pdfshub.netlify.app/" }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://pdfshub.netlify.app/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Documentation",
-            "item": "https://pdfshub.netlify.app/docs/"
-          }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pdfshub.netlify.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://pdfshub.netlify.app/docs/" }
         ]
       }
     ]
   }
   </script>
-  <script>
-    (function(){
-      try {
-        const saved = localStorage.getItem('pdfhub-theme');
-        if (saved === 'light') {
-          document.documentElement.classList.add('light');
-          document.body?.classList.add('light');
-        }
-      } catch(e){}
-    })();
-  </script>
 </head>
-<body data-root="../">
+<body data-root="../" data-depth="1">
 
-  <!-- SHARED PDFHUB NAV -->
-  <nav class="site-nav" role="navigation" aria-label="PDFHub Main Navigation">
+  
+  <nav class="site-nav" role="navigation" aria-label="PDFHub Documentation Navigation">
     <div class="nav-left">
+      <button class="sidebar-toggle-btn" id="sidebarToggle" type="button" aria-label="Toggle navigation sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
       <a class="logo" href="../index.html" title="PDFHub Home">
         <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
         <span>PDF HUB</span>
@@ -101,31 +63,38 @@
       <span class="nav-divider" aria-hidden="true">/</span>
       <span class="nav-badge">
         <i class="fas fa-book-bookmark" aria-hidden="true"></i>
-        <span>Documentation</span>
+        <span>Docs</span>
       </span>
     </div>
+
+    <div class="nav-center">
+      <button class="nav-search-btn" type="button" aria-label="Search documentation (Press Ctrl+K)">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <span>Search documentation...</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+    </div>
+
     <div class="nav-right">
       <a class="nav-subtle-link" href="../index.html" title="Browse all 33 tools">
         <i class="fas fa-th-large" aria-hidden="true"></i>
-        <span>All Tools</span>
+        <span>Tools</span>
       </a>
-      <a class="nav-subtle-link" href="../guides/" title="View Step-by-Step Tutorials">
-        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-        <span>User Guides</span>
+      <a class="nav-btn-manual" href="./pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf" title="Download 75-Page Complete Technical Manual">
+        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+        <span>Download PDF</span>
       </a>
-      <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark theme">
+      <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle theme">
         <span class="t-label" id="themeLabel">Dark</span>
         <span class="toggle-track">
-          <span class="toggle-knob" id="themeKnob">
-            <i class="fas fa-moon"></i>
-          </span>
+          <span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span>
         </span>
       </button>
       <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteMenu" title="Open control center menu" aria-label="Open menu">
         <i class="fas fa-bars" aria-hidden="true"></i>
       </button>
 
-      <!-- PDFHUB CONTROL CENTER -->
+      <!-- PDFHUB CONTROL CENTER DRAWER -->
       <div class="site-menu" id="siteMenu" aria-hidden="true" role="navigation" aria-label="PDFHub control center">
         <div class="menu-header">
           <div class="menu-heading">
@@ -159,7 +128,7 @@
               <span>User Guides &amp; Tips</span>
               <span class="menu-action-note">33 guides</span>
             </a>
-            <a class="menu-action active-page" href="./">
+            <a class="menu-action active-page" href="./index.html">
               <i class="fas fa-book-bookmark" aria-hidden="true"></i>
               <span>Documentation</span>
               <span class="menu-action-note">Docs Hub</span>
@@ -192,8 +161,8 @@
       </div>
     </div>
   </nav>
+  
 
-  <!-- MAIN DOCUMENTATION SHELL -->
   <main class="doc-shell">
     <header class="doc-hero">
       <div class="doc-hero-badge">
@@ -202,7 +171,6 @@
       <h1>PDFHub Documentation Portal</h1>
       <p>Authoritative technical specifications, browser runtime architecture, data processing models, and guides for all 33 privacy-first PDF utilities.</p>
 
-      <!-- Stat Badges -->
       <div class="doc-stats-grid">
         <div class="doc-stat-pill success">
           <i class="fas fa-cubes"></i>
@@ -234,10 +202,13 @@
         </div>
       </div>
 
-      <!-- Download Complete PDF Documentation Action -->
-      <div style="margin: 0 auto 28px; text-align: center;">
-        <a class="tool-btn-primary" href="pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation.pdf" style="display: inline-flex; width: auto; padding: 13px 28px; font-size: 0.95rem; border-radius: 99px; box-shadow: 0 4px 20px rgba(124,106,255,0.35); text-decoration: none;">
+      <!-- Prominent 75-Page Complete Documentation Manual Download Actions -->
+      <div style="margin: 0 auto 28px; text-align: center; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+        <a class="tool-btn-primary" href="pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf" style="display: inline-flex; width: auto; padding: 13px 28px; font-size: 0.95rem; border-radius: 99px; box-shadow: 0 4px 20px rgba(56,189,248,0.35); text-decoration: none;">
           <i class="fas fa-file-pdf" aria-hidden="true"></i> Download Complete PDF Documentation Manual (75 Pages, A4)
+        </a>
+        <a class="tool-btn-subtle" href="pdfhub-complete-documentation.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: auto; padding: 13px 24px; font-size: 0.95rem; border-radius: 99px; text-decoration: none;">
+          <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Open PDF in New Tab
         </a>
       </div>
 
@@ -275,19 +246,17 @@
 
     <!-- TAB 1: 33 TOOLS DIRECTORY -->
     <section id="tab-tools" class="doc-section active">
-      <!-- Category Filter Chips -->
       <div class="filter-chips" role="region" aria-label="Filter tools by category">
         <button class="filter-chip active" data-cat="all" type="button">All (33)</button>
-        <button class="filter-chip" data-cat="Organize PDF" type="button">Organize (6)</button>
-        <button class="filter-chip" data-cat="Optimize PDF" type="button">Optimize (3)</button>
-        <button class="filter-chip" data-cat="Convert to PDF" type="button">Convert to PDF (5)</button>
-        <button class="filter-chip" data-cat="Convert from PDF" type="button">Convert from PDF (5)</button>
-        <button class="filter-chip" data-cat="Secure PDF" type="button">Security (4)</button>
-        <button class="filter-chip" data-cat="Edit PDF" type="button">Edit &amp; Annotate (4)</button>
-        <button class="filter-chip" data-cat="Extract Content" type="button">Extract &amp; AI (6)</button>
+        <button class="filter-chip" data-cat="Organize PDF" type="button">Organize PDF</button>
+        <button class="filter-chip" data-cat="Optimize PDF" type="button">Optimize PDF</button>
+        <button class="filter-chip" data-cat="Convert to PDF" type="button">Convert to PDF</button>
+        <button class="filter-chip" data-cat="Convert from PDF" type="button">Convert from PDF</button>
+        <button class="filter-chip" data-cat="Edit PDF" type="button">Edit PDF</button>
+        <button class="filter-chip" data-cat="Secure PDF" type="button">Secure PDF</button>
+        <button class="filter-chip" data-cat="Extract Content" type="button">Extract Content</button>
       </div>
 
-      <!-- Tools Grid -->
       <div id="toolsGrid" class="tools-grid">
         
     <article class="tool-card" data-category="Organize PDF" data-tool-id="compare-pdf">
@@ -325,11 +294,11 @@
         <a class="tool-btn-primary" href="../tools/compare.html" title="Open Compare PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/compare-pdf/" title="View Interactive Guide for Compare PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/compare-pdf.html" title="View Technical Spec &amp; Guide for Compare PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/compare-pdf.md" title="View Technical Spec for Compare PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/compare-pdf/" title="View Interactive Walkthrough for Compare PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -369,11 +338,11 @@
         <a class="tool-btn-primary" href="../tools/compress.html" title="Open Compress PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/compress-pdf/" title="View Interactive Guide for Compress PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/compress-pdf.html" title="View Technical Spec &amp; Guide for Compress PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/compress-pdf.md" title="View Technical Spec for Compress PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/compress-pdf/" title="View Interactive Walkthrough for Compress PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -413,11 +382,11 @@
         <a class="tool-btn-primary" href="../tools/crop.html" title="Open Crop PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/crop-pdf/" title="View Interactive Guide for Crop PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/crop-pdf.html" title="View Technical Spec &amp; Guide for Crop PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/crop-pdf.md" title="View Technical Spec for Crop PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/crop-pdf/" title="View Interactive Walkthrough for Crop PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -457,11 +426,11 @@
         <a class="tool-btn-primary" href="../tools/edit.html" title="Open Edit PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/edit-pdf/" title="View Interactive Guide for Edit PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/edit-pdf.html" title="View Technical Spec &amp; Guide for Edit PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/edit-pdf.md" title="View Technical Spec for Edit PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/edit-pdf/" title="View Interactive Walkthrough for Edit PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -501,11 +470,11 @@
         <a class="tool-btn-primary" href="../tools/excel-to-pdf.html" title="Open Excel to PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/excel-to-pdf/" title="View Interactive Guide for Excel to PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/excel-to-pdf.html" title="View Technical Spec &amp; Guide for Excel to PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/excel-to-pdf.md" title="View Technical Spec for Excel to PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/excel-to-pdf/" title="View Interactive Walkthrough for Excel to PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -545,11 +514,11 @@
         <a class="tool-btn-primary" href="../tools/extract-pages.html" title="Open Extract Pages in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/extract-pages/" title="View Interactive Guide for Extract Pages">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/extract-pages.html" title="View Technical Spec &amp; Guide for Extract Pages">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/extract-pages.md" title="View Technical Spec for Extract Pages">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/extract-pages/" title="View Interactive Walkthrough for Extract Pages">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -589,11 +558,11 @@
         <a class="tool-btn-primary" href="../tools/forms.html" title="Open PDF Forms in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/forms-pdf/" title="View Interactive Guide for PDF Forms">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/forms-pdf.html" title="View Technical Spec &amp; Guide for PDF Forms">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/forms-pdf.md" title="View Technical Spec for PDF Forms">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/forms-pdf/" title="View Interactive Walkthrough for PDF Forms">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -633,11 +602,11 @@
         <a class="tool-btn-primary" href="../tools/html-to-pdf.html" title="Open HTML to PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/html-to-pdf/" title="View Interactive Guide for HTML to PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/html-to-pdf.html" title="View Technical Spec &amp; Guide for HTML to PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/html-to-pdf.md" title="View Technical Spec for HTML to PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/html-to-pdf/" title="View Interactive Walkthrough for HTML to PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -677,11 +646,11 @@
         <a class="tool-btn-primary" href="../tools/jpg-to-pdf.html" title="Open JPG to PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/jpg-to-pdf/" title="View Interactive Guide for JPG to PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/jpg-to-pdf.html" title="View Technical Spec &amp; Guide for JPG to PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/jpg-to-pdf.md" title="View Technical Spec for JPG to PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/jpg-to-pdf/" title="View Interactive Walkthrough for JPG to PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -721,11 +690,11 @@
         <a class="tool-btn-primary" href="../tools/merge.html" title="Open Merge PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/merge-pdf/" title="View Interactive Guide for Merge PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/merge-pdf.html" title="View Technical Spec &amp; Guide for Merge PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/merge-pdf.md" title="View Technical Spec for Merge PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/merge-pdf/" title="View Interactive Walkthrough for Merge PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -765,11 +734,11 @@
         <a class="tool-btn-primary" href="../tools/ocr.html" title="Open OCR PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/ocr-pdf/" title="View Interactive Guide for OCR PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/ocr-pdf.html" title="View Technical Spec &amp; Guide for OCR PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/ocr-pdf.md" title="View Technical Spec for OCR PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/ocr-pdf/" title="View Interactive Walkthrough for OCR PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -809,11 +778,11 @@
         <a class="tool-btn-primary" href="../tools/organize.html" title="Open Organize PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/organize-pdf/" title="View Interactive Guide for Organize PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/organize-pdf.html" title="View Technical Spec &amp; Guide for Organize PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/organize-pdf.md" title="View Technical Spec for Organize PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/organize-pdf/" title="View Interactive Walkthrough for Organize PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -853,11 +822,11 @@
         <a class="tool-btn-primary" href="../tools/page-numbers.html" title="Open Add Page Numbers in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/page-numbers/" title="View Interactive Guide for Add Page Numbers">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/page-numbers.html" title="View Technical Spec &amp; Guide for Add Page Numbers">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/page-numbers.md" title="View Technical Spec for Add Page Numbers">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/page-numbers/" title="View Interactive Walkthrough for Add Page Numbers">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -897,11 +866,11 @@
         <a class="tool-btn-primary" href="../tools/pdf-to-excel.html" title="Open PDF to Excel in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/pdf-to-excel/" title="View Interactive Guide for PDF to Excel">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/pdf-to-excel.html" title="View Technical Spec &amp; Guide for PDF to Excel">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/pdf-to-excel.md" title="View Technical Spec for PDF to Excel">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/pdf-to-excel/" title="View Interactive Walkthrough for PDF to Excel">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -941,11 +910,11 @@
         <a class="tool-btn-primary" href="../tools/pdf-to-jpg.html" title="Open PDF to JPG in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/pdf-to-jpg/" title="View Interactive Guide for PDF to JPG">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/pdf-to-jpg.html" title="View Technical Spec &amp; Guide for PDF to JPG">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/pdf-to-jpg.md" title="View Technical Spec for PDF to JPG">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/pdf-to-jpg/" title="View Interactive Walkthrough for PDF to JPG">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -985,11 +954,11 @@
         <a class="tool-btn-primary" href="../tools/pdf-to-markdown.html" title="Open PDF to Markdown in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/pdf-to-markdown/" title="View Interactive Guide for PDF to Markdown">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/pdf-to-markdown.html" title="View Technical Spec &amp; Guide for PDF to Markdown">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/pdf-to-markdown.md" title="View Technical Spec for PDF to Markdown">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/pdf-to-markdown/" title="View Interactive Walkthrough for PDF to Markdown">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1029,11 +998,11 @@
         <a class="tool-btn-primary" href="../tools/pdf-to-pdfa.html" title="Open PDF to PDF/A in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/pdf-to-pdfa/" title="View Interactive Guide for PDF to PDF/A">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/pdf-to-pdfa.html" title="View Technical Spec &amp; Guide for PDF to PDF/A">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/pdf-to-pdfa.md" title="View Technical Spec for PDF to PDF/A">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/pdf-to-pdfa/" title="View Interactive Walkthrough for PDF to PDF/A">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1073,11 +1042,11 @@
         <a class="tool-btn-primary" href="../tools/pdf-to-ppt.html" title="Open PDF to PowerPoint in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/pdf-to-ppt/" title="View Interactive Guide for PDF to PowerPoint">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/pdf-to-ppt.html" title="View Technical Spec &amp; Guide for PDF to PowerPoint">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/pdf-to-ppt.md" title="View Technical Spec for PDF to PowerPoint">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/pdf-to-ppt/" title="View Interactive Walkthrough for PDF to PowerPoint">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1117,11 +1086,11 @@
         <a class="tool-btn-primary" href="../tools/pdf-to-word.html" title="Open PDF to Word in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/pdf-to-word/" title="View Interactive Guide for PDF to Word">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/pdf-to-word.html" title="View Technical Spec &amp; Guide for PDF to Word">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/pdf-to-word.md" title="View Technical Spec for PDF to Word">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/pdf-to-word/" title="View Interactive Walkthrough for PDF to Word">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1161,11 +1130,11 @@
         <a class="tool-btn-primary" href="../tools/ppt-to-pdf.html" title="Open PowerPoint to PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/ppt-to-pdf/" title="View Interactive Guide for PowerPoint to PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/ppt-to-pdf.html" title="View Technical Spec &amp; Guide for PowerPoint to PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/ppt-to-pdf.md" title="View Technical Spec for PowerPoint to PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/ppt-to-pdf/" title="View Interactive Walkthrough for PowerPoint to PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1205,11 +1174,11 @@
         <a class="tool-btn-primary" href="../tools/protect.html" title="Open Protect PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/protect-pdf/" title="View Interactive Guide for Protect PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/protect-pdf.html" title="View Technical Spec &amp; Guide for Protect PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/protect-pdf.md" title="View Technical Spec for Protect PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/protect-pdf/" title="View Interactive Walkthrough for Protect PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1249,11 +1218,11 @@
         <a class="tool-btn-primary" href="../tools/redact.html" title="Open Redact PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/redact-pdf/" title="View Interactive Guide for Redact PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/redact-pdf.html" title="View Technical Spec &amp; Guide for Redact PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/redact-pdf.md" title="View Technical Spec for Redact PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/redact-pdf/" title="View Interactive Walkthrough for Redact PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1293,11 +1262,11 @@
         <a class="tool-btn-primary" href="../tools/remove-pages.html" title="Open Remove Pages in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/remove-pages/" title="View Interactive Guide for Remove Pages">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/remove-pages.html" title="View Technical Spec &amp; Guide for Remove Pages">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/remove-pages.md" title="View Technical Spec for Remove Pages">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/remove-pages/" title="View Interactive Walkthrough for Remove Pages">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1337,11 +1306,11 @@
         <a class="tool-btn-primary" href="../tools/repair.html" title="Open Repair PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/repair-pdf/" title="View Interactive Guide for Repair PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/repair-pdf.html" title="View Technical Spec &amp; Guide for Repair PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/repair-pdf.md" title="View Technical Spec for Repair PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/repair-pdf/" title="View Interactive Walkthrough for Repair PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1381,11 +1350,11 @@
         <a class="tool-btn-primary" href="../tools/rotate.html" title="Open Rotate PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/rotate-pdf/" title="View Interactive Guide for Rotate PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/rotate-pdf.html" title="View Technical Spec &amp; Guide for Rotate PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/rotate-pdf.md" title="View Technical Spec for Rotate PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/rotate-pdf/" title="View Interactive Walkthrough for Rotate PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1425,11 +1394,11 @@
         <a class="tool-btn-primary" href="../tools/scan-to-pdf.html" title="Open Scan to PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/scan-to-pdf/" title="View Interactive Guide for Scan to PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/scan-to-pdf.html" title="View Technical Spec &amp; Guide for Scan to PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/scan-to-pdf.md" title="View Technical Spec for Scan to PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/scan-to-pdf/" title="View Interactive Walkthrough for Scan to PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1469,11 +1438,11 @@
         <a class="tool-btn-primary" href="../tools/sign.html" title="Open Sign PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/sign-pdf/" title="View Interactive Guide for Sign PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/sign-pdf.html" title="View Technical Spec &amp; Guide for Sign PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/sign-pdf.md" title="View Technical Spec for Sign PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/sign-pdf/" title="View Interactive Walkthrough for Sign PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1513,11 +1482,11 @@
         <a class="tool-btn-primary" href="../tools/split.html" title="Open Split PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/split-pdf/" title="View Interactive Guide for Split PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/split-pdf.html" title="View Technical Spec &amp; Guide for Split PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/split-pdf.md" title="View Technical Spec for Split PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/split-pdf/" title="View Interactive Walkthrough for Split PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1557,11 +1526,11 @@
         <a class="tool-btn-primary" href="../tools/summarize.html" title="Open AI Summarizer in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/summarize-pdf/" title="View Interactive Guide for AI Summarizer">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/summarize-pdf.html" title="View Technical Spec &amp; Guide for AI Summarizer">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/summarize-pdf.md" title="View Technical Spec for AI Summarizer">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/summarize-pdf/" title="View Interactive Walkthrough for AI Summarizer">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1601,11 +1570,11 @@
         <a class="tool-btn-primary" href="../tools/translate.html" title="Open Translate PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/translate-pdf/" title="View Interactive Guide for Translate PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/translate-pdf.html" title="View Technical Spec &amp; Guide for Translate PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/translate-pdf.md" title="View Technical Spec for Translate PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/translate-pdf/" title="View Interactive Walkthrough for Translate PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1645,11 +1614,11 @@
         <a class="tool-btn-primary" href="../tools/unlock.html" title="Open Unlock PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/unlock-pdf/" title="View Interactive Guide for Unlock PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/unlock-pdf.html" title="View Technical Spec &amp; Guide for Unlock PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/unlock-pdf.md" title="View Technical Spec for Unlock PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/unlock-pdf/" title="View Interactive Walkthrough for Unlock PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1689,11 +1658,11 @@
         <a class="tool-btn-primary" href="../tools/watermark.html" title="Open Add Watermark in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/watermark-pdf/" title="View Interactive Guide for Add Watermark">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/watermark-pdf.html" title="View Technical Spec &amp; Guide for Add Watermark">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/watermark-pdf.md" title="View Technical Spec for Add Watermark">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/watermark-pdf/" title="View Interactive Walkthrough for Add Watermark">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1733,11 +1702,11 @@
         <a class="tool-btn-primary" href="../tools/word-to-pdf.html" title="Open Word to PDF in browser">
           <i class="fas fa-arrow-up-right-from-square"></i> Open Live Tool
         </a>
-        <a class="tool-btn-subtle" href="../guides/word-to-pdf/" title="View Interactive Guide for Word to PDF">
-          <i class="fas fa-book-open"></i> Visual Guide
+        <a class="tool-btn-subtle" href="tools/word-to-pdf.html" title="View Technical Spec &amp; Guide for Word to PDF">
+          <i class="fas fa-book-open"></i> View Guide
         </a>
-        <a class="tool-btn-subtle" href="tools/word-to-pdf.md" title="View Technical Spec for Word to PDF">
-          <i class="fas fa-file-code"></i> Tech Spec (.md)
+        <a class="tool-btn-subtle" href="../guides/word-to-pdf/" title="View Interactive Walkthrough for Word to PDF">
+          <i class="fas fa-graduation-cap"></i> Interactive
         </a>
       </div>
     </article>
@@ -1748,62 +1717,30 @@
     <!-- TAB 2: ARCHITECTURE & PRIVACY -->
     <section id="tab-architecture" class="doc-section">
       <div class="doc-panel-box">
-        <h2>Client-Side Browser Execution Model</h2>
-        <p>PDFHub operates as a static, decentralized web utility platform. Unlike legacy PDF converters that upload documents to remote server farms, PDFHub compiles document transformation pipelines into WebAssembly and JavaScript engines that execute directly inside your device's browser memory.</p>
-
+        <h2>Zero-Knowledge Client-Side Architecture</h2>
+        <p>Unlike conventional web PDF converters that require users to transmit sensitive documents to multi-tenant cloud storage, PDFHub compiles document transformation pipelines into WebAssembly and client-side JavaScript. Processing executes in the user's browser memory, guaranteeing absolute data confidentiality.</p>
         <div class="doc-callout success">
-          <i class="fas fa-check-circle"></i>
-          <div>
-            <strong>100% Client-Side Privacy Guarantee for 31 of 33 Tools:</strong>
-            Documents selected in your browser are read into binary <code>ArrayBuffer</code> memory buffers. They are parsed, modified, and serialized entirely in local RAM. Zero bytes are uploaded to any server.
-          </div>
+          <i class="fas fa-shield-halved"></i>
+          <div><strong>Verified Classification:</strong> 31 tools operate 100% locally in browser RAM with zero network requests. OCR PDF fetches trained language weights once via CDN, then executes locally. Translate PDF uses the public MyMemory API for text chunks under 500 characters.</div>
         </div>
-
-        <h3>Data Processing Classification</h3>
-        <div class="doc-table-wrapper">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Category</th>
-                <th>Tools Count</th>
-                <th>Implemented Tools</th>
-                <th>Network &amp; API Behavior</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>100% Client-Side</strong></td>
-                <td>31 Tools</td>
-                <td>Merge, Split, Remove, Extract, Organize, Scan, Compress, Repair, JPG to PDF, Word to PDF, PPT to PDF, Excel to PDF, HTML to PDF, PDF to JPG, PDF to Word, PDF to PPT, PDF to Excel, PDF to PDF/A, Rotate, Page Numbers, Watermark, Crop, Edit, Forms, Protect, Unlock, Sign, Redact, Compare, Summarize, PDF to Markdown</td>
-                <td><strong>Zero Network Calls.</strong> Files are never uploaded or transmitted off the client device.</td>
-              </tr>
-              <tr>
-                <td><strong>CDN Model Assisted</strong></td>
-                <td>1 Tool</td>
-                <td><strong>OCR PDF</strong> (<code>ocr.html</code>)</td>
-                <td>Image processing is performed locally in browser via Tesseract.js WebAssembly worker. On initial run, the worker fetches trained language weights (<code>eng.traineddata.gz</code>) from official CDN. Document images never leave the device.</td>
-              </tr>
-              <tr>
-                <td><strong>External API Hybrid</strong></td>
-                <td>1 Tool</td>
-                <td><strong>Translate PDF</strong> (<code>translate.html</code>)</td>
-                <td>Text extraction occurs locally via <code>pdf.js</code>. Selected text chunks (&lt;500 characters) are transmitted via HTTPS to the free public MyMemory Translation API to obtain multi-lingual translated strings.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Browser Storage Usage</h3>
-        <p>PDFHub does not store document content in persistent browser storage. Storage is restricted to lightweight user preferences:</p>
-        <ul style="margin-left: 20px; color: var(--muted); line-height: 1.8; font-size: 0.9rem;">
-          <li><code>pdfhub-theme</code>: Stores user interface color theme (<code>"dark"</code> or <code>"light"</code>).</li>
-          <li><code>pdfhub-favorites</code>: Stores an array of favorited tool IDs locally.</li>
-          <li><code>pdfhub-recent-history</code>: Stores timestamped log of tool navigation (no document contents or file names are retained).</li>
-        </ul>
-
-        <div style="margin-top: 24px;">
-          <a class="nav-subtle-link" href="privacy-and-data-processing.md">
-            <i class="fas fa-file-shield"></i> Read Full Privacy &amp; Data Processing Specification (.md)
+        <div class="topic-cards-grid">
+          <a class="topic-card" href="system-architecture.html">
+            <div class="topic-card-icon"><i class="fas fa-diagram-project"></i></div>
+            <h3>System Architecture</h3>
+            <p>Deep-dive into zero-framework runtime, ArrayBuffer streams, and Web Workers isolation.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a class="topic-card" href="privacy-and-data-processing.html">
+            <div class="topic-card-icon"><i class="fas fa-user-shield"></i></div>
+            <h3>Privacy &amp; Data Processing</h3>
+            <p>Exhaustive privacy disclosures, localStorage audits, and GDPR/HIPAA compliance.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a class="topic-card" href="technology-stack.html">
+            <div class="topic-card-icon"><i class="fas fa-layer-group"></i></div>
+            <h3>Technology Stack</h3>
+            <p>Complete breakdown of pdf-lib, pdf.js, Tesseract.js, SheetJS, and Mammoth.js.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
           </a>
         </div>
       </div>
@@ -1813,64 +1750,19 @@
     <section id="tab-formats" class="doc-section">
       <div class="doc-panel-box">
         <h2>Supported Formats &amp; Hardware Memory Limits</h2>
-        <p>Because PDFHub performs document manipulations in browser RAM, file capacities are bounded by available system memory and browser tab allocations rather than artificial paywalls.</p>
-
-        <h3>Input and Output Format Matrix</h3>
-        <div class="doc-table-wrapper">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Operation</th>
-                <th>Input Formats</th>
-                <th>Output Formats</th>
-                <th>Underlying Engine</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>PDF Assembly</strong></td>
-                <td><code>.pdf</code></td>
-                <td><code>.pdf</code>, <code>.zip</code></td>
-                <td><code>pdf-lib</code> + <code>JSZip</code></td>
-              </tr>
-              <tr>
-                <td><strong>Office to PDF</strong></td>
-                <td><code>.docx</code>, <code>.pptx</code>, <code>.xlsx</code>, <code>.xls</code>, <code>.csv</code></td>
-                <td>Formatted PDF (Browser Print Engine)</td>
-                <td><code>Mammoth.js</code>, <code>JSZip</code>, <code>SheetJS</code></td>
-              </tr>
-              <tr>
-                <td><strong>Images &amp; Scans</strong></td>
-                <td><code>.jpg</code>, <code>.jpeg</code>, <code>.png</code>, <code>.webp</code>, Camera Stream</td>
-                <td><code>.pdf</code>, <code>.jpg</code>, <code>.png</code></td>
-                <td>HTML5 Canvas 2D + <code>pdf-lib</code></td>
-              </tr>
-              <tr>
-                <td><strong>PDF to Office</strong></td>
-                <td><code>.pdf</code> (text-based)</td>
-                <td><code>.docx</code>, <code>.xlsx</code>, <code>.pptx</code>, <code>.txt</code></td>
-                <td><code>pdf.js</code> + <code>docx.js</code> / <code>SheetJS</code> / <code>PptxGenJS</code></td>
-              </tr>
-              <tr>
-                <td><strong>Text &amp; Web</strong></td>
-                <td><code>.html</code>, HTML Code, URL</td>
-                <td><code>.pdf</code>, <code>.md</code>, <code>.txt</code></td>
-                <td>DOM Parser + <code>pdf.js</code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="doc-callout warning">
-          <i class="fas fa-triangle-exclamation"></i>
-          <div>
-            <strong>Memory Recommendations:</strong> For optimal performance, input files between 10 MB and 100 MB (up to 500 pages) process smoothly across all standard desktop and mobile browsers. Very large files (&gt;150 MB) may trigger browser tab memory limits on mobile devices with limited RAM.
-          </div>
-        </div>
-
-        <div style="margin-top: 24px;">
-          <a class="nav-subtle-link" href="supported-formats.md">
-            <i class="fas fa-file-lines"></i> Read Comprehensive Format Specifications (.md)
+        <p>PDFHub supports a wide variety of document, office, image, and text formats. Memory limits are bounded by your device's available RAM rather than cloud server quotas.</p>
+        <div class="topic-cards-grid">
+          <a class="topic-card" href="supported-formats.html">
+            <div class="topic-card-icon"><i class="fas fa-file-pdf"></i></div>
+            <h3>Supported Formats Matrix</h3>
+            <p>Full input, output, and engine compatibility matrix for PDF, Office, and Images.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a class="topic-card" href="hardware-requirements.html">
+            <div class="topic-card-icon"><i class="fas fa-microchip"></i></div>
+            <h3>Hardware &amp; Memory Limits</h3>
+            <p>Browser RAM execution limits, desktop vs mobile benchmarks, and heap management.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
           </a>
         </div>
       </div>
@@ -1879,57 +1771,20 @@
     <!-- TAB 4: GETTING STARTED & PWA -->
     <section id="tab-getting-started" class="doc-section">
       <div class="doc-panel-box">
-        <h2>Getting Started with PDFHub</h2>
-        <p>PDFHub is engineered for immediate productivity without login hurdles, registration walls, or software installations.</p>
-
-        <div class="doc-stats-grid" style="margin: 24px 0;">
-          <div class="doc-stat-pill">
-            <i class="fas fa-1"></i>
-            <div>
-              <strong>1. Choose a Utility</strong>
-              <span>Select from 33 categorized tools</span>
-            </div>
-          </div>
-          <div class="doc-stat-pill">
-            <i class="fas fa-2"></i>
-            <div>
-              <strong>2. Select Document</strong>
-              <span>Drag &amp; drop or click to upload</span>
-            </div>
-          </div>
-          <div class="doc-stat-pill">
-            <i class="fas fa-3"></i>
-            <div>
-              <strong>3. Configure &amp; Process</strong>
-              <span>Adjust parameters and click execute</span>
-            </div>
-          </div>
-          <div class="doc-stat-pill success">
-            <i class="fas fa-4"></i>
-            <div>
-              <strong>4. Instant Download</strong>
-              <span>Save output directly to disk</span>
-            </div>
-          </div>
-        </div>
-
-        <h3>Install as Progressive Web App (PWA)</h3>
-        <p>PDFHub features full PWA capabilities including a Web App Manifest, Service Worker caching, and an offline shell. Installing gives you a native desktop or mobile window experience with faster boot times and offline tool availability.</p>
-
-        <div class="doc-callout">
-          <i class="fas fa-download"></i>
-          <div>
-            <strong>Desktop Installation:</strong> In Chrome, Edge, or Brave, click the Install icon in the address bar or open the browser menu and select <em>"Install PDFHub"</em>.<br>
-            <strong>Mobile Installation:</strong> On iOS Safari, tap <em>Share &rarr; Add to Home Screen</em>. On Android Chrome, tap <em>Install App</em> from the banner or menu.
-          </div>
-        </div>
-
-        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
-          <a class="tool-btn-primary" href="../install/" style="display: inline-flex; width: auto; padding: 10px 20px;">
-            <i class="fas fa-download"></i> Open Interactive PWA Installer
+        <h2>Getting Started &amp; PWA Capabilities</h2>
+        <p>Learn how to use PDFHub on desktop and mobile, install it as an offline-capable Progressive Web App, and navigate workspaces.</p>
+        <div class="topic-cards-grid">
+          <a class="topic-card" href="getting-started.html">
+            <div class="topic-card-icon"><i class="fas fa-rocket"></i></div>
+            <h3>Getting Started Guide</h3>
+            <p>Step-by-step first workflow, file upload options, and keyboard shortcuts.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
           </a>
-          <a class="nav-subtle-link" href="getting-started.md">
-            <i class="fas fa-book"></i> Read Getting Started Guide (.md)
+          <a class="topic-card" href="pwa-offline.html">
+            <div class="topic-card-icon"><i class="fas fa-wifi"></i></div>
+            <h3>PWA &amp; Offline Capabilities</h3>
+            <p>Service Worker caching strategies, web app manifest, and offline shell.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
           </a>
         </div>
       </div>
@@ -1939,207 +1794,70 @@
     <section id="tab-troubleshooting" class="doc-section">
       <div class="doc-panel-box">
         <h2>Troubleshooting &amp; Frequently Asked Questions</h2>
-        <p>Diagnose common browser memory issues, document encryption restrictions, and layout quirks with these verified solutions.</p>
-
-        <h3>Universal Troubleshooting Diagnostic Matrix</h3>
-        <div class="doc-table-wrapper">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Symptom / Error</th>
-                <th>Underlying Cause</th>
-                <th>Verified Resolution</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Tab crashes or reloads during processing</strong></td>
-                <td>Browser ran out of heap memory on an exceptionally large PDF (&gt;150 MB).</td>
-                <td>Close extraneous browser tabs, or use Split PDF to partition large documents into smaller page batches before applying heavy processing.</td>
-              </tr>
-              <tr>
-                <td><strong>PasswordRequired or Decryption Error</strong></td>
-                <td>Document is secured with owner or user encryption.</td>
-                <td>Unlock the document first using the authorized password in <strong>Unlock PDF</strong> before merging or converting.</td>
-              </tr>
-              <tr>
-                <td><strong>Extracted Word / Excel document is blank</strong></td>
-                <td>Source PDF contains scanned raster images rather than selectable vector text.</td>
-                <td>Run the PDF through <strong>OCR PDF</strong> to extract text characters from images before converting.</td>
-              </tr>
-              <tr>
-                <td><strong>Corrupted or truncated PDF stream</strong></td>
-                <td>Damaged cross-reference (xref) table or broken EOF trailer.</td>
-                <td>Run the damaged document through <strong>Repair PDF</strong> to regenerate the catalog structure.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Master FAQ Accordion</h3>
+        <p>Find diagnostic solutions for Out of Memory conditions, encrypted PDFs, corrupted xref tables, and print dialog scaling.</p>
         <div class="faq-accordion">
           <div class="faq-item">
             <button class="faq-question" type="button">
-              <span>Are my documents or files ever uploaded to your servers?</span>
-              <i class="fas fa-chevron-down faq-icon" aria-hidden="true"></i>
+              <span>Why does a browser tab reload on very large PDFs?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
             </button>
             <div class="faq-answer">
-              No. 31 of PDFHub's 33 tools run 100% locally in your browser memory. OCR PDF runs locally using a WebAssembly worker (fetching trained weights once from a CDN), and Translate PDF sends small isolated text chunks (&lt;500 characters) to an external translation API. Your documents never touch a PDFHub server.
+              <p>When processing exceptionally large files (>150 MB), the browser tab may reach its JavaScript heap quota. Close other background tabs and split the file into smaller batches first.</p>
             </div>
           </div>
           <div class="faq-item">
             <button class="faq-question" type="button">
-              <span>Is PDFHub completely free to use without hidden limits?</span>
-              <i class="fas fa-chevron-down faq-icon" aria-hidden="true"></i>
+              <span>Why is my converted Word or Excel document blank?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
             </button>
             <div class="faq-answer">
-              Yes. All 33 tools are free with zero credit cards, subscription popups, daily caps, or watermark penalties.
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" type="button">
-              <span>Can I use PDFHub without an active internet connection?</span>
-              <i class="fas fa-chevron-down faq-icon" aria-hidden="true"></i>
-            </button>
-            <div class="faq-answer">
-              Yes! Once loaded or installed as a PWA, the service worker caches application assets and client libraries, enabling offline document processing for all local tools.
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" type="button">
-              <span>Can PDFHub recover a lost password for a protected PDF?</span>
-              <i class="fas fa-chevron-down faq-icon" aria-hidden="true"></i>
-            </button>
-            <div class="faq-answer">
-              No. Unlock PDF strips encryption when you provide the correct authorized password. PDFHub does not perform cryptographic brute-forcing.
+              <p>The source PDF consists of scanned raster images rather than selectable vector text. Run the document through OCR PDF to extract text characters before converting.</p>
             </div>
           </div>
         </div>
-
-        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
-          <a class="nav-subtle-link" href="troubleshooting.md">
-            <i class="fas fa-wrench"></i> Full Troubleshooting Guide (.md)
-          </a>
-          <a class="nav-subtle-link" href="faq.md">
-            <i class="fas fa-circle-question"></i> Full FAQ Document (.md)
-          </a>
+        <div style="margin-top:24px;">
+          <a class="btn-download-pdf" href="troubleshooting.html">View Full Troubleshooting Guide <i class="fas fa-arrow-right"></i></a>
+          <a class="btn-download-pdf" href="faq.html">View Master FAQ <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </section>
 
-    <!-- TAB 6: DEVELOPER & SETUP -->
+    <!-- TAB 6: DEVELOPER REFERENCE -->
     <section id="tab-developer" class="doc-section">
       <div class="doc-panel-box">
-        <h2>Developer &amp; Project Documentation</h2>
-        <p>PDFHub is designed as a modular static architecture that compiles into standard HTML, CSS, and modern JavaScript with zero heavy framework bloat.</p>
-
-        <h3>Repository Core Technical Architecture</h3>
-        <ul style="margin-left: 20px; color: var(--muted); line-height: 1.8; font-size: 0.9rem; margin-bottom: 20px;">
-          <li><strong>Architecture:</strong> Zero-build vanilla static web application (HTML5, Vanilla CSS, Modern ES Modules).</li>
-          <li><strong>PDF Manipulation Engines:</strong> <code>pdf-lib</code> (v1.17.1), <code>pdf.js</code> (v3.11.174), <code>Tesseract.js</code> (v5.0.5), <code>SheetJS</code> (xlsx.full.min.js), <code>Mammoth.js</code>, <code>docx.js</code>, <code>PptxGenJS</code>, <code>JSZip</code>.</li>
-          <li><strong>Primary Canonical Domain:</strong> <code>https://pdfshub.netlify.app/</code></li>
-          <li><strong>Alternative Deployment:</strong> <code>https://pdfshub.smartstores.in/</code></li>
-          <li><strong>Source Code Repository:</strong> <a href="https://github.com/officialhazim42/pdfshub" target="_blank" rel="noopener" style="color: var(--accent);">github.com/officialhazim42/pdfshub</a></li>
-        </ul>
-
-        <h3>Available NPM Automation Scripts</h3>
-        <div class="doc-table-wrapper">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Command</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>npm run dev</code></td>
-                <td>Launches local HTTP preview server.</td>
-              </tr>
-              <tr>
-                <td><code>npm run build</code> / <code>npm run build:dist</code></td>
-                <td>Compiles production distribution bundle into clean <code>dist/</code> directory.</td>
-              </tr>
-              <tr>
-                <td><code>node scripts/generate-sitemap.mjs</code></td>
-                <td>Generates canonical <code>sitemap.xml</code> with verified routes.</td>
-              </tr>
-              <tr>
-                <td><code>node scripts/audit-seo.mjs</code></td>
-                <td>Runs comprehensive automated SEO, canonical, and metadata audit.</td>
-              </tr>
-              <tr>
-                <td><code>node scripts/validate-deployment-assets.mjs</code></td>
-                <td>Validates build assets, service worker, manifest, and favicons.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Master Markdown Technical Documents</h3>
-        <div class="md-docs-grid">
-          <a class="md-doc-card" href="README.md">
-            <i class="fas fa-file-lines"></i>
-            <div>
-              <strong>README.md</strong>
-              <div style="font-size: 0.72rem; color: var(--muted);">Master Documentation Overview</div>
-            </div>
+        <h2>Developer Reference &amp; Build Pipelines</h2>
+        <p>Complete repository configuration, Node.js scripts, Playwright test suites, and Netlify / Cloudflare deployment pipelines.</p>
+        <div class="topic-cards-grid">
+          <a class="topic-card" href="developer-guide.html">
+            <div class="topic-card-icon"><i class="fas fa-code"></i></div>
+            <h3>Developer Overview</h3>
+            <p>Repository structure, code standards, tool registration, and architecture.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
           </a>
-          <a class="md-doc-card" href="documentation-index.md">
-            <i class="fas fa-list-check"></i>
-            <div>
-              <strong>documentation-index.md</strong>
-              <div style="font-size: 0.72rem; color: var(--muted);">Authoritative Docs Catalog</div>
-            </div>
+          <a class="topic-card" href="installation-setup.html">
+            <div class="topic-card-icon"><i class="fas fa-terminal"></i></div>
+            <h3>Installation &amp; Setup</h3>
+            <p>Node.js prerequisites, git clone, npm install, and local development server.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
           </a>
-          <a class="md-doc-card" href="all-tools-reference.md">
-            <i class="fas fa-table-cells"></i>
-            <div>
-              <strong>all-tools-reference.md</strong>
-              <div style="font-size: 0.72rem; color: var(--muted);">All 33 Tools Matrix</div>
-            </div>
+          <a class="topic-card" href="build-and-deployment.html">
+            <div class="topic-card-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+            <h3>Build &amp; Deployment</h3>
+            <p>dist/ production bundling, Netlify configuration, and Cloudflare Pages.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
           </a>
-          <a class="md-doc-card" href="website-overview.md">
-            <i class="fas fa-sitemap"></i>
-            <div>
-              <strong>website-overview.md</strong>
-              <div style="font-size: 0.72rem; color: var(--muted);">System Architecture</div>
-            </div>
-          </a>
-          <a class="md-doc-card" href="deployment.md">
-            <i class="fas fa-cloud"></i>
-            <div>
-              <strong>deployment.md</strong>
-              <div style="font-size: 0.72rem; color: var(--muted);">Netlify &amp; Cloudflare Pipelines</div>
-            </div>
-          </a>
-          <a class="md-doc-card" href="testing.md">
-            <i class="fas fa-vial-circle-check"></i>
-            <div>
-              <strong>testing.md</strong>
-              <div style="font-size: 0.72rem; color: var(--muted);">QA &amp; Verification Procedures</div>
-            </div>
-          </a>
-          <a class="md-doc-card" href="accessibility.md">
-            <i class="fas fa-universal-access"></i>
-            <div>
-              <strong>accessibility.md</strong>
-              <div style="font-size: 0.72rem; color: var(--muted);">WCAG 2.1 AA Compliance</div>
-            </div>
-          </a>
-          <a class="md-doc-card" href="pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation.pdf" style="border-color: var(--accent); background: var(--accent-light);">
-            <i class="fas fa-file-pdf" style="color: var(--a2);"></i>
-            <div>
-              <strong>pdfhub-complete-documentation.pdf</strong>
-              <div style="font-size: 0.72rem; color: var(--accent); font-weight: 700;">Complete 75-Page PDF Manual</div>
-            </div>
+          <a class="topic-card" href="testing-and-qa.html">
+            <div class="topic-card-icon"><i class="fas fa-vial-circle-check"></i></div>
+            <h3>Testing &amp; QA</h3>
+            <p>Playwright test suites, automated SEO audits, and asset validation.</p>
+            <span class="topic-card-link">Read Guide <i class="fas fa-arrow-right"></i></span>
           </a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- CANONICAL SHARED FOOTER -->
+  
   <footer class="site-footer" role="contentinfo">
     <div class="footer-shell">
       <div class="footer-top">
@@ -2148,136 +1866,32 @@
             <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
             <span>PDF HUB</span>
           </a>
-          <p style="margin-top: 8px; font-size: 0.8rem; color: var(--muted); max-width: 320px;">
-            33 free client-side PDF utilities. Private, fast, and engineered directly for modern web browsers.
-          </p>
+          <p style="margin-top:6px;font-size:0.8rem;color:var(--muted);">33 Free Browser-Based PDF Tools. 100% Client-Side RAM Processing. Zero Server Storage.</p>
         </div>
         <div class="footer-links">
-          <a href="../index.html">All Tools</a>
-          <a href="../guides/">User Guides</a>
-          <a href="./">Documentation</a>
-          <a href="../install/">Install PWA</a>
-          <a href="../menu-bar/about.html">About Developer</a>
-          <a href="../menu-bar/privacy.html">Privacy Center</a>
-          <a href="../menu-bar/terms.html">Terms</a>
+          <a href="./index.html">Docs Home</a>
+          <a href="./getting-started.html">Getting Started</a>
+          <a href="./all-tools-reference.html">Tools Matrix</a>
+          <a href="./privacy-and-data-processing.html">Privacy</a>
+          <a href="./developer-guide.html">Developer</a>
+          <a href="./pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf">Download Manual (PDF)</a>
+          <a href="https://github.com/officialhazim42/pdfshub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 PDFHub. All rights reserved. Created by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Hazim Bashir</a>.</span>
-        <span>Runs 100% locally in your browser &bull; Zero file uploads &bull; No cookies required</span>
+        <span>© 2026 PDFHub. Crafted by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">@officialhazim42</a></span>
+        <div style="display:flex;gap:12px;color:var(--muted2);">
+          <span>WCAG 2.1 AA Compliant</span>
+          <span>•</span>
+          <span>75-Page Complete Manual</span>
+          <span>•</span>
+          <span>v1.0.0 Production</span>
+        </div>
       </div>
     </div>
   </footer>
+  
 
-  <!-- SCRIPT INTEGRATION -->
-  <script src="../developer.js"></script>
-  <script>
-    // Tab Navigation Logic
-    const tabBtns = document.querySelectorAll('.doc-tab-btn');
-    const sections = document.querySelectorAll('.doc-section');
-
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        sections.forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        const target = document.getElementById(btn.dataset.tab);
-        if (target) target.classList.add('active');
-      });
-    });
-
-    // Category Filter Chips Logic
-    const chips = document.querySelectorAll('.filter-chip');
-    const cards = document.querySelectorAll('.tool-card');
-
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const cat = chip.dataset.cat;
-        
-        cards.forEach(card => {
-          if (cat === 'all' || card.dataset.category.toLowerCase().includes(cat.toLowerCase())) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // Master Search Filtering Logic
-    const searchInput = document.getElementById('docSearchInput');
-    const clearBtn = document.getElementById('docSearchClear');
-
-    function applySearch() {
-      const q = (searchInput.value || '').trim().toLowerCase();
-      if (q.length > 0) {
-        clearBtn.classList.add('visible');
-        // Activate tools tab if not active
-        const toolsTabBtn = document.querySelector('[data-tab="tab-tools"]');
-        if (!toolsTabBtn.classList.contains('active')) {
-          toolsTabBtn.click();
-        }
-      } else {
-        clearBtn.classList.remove('visible');
-      }
-
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        if (!q || text.includes(q)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    searchInput.addEventListener('input', applySearch);
-    clearBtn.addEventListener('click', () => {
-      searchInput.value = '';
-      applySearch();
-      searchInput.focus();
-    });
-
-    // Accordion FAQ Logic
-    document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        const item = q.closest('.faq-item');
-        item.classList.toggle('open');
-      });
-    });
-
-    // Control Center Drawer Logic
-    function toggleSiteMenu(force) {
-      const toggle = document.getElementById('menuToggle');
-      const menu = document.getElementById('siteMenu');
-      if (!toggle || !menu) return;
-      const open = typeof force === 'boolean' ? force : !menu.classList.contains('open');
-      menu.classList.toggle('open', open);
-      menu.setAttribute('aria-hidden', String(!open));
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      toggle.innerHTML = open ? '<i class="fas fa-xmark"></i>' : '<i class="fas fa-bars"></i>';
-      if (open) document.getElementById('menuSearchInput')?.focus();
-    }
-
-    document.getElementById('menuToggle')?.addEventListener('click', e => {
-      e.stopPropagation();
-      toggleSiteMenu();
-    });
-    document.getElementById('menuCloseBtn')?.addEventListener('click', e => {
-      e.stopPropagation();
-      toggleSiteMenu(false);
-    });
-    document.addEventListener('click', e => {
-      if (!e.target.closest('#siteMenu') && !e.target.closest('#menuToggle')) {
-        toggleSiteMenu(false);
-      }
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') toggleSiteMenu(false);
-    });
-  </script>
+  <script src="docs.js"></script>
 </body>
 </html>

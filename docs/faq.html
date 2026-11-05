@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frequently Asked Questions (FAQ) – PDFHub Documentation</title>
+  <meta name="description" content="Authoritative answers regarding data security, offline capabilities, pricing, and document limits. Authoritative documentation for PDFHub's browser-based PDF utilities.">
+  <link rel="canonical" href="https://pdfshub.netlify.app/docs/faq.html"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#07070d">
+
+  <link rel="icon" href="../favicons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../favicons/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../developer.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "@id": "https://pdfshub.netlify.app/docs/faq.html#article",
+        "url": "https://pdfshub.netlify.app/docs/faq.html",
+        "headline": "Frequently Asked Questions (FAQ)",
+        "description": "Authoritative answers regarding data security, offline capabilities, pricing, and document limits.",
+        "author": { "@type": "Person", "name": "Hazim Bashir", "url": "https://github.com/officialhazim42" },
+        "publisher": { "@type": "Organization", "name": "PDFHub", "url": "https://pdfshub.netlify.app/" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pdfshub.netlify.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://pdfshub.netlify.app/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "Frequently Asked Questions (FAQ)", "item": "https://pdfshub.netlify.app/docs/faq.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body data-depth="1">
+
+  
+  <nav class="site-nav" role="navigation" aria-label="PDFHub Documentation Navigation">
+    <div class="nav-left">
+      <button class="sidebar-toggle-btn" id="sidebarToggle" type="button" aria-label="Toggle navigation sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a class="logo" href="../index.html" title="PDFHub Home">
+        <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
+        <span>PDF HUB</span>
+      </a>
+      <span class="nav-divider" aria-hidden="true">/</span>
+      <span class="nav-badge">
+        <i class="fas fa-book-bookmark" aria-hidden="true"></i>
+        <span>Docs</span>
+      </span>
+    </div>
+
+    <div class="nav-center">
+      <button class="nav-search-btn" type="button" aria-label="Search documentation (Press Ctrl+K)">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <span>Search documentation...</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+    </div>
+
+    <div class="nav-right">
+      <a class="nav-subtle-link" href="../index.html" title="Browse all 33 tools">
+        <i class="fas fa-th-large" aria-hidden="true"></i>
+        <span>Tools</span>
+      </a>
+      <a class="nav-btn-manual" href="./pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf" title="Download 75-Page Complete Technical Manual">
+        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+        <span>Download PDF</span>
+      </a>
+      <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle theme">
+        <span class="t-label" id="themeLabel">Dark</span>
+        <span class="toggle-track">
+          <span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span>
+        </span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteMenu" title="Open control center menu" aria-label="Open menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <!-- PDFHUB CONTROL CENTER DRAWER -->
+      <div class="site-menu" id="siteMenu" aria-hidden="true" role="navigation" aria-label="PDFHub control center">
+        <div class="menu-header">
+          <div class="menu-heading">
+            <span>PDFHub control center</span>
+            <div class="menu-heading-actions">
+              <small>Private workspace</small>
+              <button class="menu-close-btn" id="menuCloseBtn" type="button" aria-label="Close menu" title="Close menu">
+                <i class="fas fa-xmark" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <form class="menu-search" id="menuSearch" role="search">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools" autocomplete="off"/>
+            <button type="submit" title="Search"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+          </form>
+          <div class="menu-status">
+            <span><i class="fas fa-shield-halved" aria-hidden="true"></i> Runs in your browser</span>
+            <span class="menu-status-dot">●</span>
+            <span>No account needed</span>
+          </div>
+        </div>
+        <div class="menu-body" id="menuBody">
+          <div class="menu-list">
+            <div class="menu-section-label">Tools &amp; Guides</div>
+            <a class="menu-action" href="../index.html">
+              <i class="fas fa-house" aria-hidden="true"></i><span>Home</span>
+            </a>
+            <a class="menu-action" href="../guides/">
+              <i class="fas fa-book-open" aria-hidden="true"></i>
+              <span>User Guides &amp; Tips</span>
+              <span class="menu-action-note">33 guides</span>
+            </a>
+            <a class="menu-action active-page" href="./index.html">
+              <i class="fas fa-book-bookmark" aria-hidden="true"></i>
+              <span>Documentation</span>
+              <span class="menu-action-note">Docs Hub</span>
+            </a>
+            <a class="menu-action" href="../install/">
+              <i class="fas fa-download" aria-hidden="true"></i><span>Install PWA</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/favorites.html">
+              <i class="fas fa-star" aria-hidden="true"></i><span>Favorites</span><span class="menu-action-note">Local</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/history.html">
+              <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>History</span><span class="menu-action-note">Local</span>
+            </a>
+            <div class="menu-section-label" data-section="about">Privacy &amp; About</div>
+            <a class="menu-action" href="../menu-bar/privacy.html">
+              <i class="fas fa-shield-halved" aria-hidden="true"></i><span>Privacy Center</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/terms.html">
+              <i class="fas fa-file-contract" aria-hidden="true"></i><span>Terms and conditions</span>
+            </a>
+            <a class="menu-action" href="../menu-bar/about.html">
+              <i class="fas fa-circle-info" aria-hidden="true"></i><span>About us</span>
+            </a>
+            <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">
+              <i class="fas fa-envelope" aria-hidden="true"></i><span>Contact Support</span>
+            </a>
+          </div>
+          <p class="menu-note">Your tools, history, and preferences stay in this browser.</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+
+  <div class="docs-layout">
+    
+    <aside class="docs-sidebar-left" id="docsSidebarLeft" aria-label="Documentation Navigation">
+      <div class="sidebar-search-box">
+        <button class="sidebar-search-btn" type="button" aria-label="Open search dialog">
+          <span><i class="fas fa-search" aria-hidden="true"></i> Quick Search...</span>
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-group">
+          <div class="sidebar-group-title"><span>Core Documentation</span><i class="fas fa-chevron-down"></i></div>
+          <ul class="sidebar-group-items">
+            <li><a class="sidebar-link " href="./index.html"><i class="fas fa-house"></i><span>Documentation Home</span></a></li>
+            <li><a class="sidebar-link " href="./getting-started.html"><i class="fas fa-rocket"></i><span>Getting Started</span></a></li><li><a class="sidebar-link " href="./project-overview.html"><i class="fas fa-compass"></i><span>Project Overview</span></a></li><li><a class="sidebar-link " href="./system-architecture.html"><i class="fas fa-diagram-project"></i><span>System Architecture</span></a></li><li><a class="sidebar-link " href="./technology-stack.html"><i class="fas fa-layer-group"></i><span>Technology Stack</span></a></li><li><a class="sidebar-link " href="./privacy-and-data-processing.html"><i class="fas fa-shield-halved"></i><span>Privacy &amp; Data Processing</span></a></li><li><a class="sidebar-link " href="./supported-formats.html"><i class="fas fa-file-lines"></i><span>Supported File Formats</span></a></li><li><a class="sidebar-link " href="./hardware-requirements.html"><i class="fas fa-microchip"></i><span>Hardware &amp; Memory Limits</span></a></li><li><a class="sidebar-link " href="./all-tools-reference.html"><i class="fas fa-table-list"></i><span>Complete Tools Reference</span></a></li><li><a class="sidebar-link " href="./troubleshooting.html"><i class="fas fa-wrench"></i><span>Troubleshooting Guide</span></a></li><li><a class="sidebar-link active" href="./faq.html"><i class="fas fa-circle-question"></i><span>Frequently Asked Questions</span></a></li><li><a class="sidebar-link " href="./pwa-offline.html"><i class="fas fa-wifi"></i><span>PWA &amp; Offline Capabilities</span></a></li><li><a class="sidebar-link " href="./developer-guide.html"><i class="fas fa-code"></i><span>Developer Documentation</span></a></li><li><a class="sidebar-link " href="./installation-setup.html"><i class="fas fa-terminal"></i><span>Installation &amp; Setup</span></a></li><li><a class="sidebar-link " href="./build-and-deployment.html"><i class="fas fa-cloud-arrow-up"></i><span>Build &amp; Deployment</span></a></li><li><a class="sidebar-link " href="./testing-and-qa.html"><i class="fas fa-vial-circle-check"></i><span>Testing &amp; Quality Assurance</span></a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-group">
+          <div class="sidebar-group-title"><span>All 33 PDF Tools</span><i class="fas fa-chevron-down"></i></div>
+          <div class="sidebar-group-items">
+            
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Organize PDF (6)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="./tools/compare-pdf.html"><i class="fas fa-not-equal"></i><span>Compare PDF</span></a></li><li><a class="sidebar-link " href="./tools/extract-pages.html"><i class="fas fa-file-export"></i><span>Extract Pages</span></a></li><li><a class="sidebar-link " href="./tools/merge-pdf.html"><i class="fas fa-object-group"></i><span>Merge PDF</span></a></li><li><a class="sidebar-link " href="./tools/organize-pdf.html"><i class="fas fa-th-large"></i><span>Organize PDF</span></a></li><li><a class="sidebar-link " href="./tools/remove-pages.html"><i class="fas fa-trash-alt"></i><span>Remove Pages</span></a></li><li><a class="sidebar-link " href="./tools/split-pdf.html"><i class="fas fa-cut"></i><span>Split PDF</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Optimize PDF (4)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="./tools/compress-pdf.html"><i class="fas fa-compress-alt"></i><span>Compress PDF</span></a></li><li><a class="sidebar-link " href="./tools/ocr-pdf.html"><i class="fas fa-spell-check"></i><span>OCR PDF</span></a></li><li><a class="sidebar-link " href="./tools/pdf-to-pdfa.html"><i class="fas fa-archive"></i><span>PDF to PDF/A</span></a></li><li><a class="sidebar-link " href="./tools/repair-pdf.html"><i class="fas fa-wrench"></i><span>Repair PDF</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Convert to PDF (6)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="./tools/excel-to-pdf.html"><i class="fas fa-file-excel"></i><span>Excel to PDF</span></a></li><li><a class="sidebar-link " href="./tools/html-to-pdf.html"><i class="fas fa-code"></i><span>HTML to PDF</span></a></li><li><a class="sidebar-link " href="./tools/jpg-to-pdf.html"><i class="fas fa-image"></i><span>JPG to PDF</span></a></li><li><a class="sidebar-link " href="./tools/ppt-to-pdf.html"><i class="fas fa-file-powerpoint"></i><span>PowerPoint to PDF</span></a></li><li><a class="sidebar-link " href="./tools/scan-to-pdf.html"><i class="fas fa-camera"></i><span>Scan to PDF</span></a></li><li><a class="sidebar-link " href="./tools/word-to-pdf.html"><i class="fas fa-file-word"></i><span>Word to PDF</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Convert from PDF (4)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="./tools/pdf-to-excel.html"><i class="fas fa-file-excel"></i><span>PDF to Excel</span></a></li><li><a class="sidebar-link " href="./tools/pdf-to-jpg.html"><i class="fas fa-file-image"></i><span>PDF to JPG</span></a></li><li><a class="sidebar-link " href="./tools/pdf-to-ppt.html"><i class="fas fa-file-powerpoint"></i><span>PDF to PowerPoint</span></a></li><li><a class="sidebar-link " href="./tools/pdf-to-word.html"><i class="fas fa-file-word"></i><span>PDF to Word</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>Edit &amp; Annotate (7)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="./tools/crop-pdf.html"><i class="fas fa-crop-alt"></i><span>Crop PDF</span></a></li><li><a class="sidebar-link " href="./tools/edit-pdf.html"><i class="fas fa-edit"></i><span>Edit PDF</span></a></li><li><a class="sidebar-link " href="./tools/forms-pdf.html"><i class="fas fa-wpforms"></i><span>PDF Forms</span></a></li><li><a class="sidebar-link " href="./tools/page-numbers.html"><i class="fas fa-list-ol"></i><span>Add Page Numbers</span></a></li><li><a class="sidebar-link " href="./tools/rotate-pdf.html"><i class="fas fa-redo"></i><span>Rotate PDF</span></a></li><li><a class="sidebar-link " href="./tools/sign-pdf.html"><i class="fas fa-signature"></i><span>Sign PDF</span></a></li><li><a class="sidebar-link " href="./tools/watermark-pdf.html"><i class="fas fa-stamp"></i><span>Add Watermark</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>PDF Security (3)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="./tools/protect-pdf.html"><i class="fas fa-lock"></i><span>Protect PDF</span></a></li><li><a class="sidebar-link " href="./tools/redact-pdf.html"><i class="fas fa-eraser"></i><span>Redact PDF</span></a></li><li><a class="sidebar-link " href="./tools/unlock-pdf.html"><i class="fas fa-lock-open"></i><span>Unlock PDF</span></a></li></ul>
+    
+      <div class="sidebar-category-header"><i class="fas fa-folder-open"></i><span>PDF Intelligence (3)</span></div>
+      <ul class="sidebar-group-items"><li><a class="sidebar-link " href="./tools/pdf-to-markdown.html"><i class="fas fa-file-code"></i><span>PDF to Markdown</span></a></li><li><a class="sidebar-link " href="./tools/summarize-pdf.html"><i class="fas fa-robot"></i><span>AI Summarizer</span></a></li><li><a class="sidebar-link " href="./tools/translate-pdf.html"><i class="fas fa-language"></i><span>Translate PDF</span></a></li></ul>
+    
+          </div>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer-cta">
+        <a class="sidebar-btn-download" href="./pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf">
+          <i class="fas fa-file-pdf"></i> Download Manual (75p)
+        </a>
+        <a class="sidebar-btn-download" style="background:transparent;border-color:var(--border);color:var(--muted);" href="./pdfhub-complete-documentation.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-arrow-up-right-from-square"></i> Open PDF in Tab
+        </a>
+      </div>
+    </aside>
+  
+
+    <main class="docs-main-content">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb navigation">
+        <a href="index.html">Docs</a>
+        <span class="sep">/</span>
+        <span class="sep">Support</span>
+        <span class="sep">/</span>
+        <span class="current">Frequently Asked Questions (FAQ)</span>
+      </nav>
+
+      <article class="docs-article">
+        <header class="docs-header">
+          <span class="docs-category-tag"><i class="fas fa-book-open"></i> Support</span>
+          <h1 class="docs-title">Frequently Asked Questions (FAQ)</h1>
+          <p class="docs-lead">Authoritative answers regarding data security, offline capabilities, pricing, and document limits.</p>
+
+          <div class="docs-actions-bar">
+            <a class="btn-download-pdf" href="pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf">
+              <i class="fas fa-file-pdf"></i> Download 75-Page Manual (PDF)
+            </a>
+            <a class="btn-download-pdf" href="pdfhub-complete-documentation.pdf" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-arrow-up-right-from-square"></i> Open PDF in Tab
+            </a>
+            <a class="btn-download-pdf" href="all-tools-reference.html">
+              <i class="fas fa-table-list"></i> Browse All 33 Tools
+            </a>
+          </div>
+        </header>
+
+        
+      <section id="master-faq">
+        <h2><i class="fas fa-circle-question"></i> Master Questions &amp; Answers</h2>
+        <div class="faq-accordion">
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Are my documents ever uploaded to remote servers?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>No. 31 of PDFHub's 33 tools process files 100% locally in your browser memory. OCR PDF runs locally via WebAssembly, downloading trained model weights once from CDN. Translate PDF transmits short text snippets (&lt;500 chars) to MyMemory Translation API. Your files never touch a PDFHub server.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Can I use PDFHub without an internet connection?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! Once loaded or installed as a Progressive Web App (PWA), the application service worker caches all required assets. All 31 local tools operate completely offline on flights, remote sites, or secure isolated networks.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Is PDFHub really 100% free forever?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Because PDFHub processes files on your local hardware rather than incurring server infrastructure costs, there are no subscriptions, registration barriers, or paywalls.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Can PDFHub recover lost passwords?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>No. Unlock PDF decrypts documents when the user supplies the correct authorized password. PDFHub does not perform cryptographic brute-force attacks.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Does PDFHub watermark or alter my documents?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Never. Your documents retain their exact original quality, formatting, and vector fidelity with zero watermarks added.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+
+        <nav class="prev-next-nav" aria-label="Documentation navigation">
+          
+            <a class="prev-next-card prev" href="troubleshooting.html">
+              <span class="prev-next-label"><i class="fas fa-arrow-left"></i> Previous</span>
+              <span class="prev-next-title">Troubleshooting Guide</span>
+            </a>
+          
+          
+            <a class="prev-next-card next" href="pwa-offline.html">
+              <span class="prev-next-label">Next <i class="fas fa-arrow-right"></i></span>
+              <span class="prev-next-title">PWA &amp; Offline Capabilities</span>
+            </a>
+          
+        </nav>
+      </article>
+    </main>
+
+    <aside class="docs-sidebar-right" aria-label="On this page navigation">
+      <div class="toc-heading"><i class="fas fa-align-left"></i> On this page</div>
+      <ul class="toc-list" id="tocList"></ul>
+
+      <div class="right-sidebar-box">
+        <h4>Complete Documentation</h4>
+        <ul class="right-sidebar-links">
+          <li><a href="pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf"><i class="fas fa-file-pdf"></i> Download PDF (75p)</a></li>
+          <li><a href="pdfhub-complete-documentation.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open in New Tab</a></li>
+          <li><a href="https://github.com/officialhazim42/pdfshub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View GitHub Repo</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-shell">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="../index.html">
+            <img class="logo-mark" src="../favicons/favicon.png" alt="" aria-hidden="true"/>
+            <span>PDF HUB</span>
+          </a>
+          <p style="margin-top:6px;font-size:0.8rem;color:var(--muted);">33 Free Browser-Based PDF Tools. 100% Client-Side RAM Processing. Zero Server Storage.</p>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html">Docs Home</a>
+          <a href="./getting-started.html">Getting Started</a>
+          <a href="./all-tools-reference.html">Tools Matrix</a>
+          <a href="./privacy-and-data-processing.html">Privacy</a>
+          <a href="./developer-guide.html">Developer</a>
+          <a href="./pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf">Download Manual (PDF)</a>
+          <a href="https://github.com/officialhazim42/pdfshub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 PDFHub. Crafted by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">@officialhazim42</a></span>
+        <div style="display:flex;gap:12px;color:var(--muted2);">
+          <span>WCAG 2.1 AA Compliant</span>
+          <span>•</span>
+          <span>75-Page Complete Manual</span>
+          <span>•</span>
+          <span>v1.0.0 Production</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+
+  <script src="docs.js"></script>
+</body>
+</html>

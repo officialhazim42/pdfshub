@@ -196,6 +196,36 @@
     }
 
     .nav-right {
+    .nav-docs-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--s1);
+      color: var(--text);
+      text-decoration: none;
+      font-size: .75rem;
+      font-weight: 600;
+      transition: all .2s ease;
+    }
+    .nav-docs-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(124, 106, 255, .1);
+      transform: translateY(-1px);
+    }
+    body.light .nav-docs-link:hover {
+      border-color: #5b47e0;
+      color: #5b47e0;
+      background: rgba(91, 71, 224, .08);
+    }
+    @media(max-width: 580px) {
+      .nav-docs-link span { display: none; }
+      .nav-docs-link { padding: 6px 9px; }
+    }
+
       display: flex;
       align-items: center;
       gap: 14px
@@ -1844,6 +1874,7 @@
     <a class="logo" href="index.html"><img class="logo-mark" src="favicons/favicon.png" alt="" aria-hidden="true" />PDF
       HUB</a>
     <div class="nav-right">
+      <a class="nav-docs-link" href="docs/" title="PDFHub Documentation &amp; Technical Manual"><i class="fas fa-book-bookmark"></i><span>Docs</span></a>
       <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()"
         title="Toggle light/dark mode"><span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span
             class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span></button>
@@ -2269,6 +2300,55 @@
       </div>
     </div>
 
+  
+    <!-- DOCUMENTATION & ARCHITECTURAL MANUAL SHOWCASE -->
+    <section class="docs-showcase-section" id="documentation-showcase" style="margin: 60px 0 20px; padding: 40px 32px; border-radius: 20px; background: linear-gradient(135deg, rgba(15,20,34,0.95), rgba(22,30,50,0.95)); border: 1px solid rgba(56,189,248,0.25); box-shadow: 0 12px 36px rgba(0,0,0,0.35); text-align: left; position: relative; overflow: hidden;">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 24px; position: relative; z-index: 2;">
+        <div style="max-width: 640px;">
+          <div style="display: inline-flex; align-items: center; gap: 7px; padding: 4px 12px; border-radius: 99px; background: rgba(56,189,248,0.12); border: 1px solid #38bdf8; color: #38bdf8; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px;">
+            <i class="fas fa-book-bookmark"></i> Official System Manual
+          </div>
+          <h2 style="font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: #fff; margin-bottom: 10px; line-height: 1.2;">
+            PDFHub Technical Documentation &amp; Manual
+          </h2>
+          <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+            Explore our comprehensive 17-part interactive documentation covering browser runtime architecture, client RAM limits, privacy guarantees across all 33 utilities, and developer pipelines.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="docs/" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 99px; background: #38bdf8; color: #040814; font-weight: 700; font-size: 0.86rem; text-decoration: none; box-shadow: 0 4px 16px rgba(56,189,248,0.35); transition: transform 0.2s;">
+              <i class="fas fa-book-open"></i> Explore Documentation Hub
+            </a>
+            <a href="docs/pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 99px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-weight: 600; font-size: 0.86rem; text-decoration: none; transition: background 0.2s;">
+              <i class="fas fa-file-pdf"></i> Download 75-Page Manual (PDF)
+            </a>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(140px, 1fr)); gap: 10px; width: min(400px, 100%);">
+          <a href="docs/getting-started.html" style="padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); text-decoration: none; color: #fff; transition: border-color 0.2s;">
+            <div style="color: #38bdf8; font-size: 1.1rem; margin-bottom: 6px;"><i class="fas fa-rocket"></i></div>
+            <div style="font-weight: 700; font-size: 0.84rem;">Getting Started</div>
+            <div style="color: #94a3b8; font-size: 0.72rem; margin-top: 2px;">Workflows &amp; PWA</div>
+          </a>
+          <a href="docs/system-architecture.html" style="padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); text-decoration: none; color: #fff; transition: border-color 0.2s;">
+            <div style="color: #c084fc; font-size: 1.1rem; margin-bottom: 6px;"><i class="fas fa-diagram-project"></i></div>
+            <div style="font-weight: 700; font-size: 0.84rem;">Architecture</div>
+            <div style="color: #94a3b8; font-size: 0.72rem; margin-top: 2px;">WASM &amp; Web Workers</div>
+          </a>
+          <a href="docs/privacy-and-data-processing.html" style="padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); text-decoration: none; color: #fff; transition: border-color 0.2s;">
+            <div style="color: #00e5a0; font-size: 1.1rem; margin-bottom: 6px;"><i class="fas fa-shield-halved"></i></div>
+            <div style="font-weight: 700; font-size: 0.84rem;">Privacy Model</div>
+            <div style="color: #94a3b8; font-size: 0.72rem; margin-top: 2px;">31 Local / 2 Network</div>
+          </a>
+          <a href="docs/all-tools-reference.html" style="padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); text-decoration: none; color: #fff; transition: border-color 0.2s;">
+            <div style="color: #ffb347; font-size: 1.1rem; margin-bottom: 6px;"><i class="fas fa-table-list"></i></div>
+            <div style="font-weight: 700; font-size: 0.84rem;">Tools Matrix</div>
+            <div style="color: #94a3b8; font-size: 0.72rem; margin-top: 2px;">All 33 Specifications</div>
+          </a>
+        </div>
+      </div>
+    </section>
+  
   </main>
 
   <footer class="site-footer" role="contentinfo">

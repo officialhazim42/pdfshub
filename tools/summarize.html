@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="pdf-password.js"></script>
   <script src="shared.js"></script>
   <script type="application/ld+json">
 {
@@ -199,11 +200,21 @@ drop.ondragleave=()=>drop.classList.remove('over');
 drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
 async function loadFile(f){
   file=f;
-  const ab=await f.arrayBuffer();
-  const doc=await pdfjsLib.getDocument({data:ab}).promise;
-  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf" style="color:var(--a2)"></i><span class="fn">${f.name}</span><span class="fs">${doc.numPages} pages</span></div>`;
-  document.getElementById('opts').style.display='block';
-  document.getElementById('goBtn').disabled=false;
+  showStatus('Checking file…','info');
+  try{
+    const auth=await PDFPasswordManager.ensureAuthenticated(f);
+    if(auth.cancelled){
+      showStatus('Password required to process this file.','error');
+      return;
+    }
+    showStatus('Loading PDF…','info');
+    const doc=await PDFPasswordManager.openPdfJs(f);
+    const badge=auth.isEncrypted?'<span class="unlocked-badge"><i class="fas fa-unlock"></i> Authenticated</span>':'';
+    document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf" style="color:var(--a6)"></i><span class="fn">${f.name}</span><span class="fs">${doc.numPages} pages</span>${badge}</div>`;
+    document.getElementById('opts').style.display='block';
+    document.getElementById('goBtn').disabled=false;
+    showStatus('','');
+  }catch(e){showStatus('Error: '+e.message,'error')}
 }
 function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
 

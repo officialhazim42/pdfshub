@@ -1088,6 +1088,7 @@ To ensure absolute transparency, PDFHub documents the following technical consid
 3. **OCR Engine Loading**: Optical Character Recognition (`ocr.html`) utilizes Tesseract.js. On first execution, the browser fetches the Tesseract language dictionary and WebAssembly worker (cached for future visits).
 4. **Archival PDF/A Compliance**: The `pdf-to-pdfa` tool writes standard PDF/A catalog dictionaries and XMP archival metadata. For legal regulatory submissions, always verify with an external ISO validator.
 5. **AI Summarizer & Translation**: Text extraction is executed 100% locally. The optional summarization and translation APIs require internet connectivity to communicate with external translation/AI endpoints.
+6. **Password-Protected PDF Support**: PDFHub features automated detection and authentication for password-protected PDF files across the suite (supporting ISO 32000 standard encryption, including AES-256, AES-128, and RC4). Passwords are held strictly in temporary execution memory (RAM) for the current session only and are never saved to localStorage, cookies, URLs, or console logs. Unlocking requires entering the valid document password; unauthorized decryption cracking is strictly unsupported.
 
 ---
 

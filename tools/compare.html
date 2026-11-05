@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="pdf-password.js"></script>
   <script src="shared.js"></script>
   <script type="application/ld+json">
 {
@@ -183,7 +184,25 @@ function setupDrop(n){
   drop.ondrop=e=>{e.preventDefault();drop.style.borderColor='';const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(n,f)};
 }
 setupDrop(1);setupDrop(2);
-async function loadFile(n,f){const ab=await f.arrayBuffer();docs[n-1]=await pdfjsLib.getDocument({data:ab}).promise;document.getElementById('name'+n).textContent=f.name;if(docs[0]&&docs[1])document.getElementById('goBtn').disabled=false;}
+async function loadFile(n,f){
+  showStatus('Checking file '+n+'…','info');
+  try{
+    const auth=await PDFPasswordManager.ensureAuthenticated(f,{
+      title:`Password Required: File ${n}`,
+      description:`The document "${f.name}" is password-protected. Enter its password to compare.`
+    });
+    if(auth.cancelled){
+      showStatus('Password required for file '+n+'.','error');
+      return;
+    }
+    showStatus('Loading file '+n+'…','info');
+    docs[n-1]=await PDFPasswordManager.openPdfJs(f);
+    const badge=auth.isEncrypted?' (Protected)':'';
+    document.getElementById('name'+n).textContent=f.name+badge;
+    if(docs[0]&&docs[1])document.getElementById('goBtn').disabled=false;
+    showStatus('','');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+}
 function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
 async function compare(){document.getElementById('result').style.display='block';renderCompare(1);}
 let maxPages=1;

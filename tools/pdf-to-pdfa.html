@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="pdf-password.js"></script>
   <script src="shared.js"></script>
   <script type="application/ld+json">
 {
@@ -196,11 +197,21 @@ fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
 drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
 drop.ondragleave=()=>drop.classList.remove('over');
 drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
-function loadFile(f){
+async function loadFile(f){
   file=f;
-  document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf" style="color:var(--a2)"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span></div>`;
-  document.getElementById('opts').style.display='block';
-  document.getElementById('goBtn').disabled=false;
+  showStatus('Checking file…','info');
+  try{
+    const auth=await PDFPasswordManager.ensureAuthenticated(f);
+    if(auth.cancelled){
+      showStatus('Password required to process this file.','error');
+      return;
+    }
+    const badge=auth.isEncrypted?'<span class="unlocked-badge"><i class="fas fa-unlock"></i> Authenticated</span>':'';
+    document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf" style="color:var(--a2)"></i><span class="fn">${f.name}</span><span class="fs">${(f.size/1024/1024).toFixed(2)} MB</span>${badge}</div>`;
+    document.getElementById('opts').style.display='block';
+    document.getElementById('goBtn').disabled=false;
+    showStatus('','');
+  }catch(e){showStatus('Error: '+e.message,'error')}
 }
 function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
 async function go(){
@@ -209,8 +220,7 @@ async function go(){
   document.getElementById('pbar').style.width='15%';
   showStatus('Converting to PDF/A…','info');
   try{
-    const ab=await file.arrayBuffer();
-    const doc=await PDFLib.PDFDocument.load(ab,{ignoreEncryption:true});
+    const doc=await PDFPasswordManager.openPdfLib(file);
     const level=document.getElementById('level').value;
     const title=document.getElementById('doctitle').value.trim()||file.name.replace('.pdf','');
     const author=document.getElementById('docauthor').value.trim()||'PDFHub';
@@ -273,7 +283,7 @@ async function go(){
     document.getElementById('pbar').style.width='80%';
 
     const bytes=await doc.save({useObjectStreams:true,addDefaultPage:false});
-    downloadBlob(blob,file.name.replace('.pdf',`-pdfa-${level}.pdf`));
+    downloadBlob(new Blob([bytes],{type:"application/pdf"}),file.name.replace(".pdf",`-pdfa-${level}.pdf`));
     document.getElementById('pbar').style.width='100%';
     showStatus(`✓ Converted to PDF/A-${level}! Download started.`,'success');
   }catch(e){showStatus('Error: '+e.message,'error')}

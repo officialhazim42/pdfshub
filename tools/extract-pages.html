@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="pdf-password.js"></script>
   <script src="shared.js"></script>
   <script type="application/ld+json">
 {
@@ -169,7 +170,25 @@ const drop=document.getElementById('drop'),fin=document.getElementById('fin');
 fin.onchange=e=>{if(e.target.files[0])loadFile(e.target.files[0])};
 drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};drop.ondragleave=()=>drop.classList.remove('over');
 drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');const f=e.dataTransfer.files[0];if(f?.type==='application/pdf')loadFile(f)};
-async function loadFile(f){file=f;const ab=await f.arrayBuffer();const doc=await PDFLib.PDFDocument.load(ab,{ignoreEncryption:true});pageCount=doc.getPageCount();document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf"></i><span class="fn">${f.name}</span><span class="fs">${pageCount} pages</span></div>`;document.getElementById('lbl').textContent=`Pages to extract (1-${pageCount})`;document.getElementById('opts').style.display='block';document.getElementById('goBtn').disabled=false;}
+async function loadFile(f){
+  file=f;
+  showStatus('Checking file…','info');
+  try{
+    const auth=await PDFPasswordManager.ensureAuthenticated(f);
+    if(auth.cancelled){
+      showStatus('Password required to process this file.','error');
+      return;
+    }
+    const doc=await PDFPasswordManager.openPdfLib(f);
+    pageCount=doc.getPageCount();
+    const badge=auth.isEncrypted?'<span class="unlocked-badge"><i class="fas fa-unlock"></i> Authenticated</span>':'';
+    document.getElementById('finfo').innerHTML=`<div class="file-item"><i class="fas fa-file-pdf"></i><span class="fn">${f.name}</span><span class="fs">${pageCount} pages</span>${badge}</div>`;
+    document.getElementById('lbl').textContent=`Pages to extract (1-${pageCount})`;
+    document.getElementById('opts').style.display='block';
+    document.getElementById('goBtn').disabled=false;
+    showStatus('','');
+  }catch(e){showStatus('Error: '+e.message,'error')}
+}
 function parsePages(str,max){const set=new Set();str.split(',').forEach(r=>{r=r.trim();if(r.includes('-')){const[a,b]=r.split('-').map(Number);for(let i=a;i<=Math.min(b,max);i++)set.add(i-1);}else{const n=parseInt(r);if(n>=1&&n<=max)set.add(n-1);}});return[...set].sort((a,b)=>a-b);}
 function showStatus(msg,type){const s=document.getElementById('status');s.textContent=msg;s.className='status show '+type}
 async function go(){
@@ -177,7 +196,7 @@ async function go(){
   try{
     const pages=parsePages(document.getElementById('pages').value,pageCount);
     if(!pages.length){showStatus('Enter valid page numbers','error');btn.disabled=false;return;}
-    const ab=await file.arrayBuffer();const src=await PDFLib.PDFDocument.load(ab,{ignoreEncryption:true});
+    const src=await PDFPasswordManager.openPdfLib(file);
     const out=await PDFLib.PDFDocument.create();const ps=await out.copyPages(src,pages);ps.forEach(p=>out.addPage(p));
     document.getElementById('pbar').style.width='90%';const bytes=await out.save();
     downloadBlob(new Blob([bytes],{type:'application/pdf'}),'extracted-pages.pdf',(bytes.length/1024/1024).toFixed(2));

@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="shared.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="pdf-password.js"></script>
   <script src="shared.js"></script>
   <script type="application/ld+json">
 {
@@ -257,7 +258,7 @@ async function saveSigned(){
   showStatus('Saving…','info');
   try{
     const pdfLibMod=PDFLib;
-    const ab=await file.arrayBuffer();const doc=await pdfLibMod.PDFDocument.load(ab,{ignoreEncryption:true});
+    const doc=await PDFPasswordManager.openPdfLib(file);
     const pages=doc.getPages();
     const scale=1/1.2;// reverse viewport scale
     for(const s of signatures){
