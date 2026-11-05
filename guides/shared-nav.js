@@ -112,7 +112,7 @@
           <a class="menu-action" href="${siteRoot}menu-bar/about.html">
             <i class="fas fa-circle-info" aria-hidden="true"></i><span>About Us</span>
           </a>
-          <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">
+          <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Support%20Request&body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!">
             <i class="fas fa-envelope" aria-hidden="true"></i><span>Contact Support</span>
           </a>
         </div>
@@ -181,7 +181,7 @@
           <li><a href="${siteRoot}menu-bar/privacy.html">Privacy Center</a></li>
           <li><a href="${siteRoot}menu-bar/terms.html">Terms &amp; Conditions</a></li>
           <li><a href="${siteRoot}menu-bar/about.html">About PDFHub</a></li>
-          <li><a href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Inquiry">Contact Support</a></li>
+          <li><a href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Support%20Request&body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!">Contact Support</a></li>
         </ul>
         <div class="footer-security-note">
           <i class="fas fa-shield-halved" aria-hidden="true"></i>

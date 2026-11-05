@@ -140,6 +140,65 @@
     window.addEventListener('storage',event=>{if(event.key==='pdfhub-theme')applyTheme(event.newValue||'dark');});
   }
 
+  const supportEmail = 'hazimbashirfaqeer@gmail.com';
+  const supportSubject = 'PDFHub Support Request';
+  const supportBody = `Hello PDFHub Support Team,\n\nI need assistance with PDFHub:\n- Tool / Feature: \n- Description of issue: \n- Operating System / Browser: \n\nThank you!`;
+  const supportMailtoUrl = `mailto:${supportEmail}?subject=${encodeURIComponent(supportSubject)}&body=${encodeURIComponent(supportBody)}`;
+
+  const setupContactSupport = () => {
+    // Ensure all existing contact links have the standardized mailto URL
+    document.querySelectorAll('a[href*="hazimbashirfaqeer@gmail.com"]').forEach(link => {
+      link.setAttribute('href', supportMailtoUrl);
+    });
+
+    document.addEventListener('click', event => {
+      const link = event.target.closest('a[href^="mailto:"], .menu-action[href^="mailto:"]');
+      if (!link) return;
+      const href = link.getAttribute('href') || '';
+      if (href.includes(supportEmail) || link.textContent.includes('Contact Support')) {
+        // Close control center drawer if open
+        const siteMenu = document.getElementById('siteMenu');
+        if (siteMenu && siteMenu.classList.contains('open')) {
+          if (typeof toggleSiteMenu === 'function') toggleSiteMenu(false);
+          else {
+            siteMenu.classList.remove('open');
+            siteMenu.setAttribute('aria-hidden', 'true');
+            const toggle = document.getElementById('menuToggle');
+            if (toggle) {
+              toggle.setAttribute('aria-expanded', 'false');
+              toggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+          }
+        }
+
+        // Direct navigation to mailto
+        try {
+          window.location.href = supportMailtoUrl;
+        } catch (_) {}
+
+        // Helpful fallback if desktop has no default email app registered
+        let leftPage = false;
+        const onVis = () => { leftPage = document.visibilityState !== 'visible'; };
+        document.addEventListener('visibilitychange', onVis, { once: true });
+        setTimeout(async () => {
+          document.removeEventListener('visibilitychange', onVis);
+          if (leftPage) return;
+          if (navigator.clipboard?.writeText) {
+            try {
+              await navigator.clipboard.writeText(supportEmail);
+              toast('Support email copied to clipboard: ' + supportEmail);
+            } catch (_) {}
+          }
+        }, 1200);
+      }
+    });
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupContactSupport);
+  } else {
+    setupContactSupport();
+  }
+
   const enhanceFooter=()=>{
     const footer=document.querySelector('footer');
     if(!footer||footer.querySelector('.footer-grid')||footer.querySelector('.pdfhub-footer-links'))return;
@@ -151,7 +210,7 @@
       ['About PDFHub',siteRoot+'menu-bar/about.html'],
       ['Terms',siteRoot+'menu-bar/terms.html'],
       ['Privacy',siteRoot+'menu-bar/privacy.html'],
-      ['Contact',`mailto:hazimbashirfaqeer@gmail.com?subject=${encodeURIComponent('PDFHub Inquiry')}`]
+      ['Contact',supportMailtoUrl]
     ];
     const nav=document.createElement('nav');
     nav.className='pdfhub-footer-links';
