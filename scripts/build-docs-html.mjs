@@ -274,7 +274,7 @@ const html = `<!doctype html>
             <a class="menu-action" href="../menu-bar/about.html">
               <i class="fas fa-circle-info" aria-hidden="true"></i><span>About us</span>
             </a>
-            <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Support%20Request&body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!">
+            <a class="menu-action" href="mailto:?subject=PDFHub%20Support%20Request&body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!">
               <i class="fas fa-envelope" aria-hidden="true"></i><span>Contact Support</span>
             </a>
           </div>
@@ -809,115 +809,7 @@ const html = `<!doctype html>
   </footer>
 
   <!-- SCRIPT INTEGRATION -->
-  <script src="../developer.js"></script>
-  <script>
-    // Tab Navigation Logic
-    const tabBtns = document.querySelectorAll('.doc-tab-btn');
-    const sections = document.querySelectorAll('.doc-section');
-
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        sections.forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        const target = document.getElementById(btn.dataset.tab);
-        if (target) target.classList.add('active');
-      });
-    });
-
-    // Category Filter Chips Logic
-    const chips = document.querySelectorAll('.filter-chip');
-    const cards = document.querySelectorAll('.tool-card');
-
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const cat = chip.dataset.cat;
-        
-        cards.forEach(card => {
-          if (cat === 'all' || card.dataset.category.toLowerCase().includes(cat.toLowerCase())) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // Master Search Filtering Logic
-    const searchInput = document.getElementById('docSearchInput');
-    const clearBtn = document.getElementById('docSearchClear');
-
-    function applySearch() {
-      const q = (searchInput.value || '').trim().toLowerCase();
-      if (q.length > 0) {
-        clearBtn.classList.add('visible');
-        // Activate tools tab if not active
-        const toolsTabBtn = document.querySelector('[data-tab="tab-tools"]');
-        if (!toolsTabBtn.classList.contains('active')) {
-          toolsTabBtn.click();
-        }
-      } else {
-        clearBtn.classList.remove('visible');
-      }
-
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        if (!q || text.includes(q)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    searchInput.addEventListener('input', applySearch);
-    clearBtn.addEventListener('click', () => {
-      searchInput.value = '';
-      applySearch();
-      searchInput.focus();
-    });
-
-    // Accordion FAQ Logic
-    document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        const item = q.closest('.faq-item');
-        item.classList.toggle('open');
-      });
-    });
-
-    // Control Center Drawer Logic
-    function toggleSiteMenu(force) {
-      const toggle = document.getElementById('menuToggle');
-      const menu = document.getElementById('siteMenu');
-      if (!toggle || !menu) return;
-      const open = typeof force === 'boolean' ? force : !menu.classList.contains('open');
-      menu.classList.toggle('open', open);
-      menu.setAttribute('aria-hidden', String(!open));
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      toggle.innerHTML = open ? '<i class="fas fa-xmark"></i>' : '<i class="fas fa-bars"></i>';
-      if (open) document.getElementById('menuSearchInput')?.focus();
-    }
-
-    document.getElementById('menuToggle')?.addEventListener('click', e => {
-      e.stopPropagation();
-      toggleSiteMenu();
-    });
-    document.getElementById('menuCloseBtn')?.addEventListener('click', e => {
-      e.stopPropagation();
-      toggleSiteMenu(false);
-    });
-    document.addEventListener('click', e => {
-      if (!e.target.closest('#siteMenu') && !e.target.closest('#menuToggle')) {
-        toggleSiteMenu(false);
-      }
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') toggleSiteMenu(false);
-    });
-  </script>
+  <script src="docs.js"></script>
 </body>
 </html>`;
 

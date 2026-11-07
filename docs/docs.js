@@ -36,15 +36,69 @@
     }
   };
 
-  // 2. SUPPORT MAILTO ENHANCER
-  const supportEmail = 'hazimbashirfaqeer@gmail.com';
+  // 2. SUPPORT MAILTO ENHANCER & FEEDBACK TOAST
+  // Audited repository: No separate organization support inbox configured.
+  // In accordance with instructions: We do not invent an unverified email address,
+  // and we do not use the developer's personal email (hazimbashirfaqeer@gmail.com).
+  // RFC 6068 mailto URI with subject and prefilled body opens the user's default email client.
+  const verifiedSupportEmail = '';
   const supportSubject = 'PDFHub Support Request';
   const supportBody = `Hello PDFHub Support Team,\n\nI need assistance with PDFHub:\n- Tool / Feature: \n- Description of issue: \n- Operating System / Browser: \n\nThank you!`;
-  const supportMailtoUrl = `mailto:${supportEmail}?subject=${encodeURIComponent(supportSubject)}&body=${encodeURIComponent(supportBody)}`;
+  const supportMailtoUrl = `mailto:${verifiedSupportEmail}?subject=${encodeURIComponent(supportSubject)}&body=${encodeURIComponent(supportBody)}`;
+
+  function showToast(message, duration = 3500) {
+    let toast = document.getElementById('docsToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'docsToast';
+      toast.className = 'docs-toast';
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<i class="fas fa-circle-info" aria-hidden="true"></i><span>${message}</span>`;
+    toast.classList.add('show');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, duration);
+  }
 
   function setupContactSupportLinks() {
-    document.querySelectorAll('a[href*="hazimbashirfaqeer@gmail.com"]').forEach(link => {
-      link.setAttribute('href', supportMailtoUrl);
+    // Standardize all support links in documentation
+    document.querySelectorAll('a.menu-action, a').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      if (link.textContent.includes('Contact Support') || href.includes('hazimbashirfaqeer') || href.includes('Support%20Request')) {
+        link.setAttribute('href', supportMailtoUrl);
+      }
+    });
+
+    // Intercept clicks on Contact Support to ensure drawer closes and mail application launches
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="mailto:"], .menu-action[href^="mailto:"]');
+      if (!link) return;
+
+      const isContactSupport = link.textContent.includes('Contact Support') || link.getAttribute('href')?.includes('Support%20Request');
+      if (isContactSupport) {
+        // 1. Close siteMenu drawer cleanly
+        const menu = document.getElementById('siteMenu');
+        const toggle = document.getElementById('menuToggle');
+        if (menu && menu.classList.contains('open')) {
+          menu.classList.remove('open');
+          menu.setAttribute('aria-hidden', 'true');
+          if (toggle) {
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.innerHTML = '<i class="fas fa-bars"></i>';
+            toggle.setAttribute('aria-label', 'Open menu');
+          }
+        }
+
+        // 2. Explicitly trigger mailto navigation
+        try {
+          window.location.href = supportMailtoUrl;
+        } catch (_) {}
+
+        // 3. Informative toast feedback
+        showToast('Opening default email application for PDFHub support...');
+      }
     });
   }
 
@@ -507,6 +561,40 @@
         toggleMenu(false);
       }
     });
+
+    // Auto-close when clicking any menu action link
+    menu.querySelectorAll('.menu-action').forEach(action => {
+      action.addEventListener('click', () => {
+        toggleMenu(false);
+      });
+    });
+
+    // Quick search inside drawer
+    const menuSearchForm = document.getElementById('menuSearch');
+    const menuSearchInput = document.getElementById('menuSearchInput');
+    if (menuSearchForm && menuSearchInput) {
+      menuSearchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = menuSearchInput.value.trim().toLowerCase();
+        if (!query) return;
+        toggleMenu(false);
+
+        const portalSearch = document.getElementById('docSearchInput');
+        if (portalSearch) {
+          portalSearch.value = query;
+          portalSearch.dispatchEvent(new Event('input', { bubbles: true }));
+          portalSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          const searchModalBtn = document.querySelector('.nav-search-btn');
+          if (searchModalBtn) searchModalBtn.click();
+          const modalInput = document.getElementById('quickSearchInput');
+          if (modalInput) {
+            modalInput.value = query;
+            modalInput.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
+      });
+    }
   }
 
   // 8. DOCS PORTAL TAB NAVIGATION & FILTERING (For docs/index.html)

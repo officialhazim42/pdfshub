@@ -140,22 +140,24 @@
     window.addEventListener('storage',event=>{if(event.key==='pdfhub-theme')applyTheme(event.newValue||'dark');});
   }
 
-  const supportEmail = 'hazimbashirfaqeer@gmail.com';
+  const verifiedSupportEmail = '';
   const supportSubject = 'PDFHub Support Request';
   const supportBody = `Hello PDFHub Support Team,\n\nI need assistance with PDFHub:\n- Tool / Feature: \n- Description of issue: \n- Operating System / Browser: \n\nThank you!`;
-  const supportMailtoUrl = `mailto:${supportEmail}?subject=${encodeURIComponent(supportSubject)}&body=${encodeURIComponent(supportBody)}`;
+  const supportMailtoUrl = `mailto:${verifiedSupportEmail}?subject=${encodeURIComponent(supportSubject)}&body=${encodeURIComponent(supportBody)}`;
 
   const setupContactSupport = () => {
     // Ensure all existing contact links have the standardized mailto URL
     document.querySelectorAll('a[href*="hazimbashirfaqeer@gmail.com"]').forEach(link => {
-      link.setAttribute('href', supportMailtoUrl);
+      if (!link.hasAttribute('data-developer-email') && !link.closest('.pdfhub-developer-info')) {
+        link.setAttribute('href', supportMailtoUrl);
+      }
     });
 
     document.addEventListener('click', event => {
       const link = event.target.closest('a[href^="mailto:"], .menu-action[href^="mailto:"]');
       if (!link) return;
       const href = link.getAttribute('href') || '';
-      if (href.includes(supportEmail) || link.textContent.includes('Contact Support')) {
+      if (link.textContent.includes('Contact Support') || href.includes('PDFHub%20Support%20Request')) {
         // Close control center drawer if open
         const siteMenu = document.getElementById('siteMenu');
         if (siteMenu && siteMenu.classList.contains('open')) {
@@ -175,21 +177,6 @@
         try {
           window.location.href = supportMailtoUrl;
         } catch (_) {}
-
-        // Helpful fallback if desktop has no default email app registered
-        let leftPage = false;
-        const onVis = () => { leftPage = document.visibilityState !== 'visible'; };
-        document.addEventListener('visibilitychange', onVis, { once: true });
-        setTimeout(async () => {
-          document.removeEventListener('visibilitychange', onVis);
-          if (leftPage) return;
-          if (navigator.clipboard?.writeText) {
-            try {
-              await navigator.clipboard.writeText(supportEmail);
-              toast('Support email copied to clipboard: ' + supportEmail);
-            } catch (_) {}
-          }
-        }, 1200);
       }
     });
   };
