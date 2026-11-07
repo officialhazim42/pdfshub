@@ -129,6 +129,20 @@
       </div>
     </header>
 
+    <!-- Desktop Privacy Center-Style Jump To Navigation -->
+    <nav class="terms-quick-nav" id="termsQuickNav" aria-label="Terms sections jump links">
+      <span class="quick-nav-label">Jump to:</span>
+      <a href="#acceptance">Acceptance of terms</a>
+      <a href="#permitted-use">Permitted use</a>
+      <a href="#your-documents">Your documents</a>
+      <a href="#local-processing">Local processing</a>
+      <a href="#results">Results &amp; accuracy</a>
+      <a href="#availability">Availability &amp; changes</a>
+      <a href="#third-party">Third-party services</a>
+      <a href="#disclaimer">Disclaimer &amp; liability</a>
+      <a href="#questions">Questions &amp; feedback</a>
+    </nav>
+
     <!-- Mobile / Tablet Collapsible Table of Contents -->
     <details class="terms-toc-mobile" id="termsTocMobile">
       <summary class="terms-toc-summary">
@@ -294,32 +308,34 @@
 
   <script src="site-pages.js"></script>
   <script>
-    // Active section tracking for Terms Table of Contents
+    // Active section tracking for Terms Table of Contents & Desktop Quick Nav
     (function(){
       const chips = document.querySelectorAll('.terms-toc-mobile-grid .toc-chip');
+      const quickLinks = document.querySelectorAll('#termsQuickNav a');
       const sections = document.querySelectorAll('.legal-section');
       if (!sections.length) return;
 
-      if (chips.length) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const id = entry.target.id;
-              chips.forEach(chip => {
-                chip.classList.toggle('active', chip.getAttribute('href') === '#' + id);
-              });
-            }
-          });
-        }, {
-          rootMargin: '-100px 0px -60% 0px',
-          threshold: 0
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            chips.forEach(chip => {
+              chip.classList.toggle('active', chip.getAttribute('href') === '#' + id);
+            });
+            quickLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
         });
+      }, {
+        rootMargin: '-120px 0px -65% 0px',
+        threshold: 0
+      });
 
-        sections.forEach(sec => observer.observe(sec));
-      }
+      sections.forEach(sec => observer.observe(sec));
 
       // Close mobile dropdown when a chip is tapped on small screens
-      document.querySelectorAll('.terms-toc-mobile-grid .toc-chip').forEach(chip => {
+      chips.forEach(chip => {
         chip.addEventListener('click', () => {
           if (window.innerWidth <= 768) {
             const details = document.getElementById('termsTocMobile');

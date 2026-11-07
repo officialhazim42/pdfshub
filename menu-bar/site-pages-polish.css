@@ -55,14 +55,18 @@ body.light .menu-action.menu-featured:hover .menu-feature-icon{color:#6655d9!imp
 /* ─────────────────────────────────────────────────────────────
    TERMS & CONDITIONS PAGE (REDESIGNED)
 ───────────────────────────────────────────────────────────── */
-.terms-page{width:min(1080px,92%);margin:0 auto}
+.terms-page{width:min(1200px,92%);margin:0 auto}
+.terms-page .editorial-hero{max-width:100%}
+.terms-page .editorial-hero h1{max-width:100%}
+.terms-page .editorial-hero .lead{max-width:900px}
+.terms-page .terms-intro-note{max-width:100%}
 .terms-meta-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 16px;font-size:.76rem;color:#8e8ea8}
 .meta-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:rgba(124,106,255,.08);border:1px solid rgba(124,106,255,.2);color:#b3a7ff;font-weight:500}
 .meta-dot{color:#363650;font-size:.5rem}
-.terms-intro-note{display:flex;align-items:flex-start;gap:12px;max-width:760px;margin:20px 0 0;padding:14px 18px;border:1px solid rgba(56,217,245,.22);border-radius:12px;background:rgba(56,217,245,.05);color:#b6b5ca;font-size:.82rem;line-height:1.65}
+.terms-intro-note{display:flex;align-items:flex-start;gap:12px;margin:20px 0 0;padding:14px 18px;border:1px solid rgba(56,217,245,.22);border-radius:12px;background:rgba(56,217,245,.05);color:#b6b5ca;font-size:.82rem;line-height:1.65}
 .terms-intro-note i{margin-top:3px;color:#38d9f5;font-size:1rem;flex-shrink:0}
 
-/* Terms & Conditions Collapsible Table of Contents */
+/* Terms & Conditions Collapsible Table of Contents (Mobile / Tablet Only) */
 .terms-toc-mobile{display:block;margin:28px 0 32px;border:1px solid #28283e;border-radius:14px;background:#0f0f1b;overflow:hidden;transition:border-color .2s,box-shadow .2s}
 .terms-toc-mobile:hover{border-color:rgba(124,106,255,.35);box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .terms-toc-summary{display:flex;align-items:center;justify-content:space-between;padding:15px 20px;font:700 .9rem 'Syne',sans-serif;color:#eeeef8;cursor:pointer;list-style:none;user-select:none;transition:background .15s}
@@ -78,23 +82,24 @@ details[open] .toc-caret{transform:rotate(180deg)}
 .toc-chip.active{border-color:#7c6aff;background:rgba(124,106,255,.18);color:#fff}
 .toc-num{display:inline-block;padding:2px 6px;border-radius:4px;background:rgba(124,106,255,.15);color:#a89aff;font-size:.66rem;font-weight:700}
 
-/* Terms Layout (Single column across all viewports) */
+/* Terms Layout (Single column full-width desktop container) */
 .terms-layout{display:block;width:100%;margin-top:0}
 .terms-toc-desktop{display:none!important}
 
 /* Legal Content Sections */
-.legal-sections{display:grid;gap:20px}
-.legal-section{scroll-margin-top:96px;padding:28px 30px;border:1px solid #24243a;border-radius:16px;background:#0e0e1a;box-shadow:0 10px 28px rgba(0,0,0,.15);transition:border-color .2s}
+.legal-sections{display:grid;gap:20px;width:100%}
+.legal-section{scroll-margin-top:190px;padding:28px 32px;border:1px solid #24243a;border-radius:16px;background:#0e0e1a;box-shadow:0 10px 28px rgba(0,0,0,.15);transition:border-color .2s;width:100%;max-width:100%;min-width:0;box-sizing:border-box;overflow-wrap:break-word;word-break:break-word}
 .legal-section:hover{border-color:#343450}
-.legal-section-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-.legal-number{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 8px;border-radius:9px;background:rgba(124,106,255,.12);border:1px solid rgba(124,106,255,.25);color:#b3a7ff;font:700 .76rem 'DM Sans',sans-serif;letter-spacing:.05em}
-.legal-section h2{margin:0;color:#eeeef8;font:700 1.12rem/1.35 'Syne',sans-serif;letter-spacing:-.02em}
-.legal-section-body p{margin:0 0 14px;color:#9b9bb4;font-size:.87rem;line-height:1.8}
+.legal-section-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;min-width:0}
+.legal-number{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 8px;border-radius:9px;background:rgba(124,106,255,.12);border:1px solid rgba(124,106,255,.25);color:#b3a7ff;font:700 .76rem 'DM Sans',sans-serif;letter-spacing:.05em;flex-shrink:0}
+.legal-section h2{margin:0;color:#eeeef8;font:700 1.12rem/1.35 'Syne',sans-serif;letter-spacing:-.02em;min-width:0;overflow-wrap:break-word}
+.legal-section-body{min-width:0}
+.legal-section-body p{margin:0 0 14px;color:#9b9bb4;font-size:.87rem;line-height:1.8;overflow-wrap:break-word}
 .legal-section-body p:last-child{margin-bottom:0}
-.legal-list{margin:10px 0 14px;padding-left:20px;display:grid;gap:8px}
-.legal-list li{color:#9b9bb4;font-size:.86rem;line-height:1.75}
+.legal-list{margin:10px 0 14px;padding-left:20px;display:grid;gap:8px;min-width:0}
+.legal-list li{color:#9b9bb4;font-size:.86rem;line-height:1.75;overflow-wrap:break-word}
 .legal-list li strong{color:#eeeef8}
-.legal-section code{padding:2px 6px;border-radius:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:.8rem;color:#38d9f5}
+.legal-section code{padding:2px 6px;border-radius:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:.8rem;color:#38d9f5;word-break:break-word;overflow-wrap:break-word}
 
 .terms-contact-card{display:flex;align-items:center;gap:16px;margin-top:16px;padding:16px 20px;border:1px solid #282840;border-radius:12px;background:#121222}
 .contact-card-icon{width:42px;height:42px;border-radius:10px;background:rgba(124,106,255,.1);border:1px solid rgba(124,106,255,.2);display:grid;place-items:center;color:#9b8eff;font-size:1.1rem;flex-shrink:0}
@@ -125,14 +130,25 @@ details[open] .toc-caret{transform:rotate(180deg)}
 .pillar-card h3{margin:0 0 8px;font:700 .94rem 'Syne',sans-serif;color:#eeeef8}
 .pillar-card p{margin:0;color:#8e8ea6;font-size:.8rem;line-height:1.65}
 
-/* Quick Anchor Jump Links */
-.privacy-quick-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 18px;margin-bottom:34px;border:1px solid #24243a;border-radius:12px;background:#0e0e1a;font-size:.76rem}
-.quick-nav-label{color:#6c6c88;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-right:4px}
-.privacy-quick-nav a{color:#9a8cff;text-decoration:none;padding:4px 9px;border-radius:6px;background:rgba(124,106,255,.07);border:1px solid rgba(124,106,255,.15);font-weight:500;transition:all .15s}
-.privacy-quick-nav a:hover{background:rgba(124,106,255,.18);color:#fff;border-color:#7c6aff}
+/* Quick Anchor Jump Links (Shared Base & Desktop) */
+.privacy-quick-nav,
+.terms-quick-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 18px;margin-bottom:34px;border:1px solid #24243a;border-radius:12px;background:rgba(14,14,26,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);font-size:.76rem;position:sticky;top:74px;z-index:15;height:auto!important;min-height:auto!important;justify-content:flex-start!important;box-sizing:border-box}
+.quick-nav-label{color:#6c6c88;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-right:4px;flex-shrink:0}
+.privacy-quick-nav a,
+.terms-quick-nav a{color:#9a8cff;text-decoration:none;padding:5px 11px;border-radius:6px;background:rgba(124,106,255,.07);border:1px solid rgba(124,106,255,.15);font-weight:500;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center}
+.privacy-quick-nav a:hover,
+.terms-quick-nav a:hover{background:rgba(124,106,255,.18);color:#fff;border-color:#7c6aff}
+.privacy-quick-nav a.active,
+.terms-quick-nav a.active{background:#7c6aff;color:#fff;border-color:#7c6aff;box-shadow:0 2px 10px rgba(124,106,255,.35);font-weight:600}
+
+/* Desktop vs Mobile Toggle for Terms Quick Nav */
+@media(min-width:769px){
+  .terms-quick-nav{display:flex!important}
+  .terms-toc-mobile{display:none!important}
+}
 
 /* Privacy Content Cards */
-.privacy-content-card{scroll-margin-top:90px;padding:32px 32px;margin-bottom:28px;border:1px solid #24243a;border-radius:18px;background:#0d0d18;box-shadow:0 10px 30px rgba(0,0,0,.14)}
+.privacy-content-card{scroll-margin-top:132px;padding:32px 32px;margin-bottom:28px;border:1px solid #24243a;border-radius:18px;background:#0d0d18;box-shadow:0 10px 30px rgba(0,0,0,.14)}
 .card-section-heading{margin-bottom:18px}
 .section-tag{display:inline-block;padding:3px 8px;border-radius:99px;font-size:.65rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#7c6aff;background:rgba(124,106,255,.1);border:1px solid rgba(124,106,255,.2);margin-bottom:8px}
 .section-tag-action{color:#00e5a0;background:rgba(0,229,160,.08);border-color:rgba(0,229,160,.22)}
@@ -272,9 +288,14 @@ body.light .pillar-icon{background:rgba(91,71,224,.08);border-color:rgba(91,71,2
 body.light .pillar-card h3{color:#18182e}
 body.light .pillar-card p{color:#606078}
 
-body.light .privacy-quick-nav{background:#fff;border-color:#deddf0}
-body.light .privacy-quick-nav a{background:rgba(91,71,224,.06);border-color:rgba(91,71,224,.18);color:#5b47e0}
-body.light .privacy-quick-nav a:hover{background:#5b47e0;color:#fff}
+body.light .privacy-quick-nav,
+body.light .terms-quick-nav{background:rgba(255,255,255,.94);border-color:#deddf0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+body.light .privacy-quick-nav a,
+body.light .terms-quick-nav a{background:rgba(91,71,224,.06);border-color:rgba(91,71,224,.18);color:#5b47e0}
+body.light .privacy-quick-nav a:hover,
+body.light .terms-quick-nav a:hover{background:#5b47e0;color:#fff;border-color:#5b47e0}
+body.light .privacy-quick-nav a.active,
+body.light .terms-quick-nav a.active{background:#5b47e0;color:#fff;border-color:#5b47e0;box-shadow:0 2px 10px rgba(91,71,224,.25);font-weight:600}
 
 body.light .privacy-content-card{background:#fff;border-color:#deddf0;box-shadow:0 8px 24px rgba(40,35,90,.04)}
 body.light .card-section-heading h2{color:#18182e}
@@ -336,15 +357,117 @@ body.light .modal-actions-row .btn-secondary:hover{background:#e4e4f2;color:#181
   .external-services-grid{grid-template-columns:1fr}
   .data-scope-box{grid-template-columns:1fr}
   .best-practices-grid{grid-template-columns:1fr}
+
+  /* Terms Navigation: HIDE desktop quick nav, PRESERVE mobile collapsible TOC */
+  .terms-quick-nav{display:none!important}
+  .terms-toc-mobile{display:block!important}
+
+  /* Privacy Navigation: Frictionless Horizontal Scrollable Pill Track */
+  .privacy-quick-nav{
+    display:flex!important;
+    align-items:center!important;
+    gap:8px!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    scrollbar-width:none!important;
+    -ms-overflow-style:none!important;
+    padding:8px 12px!important;
+    margin-bottom:24px!important;
+    border-radius:12px!important;
+    position:sticky!important;
+    top:64px!important;
+    z-index:15!important;
+    background:rgba(14,14,26,.95)!important;
+    backdrop-filter:blur(16px)!important;
+    -webkit-backdrop-filter:blur(16px)!important;
+    height:auto!important;
+    min-height:auto!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+  }
+  .privacy-quick-nav::-webkit-scrollbar{display:none!important}
+  .privacy-quick-nav .quick-nav-label{
+    flex-shrink:0!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    font-size:.68rem!important;
+    font-weight:700!important;
+    color:#8c8ca8!important;
+    text-transform:uppercase!important;
+    letter-spacing:.8px!important;
+    padding-right:4px!important;
+    margin-right:0!important;
+  }
+  .privacy-quick-nav a{
+    flex-shrink:0!important;
+    white-space:nowrap!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    height:38px!important;
+    min-height:38px!important;
+    padding:0 14px!important;
+    border-radius:8px!important;
+    font-size:.78rem!important;
+    font-weight:500!important;
+    line-height:1!important;
+    box-sizing:border-box!important;
+    color:#9a8cff!important;
+    background:rgba(124,106,255,.08)!important;
+    border:1px solid rgba(124,106,255,.2)!important;
+  }
+  .privacy-quick-nav a:hover,
+  .privacy-quick-nav a:focus{
+    background:rgba(124,106,255,.22)!important;
+    color:#fff!important;
+    border-color:#7c6aff!important;
+  }
+  .privacy-quick-nav a.active{
+    background:#7c6aff!important;
+    color:#fff!important;
+    border-color:#7c6aff!important;
+    box-shadow:0 2px 10px rgba(124,106,255,.35)!important;
+    font-weight:600!important;
+  }
+
+  body.light .privacy-quick-nav{
+    background:rgba(255,255,255,.95)!important;
+    border-color:#deddf0!important;
+  }
+  body.light .privacy-quick-nav .quick-nav-label{
+    color:#606078!important;
+  }
+  body.light .privacy-quick-nav a{
+    background:rgba(91,71,224,.07)!important;
+    border-color:rgba(91,71,224,.2)!important;
+    color:#5b47e0!important;
+  }
+  body.light .privacy-quick-nav a:hover,
+  body.light .privacy-quick-nav a:focus{
+    background:rgba(91,71,224,.15)!important;
+    color:#3b27b8!important;
+    border-color:#5b47e0!important;
+  }
+  body.light .privacy-quick-nav a.active{
+    background:#5b47e0!important;
+    color:#fff!important;
+    border-color:#5b47e0!important;
+    box-shadow:0 2px 10px rgba(91,71,224,.25)!important;
+  }
 }
 
 @media(max-width:560px){
-  .editorial-page,.terms-page,.privacy-page{width:92%;padding:36px 0 56px}
-  .terms-toc-mobile-grid{grid-template-columns:1fr;gap:6px;padding:12px 14px 16px}
+  html,body{overflow-x:clip}
+  .editorial-page,.terms-page,.privacy-page{width:92%;padding:36px 0 56px;overflow-x:visible}
+  .terms-toc-mobile{min-width:0;max-width:100%;box-sizing:border-box}
+  .terms-toc-mobile-grid{grid-template-columns:1fr;gap:6px;padding:12px 14px 16px;box-sizing:border-box}
+  .toc-chip{min-width:0;max-width:100%;box-sizing:border-box}
   .privacy-pillars-grid{grid-template-columns:1fr}
   .live-storage-dashboard{grid-template-columns:1fr}
-  .privacy-content-card{padding:22px 18px}
-  .legal-section{padding:20px 18px}
+  .privacy-content-card{scroll-margin-top:124px;padding:22px 18px;min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
+  .legal-section{scroll-margin-top:128px;padding:20px 18px;min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
   .legal-section-header{gap:10px}
   .legal-number{min-width:28px;height:28px;font-size:.7rem}
   .legal-section h2{font-size:1rem}

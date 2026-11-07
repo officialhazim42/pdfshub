@@ -153,7 +153,7 @@
     </section>
 
     <!-- Quick Navigation Bar for Privacy Details -->
-    <nav class="privacy-quick-nav" aria-label="Privacy sections jump links">
+    <nav class="privacy-quick-nav" id="privacyQuickNav" aria-label="Privacy sections jump links">
       <span class="quick-nav-label">Jump to:</span>
       <a href="#how-it-works">File Processing</a>
       <a href="#tool-matrix">Tool Privacy Matrix</a>
@@ -559,6 +559,46 @@
       });
 
       updateDashboard();
+    })();
+
+    // Active section tracking for Privacy Central Quick Navigation
+    (function(){
+      const nav = document.getElementById('privacyQuickNav');
+      if (!nav) return;
+      const links = nav.querySelectorAll('a');
+      const sections = document.querySelectorAll('.privacy-content-card');
+      if (!sections.length || !links.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            let activeLink = null;
+            links.forEach(link => {
+              const isMatch = link.getAttribute('href') === '#' + id;
+              link.classList.toggle('active', isMatch);
+              if (isMatch) activeLink = link;
+            });
+            if (activeLink && nav.scrollWidth > nav.clientWidth) {
+              const linkLeft = activeLink.offsetLeft;
+              const linkWidth = activeLink.offsetWidth;
+              const navScroll = nav.scrollLeft;
+              const navWidth = nav.clientWidth;
+              if (linkLeft < navScroll || (linkLeft + linkWidth) > (navScroll + navWidth)) {
+                nav.scrollTo({
+                  left: linkLeft - (navWidth / 2) + (linkWidth / 2),
+                  behavior: 'smooth'
+                });
+              }
+            }
+          }
+        });
+      }, {
+        rootMargin: '-120px 0px -65% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(sec => observer.observe(sec));
     })();
   </script>
 </body>
