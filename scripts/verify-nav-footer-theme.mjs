@@ -205,27 +205,21 @@ async function run() {
     await page.waitForTimeout(300);
 
     const overlapCheck = await page.evaluate(() => {
-      const toc = document.querySelector('.terms-toc-desktop');
+      const toc = document.querySelector('.terms-toc-mobile');
       const footer = document.querySelector('.site-footer');
-      const footnote = document.querySelector('.terms-footnote');
       if (!toc || !footer) return { error: 'elements not found' };
 
       const tocRect = toc.getBoundingClientRect();
       const footerRect = footer.getBoundingClientRect();
-      const footnoteRect = footnote ? footnote.getBoundingClientRect() : null;
-
-      // TOC bottom must not overlap the footer top
-      const overlapsFooter = tocRect.bottom > footerRect.top;
       return {
         tocBottom: tocRect.bottom,
         footerTop: footerRect.top,
-        overlapsFooter,
-        tocTop: tocRect.top,
+        overlapsFooter: tocRect.bottom > footerRect.top,
         viewportHeight: window.innerHeight
       };
     });
 
-    console.log(`  At viewport height ${h}px scrolled to bottom: tocBottom=${Math.round(overlapCheck.tocBottom)}, footerTop=${Math.round(overlapCheck.footerTop)}, overlapsFooter=${overlapCheck.overlapsFooter}`);
+    console.log(`  At viewport height ${h}px scrolled to bottom: overlapsFooter=${overlapCheck.overlapsFooter}`);
     if (overlapCheck.overlapsFooter) {
       console.error(`  FAIL: Terms TOC overlaps footer at height ${h}px!`);
       results.termsOverlapPrevented = false;
@@ -239,9 +233,16 @@ async function run() {
   await page.goto(termsUrl, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(300);
 
+  // Expand collapsible TOC on desktop if closed
+  await page.evaluate(() => {
+    const details = document.getElementById('termsTocMobile');
+    if (details) details.open = true;
+  });
+  await page.waitForTimeout(200);
+
   const sectionsToTest = ['acceptance', 'local-processing', 'disclaimer', 'questions'];
   for (const secId of sectionsToTest) {
-    const link = await page.$(`.terms-toc-desktop a[href="#${secId}"]`);
+    const link = await page.$(`#termsTocMobile a[href="#${secId}"]`);
     if (link) {
       await link.click();
       await page.waitForTimeout(400);
@@ -270,15 +271,14 @@ async function run() {
     const mobileToc = document.querySelector('.terms-toc-mobile');
     const desktopToc = document.querySelector('.terms-toc-desktop');
     const mobileStyle = window.getComputedStyle(mobileToc);
-    const desktopStyle = window.getComputedStyle(desktopToc);
     return {
       mobileVisible: mobileStyle.display !== 'none',
-      desktopHidden: desktopStyle.display === 'none'
+      desktopAbsentOrHidden: !desktopToc || window.getComputedStyle(desktopToc).display === 'none'
     };
   });
 
-  if (mobileTocInfo.mobileVisible && mobileTocInfo.desktopHidden) {
-    console.log(`  ✓ On mobile (375px): mobile collapsible TOC is visible and desktop TOC is completely hidden`);
+  if (mobileTocInfo.mobileVisible && mobileTocInfo.desktopAbsentOrHidden) {
+    console.log(`  ✓ On mobile (375px): mobile collapsible TOC is visible and desktop TOC is completely absent/hidden`);
   } else {
     console.error(`  FAIL: TOC display incorrect on mobile: ${JSON.stringify(mobileTocInfo)}`);
     results.termsMobileTocWorks = false;

@@ -103,7 +103,7 @@
             <a class="menu-action" href="privacy.html"><i class="fas fa-shield-halved"></i><span>Privacy Center</span></a>
             <a class="menu-action active-page" href="terms.html"><i class="fas fa-file-contract"></i><span>Terms &amp; Conditions</span></a>
             <a class="menu-action" href="about.html"><i class="fas fa-circle-info"></i><span>About us</span></a>
-            <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Support%20Request&amp;body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!"><i class="fas fa-envelope"></i><span>Contact Support</span></a>
+            <a class="menu-action" href="mailto:?subject=PDFHub%20Support%20Request&amp;body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!"><i class="fas fa-envelope"></i><span>Contact Support</span></a>
           </div>
           <p class="menu-note">Your files stay on this device. No account required.</p>
         </div>
@@ -149,25 +149,6 @@
     </details>
 
     <div class="terms-layout">
-      <!-- Desktop Constrained Sticky Table of Contents -->
-      <nav class="terms-toc-desktop" id="termsTocDesktop" aria-label="Table of contents">
-        <div class="toc-desktop-header">
-          <h2>In this document</h2>
-          <span class="toc-badge">9 Sections</span>
-        </div>
-        <div class="toc-desktop-links" id="termsNavLinks">
-          <a class="terms-nav-link active" href="#acceptance"><span class="link-num">01</span><span>Acceptance of terms</span></a>
-          <a class="terms-nav-link" href="#permitted-use"><span class="link-num">02</span><span>Permitted use</span></a>
-          <a class="terms-nav-link" href="#your-documents"><span class="link-num">03</span><span>Your documents &amp; rights</span></a>
-          <a class="terms-nav-link" href="#local-processing"><span class="link-num">04</span><span>Processing &amp; storage</span></a>
-          <a class="terms-nav-link" href="#results"><span class="link-num">05</span><span>Results &amp; accuracy</span></a>
-          <a class="terms-nav-link" href="#availability"><span class="link-num">06</span><span>Availability &amp; updates</span></a>
-          <a class="terms-nav-link" href="#third-party"><span class="link-num">07</span><span>Third-party services</span></a>
-          <a class="terms-nav-link" href="#disclaimer"><span class="link-num">08</span><span>Disclaimer &amp; liability</span></a>
-          <a class="terms-nav-link" href="#questions"><span class="link-num">09</span><span>Questions &amp; feedback</span></a>
-        </div>
-      </nav>
-
       <!-- Legal Document Content Articles -->
       <section class="legal-sections" aria-label="Terms and conditions sections">
         <article class="legal-section" id="acceptance">
@@ -313,33 +294,37 @@
 
   <script src="site-pages.js"></script>
   <script>
-    // Smooth active section tracking for Terms TOC
+    // Active section tracking for Terms Table of Contents
     (function(){
-      const links = document.querySelectorAll('#termsNavLinks .terms-nav-link');
+      const chips = document.querySelectorAll('.terms-toc-mobile-grid .toc-chip');
       const sections = document.querySelectorAll('.legal-section');
-      if (!links.length || !sections.length) return;
+      if (!sections.length) return;
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            links.forEach(link => {
-              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-            });
-          }
+      if (chips.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              chips.forEach(chip => {
+                chip.classList.toggle('active', chip.getAttribute('href') === '#' + id);
+              });
+            }
+          });
+        }, {
+          rootMargin: '-100px 0px -60% 0px',
+          threshold: 0
         });
-      }, {
-        rootMargin: '-100px 0px -60% 0px',
-        threshold: 0
-      });
 
-      sections.forEach(sec => observer.observe(sec));
+        sections.forEach(sec => observer.observe(sec));
+      }
 
-      // Close mobile dropdown when a chip is tapped
+      // Close mobile dropdown when a chip is tapped on small screens
       document.querySelectorAll('.terms-toc-mobile-grid .toc-chip').forEach(chip => {
         chip.addEventListener('click', () => {
-          const details = document.getElementById('termsTocMobile');
-          if (details) details.open = false;
+          if (window.innerWidth <= 768) {
+            const details = document.getElementById('termsTocMobile');
+            if (details) details.open = false;
+          }
         });
       });
     })();

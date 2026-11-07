@@ -18,7 +18,8 @@
     "build:seo": "node scripts/build-seo-suite.mjs && node scripts/generate-sitemap.mjs",
     "build:docs": "node scripts/build-docs-suite.mjs && node scripts/build-core-docs.mjs && node scripts/build-docs-html.mjs",
     "test:docs": "node scripts/test-docs-portal.mjs",
-    "test:docs-mobile": "node scripts/test-docs-mobile-and-support.mjs"
+    "test:docs-mobile": "node scripts/test-docs-mobile-and-support.mjs",
+    "test:terms": "node scripts/test-terms-desktop-toc.mjs"
   },
   "devDependencies": {
     "docx": "^9.11.0",

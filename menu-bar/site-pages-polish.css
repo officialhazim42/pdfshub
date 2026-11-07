@@ -55,40 +55,32 @@ body.light .menu-action.menu-featured:hover .menu-feature-icon{color:#6655d9!imp
 /* ─────────────────────────────────────────────────────────────
    TERMS & CONDITIONS PAGE (REDESIGNED)
 ───────────────────────────────────────────────────────────── */
-.terms-page{width:min(1160px,90%)}
+.terms-page{width:min(1080px,92%);margin:0 auto}
 .terms-meta-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 16px;font-size:.76rem;color:#8e8ea8}
 .meta-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:rgba(124,106,255,.08);border:1px solid rgba(124,106,255,.2);color:#b3a7ff;font-weight:500}
 .meta-dot{color:#363650;font-size:.5rem}
 .terms-intro-note{display:flex;align-items:flex-start;gap:12px;max-width:760px;margin:20px 0 0;padding:14px 18px;border:1px solid rgba(56,217,245,.22);border-radius:12px;background:rgba(56,217,245,.05);color:#b6b5ca;font-size:.82rem;line-height:1.65}
 .terms-intro-note i{margin-top:3px;color:#38d9f5;font-size:1rem;flex-shrink:0}
 
-/* Mobile Collapsible TOC (< 1024px) */
-.terms-toc-mobile{display:none;margin-bottom:32px;border:1px solid #28283e;border-radius:14px;background:#0f0f1b;overflow:hidden}
-.terms-toc-summary{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;font:700 .86rem 'Syne',sans-serif;color:#eeeef8;cursor:pointer;list-style:none;user-select:none}
+/* Terms & Conditions Collapsible Table of Contents */
+.terms-toc-mobile{display:block;margin:28px 0 32px;border:1px solid #28283e;border-radius:14px;background:#0f0f1b;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.terms-toc-mobile:hover{border-color:rgba(124,106,255,.35);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.terms-toc-summary{display:flex;align-items:center;justify-content:space-between;padding:15px 20px;font:700 .9rem 'Syne',sans-serif;color:#eeeef8;cursor:pointer;list-style:none;user-select:none;transition:background .15s}
+.terms-toc-summary:hover{background:rgba(124,106,255,.05)}
 .terms-toc-summary::-webkit-details-marker{display:none}
-.toc-summary-title{display:inline-flex;align-items:center;gap:9px}
+.toc-summary-title{display:inline-flex;align-items:center;gap:10px}
 .toc-summary-title i{color:#7c6aff}
 .toc-caret{transition:transform .2s ease;color:#8e8ea8}
 details[open] .toc-caret{transform:rotate(180deg)}
-.terms-toc-mobile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;padding:14px 18px 18px;border-top:1px solid #202030;background:#0b0b14}
-.toc-chip{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;background:#141424;border:1px solid #242438;color:#9b9bb6;text-decoration:none;font-size:.76rem;font-weight:500;transition:all .15s}
-.toc-chip:hover{color:#fff;border-color:#7c6aff;background:#1a1a30;transform:translateY(-1px)}
-.toc-num{display:inline-block;padding:2px 5px;border-radius:4px;background:rgba(124,106,255,.15);color:#a89aff;font-size:.65rem;font-weight:700}
+.terms-toc-mobile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:18px 20px 22px;border-top:1px solid #202030;background:#0b0b14}
+.toc-chip{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;background:#141424;border:1px solid #242438;color:#9b9bb6;text-decoration:none;font-size:.78rem;font-weight:500;transition:all .15s}
+.toc-chip:hover,.toc-chip.active{color:#fff;border-color:#7c6aff;background:#1a1a30;transform:translateY(-1px)}
+.toc-chip.active{border-color:#7c6aff;background:rgba(124,106,255,.18);color:#fff}
+.toc-num{display:inline-block;padding:2px 6px;border-radius:4px;background:rgba(124,106,255,.15);color:#a89aff;font-size:.66rem;font-weight:700}
 
-/* Desktop Constrained 2-Column Layout (>= 1024px) */
-.terms-layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:42px;align-items:start;margin-top:36px}
-.terms-toc-desktop{position:sticky;top:84px;max-height:calc(100vh - 110px);overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:4px;padding:18px 14px;border:1px solid #26263c;border-radius:16px;background:#0d0d18;box-shadow:0 12px 32px rgba(0,0,0,.2)}
-.terms-toc-desktop::-webkit-scrollbar{width:4px}
-.terms-toc-desktop::-webkit-scrollbar-thumb{background:#30304a;border-radius:4px}
-.toc-desktop-header{display:flex;align-items:center;justify-content:space-between;padding:0 8px 12px;border-bottom:1px solid #202034;margin-bottom:8px}
-.toc-desktop-header h2{margin:0;font:700 .84rem 'Syne',sans-serif;color:#eeeef8}
-.toc-badge{font-size:.65rem;font-weight:700;color:#00e5a0;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.2);padding:2px 7px;border-radius:99px}
-.toc-desktop-links{display:flex;flex-direction:column;gap:3px}
-.terms-nav-link{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;color:#8b8ba7;text-decoration:none;font-size:.75rem;font-weight:500;line-height:1.4;transition:all .15s ease}
-.terms-nav-link .link-num{font-size:.66rem;font-weight:700;color:#6b6b8a;width:18px;flex-shrink:0}
-.terms-nav-link:hover{color:#eeeef8;background:rgba(124,106,255,.08)}
-.terms-nav-link.active{color:#fff;background:linear-gradient(90deg,rgba(124,106,255,.18),rgba(124,106,255,.05));border-left:2px solid #7c6aff;font-weight:600}
-.terms-nav-link.active .link-num{color:#a99bff}
+/* Terms Layout (Single column across all viewports) */
+.terms-layout{display:block;width:100%;margin-top:0}
+.terms-toc-desktop{display:none!important}
 
 /* Legal Content Sections */
 .legal-sections{display:grid;gap:20px}
@@ -246,21 +238,13 @@ body.light .meta-pill{background:rgba(91,71,224,.07);border-color:rgba(91,71,224
 body.light .meta-dot{color:#c5c5dc}
 body.light .terms-intro-note{background:rgba(2,132,199,.06);border-color:rgba(2,132,199,.2);color:#404058}
 body.light .terms-intro-note i{color:#0284c7}
-body.light .terms-toc-mobile{background:#fff;border-color:#dcdcfa}
+body.light .terms-toc-mobile{background:#fff;border-color:#dcdcfa;box-shadow:0 8px 24px rgba(40,35,90,.04)}
 body.light .terms-toc-summary{color:#18182e}
+body.light .terms-toc-summary:hover{background:rgba(91,71,224,.03)}
 body.light .terms-toc-mobile-grid{background:#f6f6fc;border-color:#e4e4f4}
 body.light .toc-chip{background:#fff;border-color:#dcdcfa;color:#505068}
-body.light .toc-chip:hover{background:#f0f0fa;color:#18182e;border-color:#5b47e0}
+body.light .toc-chip:hover,body.light .toc-chip.active{background:#f0f0fa;color:#5b47e0;border-color:#5b47e0}
 body.light .toc-num{background:rgba(91,71,224,.1);color:#5b47e0}
-
-body.light .terms-toc-desktop{background:#fff;border-color:#deddf0;box-shadow:0 8px 24px rgba(40,35,90,.05)}
-body.light .toc-desktop-header{border-color:#eaeaee}
-body.light .toc-desktop-header h2{color:#18182e}
-body.light .terms-nav-link{color:#686888}
-body.light .terms-nav-link .link-num{color:#8888a4}
-body.light .terms-nav-link:hover{color:#18182e;background:rgba(91,71,224,.06)}
-body.light .terms-nav-link.active{color:#5b47e0;background:rgba(91,71,224,.08);border-left-color:#5b47e0}
-body.light .terms-nav-link.active .link-num{color:#5b47e0}
 
 body.light .legal-section{background:#fff;border-color:#deddf0;box-shadow:0 6px 20px rgba(40,35,90,.04)}
 body.light .legal-section:hover{border-color:#c8c8e8}
@@ -337,9 +321,7 @@ body.light .modal-actions-row .btn-secondary:hover{background:#e4e4f2;color:#181
    RESPONSIVE BREAKPOINTS
 ───────────────────────────────────────────────────────────── */
 @media(max-width:1023px){
-  .terms-layout{grid-template-columns:1fr;gap:24px}
-  .terms-toc-desktop{display:none}
-  .terms-toc-mobile{display:block}
+  .terms-toc-mobile-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;padding:14px 18px 18px}
   .privacy-pillars-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .live-storage-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}
   .architecture-steps{grid-template-columns:1fr}
@@ -358,6 +340,7 @@ body.light .modal-actions-row .btn-secondary:hover{background:#e4e4f2;color:#181
 
 @media(max-width:560px){
   .editorial-page,.terms-page,.privacy-page{width:92%;padding:36px 0 56px}
+  .terms-toc-mobile-grid{grid-template-columns:1fr;gap:6px;padding:12px 14px 16px}
   .privacy-pillars-grid{grid-template-columns:1fr}
   .live-storage-dashboard{grid-template-columns:1fr}
   .privacy-content-card{padding:22px 18px}
