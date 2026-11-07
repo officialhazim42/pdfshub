@@ -358,9 +358,39 @@ body.light .modal-actions-row .btn-secondary:hover{background:#e4e4f2;color:#181
   .data-scope-box{grid-template-columns:1fr}
   .best-practices-grid{grid-template-columns:1fr}
 
-  /* Terms Navigation: HIDE desktop quick nav, PRESERVE mobile collapsible TOC */
+  /* Terms Navigation: HIDE desktop quick nav, STICKY mobile collapsible TOC */
   .terms-quick-nav{display:none!important}
-  .terms-toc-mobile{display:block!important}
+  .terms-toc-mobile{
+    display:block!important;
+    position:sticky!important;
+    top:64px!important;
+    z-index:15!important;
+    background:rgba(15,15,27,.96)!important;
+    backdrop-filter:blur(16px)!important;
+    -webkit-backdrop-filter:blur(16px)!important;
+    border:1px solid #28283e!important;
+    border-radius:14px!important;
+    box-shadow:0 8px 24px rgba(0,0,0,.35)!important;
+    max-height:calc(100vh - 76px)!important;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    margin:18px 0 24px!important;
+  }
+  .terms-toc-mobile summary{
+    position:sticky!important;
+    top:0!important;
+    z-index:2!important;
+    background:rgba(15,15,27,.98)!important;
+  }
+  body.light .terms-toc-mobile{
+    background:rgba(255,255,255,.96)!important;
+    border-color:#deddf0!important;
+    box-shadow:0 8px 24px rgba(40,35,90,.08)!important;
+  }
+  body.light .terms-toc-mobile summary{
+    background:rgba(255,255,255,.98)!important;
+  }
+  .legal-section{scroll-margin-top:136px!important}
 
   /* Privacy Navigation: Frictionless Horizontal Scrollable Pill Track */
   .privacy-quick-nav{
@@ -462,12 +492,13 @@ body.light .modal-actions-row .btn-secondary:hover{background:#e4e4f2;color:#181
   html,body{overflow-x:clip}
   .editorial-page,.terms-page,.privacy-page{width:92%;padding:36px 0 56px;overflow-x:visible}
   .terms-toc-mobile{min-width:0;max-width:100%;box-sizing:border-box}
+  .terms-toc-summary{padding:13px 16px!important;font-size:.84rem!important}
   .terms-toc-mobile-grid{grid-template-columns:1fr;gap:6px;padding:12px 14px 16px;box-sizing:border-box}
   .toc-chip{min-width:0;max-width:100%;box-sizing:border-box}
   .privacy-pillars-grid{grid-template-columns:1fr}
   .live-storage-dashboard{grid-template-columns:1fr}
   .privacy-content-card{scroll-margin-top:124px;padding:22px 18px;min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
-  .legal-section{scroll-margin-top:128px;padding:20px 18px;min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
+  .legal-section{scroll-margin-top:136px!important;padding:20px 18px;min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
   .legal-section-header{gap:10px}
   .legal-number{min-width:28px;height:28px;font-size:.7rem}
   .legal-section h2{font-size:1rem}
