@@ -19,6 +19,7 @@
     "build:docs": "node scripts/build-docs-suite.mjs && node scripts/build-core-docs.mjs && node scripts/build-docs-html.mjs",
     "test:docs": "node scripts/test-docs-portal.mjs",
     "test:docs-mobile": "node scripts/test-docs-mobile-and-support.mjs",
+    "test:docs-desktop": "node scripts/test-desktop-docs-menu.mjs",
     "test:terms": "node scripts/test-terms-desktop-toc.mjs"
   },
   "devDependencies": {

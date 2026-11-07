@@ -661,6 +661,336 @@ body.light .menu-note {
   color: #8888a0;
 }
 
+/* ==========================================================================
+   DESKTOP DOCUMENTATION MENU BAR / CONTROL CENTER (>= 769px)
+   ========================================================================== */
+@media (min-width: 769px) {
+  .site-menu {
+    width: min(560px, calc(100vw - 40px));
+    max-height: calc(100vh - 84px);
+    padding: 20px 22px;
+    border-radius: 20px;
+    background: rgba(15, 15, 26, 0.98);
+    border: 1px solid rgba(124, 106, 255, 0.28);
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  body.light .site-menu {
+    background: rgba(255, 255, 255, 0.99);
+    border-color: rgba(124, 106, 255, 0.22);
+    box-shadow: 0 24px 70px rgba(48, 42, 100, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.06);
+    color: #1a1a2e;
+  }
+
+  .menu-header {
+    gap: 8px;
+    padding-bottom: 2px;
+  }
+
+  .menu-heading {
+    padding: 2px 2px 10px;
+    font-size: 0.94rem;
+    letter-spacing: 0.3px;
+  }
+
+  .menu-heading small {
+    padding: 4px 10px;
+    font-size: 0.62rem;
+    letter-spacing: 0.9px;
+  }
+
+  .menu-search {
+    padding: 8px 0 6px;
+  }
+
+  .menu-search input {
+    min-height: 42px;
+    font-size: 0.85rem;
+    padding: 9px 12px 9px 36px;
+    border-radius: 12px;
+  }
+
+  .menu-search > i {
+    left: 14px;
+    font-size: 0.82rem;
+  }
+
+  .menu-search button {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+  }
+
+  .menu-status {
+    padding: 8px 12px;
+    background: rgba(22, 22, 37, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    font-size: 0.72rem;
+    justify-content: flex-start;
+  }
+
+  body.light .menu-status {
+    background: #f0f0f8;
+    border-color: #e2e2ee;
+    color: #606080;
+  }
+
+  .menu-body {
+    margin-top: 10px;
+    padding-right: 6px;
+  }
+
+  .menu-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 4px;
+  }
+
+  .menu-section-label {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 4px 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    color: var(--muted, #8b8ba7);
+    text-transform: uppercase;
+  }
+
+  .menu-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(124, 106, 255, 0.25) 0%, rgba(124, 106, 255, 0.02) 100%);
+  }
+
+  body.light .menu-section-label {
+    color: #606080;
+  }
+
+  body.light .menu-section-label::after {
+    background: linear-gradient(90deg, rgba(103, 88, 220, 0.22) 0%, rgba(103, 88, 220, 0.02) 100%);
+  }
+
+  .menu-action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 50px;
+    padding: 10px 14px;
+    border-radius: 13px;
+    background: rgba(22, 22, 37, 0.75);
+    border: 1px solid rgba(124, 106, 255, 0.16);
+    color: var(--text, #f0f0f8);
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .menu-action::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124, 106, 255, 0.12) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .menu-action:hover,
+  .menu-action:focus-visible {
+    background: rgba(28, 28, 48, 0.95);
+    border-color: rgba(124, 106, 255, 0.5);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124, 106, 255, 0.22), 0 0 0 1px rgba(124, 106, 255, 0.25);
+  }
+
+  .menu-action:hover::before,
+  .menu-action:focus-visible::before {
+    opacity: 1;
+  }
+
+  .menu-action:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(124, 106, 255, 0.2);
+  }
+
+  .menu-action.active-page {
+    background: linear-gradient(135deg, rgba(124, 106, 255, 0.24) 0%, rgba(22, 22, 37, 0.9) 100%);
+    border-color: var(--accent, #7c6aff);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 4px 18px rgba(124, 106, 255, 0.3), inset 0 0 0 1px var(--accent, #7c6aff);
+  }
+
+  .menu-action i {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: rgba(124, 106, 255, 0.12);
+    border: 1px solid rgba(124, 106, 255, 0.2);
+    color: var(--accent, #7c6aff);
+    font-size: 0.88rem;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .menu-action:hover i,
+  .menu-action:focus-visible i {
+    background: var(--accent, #7c6aff);
+    color: #ffffff;
+    border-color: var(--accent, #7c6aff);
+    transform: scale(1.06);
+    box-shadow: 0 3px 10px rgba(124, 106, 255, 0.4);
+  }
+
+  .menu-action.active-page i {
+    background: var(--accent, #7c6aff);
+    color: #ffffff;
+    border-color: var(--accent, #7c6aff);
+    box-shadow: 0 3px 10px rgba(124, 106, 255, 0.45);
+  }
+
+  .menu-action span {
+    flex: 1 1 auto;
+    font-size: 0.84rem;
+    letter-spacing: 0.1px;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .menu-action-note {
+    margin-left: auto;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 99px;
+    background: rgba(124, 106, 255, 0.14);
+    border: 1px solid rgba(124, 106, 255, 0.26);
+    color: var(--accent, #7c6aff);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .menu-action:hover .menu-action-note,
+  .menu-action:focus-visible .menu-action-note {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+  }
+
+  .menu-action.active-page .menu-action-note {
+    background: var(--accent, #7c6aff);
+    border-color: var(--accent, #7c6aff);
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(124, 106, 255, 0.35);
+  }
+
+  .menu-note {
+    margin: 16px 2px 2px;
+    padding: 10px 14px;
+    border-radius: 11px;
+    background: rgba(124, 106, 255, 0.06);
+    border: 1px dashed rgba(124, 106, 255, 0.22);
+    font-size: 0.74rem;
+    color: var(--muted, #8b8ba7);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  /* Light Theme Desktop */
+  body.light .menu-action {
+    background: #f7f7fc;
+    border-color: #e2e2ee;
+    color: #1a1a2e;
+    box-shadow: 0 2px 6px rgba(48, 42, 100, 0.05);
+  }
+
+  body.light .menu-action::before {
+    background: linear-gradient(135deg, rgba(103, 88, 220, 0.08) 0%, transparent 60%);
+  }
+
+  body.light .menu-action:hover,
+  body.light .menu-action:focus-visible {
+    background: #ffffff;
+    border-color: var(--accent, #6758dc);
+    color: #1a1a2e;
+    box-shadow: 0 8px 22px rgba(103, 88, 220, 0.15), 0 0 0 1px rgba(103, 88, 220, 0.2);
+  }
+
+  body.light .menu-action.active-page {
+    background: linear-gradient(135deg, rgba(103, 88, 220, 0.14) 0%, #ffffff 100%);
+    border-color: var(--accent, #6758dc);
+    color: #1a1a2e;
+    box-shadow: 0 4px 16px rgba(103, 88, 220, 0.18), inset 0 0 0 1px var(--accent, #6758dc);
+  }
+
+  body.light .menu-action i {
+    background: rgba(103, 88, 220, 0.09);
+    border-color: rgba(103, 88, 220, 0.18);
+    color: var(--accent, #6758dc);
+  }
+
+  body.light .menu-action:hover i,
+  body.light .menu-action:focus-visible i {
+    background: var(--accent, #6758dc);
+    color: #ffffff;
+    border-color: var(--accent, #6758dc);
+  }
+
+  body.light .menu-action.active-page i {
+    background: var(--accent, #6758dc);
+    color: #ffffff;
+    border-color: var(--accent, #6758dc);
+  }
+
+  body.light .menu-action-note {
+    background: #ebebf5;
+    border-color: #d8d8ea;
+    color: #5544cc;
+  }
+
+  body.light .menu-action:hover .menu-action-note,
+  body.light .menu-action:focus-visible .menu-action-note {
+    background: #5544cc;
+    border-color: #5544cc;
+    color: #ffffff;
+  }
+
+  body.light .menu-action.active-page .menu-action-note {
+    background: #5544cc;
+    border-color: #5544cc;
+    color: #ffffff;
+  }
+
+  body.light .menu-note {
+    background: rgba(103, 88, 220, 0.05);
+    border-color: rgba(103, 88, 220, 0.2);
+    color: #606080;
+  }
+}
+
 /* Toast feedback notification */
 .docs-toast {
   position: fixed;
