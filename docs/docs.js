@@ -377,7 +377,7 @@
     { title: 'PWA & Offline Capabilities', category: 'Mobile & PWA', url: 'pwa-offline.html', desc: 'Service workers, offline caching, mobile installation.' },
     { title: 'Developer Guide', category: 'Development', url: 'developer-guide.html', desc: 'Adding tools, code style, building and testing.' },
     { title: 'Installation & Setup', category: 'Development', url: 'installation-setup.html', desc: 'Local environment, dependencies, running preview server.' },
-    { title: 'Build & Deployment', category: 'DevOps', url: 'build-and-deployment.html', desc: 'Netlify, Cloudflare Pages, dist builder pipeline.' },
+    { title: 'Build & Deployment', category: 'DevOps', url: 'build-and-deployment.html', desc: 'Cloudflare Pages, static headers, dist builder pipeline.' },
     { title: 'Testing & Quality Assurance', category: 'QA', url: 'testing-and-qa.html', desc: 'Playwright E2E suites, asset validation, WCAG audits.' },
     { title: 'Merge PDF', category: 'Tool', url: 'tools/merge-pdf.html', desc: 'Combine multiple PDF documents into a single file.' },
     { title: 'Split PDF', category: 'Tool', url: 'tools/split-pdf.html', desc: 'Extract pages or split into individual PDF files.' },

@@ -1116,7 +1116,7 @@ http://localhost:8000
 - **Primary Canonical Production:** [https://pdfshub.netlify.app/](https://pdfshub.netlify.app/)
 - **Alternative Deployment:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 
-PDFHub can be deployed directly to any static hosting service (Netlify, Cloudflare Pages, GitHub Pages, or Apache/Nginx). Ensure HTTPS is enabled in production so browser Service Workers and PWA installation remain fully functional.
+PDFHub can be deployed directly to any static hosting service (Cloudflare Pages, GitHub Pages, or Apache/Nginx). Ensure HTTPS is enabled in production so browser Service Workers and PWA installation remain fully functional.
 
 ---
 

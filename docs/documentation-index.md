@@ -6,8 +6,6 @@ Welcome to the central documentation index for PDFHub. Every implemented tool, a
 
 ## Part 1: Architecture & Technical Foundations
 
-0. **[Complete Downloadable PDF Documentation Manual (75 Pages)](pdfhub-complete-documentation.pdf)**  
-   *Comprehensive, publication-grade, print-ready A4 PDF book containing all 33 tool specifications, privacy models, architecture, troubleshooting, and deployment guides.*
 1. **[Getting Started Guide](getting-started.md)**  
    *Overview of PDFHub, accessing web tools, mobile and desktop PWA installation, and navigating workspaces.*
 2. **[Website Architecture & Overview](website-overview.md)**  
@@ -25,7 +23,7 @@ Welcome to the central documentation index for PDFHub. Every implemented tool, a
 8. **[Accessibility Standards & Compliance](accessibility.md)**  
    *WCAG 2.1 Level AA compliance, contrast audit, keyboard navigation, and ARIA landmark implementations.*
 9. **[Production Deployment Manual](deployment.md)**  
-   *Configuring Netlify and Cloudflare Pages, build scripts, domain canonicalization, and asset caching.*
+   *Configuring Cloudflare Pages, build scripts, domain canonicalization, and asset caching.*
 10. **[QA Testing & Automated Test Suites](testing.md)**  
     *Documentation for automated SEO audits, link validation, runtime console checking, and E2E tool verification.*
 11. **[User Guides System Overview](guides/README.md)**  

@@ -142,15 +142,15 @@ const html = `<!DOCTYPE html>
   </div>
 
   <div class="content-wrap">
-    <h1 class="main-headline">33 Free PDF Tools. <span>Zero Uploads.</span> No Account Required.</h1>
-    <p class="sub-lead">Merge, split, compress, edit, convert, sign, protect, and inspect PDFs directly in your web browser with native WebAssembly speed.</p>
+    <h1 class="main-headline">PDFHub – 33 Free PDF Tools <span>Online</span></h1>
+    <p class="sub-lead">Your All-in-One PDF Toolkit. Organize, Edit, Convert, Compress, Protect and Manage PDF Documents with 33 Free Online Tools. No Sign-Up Required.</p>
   </div>
 
   <div class="footer-row">
     <div class="pills-group">
-      <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> 33 Browser-Based Tools</div>
-      <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> 33 Visual User Guides</div>
-      <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> Installable Offline PWA</div>
+      <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> 33 Free Online Tools</div>
+      <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> 100% Client-Side Privacy</div>
+      <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> No Account Required</div>
     </div>
     <div class="domain-tag">pdfshub.netlify.app</div>
   </div>

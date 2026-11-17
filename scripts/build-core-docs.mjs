@@ -33,7 +33,7 @@ Welcome to the official technical and user documentation for **PDFHub** (33 Free
 | **[Universal Troubleshooting](troubleshooting.md)** | Diagnosing memory limits, scanned pages, AcroForms, and corrupt files. |
 | **[Master FAQ](faq.md)** | Frequently asked questions regarding security, offline mode, and licensing. |
 | **[Accessibility Standards](accessibility.md)** | WCAG 2.1 AA audit, contrast ratios, keyboard navigation, and ARIA landmarks. |
-| **[Deployment Guide](deployment.md)** | Production pipelines for Netlify, Cloudflare Pages, build scripts, and caching. |
+| **[Deployment Guide](deployment.md)** | Production pipelines for Cloudflare Pages, build scripts, and caching. |
 | **[Testing & QA Manual](testing.md)** | Full test suite guide (SEO validator, link checker, E2E tool tests, PWA tests). |
 | **[User Guides Reference](guides/README.md)** | Visual walkthroughs and step-by-step tutorial architecture. |
 
@@ -88,7 +88,7 @@ Welcome to the central documentation index for PDFHub. Every implemented tool, a
 8. **[Accessibility Standards & Compliance](accessibility.md)**  
    *WCAG 2.1 Level AA compliance, contrast audit, keyboard navigation, and ARIA landmark implementations.*
 9. **[Production Deployment Manual](deployment.md)**  
-   *Configuring Netlify and Cloudflare Pages, build scripts, domain canonicalization, and asset caching.*
+   *Configuring Cloudflare Pages, build scripts, domain canonicalization, and asset caching.*
 10. **[QA Testing & Automated Test Suites](testing.md)**  
     *Documentation for automated SEO audits, link validation, runtime console checking, and E2E tool verification.*
 11. **[User Guides System Overview](guides/README.md)**  
@@ -438,7 +438,7 @@ To ensure complete technical honesty, PDFHub explicitly documents the **only 2 t
 
 ## 3. Data Retention & Cookies Policy
 
-- **No Server Storage:** PDFHub operates as a static client application on Netlify and Cloudflare Pages. There is no backend database, no file upload bucket, and no server-side processing queue.
+- **No Server Storage:** PDFHub operates as a static client application on Cloudflare Pages. There is no backend database, no file upload bucket, and no server-side processing queue.
 - **Zero Document Retention:** Once you close or reload the browser tab, the \`ArrayBuffer\` memory is immediately released to your operating system via JavaScript garbage collection.
 - **Zero Tracking Cookies:** PDFHub sets no advertising cookies, no third-party tracking pixels, and no user profiling cookies.
 - **Local Storage Usage:** The browser's \`localStorage\` is used strictly for storing UI preferences:
@@ -586,7 +586,7 @@ fs.writeFileSync(path.join(docsDir, 'accessibility.md'), accessContent, 'utf8');
 // 11. docs/deployment.md
 const deployContent = `# Production Deployment Manual
 
-This document provides complete technical instructions for building, validating, and deploying PDFHub to static hosting environments (Netlify and Cloudflare Pages).
+This document provides complete technical instructions for building, validating, and deploying PDFHub to static hosting environments (Cloudflare Pages).
 
 ---
 
@@ -611,41 +611,38 @@ node scripts/build-dist.mjs
 ### What the Build Script Does:
 1. Purges any pre-existing \`dist/\` directory.
 2. Recursively copies all production assets:
-   - Root files: \`index.html\`, \`developer.css\`, \`developer.js\`, \`sw.js\`, \`manifest.webmanifest\`, \`manifest.json\`, \`offline.html\`, \`robots.txt\`, \`sitemap.xml\`, \`_redirects\`
+   - Root files: \`index.html\`, \`developer.css\`, \`developer.js\`, \`sw.js\`, \`manifest.webmanifest\`, \`manifest.json\`, \`offline.html\`, \`robots.txt\`, \`sitemap.xml\`, \`_headers\`
    - Directories: \`assets/\`, \`favicons/\`, \`install/\`, \`menu-bar/\`, \`tools/\`, \`guides/\`, and \`docs/\`
 3. Excludes all development artifacts: \`node_modules/\`, \`.git/\`, \`scripts/\`, test files, and logs.
 4. Verifies total file count and size limits.
 
 ---
 
-## 3. Netlify Deployment Configuration (\`netlify.toml\`)
+## 3. Production Security & Cache Headers (\`_headers\`)
 
-Netlify automatically builds and publishes the site using the settings in [netlify.toml](../netlify.toml):
+Cloudflare Pages and modern static hosts apply universal response headers via [_headers](../_headers):
 
-\`\`\`toml
-[build]
-  publish = "dist"
-  command = "node scripts/build-dist.mjs"
+\`\`\`text
+# Universal headers compatible with Cloudflare Pages and static hosts
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Service-Worker-Allowed: /
 
-# Cache control for Service Worker
-[[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-    Service-Worker-Allowed = "/"
+/manifest.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
 
-# Cache control for Web App Manifest
-[[headers]]
-  for = "/manifest.webmanifest"
-  [headers.values]
-    Content-Type = "application/manifest+json; charset=utf-8"
-    Cache-Control = "public, max-age=0, must-revalidate"
+/manifest.json
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
 
-# Cache control for static icons
-[[headers]]
-  for = "/favicons/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800, immutable"
+/favicons/*
+  Cache-Control: public, max-age=604800, immutable
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
 \`\`\`
 
 ---

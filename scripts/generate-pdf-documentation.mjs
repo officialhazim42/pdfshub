@@ -635,7 +635,7 @@ const fullHtml = `<!doctype html>
 
       <div class="toc-item level-1"><span>Part VI: Developer Setup, Build Pipelines &amp; QA</span><span>41</span></div>
       <div class="toc-item level-2"><span>6.1 Local Development &amp; NPM Commands</span><span>41</span></div>
-      <div class="toc-item level-2"><span>6.2 Netlify &amp; Cloudflare Production Pipelines</span><span>41</span></div>
+      <div class="toc-item level-2"><span>6.2 Production Deployment Pipeline</span><span>41</span></div>
       <div class="toc-item level-2"><span>6.3 Automated Test Suites &amp; Verification Procedures</span><span>42</span></div>
     </div>
   </div>
@@ -957,10 +957,10 @@ const fullHtml = `<!doctype html>
       </tbody>
     </table>
 
-    <h2>6.2 Netlify &amp; Cloudflare Production Pipelines</h2>
+    <h2>6.2 Production Deployment Pipeline</h2>
     <ul class="styled-list">
-      <li><strong>Netlify Configuration:</strong> Configured via <code>netlify.toml</code> with <code>publish = "dist"</code> and <code>command = "node scripts/build-dist.mjs"</code>. Exact cache-control headers are enforced for <code>sw.js</code> (no-cache) and <code>manifest.webmanifest</code>.</li>
-      <li><strong>Cloudflare Workers:</strong> Configured via <code>wrangler.json</code> with <code>assets.directory = "dist"</code>. All production assets are strictly checked to ensure zero files exceed the Cloudflare 25 MiB asset limit.</li>
+      <li><strong>Universal Headers:</strong> Configured via <code>_headers</code> with explicit cache-control policies for <code>sw.js</code> (no-cache) and correct MIME types for <code>manifest.webmanifest</code>.</li>
+      <li><strong>Cloudflare Pages / Workers:</strong> Configured via <code>wrangler.json</code> with <code>assets.directory = "dist"</code>. All production assets are strictly checked to ensure zero files exceed the Cloudflare 25 MiB asset limit.</li>
       <li><strong>Canonical Domain:</strong> All sitemaps, Open Graph metadata, canonical links, and structured data use <code>https://pdfshub.netlify.app/</code> as primary origin.</li>
     </ul>
 

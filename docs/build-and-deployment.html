@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Build &amp; Production Deployment – PDFHub Documentation</title>
-  <meta name="description" content="Compiling production distribution bundles, Netlify configuration, and Cloudflare Pages asset limits. Authoritative documentation for PDFHub's browser-based PDF utilities.">
+  <meta name="description" content="Compiling production distribution bundles, Cloudflare Pages configuration, and static asset limits. Authoritative documentation for PDFHub's browser-based PDF utilities.">
   <link rel="canonical" href="https://pdfshub.netlify.app/docs/build-and-deployment.html"/>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#07070d">
@@ -25,7 +25,7 @@
         "@id": "https://pdfshub.netlify.app/docs/build-and-deployment.html#article",
         "url": "https://pdfshub.netlify.app/docs/build-and-deployment.html",
         "headline": "Build &amp; Production Deployment",
-        "description": "Compiling production distribution bundles, Netlify configuration, and Cloudflare Pages asset limits.",
+        "description": "Compiling production distribution bundles, Cloudflare Pages configuration, and static asset limits.",
         "author": { "@type": "Person", "name": "Hazim Bashir", "url": "https://github.com/officialhazim42" },
         "publisher": { "@type": "Organization", "name": "PDFHub", "url": "https://pdfshub.netlify.app/" }
       },
@@ -228,7 +228,7 @@
         <header class="docs-header">
           <span class="docs-category-tag"><i class="fas fa-book-open"></i> Developer</span>
           <h1 class="docs-title">Build &amp; Production Deployment</h1>
-          <p class="docs-lead">Compiling production distribution bundles, Netlify configuration, and Cloudflare Pages asset limits.</p>
+          <p class="docs-lead">Compiling production distribution bundles, Cloudflare Pages configuration, and static asset limits.</p>
 
           <div class="docs-actions-bar">
             <a class="btn-download-pdf" href="pdfhub-complete-documentation.pdf" download="PDFHub-Complete-Documentation-Manual.pdf">
@@ -281,9 +281,9 @@
         </div>
       </section>
 
-      <section id="netlify-deployment">
-        <h2><i class="fas fa-cloud"></i> Netlify Production Configuration</h2>
-        <p>Configured in <code>netlify.toml</code> with <code>publish = "dist"</code> and <code>command = "node scripts/build-dist.mjs"</code>. Explicit headers enforce <code>no-cache</code> for <code>sw.js</code> and correct MIME types for <code>manifest.webmanifest</code>.</p>
+      <section id="deployment-configuration">
+        <h2><i class="fas fa-cloud"></i> Production Deployment Configuration</h2>
+        <p>Configured in <code>wrangler.json</code> with <code>assets.directory = "dist"</code> and <code>command = "npm run build"</code>. Explicit headers enforce <code>no-cache</code> for <code>sw.js</code> and correct MIME types for <code>manifest.webmanifest</code> via universal <code>_headers</code>.</p>
       </section>
     
 

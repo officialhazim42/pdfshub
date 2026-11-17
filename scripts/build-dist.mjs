@@ -30,7 +30,7 @@ const productionItems = [
   'menu-bar',
   'robots.txt',
   'sitemap.xml',
-  '_redirects'
+  '_headers'
 ];
 
 function copyRecursive(src, dest) {
@@ -121,8 +121,8 @@ if (!fs.existsSync(path.join(dist, 'robots.txt'))) {
 if (!fs.existsSync(path.join(dist, 'sitemap.xml'))) {
   throw new Error('Verification failed: dist/sitemap.xml is missing!');
 }
-if (!fs.existsSync(path.join(dist, '_redirects'))) {
-  throw new Error('Verification failed: dist/_redirects is missing!');
+if (!fs.existsSync(path.join(dist, '_headers'))) {
+  throw new Error('Verification failed: dist/_headers is missing!');
 }
 
 const requiredIcons = [

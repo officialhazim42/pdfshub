@@ -20,7 +20,8 @@
     "test:docs": "node scripts/test-docs-portal.mjs",
     "test:docs-mobile": "node scripts/test-docs-mobile-and-support.mjs",
     "test:docs-desktop": "node scripts/test-desktop-docs-menu.mjs",
-    "test:terms": "node scripts/test-terms-desktop-toc.mjs"
+    "test:terms": "node scripts/test-terms-desktop-toc.mjs",
+    "test:social": "node scripts/test-social-preview.mjs"
   },
   "devDependencies": {
     "docx": "^9.11.0",

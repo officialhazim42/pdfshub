@@ -34,7 +34,7 @@ To ensure complete technical honesty, PDFHub explicitly documents the **only 2 t
 
 ## 3. Data Retention & Cookies Policy
 
-- **No Server Storage:** PDFHub operates as a static client application on Netlify and Cloudflare Pages. There is no backend database, no file upload bucket, and no server-side processing queue.
+- **No Server Storage:** PDFHub operates as a static client application on Cloudflare Pages. There is no backend database, no file upload bucket, and no server-side processing queue.
 - **Zero Document Retention:** Once you close or reload the browser tab, the `ArrayBuffer` memory is immediately released to your operating system via JavaScript garbage collection.
 - **Zero Tracking Cookies:** PDFHub sets no advertising cookies, no third-party tracking pixels, and no user profiling cookies.
 - **Local Storage Usage:** The browser's `localStorage` is used strictly for storing UI preferences:

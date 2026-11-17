@@ -31,13 +31,14 @@ if (fs.existsSync(robotsPath)) {
   assert(robots.includes(`Sitemap: ${domain}/sitemap.xml`), `robots.txt must reference ${domain}/sitemap.xml`);
 }
 
-// 2. Audit _redirects
-console.log('2. Auditing Netlify _redirects...');
-const redirectsPath = path.join(root, '_redirects');
-assert(fs.existsSync(redirectsPath), '_redirects must exist for Netlify configuration');
-if (fs.existsSync(redirectsPath)) {
-  const redirects = fs.readFileSync(redirectsPath, 'utf8');
-  assert(!redirects.includes('https://pdfshub.netlify.app/* https://pdfshub.smartstores.in/:splat 301!'), '_redirects must not redirect away from primary Netlify canonical domain');
+// 2. Audit _headers
+console.log('2. Auditing deployment _headers...');
+const headersPath = path.join(root, '_headers');
+assert(fs.existsSync(headersPath), '_headers must exist for production caching and security');
+if (fs.existsSync(headersPath)) {
+  const headers = fs.readFileSync(headersPath, 'utf8');
+  assert(headers.includes('Cache-Control'), '_headers must configure Cache-Control');
+  assert(headers.includes('X-Frame-Options'), '_headers must configure security headers');
 }
 
 // 3. Audit sitemap.xml

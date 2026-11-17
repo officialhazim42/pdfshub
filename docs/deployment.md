@@ -1,6 +1,6 @@
 # Production Deployment Manual
 
-This document provides complete technical instructions for building, validating, and deploying PDFHub to static hosting environments (Netlify and Cloudflare Pages).
+This document provides complete technical instructions for building, validating, and deploying PDFHub to static hosting environments (Cloudflare Pages).
 
 ---
 
@@ -25,41 +25,38 @@ node scripts/build-dist.mjs
 ### What the Build Script Does:
 1. Purges any pre-existing `dist/` directory.
 2. Recursively copies all production assets:
-   - Root files: `index.html`, `developer.css`, `developer.js`, `sw.js`, `manifest.webmanifest`, `manifest.json`, `offline.html`, `robots.txt`, `sitemap.xml`, `_redirects`
+   - Root files: `index.html`, `developer.css`, `developer.js`, `sw.js`, `manifest.webmanifest`, `manifest.json`, `offline.html`, `robots.txt`, `sitemap.xml`, `_headers`
    - Directories: `assets/`, `favicons/`, `install/`, `menu-bar/`, `tools/`, `guides/`, and `docs/`
 3. Excludes all development artifacts: `node_modules/`, `.git/`, `scripts/`, test files, and logs.
 4. Verifies total file count and size limits.
 
 ---
 
-## 3. Netlify Deployment Configuration (`netlify.toml`)
+## 3. Production Security & Cache Headers (`_headers`)
 
-Netlify automatically builds and publishes the site using the settings in [netlify.toml](../netlify.toml):
+Cloudflare Pages and modern static hosts apply universal response headers via [_headers](../_headers):
 
-```toml
-[build]
-  publish = "dist"
-  command = "node scripts/build-dist.mjs"
+```text
+# Universal headers compatible with Cloudflare Pages and static hosts
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Service-Worker-Allowed: /
 
-# Cache control for Service Worker
-[[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-    Service-Worker-Allowed = "/"
+/manifest.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
 
-# Cache control for Web App Manifest
-[[headers]]
-  for = "/manifest.webmanifest"
-  [headers.values]
-    Content-Type = "application/manifest+json; charset=utf-8"
-    Cache-Control = "public, max-age=0, must-revalidate"
+/manifest.json
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
 
-# Cache control for static icons
-[[headers]]
-  for = "/favicons/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800, immutable"
+/favicons/*
+  Cache-Control: public, max-age=604800, immutable
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
 ```
 
 ---
