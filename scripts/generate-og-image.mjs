@@ -1,6 +1,7 @@
 import { chromium } from 'playwright';
 import path from 'node:path';
 import fs from 'node:fs';
+import { SITE_HOSTNAME } from './site-config.mjs';
 
 const root = process.cwd();
 const outPath = path.join(root, 'favicons', 'og-image.png');
@@ -124,9 +125,10 @@ const html = `<!DOCTYPE html>
     }
     .domain-tag {
       font-family: 'Syne', sans-serif;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
-      color: #8888a5;
+      color: #b8b8d4;
+      letter-spacing: -0.2px;
     }
   </style>
 </head>
@@ -152,7 +154,7 @@ const html = `<!DOCTYPE html>
       <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> 100% Client-Side Privacy</div>
       <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> No Account Required</div>
     </div>
-    <div class="domain-tag">pdfshub.smartstores.in</div>
+    <div class="domain-tag">${SITE_HOSTNAME}</div>
   </div>
 </body>
 </html>`;
@@ -160,6 +162,8 @@ const html = `<!DOCTYPE html>
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
 await page.setContent(html, { waitUntil: 'networkidle' });
+await page.evaluate(() => document.fonts.ready);
+await page.waitForTimeout(200);
 await page.screenshot({ path: outPath });
 await browser.close();
-console.log(`Generated high-resolution Open Graph image at ${outPath} (1200x630)`);
+console.log(`Generated high-resolution Open Graph image at ${outPath} (1200x630) with domain: ${SITE_HOSTNAME}`);
