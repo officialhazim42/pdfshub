@@ -6,9 +6,9 @@ This document provides complete technical instructions for building, validating,
 
 ## 1. Canonical Domain Strategy
 
-- **Primary Canonical Domain:** `https://pdfshub.netlify.app/`
+- **Primary Canonical Domain:** `https://pdfshub.smartstores.in/`
 - **Alternative Deployment:** `https://pdfshub.smartstores.in/`
-- **Canonical Tags:** All 72 canonical public pages strictly declare `<link rel="canonical" href="https://pdfshub.netlify.app/..."/>`.
+- **Canonical Tags:** All 72 canonical public pages strictly declare `<link rel="canonical" href="https://pdfshub.smartstores.in/..."/>`.
 - **Redirect Policy:** No force-redirect rules are active in code between domains, ensuring both deployments remain 100% operational.
 
 ---

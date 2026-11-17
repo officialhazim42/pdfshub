@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { SITE_ORIGIN as domain } from './site-config.mjs';
 
 const root = process.cwd();
-const domain = 'https://pdfshub.netlify.app';
 
 const getISODate = (filePath) => {
   try {

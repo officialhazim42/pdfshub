@@ -579,7 +579,7 @@ const fullHtml = `<!doctype html>
     <div class="cover-meta-box">
       <div class="cover-meta-row">
         <span class="cover-meta-label">Primary Canonical Domain:</span>
-        <span class="cover-meta-value">https://pdfshub.netlify.app/</span>
+        <span class="cover-meta-value">https://pdfshub.smartstores.in/</span>
       </div>
       <div class="cover-meta-row">
         <span class="cover-meta-label">Alternative Deployment:</span>
@@ -961,7 +961,7 @@ const fullHtml = `<!doctype html>
     <ul class="styled-list">
       <li><strong>Universal Headers:</strong> Configured via <code>_headers</code> with explicit cache-control policies for <code>sw.js</code> (no-cache) and correct MIME types for <code>manifest.webmanifest</code>.</li>
       <li><strong>Cloudflare Pages / Workers:</strong> Configured via <code>wrangler.json</code> with <code>assets.directory = "dist"</code>. All production assets are strictly checked to ensure zero files exceed the Cloudflare 25 MiB asset limit.</li>
-      <li><strong>Canonical Domain:</strong> All sitemaps, Open Graph metadata, canonical links, and structured data use <code>https://pdfshub.netlify.app/</code> as primary origin.</li>
+      <li><strong>Canonical Domain:</strong> All sitemaps, Open Graph metadata, canonical links, and structured data use <code>https://pdfshub.smartstores.in/</code> as primary origin.</li>
     </ul>
 
     <div class="callout callout-success">
@@ -990,7 +990,7 @@ async function renderPdf() {
     format: 'A4',
     printBackground: true,
     displayHeaderFooter: true,
-    headerTemplate: '<div style="font-family: system-ui, -apple-system, sans-serif; font-size: 7.5pt; color: #888899; width: 100%; padding: 0 14mm; display: flex; justify-content: space-between;"><span>PDFHub Complete Documentation Manual</span><span>https://pdfshub.netlify.app/</span></div>',
+    headerTemplate: '<div style="font-family: system-ui, -apple-system, sans-serif; font-size: 7.5pt; color: #888899; width: 100%; padding: 0 14mm; display: flex; justify-content: space-between;"><span>PDFHub Complete Documentation Manual</span><span>https://pdfshub.smartstores.in/</span></div>',
     footerTemplate: '<div style="font-family: system-ui, -apple-system, sans-serif; font-size: 7.5pt; color: #888899; width: 100%; padding: 0 14mm; display: flex; justify-content: space-between;"><span>Author: Hazim Bashir (@officialhazim42)</span><span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span></div>',
     margin: {
       top: '16mm',

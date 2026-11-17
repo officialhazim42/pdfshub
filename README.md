@@ -2,7 +2,7 @@
 
 > **100% Private · Zero Server Uploads · No Sign-up Required · Free Forever**
 
-[![Live Website](https://img.shields.io/badge/Website-pdfshub.netlify.app-7c6aff.svg)](https://pdfshub.netlify.app/)
+[![Live Website](https://img.shields.io/badge/Website-pdfshub.smartstores.in-7c6aff.svg)](https://pdfshub.smartstores.in/)
 [![Repository](https://img.shields.io/badge/GitHub-officialhazim42%2Fpdfshub-00e5a0.svg)](https://github.com/officialhazim42/pdfshub)
 [![Tools](https://img.shields.io/badge/Tools-33%20Available-brightgreen.svg)](#available-tools)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Client--Side-blue.svg)](#privacy--security-architecture)
@@ -1088,7 +1088,6 @@ To ensure absolute transparency, PDFHub documents the following technical consid
 3. **OCR Engine Loading**: Optical Character Recognition (`ocr.html`) utilizes Tesseract.js. On first execution, the browser fetches the Tesseract language dictionary and WebAssembly worker (cached for future visits).
 4. **Archival PDF/A Compliance**: The `pdf-to-pdfa` tool writes standard PDF/A catalog dictionaries and XMP archival metadata. For legal regulatory submissions, always verify with an external ISO validator.
 5. **AI Summarizer & Translation**: Text extraction is executed 100% locally. The optional summarization and translation APIs require internet connectivity to communicate with external translation/AI endpoints.
-6. **Password-Protected PDF Support**: PDFHub features automated detection and authentication for password-protected PDF files across the suite (supporting ISO 32000 standard encryption, including AES-256, AES-128, and RC4). Passwords are held strictly in temporary execution memory (RAM) for the current session only and are never saved to localStorage, cookies, URLs, or console logs. Unlocking requires entering the valid document password; unauthorized decryption cracking is strictly unsupported.
 
 ---
 
@@ -1113,7 +1112,7 @@ http://localhost:8000
 
 ## Deployment
 
-- **Primary Canonical Production:** [https://pdfshub.netlify.app/](https://pdfshub.netlify.app/)
+- **Primary Canonical Production:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 - **Alternative Deployment:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 
 PDFHub can be deployed directly to any static hosting service (Cloudflare Pages, GitHub Pages, or Apache/Nginx). Ensure HTTPS is enabled in production so browser Service Workers and PWA installation remain fully functional.

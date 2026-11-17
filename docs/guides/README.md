@@ -2,7 +2,7 @@
 
 The **User Guides & Tips** system provides step-by-step visual tutorials for every one of PDFHub's 33 tools.
 
-- **Guides Landing Hub:** [/guides/](https://pdfshub.netlify.app/guides/)
+- **Guides Landing Hub:** [/guides/](https://pdfshub.smartstores.in/guides/)
 - **Individual Guide Routes:** `/guides/<tool-id>/` (33 routes)
 
 ---

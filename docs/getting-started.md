@@ -7,7 +7,7 @@
 ## 1. Accessing PDFHub
 
 PDFHub can be accessed on any modern browser on desktop, tablet, or smartphone:
-- **Primary Canonical Website:** [https://pdfshub.netlify.app/](https://pdfshub.netlify.app/)
+- **Primary Canonical Website:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 - **Alternative Deployment:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 
 No account creation, sign-up, or installation is strictly required to begin processing files immediately.
@@ -26,7 +26,7 @@ PDFHub is engineered as a fully compliant Progressive Web App (PWA). Installing 
 - **Apple iOS (Safari):** Tap the **Share** button at the bottom of the screen, scroll down, and select **Add to Home Screen**.
 - **Android (Chrome):** Tap the three-dot menu and select **Install app** or **Add to Home screen**.
 - **macOS / Linux:** Install via Chrome, Edge, or Brave into your Applications launcher.
-- **Dedicated Install Page:** Visit [/install/](https://pdfshub.netlify.app/install/) for step-by-step visual platform instructions.
+- **Dedicated Install Page:** Visit [/install/](https://pdfshub.smartstores.in/install/) for step-by-step visual platform instructions.
 
 ---
 
@@ -53,5 +53,5 @@ Every tool on PDFHub follows an intuitive, consistent 4-step workflow:
 ## 5. Visual Step-by-Step Tutorials
 
 If you want visual walkthroughs before using a tool:
-- Visit the **[User Guides Hub](https://pdfshub.netlify.app/guides/)** to explore illustrated tutorials with annotated screenshots for all 33 tools.
+- Visit the **[User Guides Hub](https://pdfshub.smartstores.in/guides/)** to explore illustrated tutorials with annotated screenshots for all 33 tools.
 - Every tool page also contains a direct link to its corresponding visual guide at the bottom of the interface.

@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { SITE_ORIGIN as domain, SITE_HOSTNAME as siteHostname } from './site-config.mjs';
 
 const root = process.cwd();
-const domain = 'https://pdfshub.netlify.app';
 
 console.log('Running Comprehensive PDFHub SEO Audit Suite...\n');
 
@@ -29,6 +29,7 @@ if (fs.existsSync(robotsPath)) {
   assert(robots.includes('User-agent: *'), 'robots.txt must specify User-agent: *');
   assert(robots.includes('Allow: /'), 'robots.txt must allow root crawling');
   assert(robots.includes(`Sitemap: ${domain}/sitemap.xml`), `robots.txt must reference ${domain}/sitemap.xml`);
+  assert(robots.includes(`Host: ${siteHostname}`), `robots.txt must specify Host: ${siteHostname}`);
 }
 
 // 2. Audit _headers

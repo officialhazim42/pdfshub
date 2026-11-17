@@ -79,18 +79,18 @@ server.listen(PORT, async () => {
       'og:description': 'Your All-in-One PDF Toolkit. Organize, Edit, Convert, Compress, Protect and Manage PDF Documents with 33 Free Online Tools. No Sign-Up Required.',
       'og:type': 'website',
       'og:locale': 'en_US',
-      'og:url': 'https://pdfshub.netlify.app/',
-      'og:image': 'https://pdfshub.netlify.app/favicons/og-image.png',
-      'og:image:secure_url': 'https://pdfshub.netlify.app/favicons/og-image.png',
+      'og:url': 'https://pdfshub.smartstores.in/',
+      'og:image': 'https://pdfshub.smartstores.in/favicons/og-image.png',
+      'og:image:secure_url': 'https://pdfshub.smartstores.in/favicons/og-image.png',
       'og:image:width': '1200',
       'og:image:height': '630',
       'og:image:alt': 'PDFHub – 33 Free PDF Tools Online',
       'twitter:card': 'summary_large_image',
       'twitter:title': 'PDFHub – 33 Free PDF Tools Online',
       'twitter:description': 'Your All-in-One PDF Toolkit. Organize, Edit, Convert, Compress, Protect and Manage PDF Documents with 33 Free Online Tools. No Sign-Up Required.',
-      'twitter:image': 'https://pdfshub.netlify.app/favicons/og-image.png',
+      'twitter:image': 'https://pdfshub.smartstores.in/favicons/og-image.png',
       'twitter:image:alt': 'PDFHub – 33 Free PDF Tools Online',
-      'canonical': 'https://pdfshub.netlify.app/'
+      'canonical': 'https://pdfshub.smartstores.in/'
     };
 
     for (const [key, val] of Object.entries(expected)) {
@@ -160,7 +160,7 @@ server.listen(PORT, async () => {
 
       const statusCode = response.status;
       const contentType = response.headers.get('content-type');
-      const hasOgImage = htmlText.includes('property="og:image"') && htmlText.includes('https://pdfshub.netlify.app/favicons/og-image.png');
+      const hasOgImage = htmlText.includes('property="og:image"') && htmlText.includes('https://pdfshub.smartstores.in/favicons/og-image.png');
       const hasOgTitle = htmlText.includes('property="og:title"') && htmlText.includes('PDFHub – 33 Free PDF Tools Online');
 
       if (statusCode !== 200 || !hasOgImage || !hasOgTitle) {

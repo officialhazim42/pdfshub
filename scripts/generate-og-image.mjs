@@ -152,7 +152,7 @@ const html = `<!DOCTYPE html>
       <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> 100% Client-Side Privacy</div>
       <div class="feature-tag"><i class="fas fa-check-circle" style="color:#00e5a0;"></i> No Account Required</div>
     </div>
-    <div class="domain-tag">pdfshub.netlify.app</div>
+    <div class="domain-tag">pdfshub.smartstores.in</div>
   </div>
 </body>
 </html>`;

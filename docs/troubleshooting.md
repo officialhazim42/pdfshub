@@ -28,7 +28,7 @@ This guide provides troubleshooting solutions for common issues encountered when
 ### Issue: "Print to PDF" dialog does not appear or formatting looks wrong
 - **Cause:** Browser pop-up blockers may prevent `window.print()` windows from opening, or print settings may have incorrect margins.
 - **Solution:**
-  1. Ensure your browser allows pop-ups for `pdfshub.netlify.app`.
+  1. Ensure your browser allows pop-ups for `pdfshub.smartstores.in`.
   2. In the print dialog, set **Destination** to **Save as PDF**.
   3. Under **More settings**, enable **Background graphics** and set **Margins** to **Default** or **None**.
 

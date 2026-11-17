@@ -13,7 +13,7 @@ const readmeContent = `# PDFHub — Complete Technical & User Documentation Suit
 
 Welcome to the official technical and user documentation for **PDFHub** (33 Free Browser-Based PDF Tools Online).
 
-- **Primary Canonical Domain:** [https://pdfshub.netlify.app/](https://pdfshub.netlify.app/)
+- **Primary Canonical Domain:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 - **Alternative Deployment:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 - **Source Code Repository:** [github.com/officialhazim42/pdfshub](https://github.com/officialhazim42/pdfshub)
 - **Web Documentation Portal:** [/docs/index.html](index.html)
@@ -160,7 +160,7 @@ const gettingStartedContent = `# Getting Started with PDFHub
 ## 1. Accessing PDFHub
 
 PDFHub can be accessed on any modern browser on desktop, tablet, or smartphone:
-- **Primary Canonical Website:** [https://pdfshub.netlify.app/](https://pdfshub.netlify.app/)
+- **Primary Canonical Website:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 - **Alternative Deployment:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 
 No account creation, sign-up, or installation is strictly required to begin processing files immediately.
@@ -179,7 +179,7 @@ PDFHub is engineered as a fully compliant Progressive Web App (PWA). Installing 
 - **Apple iOS (Safari):** Tap the **Share** button at the bottom of the screen, scroll down, and select **Add to Home Screen**.
 - **Android (Chrome):** Tap the three-dot menu and select **Install app** or **Add to Home screen**.
 - **macOS / Linux:** Install via Chrome, Edge, or Brave into your Applications launcher.
-- **Dedicated Install Page:** Visit [/install/](https://pdfshub.netlify.app/install/) for step-by-step visual platform instructions.
+- **Dedicated Install Page:** Visit [/install/](https://pdfshub.smartstores.in/install/) for step-by-step visual platform instructions.
 
 ---
 
@@ -206,7 +206,7 @@ Every tool on PDFHub follows an intuitive, consistent 4-step workflow:
 ## 5. Visual Step-by-Step Tutorials
 
 If you want visual walkthroughs before using a tool:
-- Visit the **[User Guides Hub](https://pdfshub.netlify.app/guides/)** to explore illustrated tutorials with annotated screenshots for all 33 tools.
+- Visit the **[User Guides Hub](https://pdfshub.smartstores.in/guides/)** to explore illustrated tutorials with annotated screenshots for all 33 tools.
 - Every tool page also contains a direct link to its corresponding visual guide at the bottom of the interface.
 `;
 
@@ -480,7 +480,7 @@ This guide provides troubleshooting solutions for common issues encountered when
 ### Issue: "Print to PDF" dialog does not appear or formatting looks wrong
 - **Cause:** Browser pop-up blockers may prevent \`window.print()\` windows from opening, or print settings may have incorrect margins.
 - **Solution:**
-  1. Ensure your browser allows pop-ups for \`pdfshub.netlify.app\`.
+  1. Ensure your browser allows pop-ups for \`pdfshub.smartstores.in\`.
   2. In the print dialog, set **Destination** to **Save as PDF**.
   3. Under **More settings**, enable **Background graphics** and set **Margins** to **Default** or **None**.
 
@@ -592,9 +592,9 @@ This document provides complete technical instructions for building, validating,
 
 ## 1. Canonical Domain Strategy
 
-- **Primary Canonical Domain:** \`https://pdfshub.netlify.app/\`
+- **Primary Canonical Domain:** \`https://pdfshub.smartstores.in/\`
 - **Alternative Deployment:** \`https://pdfshub.smartstores.in/\`
-- **Canonical Tags:** All 72 canonical public pages strictly declare \`<link rel="canonical" href="https://pdfshub.netlify.app/..."/>\`.
+- **Canonical Tags:** All 72 canonical public pages strictly declare \`<link rel="canonical" href="https://pdfshub.smartstores.in/..."/>\`.
 - **Redirect Policy:** No force-redirect rules are active in code between domains, ensuring both deployments remain 100% operational.
 
 ---
@@ -706,7 +706,7 @@ const guidesReadmeContent = `# PDFHub User Guides & Visual Tutorials System
 
 The **User Guides & Tips** system provides step-by-step visual tutorials for every one of PDFHub's 33 tools.
 
-- **Guides Landing Hub:** [/guides/](https://pdfshub.netlify.app/guides/)
+- **Guides Landing Hub:** [/guides/](https://pdfshub.smartstores.in/guides/)
 - **Individual Guide Routes:** \`/guides/<tool-id>/\` (33 routes)
 
 ---

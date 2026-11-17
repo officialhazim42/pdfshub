@@ -2,7 +2,7 @@
 
 Welcome to the official technical and user documentation for **PDFHub** (33 Free Browser-Based PDF Tools Online).
 
-- **Primary Canonical Domain:** [https://pdfshub.netlify.app/](https://pdfshub.netlify.app/)
+- **Primary Canonical Domain:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 - **Alternative Deployment:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 - **Source Code Repository:** [github.com/officialhazim42/pdfshub](https://github.com/officialhazim42/pdfshub)
 - **Web Documentation Portal:** [/docs/index.html](index.html)

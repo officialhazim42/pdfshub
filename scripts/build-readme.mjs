@@ -280,7 +280,7 @@ let md = `# PDFHub — 33 Free Browser-Based PDF Tools Online
 
 > **100% Private · Zero Server Uploads · No Sign-up Required · Free Forever**
 
-[![Live Website](https://img.shields.io/badge/Website-pdfshub.netlify.app-7c6aff.svg)](https://pdfshub.netlify.app/)
+[![Live Website](https://img.shields.io/badge/Website-pdfshub.smartstores.in-7c6aff.svg)](https://pdfshub.smartstores.in/)
 [![Repository](https://img.shields.io/badge/GitHub-officialhazim42%2Fpdfshub-00e5a0.svg)](https://github.com/officialhazim42/pdfshub)
 [![Tools](https://img.shields.io/badge/Tools-33%20Available-brightgreen.svg)](#available-tools)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Client--Side-blue.svg)](#privacy--security-architecture)
@@ -421,7 +421,7 @@ http://localhost:8000
 
 ## Deployment
 
-- **Primary Canonical Production:** [https://pdfshub.netlify.app/](https://pdfshub.netlify.app/)
+- **Primary Canonical Production:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 - **Alternative Deployment:** [https://pdfshub.smartstores.in/](https://pdfshub.smartstores.in/)
 
 PDFHub can be deployed directly to any static hosting service (Cloudflare Pages, GitHub Pages, or Apache/Nginx). Ensure HTTPS is enabled in production so browser Service Workers and PWA installation remain fully functional.

@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import child_process from 'node:child_process';
+import { SITE_ORIGIN as domain } from './site-config.mjs';
 
 const root = process.cwd();
-const domain = 'https://pdfshub.netlify.app';
 
 // 1. Read guides data
 const dataJsPath = path.join(root, 'guides', 'data.js');
@@ -235,12 +235,7 @@ for (const [toolFile, cfg] of Object.entries(toolSeoConfig)) {
     continue;
   }
 
-  let html;
-  try {
-    html = child_process.execSync(`git show HEAD:tools/${toolFile}`, { encoding: 'utf8' });
-  } catch (e) {
-    html = fs.readFileSync(toolFilePath, 'utf8');
-  }
+  let html = fs.readFileSync(toolFilePath, 'utf8');
 
   // Related tools chips HTML
   const relatedChips = (guide.related || []).map(relId => {
@@ -297,17 +292,14 @@ for (const [toolFile, cfg] of Object.entries(toolSeoConfig)) {
     ]
   };
 
-  // Extract original scripts from git HEAD to preserve all tool dependencies
+  // Extract original scripts to preserve all tool dependencies (excluding structured data)
   let origScripts = '';
-  try {
-    const origGitContent = child_process.execSync(`git show HEAD:tools/${toolFile}`, { encoding: 'utf8' });
-    const origHeadMatch = origGitContent.match(/<head>([\s\S]*?)<\/head>/i);
-    if (origHeadMatch) {
-      const scriptTags = [...origHeadMatch[1].matchAll(/<script[\s\S]*?<\/script>/gi)].map(m => m[0]);
-      origScripts = scriptTags.join('\n  ');
-    }
-  } catch(e) {
-    console.warn(`Could not read git HEAD for ${toolFile}:`, e.message);
+  const origHeadMatch = html.match(/<head>([\s\S]*?)<\/head>/i);
+  if (origHeadMatch) {
+    const scriptTags = [...origHeadMatch[1].matchAll(/<script[\s\S]*?<\/script>/gi)]
+      .map(m => m[0])
+      .filter(s => !s.includes('application/ld+json'));
+    origScripts = scriptTags.join('\n  ');
   }
 
   // Build new <head> metadata block

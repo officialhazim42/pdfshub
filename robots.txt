@@ -1,5 +1,5 @@
 # PDFHub Robots Configuration
-# Canonical Domain: https://pdfshub.netlify.app/
+# Canonical Domain: https://pdfshub.smartstores.in/
 
 User-agent: *
 Allow: /
@@ -8,4 +8,5 @@ Disallow: /.git/
 Disallow: /dist/
 
 # Canonical XML Sitemap
-Sitemap: https://pdfshub.netlify.app/sitemap.xml
+Sitemap: https://pdfshub.smartstores.in/sitemap.xml
+Host: pdfshub.smartstores.in
