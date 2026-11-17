@@ -37,11 +37,8 @@
   };
 
   // 2. SUPPORT MAILTO ENHANCER & FEEDBACK TOAST
-  // Audited repository: No separate organization support inbox configured.
-  // In accordance with instructions: We do not invent an unverified email address,
-  // and we do not use the developer's personal email (hazimbashirfaqeer@gmail.com).
-  // RFC 6068 mailto URI with subject and prefilled body opens the user's default email client.
-  const verifiedSupportEmail = '';
+  // Official developer & contact support email address
+  const verifiedSupportEmail = 'hazimbashir.dev@gmail.com';
   const supportSubject = 'PDFHub Support Request';
   const supportBody = `Hello PDFHub Support Team,\n\nI need assistance with PDFHub:\n- Tool / Feature: \n- Description of issue: \n- Operating System / Browser: \n\nThank you!`;
   const supportMailtoUrl = `mailto:${verifiedSupportEmail}?subject=${encodeURIComponent(supportSubject)}&body=${encodeURIComponent(supportBody)}`;
@@ -66,7 +63,7 @@
     // Standardize all support links in documentation
     document.querySelectorAll('a.menu-action, a').forEach(link => {
       const href = link.getAttribute('href') || '';
-      if (link.textContent.includes('Contact Support') || href.includes('hazimbashirfaqeer') || href.includes('Support%20Request')) {
+      if (link.textContent.includes('Contact Support') || href.includes('hazimbashirfaqeer') || href.includes('hazimbashir.dev') || href.includes('Support%20Request')) {
         link.setAttribute('href', supportMailtoUrl);
       }
     });

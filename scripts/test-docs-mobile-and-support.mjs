@@ -68,9 +68,12 @@ server.listen(PORT, async () => {
     if (!contactHref.startsWith('mailto:')) {
       throw new Error(`Contact Support link is not a mailto link: ${contactHref}`);
     }
-    // 2. Must NOT use developer's personal email as support recipient
+    // 2. Must use official developer email as support recipient
+    if (!contactHref.includes('hazimbashir.dev@gmail.com')) {
+      throw new Error(`Contact Support must use official email hazimbashir.dev@gmail.com: ${contactHref}`);
+    }
     if (contactHref.includes('hazimbashirfaqeer@gmail.com')) {
-      throw new Error(`Contact Support must not use developer personal email as recipient: ${contactHref}`);
+      throw new Error(`Contact Support must not use outdated email: ${contactHref}`);
     }
     // 3. Must include standard subject and body template
     if (!contactHref.includes('PDFHub%20Support%20Request')) {

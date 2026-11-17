@@ -1788,38 +1788,6 @@
       opacity: .5
     }
 
-    /* SCROLL TO TOP */
-    #scrollTop {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 100;
-      background: var(--s2);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: .85rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .2s;
-      opacity: 0;
-      pointer-events: none
-    }
-
-    #scrollTop.show {
-      opacity: 1;
-      pointer-events: all
-    }
-
-    #scrollTop:hover {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent)
-    }
 
     /* HIDDEN */
     .card.hidden {
@@ -1931,7 +1899,7 @@
                 conditions</span></a>
             <a class="menu-action" href="menu-bar/about.html"><i class="fas fa-circle-info"></i><span>About
                 us</span></a>
-            <a class="menu-action" href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Support%20Request&amp;body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!"><i
+            <a class="menu-action" href="mailto:hazimbashir.dev@gmail.com?subject=PDFHub%20Support%20Request&amp;body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!"><i
                 class="fas fa-envelope"></i><span>Contact Support</span></a>
           </div>
           <p class="menu-note">Your tools, history, and preferences stay in this browser.</p>
@@ -2416,7 +2384,7 @@
             <li><a href="menu-bar/privacy.html">Privacy Center</a></li>
             <li><a href="menu-bar/terms.html">Terms &amp; Conditions</a></li>
             <li><a href="menu-bar/about.html">About PDFHub</a></li>
-            <li><a href="mailto:hazimbashirfaqeer@gmail.com?subject=PDFHub%20Support%20Request&amp;body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!">Contact Support</a></li>
+            <li><a href="mailto:hazimbashir.dev@gmail.com?subject=PDFHub%20Support%20Request&amp;body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!">Contact Support</a></li>
           </ul>
           <div class="footer-security-note">
             <i class="fas fa-shield-halved" aria-hidden="true"></i>
@@ -2442,8 +2410,6 @@
     </div>
   </footer>
 
-  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top"><i
-      class="fas fa-chevron-up"></i></button>
 
   <script>
 
@@ -2525,8 +2491,6 @@
       });
     });
 
-    // Scroll to top button
-    window.onscroll = () => { document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 400) };
 
     // Animate stat numbers
     document.querySelectorAll('.n[data-target]').forEach(el => {

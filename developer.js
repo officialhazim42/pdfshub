@@ -140,14 +140,14 @@
     window.addEventListener('storage',event=>{if(event.key==='pdfhub-theme')applyTheme(event.newValue||'dark');});
   }
 
-  const verifiedSupportEmail = '';
+  const verifiedSupportEmail = 'hazimbashir.dev@gmail.com';
   const supportSubject = 'PDFHub Support Request';
   const supportBody = `Hello PDFHub Support Team,\n\nI need assistance with PDFHub:\n- Tool / Feature: \n- Description of issue: \n- Operating System / Browser: \n\nThank you!`;
   const supportMailtoUrl = `mailto:${verifiedSupportEmail}?subject=${encodeURIComponent(supportSubject)}&body=${encodeURIComponent(supportBody)}`;
 
   const setupContactSupport = () => {
     // Ensure all existing contact links have the standardized mailto URL
-    document.querySelectorAll('a[href*="hazimbashirfaqeer@gmail.com"]').forEach(link => {
+    document.querySelectorAll('a[href*="hazimbashirfaqeer@gmail.com"], a[href*="hazimbashir.dev@gmail.com"]').forEach(link => {
       if (!link.hasAttribute('data-developer-email') && !link.closest('.pdfhub-developer-info')) {
         link.setAttribute('href', supportMailtoUrl);
       }
@@ -230,18 +230,16 @@
     });
   });
   const existingScrollTop=document.getElementById('scrollTop')||document.getElementById('pdfhubScrollTop');
-  if(!existingScrollTop){
-    const scrollTop=document.createElement('button');
+  let scrollTop=existingScrollTop;
+  if(!scrollTop){
+    scrollTop=document.createElement('button');
     scrollTop.id='pdfhubScrollTop';document.body.appendChild(scrollTop);scrollTop.className='pdfhub-scroll-top';scrollTop.type='button';scrollTop.title='Back to top';scrollTop.setAttribute('aria-label','Back to top');scrollTop.innerHTML='<i class="fas fa-arrow-up" aria-hidden="true"></i>';
-    const updateScrollTop=()=>scrollTop.classList.toggle('show',window.scrollY>320);
-    window.addEventListener('scroll',updateScrollTop,{passive:true});
     scrollTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-    updateScrollTop();
-  }else if(!existingScrollTop.classList.contains('pdfhub-scroll-top')){
-    existingScrollTop.classList.add('pdfhub-scroll-top');
+  }else if(!scrollTop.classList.contains('pdfhub-scroll-top')){
+    scrollTop.classList.add('pdfhub-scroll-top');
   }
   if(document.getElementById('pdfhubDeveloper'))return;
-  const profile={name:'Hazim Bashir',urdu:'حازم بشیر',handle:'@officialhazim42',role:'Android Developer & Software Creator',location:'Ganderbal, Jammu & Kashmir, India',email:'hazimbashirfaqeer@gmail.com',bio:"Hi, I'm Hazim Bashir (حازم بشیر), an independent software developer from Ganderbal, Jammu & Kashmir, India. I specialize in designing modern, high-performance, and privacy-first Android applications using Kotlin and Jetpack Compose. My mission is to craft clean, offline-first mobile experiences that respect user data privacy without compromise."};
+  const profile={name:'Hazim Bashir',urdu:'حازم بشیر',handle:'@officialhazim42',role:'Android Developer & Software Creator',location:'Ganderbal, Jammu & Kashmir, India',email:'hazimbashir.dev@gmail.com',bio:"Hi, I'm Hazim Bashir (حازم بشیر), an independent software developer from Ganderbal, Jammu & Kashmir, India. I specialize in designing modern, high-performance, and privacy-first Android applications using Kotlin and Jetpack Compose. My mission is to craft clean, offline-first mobile experiences that respect user data privacy without compromise."};
   const socials=[
     ['Instagram','@officialhazim42','https://instagram.com/officialhazim42','fa-instagram'],
     ['GitHub','@officialhazim42','https://github.com/officialhazim42','fa-github'],
@@ -257,16 +255,80 @@
   const compact=socials.filter(item=>['Instagram','GitHub','YouTube'].includes(item[0]));
   const esc=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const external=(url,label,classes='')=>`<a class="${classes}" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${esc(label)} (opens in a new tab)">`;
+
+  const devImgSrc=siteRoot+'assets/hazim-bashir-dev.png';
+
   const widget=document.createElement('div');widget.id='pdfhubDeveloper';widget.className='pdfhub-developer';
-  widget.innerHTML=`<div class="pdfhub-developer-panel" aria-label="Developer links"><button class="pdfhub-developer-about" type="button"><i class="fas fa-user-astronaut" aria-hidden="true"></i> About Developer</button>${compact.map(item=>external(item[2],item[0], 'pdfhub-developer-social')+`<i class="fab ${item[3]}" aria-hidden="true"></i></a>`).join('')}</div><button class="pdfhub-developer-trigger" type="button" aria-expanded="false" aria-controls="pdfhubDeveloperDialog" aria-label="Open developer panel"><i class="fas fa-user" aria-hidden="true"></i></button></div>`;
+  widget.innerHTML=`<div class="pdfhub-developer-panel" aria-label="Developer links"><button class="pdfhub-developer-about" type="button"><i class="fas fa-user-astronaut" aria-hidden="true"></i> About Developer</button>${compact.map(item=>external(item[2],item[0], 'pdfhub-developer-social')+`<i class="fab ${item[3]}" aria-hidden="true"></i></a>`).join('')}</div><button class="pdfhub-developer-trigger" type="button" aria-expanded="false" aria-controls="pdfhubDeveloperDialog" aria-label="Open developer panel"><img class="pdfhub-developer-trigger-img" src="${devImgSrc}" alt="Hazim Bashir — Developer Profile" width="52" height="52" /><span class="pdfhub-developer-trigger-close" aria-hidden="true"><i class="fas fa-xmark"></i></span></button>`;
   const dialog=document.createElement('div');dialog.id='pdfhubDeveloperDialog';dialog.className='pdfhub-developer-dialog';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-hidden','true');dialog.setAttribute('aria-labelledby','pdfhubDeveloperTitle');
-  dialog.innerHTML=`<div class="pdfhub-developer-card"><button class="pdfhub-developer-close" type="button" aria-label="Close developer profile"><i class="fas fa-xmark" aria-hidden="true"></i></button><div class="pdfhub-developer-content"><header class="pdfhub-developer-header"><div class="pdfhub-developer-avatar" aria-hidden="true"><i class="fas fa-code"></i></div><div><h2 class="pdfhub-developer-name" id="pdfhubDeveloperTitle">${profile.name}</h2><div class="pdfhub-developer-urdu" lang="ur" dir="rtl">${profile.urdu}</div><span class="pdfhub-developer-handle">${profile.handle}</span><div class="pdfhub-developer-role">${profile.role}</div><div class="pdfhub-developer-location"><i class="fas fa-location-dot" aria-hidden="true"></i><span>${profile.location}</span></div></div></header><section class="pdfhub-developer-section"><h3>About Me</h3><p class="pdfhub-developer-bio">${profile.bio}</p></section><section class="pdfhub-developer-section"><h3>Developer Information</h3><div class="pdfhub-developer-info"><div class="pdfhub-developer-info-item"><strong>Full Name</strong><span>${profile.name} (${profile.urdu})</span></div><div class="pdfhub-developer-info-item"><strong>Location</strong><span>${profile.location}</span></div><div class="pdfhub-developer-info-item"><strong>Specialization</strong><span>Android Development, Kotlin, and Jetpack Compose</span></div><div class="pdfhub-developer-info-item"><strong>Professional Role</strong><span>${profile.role}</span></div><div class="pdfhub-developer-info-item"><strong>Email</strong><a href="mailto:${profile.email}?subject=${encodeURIComponent('Developer Inquiry — PDFHub')}" data-developer-email>${profile.email}</a></div></div></section><section class="pdfhub-developer-section"><h3>Connect With Me</h3><div class="pdfhub-developer-social-grid">${socials.map(item=>external(item[2],`${item[0]} profile`, 'pdfhub-developer-social-card')+`<i class="fab ${item[3]}" aria-hidden="true"></i><span>${item[0]}<small>${item[1]}</small></span></a>`).join('')}</div></section><footer class="pdfhub-developer-footer">Crafted with care by Hazim Bashir (حازم بشیر) in Kashmir 🏔️<br>Instagram: @officialhazim42 · GitHub: @officialhazim42 · YouTube: @officialhazim42 · LinkedIn: hazim-bashir-faqeer</footer></div></div>`;
+  dialog.innerHTML=`<div class="pdfhub-developer-card"><button class="pdfhub-developer-close" type="button" aria-label="Close developer profile"><i class="fas fa-xmark" aria-hidden="true"></i></button><div class="pdfhub-developer-content"><header class="pdfhub-developer-header"><div class="pdfhub-developer-avatar"><img class="pdfhub-developer-avatar-img" src="${devImgSrc}" alt="Hazim Bashir — Android Developer &amp; Software Creator" width="84" height="84" /></div><div><h2 class="pdfhub-developer-name" id="pdfhubDeveloperTitle">${profile.name}</h2><div class="pdfhub-developer-urdu" lang="ur" dir="rtl">${profile.urdu}</div><span class="pdfhub-developer-handle">${profile.handle}</span><div class="pdfhub-developer-role">${profile.role}</div><div class="pdfhub-developer-location"><i class="fas fa-location-dot" aria-hidden="true"></i><span>${profile.location}</span></div></div></header><section class="pdfhub-developer-section"><h3>About Me</h3><p class="pdfhub-developer-bio">${profile.bio}</p></section><section class="pdfhub-developer-section"><h3>Developer Information</h3><div class="pdfhub-developer-info"><div class="pdfhub-developer-info-item"><strong>Full Name</strong><span>${profile.name} (${profile.urdu})</span></div><div class="pdfhub-developer-info-item"><strong>Location</strong><span>${profile.location}</span></div><div class="pdfhub-developer-info-item"><strong>Specialization</strong><span>Android Development, Kotlin, and Jetpack Compose</span></div><div class="pdfhub-developer-info-item"><strong>Professional Role</strong><span>${profile.role}</span></div><div class="pdfhub-developer-info-item"><strong>Email</strong><a href="mailto:${profile.email}?subject=${encodeURIComponent('Developer Inquiry — PDFHub')}" data-developer-email>${profile.email}</a></div></div></section><section class="pdfhub-developer-section"><h3>Connect With Me</h3><div class="pdfhub-developer-social-grid">${socials.map(item=>external(item[2],`${item[0]} profile`, 'pdfhub-developer-social-card')+`<i class="fab ${item[3]}" aria-hidden="true"></i><span>${item[0]}<small>${item[1]}</small></span></a>`).join('')}</div></section><footer class="pdfhub-developer-footer">Crafted with care by Hazim Bashir (حازم بشیر) in Kashmir 🏔️<br>Instagram: @officialhazim42 · GitHub: @officialhazim42 · YouTube: @officialhazim42 · LinkedIn: hazim-bashir-faqeer</footer></div></div>`;
   document.body.append(widget,dialog);
   const trigger=widget.querySelector('.pdfhub-developer-trigger'),panel=widget.querySelector('.pdfhub-developer-panel'),about=widget.querySelector('.pdfhub-developer-about'),close=dialog.querySelector('.pdfhub-developer-close');
   let lastFocus=null;
   const toast=message=>{let node=document.querySelector('.pdfhub-developer-toast');if(!node){node=document.createElement('div');node.className='pdfhub-developer-toast';node.setAttribute('role','status');document.body.append(node)}node.textContent=message;node.classList.add('show');setTimeout(()=>node.classList.remove('show'),2600)};
-  const setPanel=open=>{widget.classList.toggle('open',open);trigger.setAttribute('aria-expanded',String(open));trigger.setAttribute('aria-label',open?'Close developer panel':'Open developer panel');trigger.innerHTML=`<i class="fas ${open?'fa-xmark':'fa-user'}" aria-hidden="true"></i>`;};
-  const setDialog=open=>{dialog.classList.toggle('open',open);dialog.setAttribute('aria-hidden',String(!open));widget.inert=open;document.getElementById('pdfhubScrollTop')?.toggleAttribute('inert',open);document.body.classList.toggle('pdfhub-modal-open',open);if(open){lastFocus=document.activeElement;setPanel(false);close.focus();}else{lastFocus?.focus();}};
+
+  // Floating Controls Inactivity & Interaction Management
+  let inactivityTimer=null;
+  const INACTIVITY_DELAY=3000;
+
+  const isDevOpen=()=>widget.classList.contains('open')||dialog.classList.contains('open')||document.body.classList.contains('pdfhub-modal-open');
+  const isHoveredOrFocused=el=>{
+    if(!el)return false;
+    try{return el.matches(':hover')||el.contains(document.activeElement);}catch(_){return false;}
+  };
+
+  const hideFloatingControls=()=>{
+    if(isDevOpen())return;
+    if(!isHoveredOrFocused(widget))widget.classList.remove('show');
+    if(!isHoveredOrFocused(scrollTop))scrollTop.classList.remove('show');
+  };
+
+  const handleInteraction=()=>{
+    widget.classList.add('show');
+    if(scrollTop){
+      if(window.scrollY>300)scrollTop.classList.add('show');
+      else scrollTop.classList.remove('show');
+    }
+    clearTimeout(inactivityTimer);
+    inactivityTimer=setTimeout(hideFloatingControls,INACTIVITY_DELAY);
+  };
+
+  ['scroll','mousemove','pointerdown','touchstart','keydown','wheel'].forEach(evt=>{
+    window.addEventListener(evt,handleInteraction,{passive:true});
+  });
+
+  [widget,scrollTop].forEach(el=>{
+    if(!el)return;
+    el.addEventListener('mouseenter',()=>{clearTimeout(inactivityTimer);el.classList.add('show');});
+    el.addEventListener('mouseleave',()=>{if(!isDevOpen()){clearTimeout(inactivityTimer);inactivityTimer=setTimeout(hideFloatingControls,INACTIVITY_DELAY);}});
+    el.addEventListener('focusin',()=>{clearTimeout(inactivityTimer);el.classList.add('show');});
+    el.addEventListener('focusout',()=>{if(!isDevOpen()){clearTimeout(inactivityTimer);inactivityTimer=setTimeout(hideFloatingControls,INACTIVITY_DELAY);}});
+  });
+
+  const setPanel=open=>{
+    widget.classList.toggle('open',open);
+    trigger.setAttribute('aria-expanded',String(open));
+    trigger.setAttribute('aria-label',open?'Close developer panel':'Open developer panel');
+    if(open){widget.classList.add('show');clearTimeout(inactivityTimer);}
+    else{clearTimeout(inactivityTimer);inactivityTimer=setTimeout(hideFloatingControls,INACTIVITY_DELAY);}
+  };
+  const setDialog=open=>{
+    dialog.classList.toggle('open',open);
+    dialog.setAttribute('aria-hidden',String(!open));
+    widget.inert=open;
+    scrollTop?.toggleAttribute('inert',open);
+    document.body.classList.toggle('pdfhub-modal-open',open);
+    if(open){
+      lastFocus=document.activeElement;
+      setPanel(false);
+      clearTimeout(inactivityTimer);
+      close.focus();
+    }else{
+      lastFocus?.focus();
+      clearTimeout(inactivityTimer);
+      inactivityTimer=setTimeout(hideFloatingControls,INACTIVITY_DELAY);
+    }
+  };
   trigger.addEventListener('click',()=>setPanel(!widget.classList.contains('open')));
   about.addEventListener('click',()=>setDialog(true));
   close.addEventListener('click',()=>setDialog(false));dialog.addEventListener('click',event=>{if(event.target===dialog)setDialog(false)});
