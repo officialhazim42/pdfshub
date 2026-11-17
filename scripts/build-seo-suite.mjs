@@ -328,8 +328,11 @@ for (const [toolFile, cfg] of Object.entries(toolSeoConfig)) {
   <meta name="twitter:description" content="${esc(cfg.desc)}"/>
   <meta name="twitter:image" content="${domain}/favicons/og-image.png"/>
 
-  <link rel="icon" href="../favicons/favicon.png" type="image/png"/>
-  <link rel="apple-touch-icon" href="../favicons/favicon.png"/>
+  <link rel="icon" href="/favicon.ico" sizes="32x32"/>
+  <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml"/>
+  <link rel="icon" href="/favicons/favicon-32x32.png" sizes="32x32" type="image/png"/>
+  <link rel="icon" href="/favicons/favicon-16x16.png" sizes="16x16" type="image/png"/>
+  <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
@@ -790,8 +793,11 @@ for (const guide of guides) {
   <meta name="twitter:description" content="${esc(guideDesc)}">
   <meta name="twitter:image" content="${domain}/favicons/og-image.png">
 
-  <link rel="icon" href="../../favicons/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="../../favicons/favicon.png">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../../developer.css">
@@ -853,8 +859,11 @@ const guideTemplateHtml = `<!doctype html>
   <meta name="twitter:description" content="Step-by-step user guide and tutorial for __TOOL_NAME__ on PDFHub with visual screenshots, tips, and troubleshooting FAQs.">
   <meta name="twitter:image" content="${domain}/favicons/og-image.png">
 
-  <link rel="icon" href="../../favicons/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="../../favicons/favicon.png">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../../developer.css">

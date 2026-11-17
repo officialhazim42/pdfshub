@@ -47,11 +47,17 @@ console.log('✓ Production dist directory verified: dist/index.html');
 
 // 3b. Verify PWA Assets in dist
 const pwaFiles = [
+  'favicon.ico',
   'manifest.webmanifest',
   'manifest.json',
   'sw.js',
   'offline.html',
   'install/index.html',
+  'favicons/favicon.ico',
+  'favicons/favicon.svg',
+  'favicons/favicon.png',
+  'favicons/favicon-16x16.png',
+  'favicons/favicon-32x32.png',
   'favicons/icon-192.png',
   'favicons/icon-512.png',
   'favicons/icon-maskable-192.png',

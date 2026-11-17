@@ -1,31 +1,35 @@
-/* PDFHub Production-Ready Service Worker (v5)
+/* PDFHub Production-Ready Service Worker (v6)
    - Standards-compliant PWA caching
    - Zero sensitive document caching (files never stored in SW cache)
    - Safe navigation fallback (dedicated offline.html, never returns HTML for JS/CSS/image requests)
    - Graceful cache cleanup & update handling without breaking active editing sessions
 */
 
-const CACHE_NAME = 'pdfhub-v5';
+const CACHE_NAME = 'pdfhub-v6';
 const MAX_CACHE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MiB individual asset limit
 
 // Core static application shell essential for offline launch
 const CORE_APP_SHELL = [
   '/',
   '/index.html',
+  '/favicon.ico',
   '/manifest.webmanifest',
   '/offline.html',
   '/install/',
   '/install/index.html',
   '/developer.css',
   '/developer.js',
+  '/favicons/favicon.ico',
+  '/favicons/favicon.svg',
   '/favicons/favicon.png',
+  '/favicons/favicon-16x16.png',
+  '/favicons/favicon-32x32.png',
+  '/favicons/favicon-48x48.png',
   '/favicons/icon-192.png',
   '/favicons/icon-512.png',
   '/favicons/icon-maskable-192.png',
   '/favicons/icon-maskable-512.png',
   '/favicons/apple-touch-icon.png',
-  '/favicons/favicon-32x32.png',
-  '/favicons/favicon-16x16.png',
   '/tools/shared.css',
   '/tools/shared.js',
   '/menu-bar/site-pages.css',

@@ -15,6 +15,7 @@ fs.mkdirSync(dist, { recursive: true });
 // 2. Production items to copy (files and directories)
 const productionItems = [
   'index.html',
+  'favicon.ico',
   'developer.css',
   'developer.js',
   'sw.js',
