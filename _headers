@@ -13,11 +13,9 @@
   Content-Type: application/manifest+json; charset=utf-8
   Cache-Control: public, max-age=0, must-revalidate
 
-/favicons/og-image.png
-  Cache-Control: public, max-age=0, must-revalidate
-
 /favicons/*
-  Cache-Control: public, max-age=604800, immutable
+  Cache-Control: public, max-age=604800, s-maxage=604800
+  Accept-Ranges: bytes
 
 /*
   X-Frame-Options: SAMEORIGIN

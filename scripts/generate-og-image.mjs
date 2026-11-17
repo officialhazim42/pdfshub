@@ -144,8 +144,8 @@ const html = `<!DOCTYPE html>
   </div>
 
   <div class="content-wrap">
-    <h1 class="main-headline">PDFHub – 33 Free PDF Tools <span>Online</span></h1>
-    <p class="sub-lead">Your All-in-One PDF Toolkit. Organize, Edit, Convert, Compress, Protect and Manage PDF Documents with 33 Free Online Tools. No Sign-Up Required.</p>
+    <h1 class="main-headline">PDFHub – Free Online <span>PDF Tools</span></h1>
+    <p class="sub-lead">Your All-in-One PDF Toolkit. 33 free online tools to edit, convert, merge, compress, protect, and manage PDF documents directly in your browser. No sign-up required.</p>
   </div>
 
   <div class="footer-row">

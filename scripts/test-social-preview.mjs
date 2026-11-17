@@ -75,21 +75,22 @@ server.listen(PORT, async () => {
     // Required tags
     const expected = {
       'og:site_name': 'PDFHub',
-      'og:title': 'PDFHub – 33 Free PDF Tools Online',
-      'og:description': 'Your All-in-One PDF Toolkit. Organize, Edit, Convert, Compress, Protect and Manage PDF Documents with 33 Free Online Tools. No Sign-Up Required.',
+      'og:title': 'PDFHub – Free Online PDF Tools',
+      'og:description': 'Your All-in-One PDF Toolkit. 33 free online tools to edit, convert, merge, compress, protect, and manage PDF documents directly in your browser. No sign-up required.',
       'og:type': 'website',
       'og:locale': 'en_US',
       'og:url': 'https://pdfshub.smartstores.in/',
       'og:image': 'https://pdfshub.smartstores.in/favicons/og-image.png',
       'og:image:secure_url': 'https://pdfshub.smartstores.in/favicons/og-image.png',
+      'og:image:type': 'image/png',
       'og:image:width': '1200',
       'og:image:height': '630',
-      'og:image:alt': 'PDFHub – 33 Free PDF Tools Online',
+      'og:image:alt': 'PDFHub – Free Online PDF Tools',
       'twitter:card': 'summary_large_image',
-      'twitter:title': 'PDFHub – 33 Free PDF Tools Online',
-      'twitter:description': 'Your All-in-One PDF Toolkit. Organize, Edit, Convert, Compress, Protect and Manage PDF Documents with 33 Free Online Tools. No Sign-Up Required.',
+      'twitter:title': 'PDFHub – Free Online PDF Tools',
+      'twitter:description': 'Your All-in-One PDF Toolkit. 33 free online tools to edit, convert, merge, compress, protect, and manage PDF documents directly in your browser. No sign-up required.',
       'twitter:image': 'https://pdfshub.smartstores.in/favicons/og-image.png',
-      'twitter:image:alt': 'PDFHub – 33 Free PDF Tools Online',
+      'twitter:image:alt': 'PDFHub – Free Online PDF Tools',
       'canonical': 'https://pdfshub.smartstores.in/'
     };
 
@@ -161,7 +162,7 @@ server.listen(PORT, async () => {
       const statusCode = response.status;
       const contentType = response.headers.get('content-type');
       const hasOgImage = htmlText.includes('property="og:image"') && htmlText.includes('https://pdfshub.smartstores.in/favicons/og-image.png');
-      const hasOgTitle = htmlText.includes('property="og:title"') && htmlText.includes('PDFHub – 33 Free PDF Tools Online');
+      const hasOgTitle = htmlText.includes('property="og:title"') && htmlText.includes('PDFHub – Free Online PDF Tools');
 
       if (statusCode !== 200 || !hasOgImage || !hasOgTitle) {
         console.error(`  ❌ Crawler failed: ${crawler.bot} (status: ${statusCode}, hasOgImage: ${hasOgImage}, hasOgTitle: ${hasOgTitle})`);
