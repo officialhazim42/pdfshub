@@ -74,6 +74,7 @@ server.listen(PORT, async () => {
 
     // Required tags
     const expected = {
+      'fb:app_id': '1485488066275075',
       'og:site_name': 'PDFHub',
       'og:title': 'PDFHub – Free Online PDF Tools',
       'og:description': 'Your All-in-One PDF Toolkit. 33 free online tools to edit, convert, merge, compress, protect, and manage PDF documents directly in your browser. No sign-up required.',
@@ -98,7 +99,7 @@ server.listen(PORT, async () => {
       let actualVal;
       if (key === 'canonical') {
         actualVal = getLinkHref(indexHtml, 'canonical');
-      } else if (key.startsWith('og:')) {
+      } else if (key.startsWith('og:') || key.startsWith('fb:')) {
         actualVal = getMetaProperty(indexHtml, key);
       } else if (key.startsWith('twitter:')) {
         actualVal = getMetaName(indexHtml, key);

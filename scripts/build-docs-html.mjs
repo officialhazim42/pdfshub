@@ -101,6 +101,7 @@ const html = `<!doctype html>
   <meta name="theme-color" content="#07070d">
 
   <!-- Open Graph / Facebook -->
+  <meta property="fb:app_id" content="1485488066275075">
   <meta property="og:site_name" content="PDFHub">
   <meta property="og:type" content="website">
   <meta property="og:title" content="PDFHub Documentation Portal – Architecture, Tools &amp; Technical Reference">

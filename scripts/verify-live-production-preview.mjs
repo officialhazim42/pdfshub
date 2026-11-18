@@ -51,6 +51,7 @@ async function runLiveVerification() {
 
   const html = pageRes.bodyText;
   const checks = [
+    { name: 'fb:app_id', pattern: /<meta\s+property=["']fb:app_id["']\s+content=["']1485488066275075["']/i },
     { name: 'og:site_name', pattern: /<meta\s+property=["']og:site_name["']\s+content=["']PDFHub["']/i },
     { name: 'og:type', pattern: /<meta\s+property=["']og:type["']\s+content=["']website["']/i },
     { name: 'og:locale', pattern: /<meta\s+property=["']og:locale["']\s+content=["']en_US["']/i },

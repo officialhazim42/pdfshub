@@ -312,6 +312,7 @@ for (const [toolFile, cfg] of Object.entries(toolSeoConfig)) {
   <meta name="theme-color" content="#07070d"/>
 
   <!-- Open Graph / Facebook -->
+  <meta property="fb:app_id" content="1485488066275075"/>
   <meta property="og:site_name" content="PDFHub"/>
   <meta property="og:type" content="website"/>
   <meta property="og:title" content="${esc(cfg.title)}"/>
@@ -777,6 +778,8 @@ for (const guide of guides) {
   <meta name="theme-color" content="#07070d">
 
   <!-- Open Graph / Facebook -->
+  <meta property="fb:app_id" content="1485488066275075">
+  <meta property="fb:app_id" content="1485488066275075">
   <meta property="og:site_name" content="PDFHub">
   <meta property="og:type" content="article">
   <meta property="og:title" content="${esc(guideTitle)}">
@@ -847,6 +850,7 @@ const guideTemplateHtml = `<!doctype html>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#07070d">
 
+  <meta property="fb:app_id" content="1485488066275075">
   <meta property="og:site_name" content="PDFHub">
   <meta property="og:type" content="article">
   <meta property="og:title" content="__TOOL_NAME__ Guide &amp; Tutorial | PDFHub">
