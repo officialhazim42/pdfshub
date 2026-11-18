@@ -44,7 +44,7 @@ server.listen(8199, '127.0.0.1', async () => {
     page.on('console', msg => console.log('PAGE LOG:', msg.text()));
 
     console.log('\n======================================================');
-    console.log('[TEST 1] Initial Load State (Floating Buttons Hidden)');
+    console.log('[TEST 1] Initial Load State (Developer Button Hidden, Back to Top Hidden)');
     console.log('======================================================');
     await page.goto('http://127.0.0.1:8199/index.html', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(500);
@@ -54,18 +54,21 @@ server.listen(8199, '127.0.0.1', async () => {
       if (!el) return null;
       const style = window.getComputedStyle(el);
       return {
-        hasShow: el.classList.contains('show'),
-        opacity: style.opacity,
-        pointerEvents: style.pointerEvents,
-        displayed: style.display !== 'none'
+        existsInDOM: true,
+        display: style.display,
+        visibility: style.visibility,
+        configFlag: window.__PDFHUB_SHOW_DEVELOPER_WIDGET
       };
     });
 
     console.log('Initial Developer Widget State:', initialDevState);
-    if (initialDevState.hasShow || parseFloat(initialDevState.opacity) > 0.1 || initialDevState.pointerEvents !== 'none') {
-      throw new Error('Assertion failed: Floating developer button is visible or interactive on initial page load!');
+    if (!initialDevState || !initialDevState.existsInDOM) {
+      throw new Error('Assertion failed: Floating developer element was deleted or not mounted in DOM!');
     }
-    console.log('✓ Developer floating button is correctly hidden on initial page load (opacity 0, pointer-events none).');
+    if (initialDevState.display !== 'none' || initialDevState.configFlag !== false) {
+      throw new Error(`Assertion failed: Floating developer button is not hidden! display: ${initialDevState.display}, flag: ${initialDevState.configFlag}`);
+    }
+    console.log('✓ Developer floating button is preserved in DOM but correctly hidden (display: none, flag: false).');
 
     const initialScrollTopState = await page.evaluate(() => {
       const el = document.getElementById('pdfhubScrollTop');
@@ -84,191 +87,54 @@ server.listen(8199, '127.0.0.1', async () => {
     console.log('✓ Back to Top button is correctly hidden on initial page load.');
 
     console.log('\n======================================================');
-    console.log('[TEST 2] Interaction Detection & Button Appearance');
+    console.log('[TEST 2] Interaction Detection: Developer Button REMAINS Hidden While Back to Top Works');
     console.log('======================================================');
-    // Simulate user mouse movement
+    // Simulate user mouse movement and scrolling down 600px
     await page.mouse.move(200, 200);
-    await page.waitForTimeout(450);
-
-    const devStateAfterMove = await page.evaluate(() => {
-      const el = document.getElementById('pdfhubDeveloper');
-      const style = window.getComputedStyle(el);
-      return {
-        hasShow: el.classList.contains('show'),
-        opacity: style.opacity,
-        pointerEvents: style.pointerEvents
-      };
-    });
-    console.log('Developer Widget State after mouse move:', devStateAfterMove);
-    if (!devStateAfterMove.hasShow || parseFloat(devStateAfterMove.opacity) < 0.9) {
-      throw new Error('Assertion failed: Developer button did not show on user interaction!');
-    }
-    console.log('✓ Developer button smoothly appears on user interaction.');
-
-    // Scroll down 600px and check Back to Top
     await page.evaluate(() => window.scrollTo(0, 600));
     await page.mouse.move(250, 250);
     await page.waitForTimeout(450);
 
-    const scrollTopStateAfterScroll = await page.evaluate(() => {
-      const el = document.getElementById('pdfhubScrollTop');
-      const style = window.getComputedStyle(el);
+    const stateAfterInteraction = await page.evaluate(() => {
+      const dev = document.getElementById('pdfhubDeveloper');
+      const scroll = document.getElementById('pdfhubScrollTop');
+      const devStyle = window.getComputedStyle(dev);
+      const scrollStyle = window.getComputedStyle(scroll);
       return {
-        hasShow: el.classList.contains('show'),
-        opacity: style.opacity,
-        pointerEvents: style.pointerEvents
+        devDisplay: devStyle.display,
+        devHasShow: dev.classList.contains('show'),
+        scrollHasShow: scroll.classList.contains('show'),
+        scrollOpacity: scrollStyle.opacity
       };
     });
-    console.log('Back to Top State after scrolling > 300px:', scrollTopStateAfterScroll);
-    if (!scrollTopStateAfterScroll.hasShow || parseFloat(scrollTopStateAfterScroll.opacity) < 0.9) {
-      throw new Error('Assertion failed: Back to top button did not appear when scrolled down!');
+    console.log('State after interaction & scrolling > 300px:', stateAfterInteraction);
+    if (stateAfterInteraction.devDisplay !== 'none' || stateAfterInteraction.devHasShow) {
+      throw new Error('Assertion failed: Developer button showed up on user interaction or scroll!');
     }
-    console.log('✓ Back to Top button appears when user scrolls > 300px.');
+    if (!stateAfterInteraction.scrollHasShow || parseFloat(stateAfterInteraction.scrollOpacity) < 0.9) {
+      throw new Error('Assertion failed: Back to top button failed to appear when scrolled > 300px!');
+    }
+    console.log('✓ Floating developer button remains 100% hidden on interaction/scroll.');
+    console.log('✓ Back to Top button correctly appears when user scrolls > 300px.');
 
     console.log('\n======================================================');
-    console.log('[TEST 3] Auto-Hide on Inactivity (~3 Seconds)');
+    console.log('[TEST 3] Back to Top Auto-Hide on Inactivity (~3 Seconds)');
     console.log('======================================================');
     console.log('Waiting 3.4 seconds without user interaction...');
     await page.waitForTimeout(3400);
 
-    const devStateAfterInactivity = await page.evaluate(() => {
-      const dev = document.getElementById('pdfhubDeveloper');
+    const scrollStateAfterInactivity = await page.evaluate(() => {
       const scroll = document.getElementById('pdfhubScrollTop');
-      return {
-        devHasShow: dev.classList.contains('show'),
-        scrollHasShow: scroll.classList.contains('show')
-      };
+      return scroll.classList.contains('show');
     });
-    console.log('State after inactivity:', devStateAfterInactivity);
-    if (devStateAfterInactivity.devHasShow || devStateAfterInactivity.scrollHasShow) {
-      throw new Error('Assertion failed: Buttons did not auto-hide after 3 seconds of inactivity!');
+    console.log('Back to Top has show class after inactivity:', scrollStateAfterInactivity);
+    if (scrollStateAfterInactivity) {
+      throw new Error('Assertion failed: Back to Top button did not auto-hide after 3 seconds of inactivity!');
     }
-    console.log('✓ Both floating buttons auto-hide after 3 seconds of inactivity.');
+    console.log('✓ Back to Top button cleanly auto-hides after 3 seconds of inactivity.');
 
     console.log('\n======================================================');
-    console.log('[TEST 4] Hover / Focus Inactivity Exception');
-    console.log('======================================================');
-    // Move mouse over developer button
-    await page.mouse.move(40, page.viewportSize().height - 40);
-    await page.waitForTimeout(200);
-
-    // Hover directly on the trigger button
-    await page.hover('.pdfhub-developer-trigger');
-    console.log('Hovering developer button, waiting 3.4 seconds...');
-    await page.waitForTimeout(3400);
-
-    const devStateWhileHovered = await page.evaluate(() => {
-      const el = document.getElementById('pdfhubDeveloper');
-      return el.classList.contains('show');
-    });
-    console.log('Developer Widget remains visible while hovered:', devStateWhileHovered);
-    if (!devStateWhileHovered) {
-      throw new Error('Assertion failed: Developer button hid while hovered!');
-    }
-    console.log('✓ Developer button remains visible while hovered during inactivity.');
-
-    console.log('\n======================================================');
-    console.log('[TEST 5] Developer Image Verification (Trigger & Modal)');
-    console.log('======================================================');
-    // Check trigger image
-    const triggerImgInfo = await page.evaluate(() => {
-      const img = document.querySelector('.pdfhub-developer-trigger-img');
-      if (!img) return null;
-      return {
-        src: img.src,
-        alt: img.alt,
-        naturalWidth: img.naturalWidth,
-        naturalHeight: img.naturalHeight,
-        complete: img.complete
-      };
-    });
-    console.log('Trigger Image Info:', triggerImgInfo);
-    if (!triggerImgInfo || !triggerImgInfo.complete || triggerImgInfo.naturalWidth === 0) {
-      throw new Error('Assertion failed: Trigger profile image failed to load!');
-    }
-    if (!triggerImgInfo.alt.includes('Hazim Bashir')) {
-      throw new Error('Assertion failed: Trigger image missing proper alt text!');
-    }
-    console.log(`✓ Trigger profile image loaded successfully (${triggerImgInfo.naturalWidth}x${triggerImgInfo.naturalHeight}) with alt: "${triggerImgInfo.alt}".`);
-
-    // Click trigger to open panel
-    await page.click('.pdfhub-developer-trigger');
-    await page.waitForTimeout(300);
-
-    // Click "About Developer" to open dialog
-    await page.click('.pdfhub-developer-about');
-    await page.waitForTimeout(400);
-
-    const modalImgInfo = await page.evaluate(() => {
-      const dialog = document.getElementById('pdfhubDeveloperDialog');
-      const img = dialog.querySelector('.pdfhub-developer-avatar-img');
-      const obsoleteCodeIcon = dialog.querySelector('.pdfhub-developer-avatar .fa-code');
-      return {
-        isOpen: dialog.classList.contains('open'),
-        hasCodeIcon: !!obsoleteCodeIcon,
-        imgSrc: img ? img.src : null,
-        imgAlt: img ? img.alt : null,
-        naturalWidth: img ? img.naturalWidth : 0,
-        naturalHeight: img ? img.naturalHeight : 0,
-        complete: img ? img.complete : false
-      };
-    });
-    console.log('Modal Image Info:', modalImgInfo);
-    if (!modalImgInfo.isOpen) {
-      throw new Error('Assertion failed: Developer modal dialog failed to open!');
-    }
-    if (modalImgInfo.hasCodeIcon) {
-      throw new Error('Assertion failed: Obsolete code icon illustration still present in modal avatar!');
-    }
-    if (!modalImgInfo.complete || modalImgInfo.naturalWidth === 0) {
-      throw new Error('Assertion failed: Modal profile image failed to load!');
-    }
-    if (!modalImgInfo.imgAlt.includes('Hazim Bashir')) {
-      throw new Error('Assertion failed: Modal image missing descriptive alt text!');
-    }
-    console.log(`✓ Modal profile image loaded cleanly (${modalImgInfo.naturalWidth}x${modalImgInfo.naturalHeight}) with alt: "${modalImgInfo.imgAlt}".`);
-
-    console.log('\n======================================================');
-    console.log('[TEST 6] Modal Stays Visible Indefinitely During Inactivity');
-    console.log('======================================================');
-    console.log('Waiting 3.4 seconds while modal is open...');
-    await page.waitForTimeout(3400);
-
-    const modalStillOpen = await page.evaluate(() => {
-      const dialog = document.getElementById('pdfhubDeveloperDialog');
-      return dialog.classList.contains('open');
-    });
-    console.log('Modal still open after inactivity:', modalStillOpen);
-    if (!modalStillOpen) {
-      throw new Error('Assertion failed: Modal closed during inactivity!');
-    }
-    console.log('✓ Developer modal remains open during inactivity.');
-
-    console.log('\n======================================================');
-    console.log('[TEST 7] Contact Email In Modal & Across Page');
-    console.log('======================================================');
-    const modalEmail = await page.evaluate(() => {
-      const emailLink = document.querySelector('[data-developer-email]');
-      return {
-        text: emailLink?.textContent.trim(),
-        href: emailLink?.getAttribute('href')
-      };
-    });
-    console.log('Modal Email Link:', modalEmail);
-    if (modalEmail.text !== 'hazimbashir.dev@gmail.com') {
-      throw new Error(`Assertion failed: Modal email display is ${modalEmail.text}, expected hazimbashir.dev@gmail.com`);
-    }
-    if (!modalEmail.href.includes('mailto:hazimbashir.dev@gmail.com')) {
-      throw new Error(`Assertion failed: Modal email href is ${modalEmail.href}, expected mailto:hazimbashir.dev@gmail.com`);
-    }
-    console.log('✓ Modal email verified: hazimbashir.dev@gmail.com with correct mailto href.');
-
-    // Close modal
-    await page.click('.pdfhub-developer-close');
-    await page.waitForTimeout(300);
-
-    console.log('\n======================================================');
-    console.log('[TEST 8] Back To Top Responds To Scroll Position');
+    console.log('[TEST 4] Back to Top Responds to Scroll Position');
     console.log('======================================================');
     // Scroll back to top
     await page.evaluate(() => window.scrollTo(0, 0));
@@ -286,10 +152,83 @@ server.listen(8199, '127.0.0.1', async () => {
     console.log('✓ Back to Top button is cleanly hidden when user is at the top of the page.');
 
     console.log('\n======================================================');
-    console.log('[TEST 9] Mobile Touch Targets & Responsiveness');
+    console.log('[TEST 5] Developer Modal & Profile Asset Preservation');
+    console.log('======================================================');
+    // Open modal via programmatic API or DOM event trigger
+    await page.evaluate(() => {
+      if (typeof window.openPdfhubDeveloperModal === 'function') {
+        window.openPdfhubDeveloperModal();
+      } else {
+        const aboutBtn = document.querySelector('.pdfhub-developer-about');
+        if (aboutBtn) aboutBtn.click();
+      }
+    });
+    await page.waitForTimeout(400);
+
+    const modalInfo = await page.evaluate(() => {
+      const dialog = document.getElementById('pdfhubDeveloperDialog');
+      const img = dialog.querySelector('.pdfhub-developer-avatar-img');
+      const emailLink = dialog.querySelector('[data-developer-email]');
+      const name = dialog.querySelector('#pdfhubDeveloperTitle')?.textContent;
+      const role = dialog.querySelector('.pdfhub-developer-role')?.textContent;
+      const location = dialog.querySelector('.pdfhub-developer-location')?.textContent;
+      const bio = dialog.querySelector('.pdfhub-developer-bio')?.textContent;
+
+      return {
+        isOpen: dialog.classList.contains('open'),
+        dialogAriaHidden: dialog.getAttribute('aria-hidden'),
+        name,
+        role,
+        location,
+        bioPresent: !!bio && bio.length > 20,
+        imgSrc: img ? img.src : null,
+        imgAlt: img ? img.alt : null,
+        naturalWidth: img ? img.naturalWidth : 0,
+        naturalHeight: img ? img.naturalHeight : 0,
+        complete: img ? img.complete : false,
+        emailText: emailLink?.textContent.trim(),
+        emailHref: emailLink?.getAttribute('href')
+      };
+    });
+
+    console.log('Modal Preservation Info:', modalInfo);
+    if (!modalInfo.isOpen || modalInfo.dialogAriaHidden !== 'false') {
+      throw new Error('Assertion failed: Developer modal dialog failed to open!');
+    }
+    if (!modalInfo.complete || modalInfo.naturalWidth === 0) {
+      throw new Error('Assertion failed: Modal avatar profile image failed to load!');
+    }
+    if (!modalInfo.imgAlt.includes('Hazim Bashir')) {
+      throw new Error('Assertion failed: Modal avatar image missing descriptive alt text!');
+    }
+    if (modalInfo.emailText !== 'hazimbashir.dev@gmail.com' || !modalInfo.emailHref.includes('mailto:hazimbashir.dev@gmail.com')) {
+      throw new Error(`Assertion failed: Developer email is incorrect! Found text: ${modalInfo.emailText}, href: ${modalInfo.emailHref}`);
+    }
+    if (!modalInfo.bioPresent || !modalInfo.name.includes('Hazim Bashir')) {
+      throw new Error('Assertion failed: Developer profile details missing from modal!');
+    }
+    console.log(`✓ Developer profile image loaded cleanly (${modalInfo.naturalWidth}x${modalInfo.naturalHeight}) with alt: "${modalInfo.imgAlt}".`);
+    console.log(`✓ Developer profile info, bio, and email (${modalInfo.emailText}) fully preserved.`);
+
+    // Close modal
+    await page.click('.pdfhub-developer-close');
+    await page.waitForTimeout(300);
+
+    const modalClosed = await page.evaluate(() => {
+      const dialog = document.getElementById('pdfhubDeveloperDialog');
+      return !dialog.classList.contains('open') && dialog.getAttribute('aria-hidden') === 'true';
+    });
+    if (!modalClosed) {
+      throw new Error('Assertion failed: Modal failed to close on clicking close button!');
+    }
+    console.log('✓ Modal closed successfully.');
+
+    console.log('\n======================================================');
+    console.log('[TEST 6] Multi-Device Responsiveness (Mobile, Tablet, Desktop)');
     console.log('======================================================');
     const viewports = [
       { name: 'iPhone 13 (390x844)', width: 390, height: 844 },
+      { name: 'iPad Mini (768x1024)', width: 768, height: 1024 },
       { name: 'Small Phone (320x568)', width: 320, height: 568 },
       { name: 'Desktop Standard (1440x900)', width: 1440, height: 900 }
     ];
@@ -301,30 +240,30 @@ server.listen(8199, '127.0.0.1', async () => {
       await page.waitForTimeout(200);
 
       const metrics = await page.evaluate(() => {
-        const trigger = document.querySelector('.pdfhub-developer-trigger');
+        const dev = document.getElementById('pdfhubDeveloper');
         const scroll = document.getElementById('pdfhubScrollTop');
-        const tRect = trigger.getBoundingClientRect();
+        const dStyle = window.getComputedStyle(dev);
         const sRect = scroll.getBoundingClientRect();
         return {
-          triggerW: tRect.width,
-          triggerH: tRect.height,
+          devDisplay: dStyle.display,
           scrollW: sRect.width,
           scrollH: sRect.height
         };
       });
 
-      console.log(`[${vp.name}] Trigger size: ${metrics.triggerW}x${metrics.triggerH}px, ScrollTop size: ${metrics.scrollW}x${metrics.scrollH}px`);
-      if (metrics.triggerW < 44 || metrics.triggerH < 44) {
-        throw new Error(`Trigger button violates 44px minimum touch target on ${vp.name}!`);
+      console.log(`[${vp.name}] Dev button display: ${metrics.devDisplay}, ScrollTop size: ${metrics.scrollW}x${metrics.scrollH}px`);
+      if (metrics.devDisplay !== 'none') {
+        throw new Error(`Floating developer button is visible on viewport ${vp.name}!`);
       }
       if (metrics.scrollW < 44 || metrics.scrollH < 44) {
         throw new Error(`Scroll top button violates 44px minimum touch target on ${vp.name}!`);
       }
     }
-    console.log('✓ All touch targets strictly meet or exceed 44px minimum requirement across all viewports.');
+    console.log('✓ Floating developer button is 100% hidden across all viewports (mobile, tablet, desktop).');
+    console.log('✓ Back to Top touch targets strictly meet or exceed 44px minimum requirement across all viewports.');
 
     console.log('\n======================================================');
-    console.log('🎉 ALL FLOATING CONTROLS & DEVELOPER ASSET TESTS PASSED!');
+    console.log('🎉 ALL FLOATING CONTROLS & REVERSIBILITY TESTS PASSED!');
     console.log('======================================================');
 
     await browser.close();

@@ -1,3 +1,14 @@
+/* ==========================================================================
+   TEMPORARY VISIBILITY TOGGLE: Floating "About Developer" Button / Widget
+   Temporarily hides the floating developer button in the bottom-left corner.
+   To restore the floating widget:
+     1. In developer.js: set SHOW_DEVELOPER_WIDGET = true
+     2. In developer.css: remove or comment out the `.pdfhub-developer { display: none !important; }` rule below.
+   ========================================================================== */
+.pdfhub-developer {
+  display: none !important;
+}
+
 .pdfhub-developer{position:fixed;z-index:2147483000;left:max(18px,env(safe-area-inset-left));bottom:max(18px,env(safe-area-inset-bottom));font-family:'DM Sans',sans-serif;color:var(--text,#eeeef8);opacity:0;pointer-events:none;transform:translateY(12px) scale(.96);transition:opacity .35s cubic-bezier(.16,1,.3,1),transform .35s cubic-bezier(.16,1,.3,1)}
 .pdfhub-developer.show,.pdfhub-developer.open{opacity:1!important;pointer-events:auto!important;transform:translateY(0) scale(1)!important}
 .pdfhub-developer-trigger{position:relative;z-index:2;width:52px;height:52px;padding:0;border:2px solid var(--accent,#7c6aff);border-radius:50%;background:var(--s1,#0f0f1a);box-shadow:0 8px 24px rgba(0,0,0,.45),0 0 0 4px rgba(124,106,255,.16);cursor:pointer;overflow:hidden;display:grid;place-items:center;transition:transform .25s cubic-bezier(.16,1,.3,1),border-color .2s,box-shadow .2s}

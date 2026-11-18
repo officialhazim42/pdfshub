@@ -258,7 +258,18 @@
 
   const devImgSrc=siteRoot+'assets/hazim-bashir-dev.png';
 
+  // ============================================================================
+  // TEMPORARY VISIBILITY CONFIGURATION: Floating "About Developer" Widget
+  // Set SHOW_DEVELOPER_WIDGET to true to immediately restore the floating button
+  // across desktop, tablet, and mobile pages.
+  // ============================================================================
+  const SHOW_DEVELOPER_WIDGET = false;
+
   const widget=document.createElement('div');widget.id='pdfhubDeveloper';widget.className='pdfhub-developer';
+  if(!SHOW_DEVELOPER_WIDGET){
+    widget.style.display='none';
+    widget.setAttribute('aria-hidden','true');
+  }
   widget.innerHTML=`<div class="pdfhub-developer-panel" aria-label="Developer links"><button class="pdfhub-developer-about" type="button"><i class="fas fa-user-astronaut" aria-hidden="true"></i> About Developer</button>${compact.map(item=>external(item[2],item[0], 'pdfhub-developer-social')+`<i class="fab ${item[3]}" aria-hidden="true"></i></a>`).join('')}</div><button class="pdfhub-developer-trigger" type="button" aria-expanded="false" aria-controls="pdfhubDeveloperDialog" aria-label="Open developer panel"><img class="pdfhub-developer-trigger-img" src="${devImgSrc}" alt="Hazim Bashir — Developer Profile" width="52" height="52" /><span class="pdfhub-developer-trigger-close" aria-hidden="true"><i class="fas fa-xmark"></i></span></button>`;
   const dialog=document.createElement('div');dialog.id='pdfhubDeveloperDialog';dialog.className='pdfhub-developer-dialog';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-hidden','true');dialog.setAttribute('aria-labelledby','pdfhubDeveloperTitle');
   dialog.innerHTML=`<div class="pdfhub-developer-card"><button class="pdfhub-developer-close" type="button" aria-label="Close developer profile"><i class="fas fa-xmark" aria-hidden="true"></i></button><div class="pdfhub-developer-content"><header class="pdfhub-developer-header"><div class="pdfhub-developer-avatar"><img class="pdfhub-developer-avatar-img" src="${devImgSrc}" alt="Hazim Bashir — Android Developer &amp; Software Creator" width="84" height="84" /></div><div><h2 class="pdfhub-developer-name" id="pdfhubDeveloperTitle">${profile.name}</h2><div class="pdfhub-developer-urdu" lang="ur" dir="rtl">${profile.urdu}</div><span class="pdfhub-developer-handle">${profile.handle}</span><div class="pdfhub-developer-role">${profile.role}</div><div class="pdfhub-developer-location"><i class="fas fa-location-dot" aria-hidden="true"></i><span>${profile.location}</span></div></div></header><section class="pdfhub-developer-section"><h3>About Me</h3><p class="pdfhub-developer-bio">${profile.bio}</p></section><section class="pdfhub-developer-section"><h3>Developer Information</h3><div class="pdfhub-developer-info"><div class="pdfhub-developer-info-item"><strong>Full Name</strong><span>${profile.name} (${profile.urdu})</span></div><div class="pdfhub-developer-info-item"><strong>Location</strong><span>${profile.location}</span></div><div class="pdfhub-developer-info-item"><strong>Specialization</strong><span>Android Development, Kotlin, and Jetpack Compose</span></div><div class="pdfhub-developer-info-item"><strong>Professional Role</strong><span>${profile.role}</span></div><div class="pdfhub-developer-info-item"><strong>Email</strong><a href="mailto:${profile.email}?subject=${encodeURIComponent('Developer Inquiry — PDFHub')}" data-developer-email>${profile.email}</a></div></div></section><section class="pdfhub-developer-section"><h3>Connect With Me</h3><div class="pdfhub-developer-social-grid">${socials.map(item=>external(item[2],`${item[0]} profile`, 'pdfhub-developer-social-card')+`<i class="fab ${item[3]}" aria-hidden="true"></i><span>${item[0]}<small>${item[1]}</small></span></a>`).join('')}</div></section><footer class="pdfhub-developer-footer">Crafted with care by Hazim Bashir (حازم بشیر) in Kashmir 🏔️<br>Instagram: @officialhazim42 · GitHub: @officialhazim42 · YouTube: @officialhazim42 · LinkedIn: hazim-bashir-faqeer</footer></div></div>`;
@@ -284,7 +295,9 @@
   };
 
   const handleInteraction=()=>{
-    widget.classList.add('show');
+    if(SHOW_DEVELOPER_WIDGET){
+      widget.classList.add('show');
+    }
     if(scrollTop){
       if(window.scrollY>300)scrollTop.classList.add('show');
       else scrollTop.classList.remove('show');
@@ -299,9 +312,15 @@
 
   [widget,scrollTop].forEach(el=>{
     if(!el)return;
-    el.addEventListener('mouseenter',()=>{clearTimeout(inactivityTimer);el.classList.add('show');});
+    el.addEventListener('mouseenter',()=>{
+      if(el===widget && !SHOW_DEVELOPER_WIDGET) return;
+      clearTimeout(inactivityTimer);el.classList.add('show');
+    });
     el.addEventListener('mouseleave',()=>{if(!isDevOpen()){clearTimeout(inactivityTimer);inactivityTimer=setTimeout(hideFloatingControls,INACTIVITY_DELAY);}});
-    el.addEventListener('focusin',()=>{clearTimeout(inactivityTimer);el.classList.add('show');});
+    el.addEventListener('focusin',()=>{
+      if(el===widget && !SHOW_DEVELOPER_WIDGET) return;
+      clearTimeout(inactivityTimer);el.classList.add('show');
+    });
     el.addEventListener('focusout',()=>{if(!isDevOpen()){clearTimeout(inactivityTimer);inactivityTimer=setTimeout(hideFloatingControls,INACTIVITY_DELAY);}});
   });
 
@@ -344,4 +363,9 @@
   });
   const discord=dialog.querySelector('.pdfhub-developer-social-card[href*="discord.com"]');discord.addEventListener('click',async()=>{if(await copyText('officialhazim42'))toast('Discord username copied to clipboard.');else toast('Clipboard is unavailable; opening Discord profile.')});
   dialog.addEventListener('keydown',event=>{if(event.key!=='Tab')return;const focusable=[close,...dialog.querySelectorAll('a[href]')];const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}});
+
+  // Programmatic API for developer profile dialog (modal remains accessible when trigger is hidden)
+  window.openPdfhubDeveloperModal = () => setDialog(true);
+  window.closePdfhubDeveloperModal = () => setDialog(false);
+  window.__PDFHUB_SHOW_DEVELOPER_WIDGET = SHOW_DEVELOPER_WIDGET;
 })();
