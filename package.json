@@ -22,6 +22,7 @@
     "test:docs-desktop": "node scripts/test-desktop-docs-menu.mjs",
     "test:terms": "node scripts/verify-privacy-and-terms.mjs && node scripts/test-sticky-mobile-terms.mjs",
     "test:floating": "node scripts/test-floating-controls-e2e.mjs",
+    "test:footer": "node scripts/verify-footer-ui-e2e.mjs",
     "test:social": "node scripts/test-social-preview.mjs",
     "test:live-preview": "node scripts/verify-live-production-preview.mjs",
     "audit:domain": "node scripts/audit-domain-references.mjs && node scripts/check-dist-domain.mjs"

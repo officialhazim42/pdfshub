@@ -806,7 +806,7 @@ const html = `<!doctype html>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; ${new Date().getFullYear()} PDFHub. All rights reserved. Created by <a href="https://github.com/officialhazim42" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Hazim Bashir</a>.</span>
+        <span>&copy; PDFHub. Created by Our Team.</span>
         <span>Runs 100% locally in your browser &bull; Zero file uploads &bull; No cookies required</span>
       </div>
     </div>
