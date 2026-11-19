@@ -106,9 +106,9 @@
   <input type="file" id="fin" accept=".pdf" hidden/>
   <div class="file-list" id="finfo"></div>
   <div class="options" id="opts" style="display:none">
-    <div class="opt-row"><label>Password</label><input type="password" id="pw" placeholder="Enter a strong password"/></div>
-    <div class="opt-row"><label>Confirm Password</label><input type="password" id="pw2" placeholder="Repeat password"/></div>
-    <div class="opt-row"><label>Permissions</label>
+    <div class="opt-row"><label for="pw">Set Document Password</label><input type="password" id="pw" autocomplete="off" autocapitalize="off" data-lpignore="true" data-form-type="other" placeholder="Enter PDF encryption password" aria-label="PDF encryption password"/></div>
+    <div class="opt-row"><label for="pw2">Confirm Document Password</label><input type="password" id="pw2" autocomplete="off" autocapitalize="off" data-lpignore="true" data-form-type="other" placeholder="Repeat encryption password" aria-label="Confirm PDF encryption password"/></div>
+    <div class="opt-row"><label for="perms">Permissions</label>
       <select id="perms">
         <option value="all">All permissions (read + print + copy)</option>
         <option value="readonly">Read only (no print, no copy)</option>

@@ -174,6 +174,7 @@ async function runLiveVerification() {
     console.log('❌ SOME TESTS FAILED.');
   }
   console.log('======================================================================\n');
+  process.exit(passedAll ? 0 : 1);
 }
 
 runLiveVerification().catch(err => {

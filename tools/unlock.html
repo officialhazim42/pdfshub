@@ -108,7 +108,7 @@
   <input type="file" id="fin" accept=".pdf" hidden/>
   <div class="file-list" id="finfo"></div>
   <div class="options" id="opts" style="display:none">
-    <div class="opt-row"><label>PDF Password (leave blank if restrictions-only)</label><input type="password" id="pw" placeholder="Enter password (if required)"/></div>
+    <div class="opt-row"><label for="pw">PDF Document Password (leave blank if restrictions-only)</label><input type="password" id="pw" autocomplete="off" autocapitalize="off" data-lpignore="true" data-form-type="other" placeholder="Enter PDF password to decrypt" aria-label="PDF decryption password"/></div>
   </div>
   <div class="action-row">
     <button class="btn btn-primary" id="goBtn" disabled onclick="go()"><i class="fas fa-lock-open"></i> Unlock PDF</button>

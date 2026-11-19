@@ -797,11 +797,11 @@ var PDFPasswordManager = (() => {
           </div>
         </div>
 
-        <form id="pwdForm" onsubmit="return false;">
+        <form id="pwdForm" onsubmit="return false;" autocomplete="off">
           <div class="pwd-input-group">
-            <label class="pwd-input-label" for="pwdInputField">Document Password</label>
+            <label class="pwd-input-label" for="pwdInputField">Document Decryption Password</label>
             <div class="pwd-input-wrapper">
-              <input id="pwdInputField" type="password" autocomplete="current-password" placeholder="Enter document password" spellcheck="false" required />
+              <input id="pwdInputField" type="password" autocomplete="off" autocapitalize="off" data-lpignore="true" data-form-type="other" placeholder="Enter document password" aria-label="PDF Document Decryption Password" spellcheck="false" required />
               <button type="button" class="pwd-toggle-btn" id="pwdToggleBtn" title="Show or hide password" aria-label="Show or hide password">
                 <i class="fas fa-eye" id="pwdToggleIcon"></i>
               </button>
