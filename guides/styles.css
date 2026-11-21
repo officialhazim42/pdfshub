@@ -9,34 +9,68 @@
   --bg: #07070d;
   --s1: #0f0f1a;
   --s2: #161625;
+  --s3: #1f1f33;
   --border: #252538;
+  --border-focus: #7c6aff;
   --text: #eeeef8;
-  --muted: #8585a8;
-  --muted2: #5d5d7e;
+  --muted: #8c8ca8;
+  --muted2: #5a5a78;
   --accent: #7c6aff;
+  --accent-light: rgba(124, 106, 255, 0.12);
+  --accent-glow: rgba(124, 106, 255, 0.28);
   --a2: #ff5f7e;
   --a3: #00e5a0;
+  --a3-light: rgba(0, 229, 160, 0.12);
   --a4: #ffb347;
   --a5: #38d9f5;
   --a6: #c084fc;
-  --nav-bg: rgba(7, 7, 13, 0.94);
-  --card-hover-bg: rgba(124, 106, 255, 0.04);
+  --sec: #facc15;
+  --radius: 14px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
   --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.25);
   --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --nav-bg: rgba(7, 7, 13, 0.92);
+  --modal-bg: rgba(0, 0, 0, 0.7);
+  --card-hover-bg: rgba(124, 106, 255, 0.04);
+  --glow-1: rgba(124, 106, 255, 0.09);
+  --glow-2: rgba(255, 95, 126, 0.06);
+  --toggle-bg: #252538;
+  --toggle-knob: #7c6aff;
+  color-scheme: dark;
 }
 
-body.light {
-  --bg: #f2f2f8;
+html.light, body.light {
+  --bg: #f4f4f8;
   --s1: #ffffff;
-  --s2: #ebebf5;
-  --border: #d5d5e8;
-  --text: #18182e;
-  --muted: #6868a0;
-  --muted2: #8f8fb8;
-  --nav-bg: rgba(242, 242, 248, 0.96);
-  --card-hover-bg: rgba(124, 106, 255, 0.05);
+  --s2: #eeeef6;
+  --s3: #e2e2ee;
+  --border: #d8d8e8;
+  --border-focus: #5b47e0;
+  --text: #1a1a2e;
+  --muted: #64648c;
+  --muted2: #8e8eb0;
+  --accent: #5b47e0;
+  --accent-light: rgba(91, 71, 224, 0.08);
+  --accent-glow: rgba(91, 71, 224, 0.22);
+  --a2: #e11d48;
+  --a3: #047857;
+  --a3-light: rgba(4, 120, 87, 0.1);
+  --a4: #b45309;
+  --a5: #0369a1;
+  --a6: #7c3aed;
+  --sec: #b45309;
+  --radius: 14px;
+  --shadow: 0 8px 32px rgba(26, 26, 46, 0.08);
   --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --nav-bg: rgba(244, 244, 248, 0.94);
+  --modal-bg: rgba(26, 26, 46, 0.5);
+  --card-hover-bg: rgba(91, 71, 224, 0.04);
+  --glow-1: rgba(91, 71, 224, 0.06);
+  --glow-2: rgba(225, 29, 72, 0.04);
+  --toggle-bg: #d8d8e8;
+  --toggle-knob: #5b47e0;
+  color-scheme: light;
 }
 
 html {

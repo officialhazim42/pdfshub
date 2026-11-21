@@ -6,6 +6,15 @@
   <link rel="canonical" href="https://pdfshub.smartstores.in/tools/protect.html"/>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
   <meta name="theme-color" content="#07070d"/>
+  <script>
+    (function(){
+      try {
+        if (localStorage.getItem('pdfhub-theme') === 'light') {
+          document.documentElement.classList.add('light');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Open Graph / Facebook -->
   <meta property="fb:app_id" content="1485488066275075" />
@@ -101,7 +110,7 @@
   </div>
 </nav>
 <div class="tool-wrap">
-  <div class="tool-header"><div class="tool-icon" style="color:#facc15"><i class="fas fa-lock"></i></div><h1>Protect PDF</h1><p>Add password protection to your PDF using PDF encryption.</p></div>
+  <div class="tool-header"><div class="tool-icon" style="color:var(--sec)"><i class="fas fa-lock"></i></div><h1>Protect PDF</h1><p>Add password protection to your PDF using PDF encryption.</p></div>
   <div class="drop-area" id="drop" onclick="document.getElementById('fin').click()"><i class="fas fa-cloud-upload-alt"></i><div class="dl">Drop a PDF or click to upload</div><div class="ds">Single PDF</div></div>
   <input type="file" id="fin" accept=".pdf" hidden/>
   <div class="file-list" id="finfo"></div>
@@ -123,7 +132,7 @@
   <div class="status" id="status"></div>
   <div class="progress" id="prog"><div class="progress-bar" id="pbar"></div></div>
   <div style="margin-top:20px;padding:14px;background:rgba(250,204,21,.07);border:1px solid rgba(250,204,21,.2);border-radius:10px;font-size:.78rem;color:var(--muted);">
-    <i class="fas fa-info-circle" style="color:#facc15"></i> PDF encryption is applied via the pdf-lib library. For maximum security, use a strong password with mixed characters.
+    <i class="fas fa-info-circle" style="color:var(--sec)"></i> PDF encryption is applied via the pdf-lib library. For maximum security, use a strong password with mixed characters.
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>

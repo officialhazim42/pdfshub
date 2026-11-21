@@ -10,31 +10,47 @@
   // 1. THEME INITIALIZATION
   const initTheme = () => {
     const savedTheme = localStorage.getItem('pdfhub-theme') || 'dark';
-    if (savedTheme === 'light') {
-      document.body.classList.add('light');
-    } else {
-      document.body.classList.remove('light');
-    }
-    const themeLabel = document.getElementById('themeLabel');
-    const themeKnob = document.getElementById('themeKnob');
-    if (themeLabel) themeLabel.textContent = savedTheme === 'light' ? 'Light' : 'Dark';
-    if (themeKnob) {
-      themeKnob.innerHTML = savedTheme === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    }
-  };
-  initTheme();
-
-  window.toggleTheme = function () {
-    const isLight = document.body.classList.toggle('light');
-    const nextTheme = isLight ? 'light' : 'dark';
-    localStorage.setItem('pdfhub-theme', nextTheme);
+    const isLight = savedTheme === 'light';
+    document.documentElement.classList.toggle('light', isLight);
+    if (document.body) document.body.classList.toggle('light', isLight);
     const themeLabel = document.getElementById('themeLabel');
     const themeKnob = document.getElementById('themeKnob');
     if (themeLabel) themeLabel.textContent = isLight ? 'Light' : 'Dark';
     if (themeKnob) {
       themeKnob.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     }
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isLight ? '#f4f4f8' : '#07070d');
   };
+  initTheme();
+
+  window.toggleTheme = function () {
+    const isLight = !document.documentElement.classList.contains('light') && !document.body?.classList.contains('light');
+    const nextTheme = isLight ? 'light' : 'dark';
+    localStorage.setItem('pdfhub-theme', nextTheme);
+    document.documentElement.classList.toggle('light', isLight);
+    if (document.body) document.body.classList.toggle('light', isLight);
+    const themeLabel = document.getElementById('themeLabel');
+    const themeKnob = document.getElementById('themeKnob');
+    if (themeLabel) themeLabel.textContent = isLight ? 'Light' : 'Dark';
+    if (themeKnob) {
+      themeKnob.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isLight ? '#f4f4f8' : '#07070d');
+  };
+
+  window.addEventListener('storage', event => {
+    if (event.key !== 'pdfhub-theme') return;
+    const isLight = event.newValue === 'light';
+    document.documentElement.classList.toggle('light', isLight);
+    if (document.body) document.body.classList.toggle('light', isLight);
+    const themeLabel = document.getElementById('themeLabel');
+    const themeKnob = document.getElementById('themeKnob');
+    if (themeLabel) themeLabel.textContent = isLight ? 'Light' : 'Dark';
+    if (themeKnob) {
+      themeKnob.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isLight ? '#f4f4f8' : '#07070d');
+  });
 
   // 2. SUPPORT MAILTO ENHANCER & FEEDBACK TOAST
   // Official developer & contact support email address

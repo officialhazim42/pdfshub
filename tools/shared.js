@@ -140,9 +140,22 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 // ── THEME ──────────────────────────────────────────────
 (function(){
-  const saved=localStorage.getItem('pdfhub-theme')||'dark';
-  const applyTheme=()=>{if(saved==='light')document.body.classList.add('light');};
-  if(document.body)applyTheme();else document.addEventListener('DOMContentLoaded',applyTheme,{once:true});
+  const saved = localStorage.getItem('pdfhub-theme') || 'dark';
+  const isLight = saved === 'light';
+  if (isLight) {
+    document.documentElement.classList.add('light');
+  }
+  const syncThemeUI = () => {
+    const light = (localStorage.getItem('pdfhub-theme') || 'dark') === 'light';
+    document.documentElement.classList.toggle('light', light);
+    if (document.body) document.body.classList.toggle('light', light);
+    document.querySelectorAll('.toggle-knob').forEach(k => {
+      k.innerHTML = light ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+    document.querySelectorAll('.t-label').forEach(label => label.textContent = light ? 'Light' : 'Dark');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', light ? '#f4f4f8' : '#07070d');
+  };
+  if (document.body) syncThemeUI(); else document.addEventListener('DOMContentLoaded', syncThemeUI, { once: true });
 })();
 
 function getHistoryTools(){
@@ -181,18 +194,19 @@ document.addEventListener('click', (event)=>{
 });
 
 function toggleTheme(){
-  const isLight=document.body.classList.toggle('light');
-  localStorage.setItem('pdfhub-theme',isLight?'light':'dark');
-  // Update all toggle icons on page
-  document.querySelectorAll('.toggle-knob').forEach(k=>{
-    k.innerHTML=isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+  const isLight = !document.documentElement.classList.contains('light') && !document.body?.classList.contains('light');
+  localStorage.setItem('pdfhub-theme', isLight ? 'light' : 'dark');
+  document.documentElement.classList.toggle('light', isLight);
+  if (document.body) document.body.classList.toggle('light', isLight);
+  document.querySelectorAll('.toggle-knob').forEach(k => {
+    k.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
   });
-  document.querySelectorAll('.t-label').forEach(label=>label.textContent=isLight?'Light':'Dark');
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',isLight?'#f4f4f8':'#07070d');
+  document.querySelectorAll('.t-label').forEach(label => label.textContent = isLight ? 'Light' : 'Dark');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isLight ? '#f4f4f8' : '#07070d');
 }
 
 function buildThemeToggle(){
-  const isLight=document.body.classList.contains('light');
+  const isLight = document.documentElement.classList.contains('light') || document.body?.classList.contains('light');
   return `<div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
     <span class="t-label" id="themeLabel">${isLight?'Light':'Dark'}</span>
     <div class="toggle-track">
@@ -201,24 +215,15 @@ function buildThemeToggle(){
   </div>`;
 }
 
-// Keep label in sync
-const _origToggle=window.toggleTheme;
-window.toggleTheme=function(){
-  const isLight=document.body.classList.toggle('light');
-  localStorage.setItem('pdfhub-theme',isLight?'light':'dark');
-  document.querySelectorAll('.toggle-knob').forEach(k=>{
-    k.innerHTML=isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
-  });
-  document.querySelectorAll('.t-label').forEach(l=>l.textContent=isLight?'Light':'Dark');
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',isLight?'#f4f4f8':'#07070d');
-};
-window.addEventListener('storage',event=>{
-  if(event.key!=='pdfhub-theme')return;
-  const isLight=event.newValue==='light';
-  document.body.classList.toggle('light',isLight);
-  document.querySelectorAll('.toggle-knob').forEach(k=>{k.innerHTML=isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';});
-  document.querySelectorAll('.t-label').forEach(l=>l.textContent=isLight?'Light':'Dark');
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',isLight?'#f4f4f8':'#07070d');
+window.toggleTheme = toggleTheme;
+window.addEventListener('storage', event => {
+  if (event.key !== 'pdfhub-theme') return;
+  const isLight = event.newValue === 'light';
+  document.documentElement.classList.toggle('light', isLight);
+  if (document.body) document.body.classList.toggle('light', isLight);
+  document.querySelectorAll('.toggle-knob').forEach(k => { k.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'; });
+  document.querySelectorAll('.t-label').forEach(l => l.textContent = isLight ? 'Light' : 'Dark');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isLight ? '#f4f4f8' : '#07070d');
 });
 
 function ensureHistoryToggle(){

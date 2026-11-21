@@ -8,6 +8,15 @@
   <link rel="canonical" href="https://pdfshub.smartstores.in/menu-bar/about.html">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#07070d">
+  <script>
+    (function(){
+      try {
+        if (localStorage.getItem('pdfhub-theme') === 'light') {
+          document.documentElement.classList.add('light');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -86,23 +95,63 @@
       --bg: #07070d;
       --s1: #0f0f1a;
       --s2: #161625;
+      --s3: #1f1f33;
       --border: #252538;
+      --border-focus: #7c6aff;
       --text: #eeeef8;
       --muted: #8c8ca8;
+      --muted2: #5a5a78;
       --accent: #7c6aff;
+      --accent-light: rgba(124, 106, 255, 0.12);
+      --accent-glow: rgba(124, 106, 255, 0.28);
       --a2: #ff5f7e;
       --a3: #00e5a0;
+      --a3-light: rgba(0, 229, 160, 0.12);
       --a4: #ffb347;
       --a5: #38d9f5;
+      --a6: #c084fc;
+      --sec: #facc15;
+      --radius: 14px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+      --nav-bg: rgba(7, 7, 13, 0.92);
+      --modal-bg: rgba(0, 0, 0, 0.7);
+      --card-hover-bg: rgba(124, 106, 255, 0.04);
+      --glow-1: rgba(124, 106, 255, 0.09);
+      --glow-2: rgba(255, 95, 126, 0.06);
+      --toggle-bg: #252538;
+      --toggle-knob: #7c6aff;
+      color-scheme: dark;
     }
-    body.light {
-      --bg: #f5f5fa;
+    html.light, body.light {
+      --bg: #f4f4f8;
       --s1: #ffffff;
-      --s2: #ececf5;
-      --border: #dcdce8;
+      --s2: #eeeef6;
+      --s3: #e2e2ee;
+      --border: #d8d8e8;
+      --border-focus: #5b47e0;
       --text: #1a1a2e;
-      --muted: #5e5e78;
+      --muted: #64648c;
+      --muted2: #8e8eb0;
       --accent: #5b47e0;
+      --accent-light: rgba(91, 71, 224, 0.08);
+      --accent-glow: rgba(91, 71, 224, 0.22);
+      --a2: #e11d48;
+      --a3: #047857;
+      --a3-light: rgba(4, 120, 87, 0.1);
+      --a4: #b45309;
+      --a5: #0369a1;
+      --a6: #7c3aed;
+      --sec: #b45309;
+      --radius: 14px;
+      --shadow: 0 8px 32px rgba(26, 26, 46, 0.08);
+      --nav-bg: rgba(244, 244, 248, 0.94);
+      --modal-bg: rgba(26, 26, 46, 0.5);
+      --card-hover-bg: rgba(91, 71, 224, 0.04);
+      --glow-1: rgba(91, 71, 224, 0.06);
+      --glow-2: rgba(225, 29, 72, 0.04);
+      --toggle-bg: #d8d8e8;
+      --toggle-knob: #5b47e0;
+      color-scheme: light;
     }
 
     .about-shell {
@@ -277,6 +326,39 @@
       background: rgba(56, 217, 245, 0.12);
       border-color: rgba(56, 217, 245, 0.24);
       color: var(--a5);
+    }
+    body.light .pillar-icon {
+      background: rgba(91, 71, 224, 0.1);
+      border-color: rgba(91, 71, 224, 0.22);
+      color: var(--accent);
+    }
+    body.light .pillar-icon.mint {
+      background: rgba(4, 120, 87, 0.1);
+      border-color: rgba(4, 120, 87, 0.25);
+      color: var(--a3);
+    }
+    body.light .pillar-icon.cyan {
+      background: rgba(3, 105, 161, 0.1);
+      border-color: rgba(3, 105, 161, 0.25);
+      color: var(--a5);
+    }
+    body.light .hero-badge-item {
+      background: rgba(91, 71, 224, 0.08);
+      border-color: rgba(91, 71, 224, 0.2);
+    }
+    body.light .privacy-arch-icon {
+      background: rgba(4, 120, 87, 0.1);
+      border-color: rgba(4, 120, 87, 0.25);
+      color: var(--a3);
+    }
+    body.light .category-badge {
+      background: rgba(91, 71, 224, 0.08);
+      border-color: rgba(91, 71, 224, 0.2);
+      color: var(--accent);
+    }
+    body.light .category-card:hover {
+      background: linear-gradient(145deg, #ffffff, #f7f7fc);
+      border-color: rgba(91, 71, 224, 0.35);
     }
     .pillar-card h3 {
       font-family: 'Syne', sans-serif;

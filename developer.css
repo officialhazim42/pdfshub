@@ -9,6 +9,70 @@
   display: none !important;
 }
 
+:root {
+  --bg: #07070d;
+  --s1: #0f0f1a;
+  --s2: #161625;
+  --s3: #1f1f33;
+  --border: #252538;
+  --border-focus: #7c6aff;
+  --text: #eeeef8;
+  --muted: #8c8ca8;
+  --muted2: #5a5a78;
+  --accent: #7c6aff;
+  --accent-light: rgba(124, 106, 255, 0.12);
+  --accent-glow: rgba(124, 106, 255, 0.28);
+  --a2: #ff5f7e;
+  --a3: #00e5a0;
+  --a3-light: rgba(0, 229, 160, 0.12);
+  --a4: #ffb347;
+  --a5: #38d9f5;
+  --a6: #c084fc;
+  --sec: #facc15;
+  --radius: 14px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --nav-bg: rgba(7, 7, 13, 0.92);
+  --modal-bg: rgba(0, 0, 0, 0.7);
+  --card-hover-bg: rgba(124, 106, 255, 0.04);
+  --glow-1: rgba(124, 106, 255, 0.09);
+  --glow-2: rgba(255, 95, 126, 0.06);
+  --toggle-bg: #252538;
+  --toggle-knob: #7c6aff;
+  color-scheme: dark;
+}
+
+html.light, body.light {
+  --bg: #f4f4f8;
+  --s1: #ffffff;
+  --s2: #eeeef6;
+  --s3: #e2e2ee;
+  --border: #d8d8e8;
+  --border-focus: #5b47e0;
+  --text: #1a1a2e;
+  --muted: #64648c;
+  --muted2: #8e8eb0;
+  --accent: #5b47e0;
+  --accent-light: rgba(91, 71, 224, 0.08);
+  --accent-glow: rgba(91, 71, 224, 0.22);
+  --a2: #e11d48;
+  --a3: #047857;
+  --a3-light: rgba(4, 120, 87, 0.1);
+  --a4: #b45309;
+  --a5: #0369a1;
+  --a6: #7c3aed;
+  --sec: #b45309;
+  --radius: 14px;
+  --shadow: 0 8px 32px rgba(26, 26, 46, 0.08);
+  --nav-bg: rgba(244, 244, 248, 0.94);
+  --modal-bg: rgba(26, 26, 46, 0.5);
+  --card-hover-bg: rgba(91, 71, 224, 0.04);
+  --glow-1: rgba(91, 71, 224, 0.06);
+  --glow-2: rgba(225, 29, 72, 0.04);
+  --toggle-bg: #d8d8e8;
+  --toggle-knob: #5b47e0;
+  color-scheme: light;
+}
+
 .pdfhub-developer{position:fixed;z-index:2147483000;left:max(18px,env(safe-area-inset-left));bottom:max(18px,env(safe-area-inset-bottom));font-family:'DM Sans',sans-serif;color:var(--text,#eeeef8);opacity:0;pointer-events:none;transform:translateY(12px) scale(.96);transition:opacity .35s cubic-bezier(.16,1,.3,1),transform .35s cubic-bezier(.16,1,.3,1)}
 .pdfhub-developer.show,.pdfhub-developer.open{opacity:1!important;pointer-events:auto!important;transform:translateY(0) scale(1)!important}
 .pdfhub-developer-trigger{position:relative;z-index:2;width:52px;height:52px;padding:0;border:2px solid var(--accent,#7c6aff);border-radius:50%;background:var(--s1,#0f0f1a);box-shadow:0 8px 24px rgba(0,0,0,.45),0 0 0 4px rgba(124,106,255,.16);cursor:pointer;overflow:hidden;display:grid;place-items:center;transition:transform .25s cubic-bezier(.16,1,.3,1),border-color .2s,box-shadow .2s}
@@ -45,12 +109,12 @@
 .pdfhub-scroll-top.show{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
 .pdfhub-scroll-top:hover,.pdfhub-scroll-top:focus-visible{background:var(--accent,#7c6aff);border-color:var(--accent,#7c6aff);color:#fff;transform:translateY(-2px) scale(1.04)}
 .pdfhub-scroll-top:focus-visible{outline:2px solid var(--accent,#7c6aff);outline-offset:3px}
-body.light .pdfhub-scroll-top{background:#fff;border-color:#cfcfe2;color:#4f4b8f;box-shadow:0 8px 24px rgba(54,48,110,.16)}
-body.light .pdfhub-scroll-top:hover,body.light .pdfhub-scroll-top:focus-visible{background:#6758dc;border-color:#6758dc;color:#fff}
+body.light .pdfhub-scroll-top{background:#fff;border-color:#cfcfe2;color:var(--accent,#5b47e0);box-shadow:0 8px 24px rgba(54,48,110,.16)}
+body.light .pdfhub-scroll-top:hover,body.light .pdfhub-scroll-top:focus-visible{background:var(--accent,#5b47e0);border-color:var(--accent,#5b47e0);color:#fff}
 body.light .site-menu{background:rgba(255,255,255,.98);border-color:#d8d8e8;color:#1a1a2e}
 body.light .menu-action,body.light .menu-heading{color:#1a1a2e}
 body.light .menu-action:hover{background:#eeeef6!important;color:#1a1a2e!important}
-body.light .menu-action:hover i{color:#6758dc!important}
+body.light .menu-action:hover i{color:var(--accent,#5b47e0)!important}
 body.light .menu-search input{background:#eeeef6;color:#1a1a2e;border-color:#d8d8e8}
 body.light .menu-note,body.light .menu-feature-subtitle,body.light .menu-feature-meta{color:#7070a0}
 body.light .site-footer{background:#fff;color:#1a1a2e;border-color:#d8d8e8}
@@ -68,7 +132,7 @@ body.light .logo-mark{filter:none!important;mix-blend-mode:normal!important;box-
 .menu-close-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--border,#252538);border-radius:8px;background:var(--s2,#161625);color:var(--muted,#6b6b8a);cursor:pointer;font-size:.72rem;transition:all .2s ease}
 .menu-close-btn:hover,.menu-close-btn:focus-visible{color:#fff;border-color:var(--accent,#7c6aff);background:var(--accent,#7c6aff)}
 body.light .menu-close-btn{background:#ebebf5;border-color:#d5d5e8;color:#7070a0}
-body.light .menu-close-btn:hover,body.light .menu-close-btn:focus-visible{color:#fff;background:#6758dc}
+body.light .menu-close-btn:hover,body.light .menu-close-btn:focus-visible{color:#fff;background:var(--accent,#5b47e0)}
 .menu-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-right:4px;margin-top:6px}
 .menu-body::-webkit-scrollbar{width:5px}
 .menu-body::-webkit-scrollbar-track{background:rgba(255,255,255,.03);border-radius:99px}

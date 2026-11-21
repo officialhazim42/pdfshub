@@ -6,6 +6,15 @@
   <link rel="canonical" href="https://pdfshub.smartstores.in/tools/compare.html"/>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
   <meta name="theme-color" content="#07070d"/>
+  <script>
+    (function(){
+      try {
+        if (localStorage.getItem('pdfhub-theme') === 'light') {
+          document.documentElement.classList.add('light');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Open Graph / Facebook -->
   <meta property="fb:app_id" content="1485488066275075" />
@@ -102,7 +111,7 @@
   </div>
 </nav>
 <div class="tool-wrap" style="max-width:1000px">
-  <div class="tool-header"><div class="tool-icon" style="color:#facc15"><i class="fas fa-not-equal"></i></div><h1>Compare PDF</h1><p>Upload two PDFs to visually compare pages side by side and highlight differences.</p></div>
+  <div class="tool-header"><div class="tool-icon" style="color:var(--sec)"><i class="fas fa-not-equal"></i></div><h1>Compare PDF</h1><p>Upload two PDFs to visually compare pages side by side and highlight differences.</p></div>
   <div class="two-col">
     <div class="pdf-drop" id="drop1" onclick="document.getElementById('fin1').click()"><i class="fas fa-file-pdf"></i><div class="l">Original PDF</div><div class="s" id="name1">Click or drop</div></div>
     <div class="pdf-drop" id="drop2" onclick="document.getElementById('fin2').click()"><i class="fas fa-file-pdf"></i><div class="l">Modified PDF</div><div class="s" id="name2">Click or drop</div></div>

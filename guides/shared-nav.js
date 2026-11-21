@@ -211,8 +211,10 @@
     // Theme toggle fallback if developer.js has not set window.toggleTheme yet
     if (!window.toggleTheme) {
       window.toggleTheme = function() {
-        const isLight = document.body.classList.toggle('light');
+        const isLight = !document.documentElement.classList.contains('light') && !document.body?.classList.contains('light');
         localStorage.setItem('pdfhub-theme', isLight ? 'light' : 'dark');
+        document.documentElement.classList.toggle('light', isLight);
+        if (document.body) document.body.classList.toggle('light', isLight);
         const lbl = document.getElementById('themeLabel');
         const knob = document.getElementById('themeKnob');
         if (lbl) lbl.textContent = isLight ? 'Light' : 'Dark';

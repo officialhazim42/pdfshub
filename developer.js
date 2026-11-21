@@ -6,12 +6,16 @@
   }
   const applyTheme=theme=>{
     const light=theme==='light';
-    document.body.classList.toggle('light',light);
-    document.querySelectorAll('#themeLabel,.global-theme-toggle .t-label').forEach(label=>label.textContent=light?'Light':'Dark');
+    document.documentElement.classList.toggle('light',light);
+    if(document.body)document.body.classList.toggle('light',light);
+    document.querySelectorAll('#themeLabel,.global-theme-toggle .t-label,.theme-toggle .t-label,.t-label').forEach(label=>label.textContent=light?'Light':'Dark');
     document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=`<i class="fas fa-${light?'sun':'moon'}"></i>`);
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f4f4f8':'#07070d');
   };
   applyTheme(localStorage.getItem('pdfhub-theme')||'dark');
+  if(!document.body){
+    document.addEventListener('DOMContentLoaded',()=>applyTheme(localStorage.getItem('pdfhub-theme')||'dark'),{once:true});
+  }
   const siteRoot=document.body.dataset.root||root;
 
   // PWA Manifest and Meta Tags
@@ -134,7 +138,8 @@
 
   if(!window.__pdfhubThemeWrapped){
     window.toggleTheme=()=>{
-      const next=document.body.classList.contains('light')?'dark':'light';
+      const current=localStorage.getItem('pdfhub-theme')||(document.documentElement.classList.contains('light')||document.body?.classList.contains('light')?'light':'dark');
+      const next=current==='light'?'dark':'light';
       localStorage.setItem('pdfhub-theme',next);
       applyTheme(next);
     };

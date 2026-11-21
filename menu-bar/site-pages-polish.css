@@ -28,6 +28,22 @@ body.light .menu-action.menu-featured:hover .menu-feature-icon{color:#6655d9!imp
 .editorial-hero h1{max-width:800px;margin:16px 0 14px;font-size:clamp(2.4rem,5.5vw,3.8rem);line-height:1.06;letter-spacing:-.05em}
 .editorial-hero .lead{max-width:740px;font-size:clamp(1rem,1.4vw,1.1rem);line-height:1.75;color:#9b9bb6;margin:0 0 18px}
 .editorial-page .eyebrow{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid rgba(0,229,160,.25);border-radius:99px;color:#00e5a0;font-size:.66rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(0,229,160,.06)}
+body.light .editorial-page .eyebrow{color:#059669;background:rgba(5,150,105,.08);border-color:rgba(5,150,105,.25)}
+body.light .principle-card{background:#fff;border-color:#deddf0;box-shadow:0 8px 24px rgba(40,35,90,.04)}
+body.light .principle-card h2,body.light .about-note h2,body.light .about-contact h2{color:#18182e}
+body.light .principle-card p,body.light .about-note p,body.light .about-contact p{color:#606078}
+body.light .principle-icon{background:rgba(91,71,224,.08);border-color:rgba(91,71,224,.2);color:#5b47e0}
+body.light .about-note{background:linear-gradient(120deg,rgba(2,132,199,.06),rgba(91,71,224,.04));border-color:rgba(2,132,199,.2)}
+body.light .about-note>i{color:#0284c7}
+body.light .about-contact{border-color:#deddf0}
+body.light .editorial-link{background:rgba(91,71,224,.08);border-color:rgba(91,71,224,.25);color:#5b47e0}
+body.light .editorial-link:hover{background:rgba(91,71,224,.15);border-color:#5b47e0}
+body.light .section-heading h2{color:#18182e}
+body.light .section-heading>p{color:#606078}
+body.light .workflow-list li{background:linear-gradient(180deg,rgba(91,71,224,.04),transparent 75%);border-top-color:#deddf0}
+body.light .workflow-list li>span{color:#5b47e0}
+body.light .workflow-list h3{color:#18182e}
+body.light .workflow-list p{color:#606078}
 
 /* About Page Elements */
 .about-principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}

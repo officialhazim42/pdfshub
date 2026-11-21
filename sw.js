@@ -1,11 +1,11 @@
-/* PDFHub Production-Ready Service Worker (v6)
+/* PDFHub Production-Ready Service Worker (v7)
    - Standards-compliant PWA caching
    - Zero sensitive document caching (files never stored in SW cache)
    - Safe navigation fallback (dedicated offline.html, never returns HTML for JS/CSS/image requests)
    - Graceful cache cleanup & update handling without breaking active editing sessions
 */
 
-const CACHE_NAME = 'pdfhub-v6';
+const CACHE_NAME = 'pdfhub-v7';
 const MAX_CACHE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MiB individual asset limit
 
 // Core static application shell essential for offline launch

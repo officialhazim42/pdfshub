@@ -1,4 +1,8 @@
 (function(){
+  const savedTheme = localStorage.getItem('pdfhub-theme') || 'dark';
+  const initLight = savedTheme === 'light';
+  document.documentElement.classList.toggle('light', initLight);
+  if (document.body) document.body.classList.toggle('light', initLight);
   const root=document.body.dataset.root||'';
   const historyHref=url=>root+(url==='index.html'?'index.html':url.startsWith('tools/')?url:`tools/${url}`);
   const polishStyles=document.createElement('link');polishStyles.rel='stylesheet';polishStyles.href=root+'menu-bar/site-pages-polish.css';document.head.appendChild(polishStyles);
@@ -141,9 +145,9 @@
   menu?.querySelector('#menuCloseBtn')?.addEventListener('click',event=>{event.stopPropagation();close();});
   document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))close();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu?.classList.contains('open')){close();}});
-  window.toggleTheme=function(){const light=document.body.classList.toggle('light');localStorage.setItem('pdfhub-theme',light?'light':'dark');document.querySelectorAll('.t-label').forEach(label=>label.textContent=light?'Light':'Dark');document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>');document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f2f2f8':'#07070d');};
-  window.addEventListener('storage',event=>{if(event.key!=='pdfhub-theme')return;const light=event.newValue==='light';document.body.classList.toggle('light',light);document.querySelectorAll('.t-label').forEach(label=>label.textContent=light?'Light':'Dark');document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>');});
-  const light=document.body.classList.contains('light');document.getElementById('themeLabel').textContent=light?'Light':'Dark';document.getElementById('themeKnob').innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+  window.toggleTheme=function(){const light=!document.documentElement.classList.contains('light')&&!document.body?.classList.contains('light');localStorage.setItem('pdfhub-theme',light?'light':'dark');document.documentElement.classList.toggle('light',light);if(document.body)document.body.classList.toggle('light',light);document.querySelectorAll('.t-label').forEach(label=>label.textContent=light?'Light':'Dark');document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>');document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f4f4f8':'#07070d');};
+  window.addEventListener('storage',event=>{if(event.key!=='pdfhub-theme')return;const light=event.newValue==='light';document.documentElement.classList.toggle('light',light);if(document.body)document.body.classList.toggle('light',light);document.querySelectorAll('.t-label').forEach(label=>label.textContent=light?'Light':'Dark');document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>');document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f4f4f8':'#07070d');});
+  const light=document.documentElement.classList.contains('light')||document.body?.classList.contains('light');document.querySelectorAll('.t-label').forEach(label=>label.textContent=light?'Light':'Dark');document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>');
   const count=document.getElementById('dashboardCount');if(count)count.textContent=getHistory().length;
   const page=document.body.dataset.page;
   const pageMain=document.querySelector('.page-main');
