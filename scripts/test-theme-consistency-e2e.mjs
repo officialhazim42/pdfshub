@@ -239,7 +239,7 @@ async function runTests() {
     // -------------------------------------------------------------
     console.log('\n--- TEST 7: Toggle Back to Dark Mode ---');
     await page.click('#globalThemeToggle');
-    await page.waitForTimeout(350);
+    await page.waitForTimeout(800);
 
     const backToDark = await page.evaluate(() => !document.documentElement.classList.contains('light') && !document.body.classList.contains('light'));
     assert(backToDark, 'Successfully returned to Dark Mode globally');
@@ -263,7 +263,7 @@ async function runTests() {
 
     // Toggle on page 1
     await page.click('#globalThemeToggle');
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(800);
 
     // Page 2 should now automatically be light via storage event!
     const page2SyncedLight = await page2.evaluate(() => document.documentElement.classList.contains('light') && document.body.classList.contains('light'));

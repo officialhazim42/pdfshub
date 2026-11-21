@@ -159,3 +159,29 @@ body.light .menu-action:hover,body.light .menu-action:focus-visible{background:r
 body.light .menu-note{border-color:#d8d8e8}
 @media(max-width:560px){.pdfhub-footer-links{gap:10px 14px}.pdfhub-footer-links a{font-size:.7rem}.pdfhub-footer-status{align-items:flex-start;flex-direction:column;width:max-content;max-width:100%}}
 @media(max-width:560px){.pdfhub-scroll-top{right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));width:46px;height:46px;min-width:44px;min-height:44px}}
+
+/* Circular Reveal Theme Transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 999999;
+}
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: none !important;
+}
+.theme-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  pointer-events: none;
+  will-change: clip-path, opacity;
+}

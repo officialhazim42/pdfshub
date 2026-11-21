@@ -44,7 +44,7 @@
         <span>All Tools</span>
       </a>
     `}
-    <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark theme">
+    <button class="global-theme-toggle" id="globalThemeToggle" type="button" onclick="toggleTheme(event)" title="Toggle light/dark mode" aria-label="Toggle light or dark theme">
       <span class="t-label" id="themeLabel">${isLight ? 'Light' : 'Dark'}</span>
       <span class="toggle-track">
         <span class="toggle-knob" id="themeKnob">

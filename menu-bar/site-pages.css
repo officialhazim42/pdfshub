@@ -139,8 +139,6 @@ body.light .f-dot{background:#6868a0}
 @media(max-width:580px){.footer-grid{grid-template-columns:1fr;gap:28px;text-align:left}.site-footer{padding:44px 20px 32px;margin-top:48px}.footer-bottom{flex-direction:column;align-items:center;text-align:center;gap:10px}.footer-bottom-meta{justify-content:center}}
 
 /* Theme-safe overrides for the shared menu pages. */
-:root{--bg:#07070d;--s1:#0f0f1a;--s2:#161625;--border:#252538;--text:#eeeef8;--muted:#6b6b8a;--accent:#7c6aff;--a3:#00e5a0;--nav-bg:rgba(7,7,13,.92)}
-body.light{--bg:#f2f2f8;--s1:#fff;--s2:#ebebf5;--border:#d5d5e8;--text:#18182e;--muted:#6868a0;--nav-bg:rgba(242,242,248,.94)}
 body{color-scheme:dark}
 body.light{color-scheme:light}
 body.light nav:not(.privacy-quick-nav):not(.terms-quick-nav){background:var(--nav-bg);border-color:var(--border)}
@@ -160,3 +158,29 @@ body.light .panel li,
 body.light .metric span,
 body.light .activity-item small,
 body.light .menu-note{color:var(--muted)}
+
+/* Circular Reveal Theme Transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 999999;
+}
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: none !important;
+}
+.theme-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  pointer-events: none;
+  will-change: clip-path, opacity;
+}

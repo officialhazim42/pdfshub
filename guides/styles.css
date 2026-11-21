@@ -2449,3 +2449,29 @@ body.light .footer-security-note i {
     scroll-behavior: auto !important;
   }
 }
+
+/* Circular Reveal Theme Transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 999999;
+}
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: none !important;
+}
+.theme-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  pointer-events: none;
+  will-change: clip-path, opacity;
+}

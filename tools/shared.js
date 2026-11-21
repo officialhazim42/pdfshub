@@ -193,8 +193,27 @@ document.addEventListener('click', (event)=>{
   }
 });
 
-function toggleTheme(){
-  const isLight = !document.documentElement.classList.contains('light') && !document.body?.classList.contains('light');
+let isThemeTransitioning = false;
+
+function getThemeToggleOrigin(event) {
+  if (event && typeof event.clientX === 'number' && event.clientX > 0 && event.clientY > 0) {
+    const target = event.target && event.target.closest ? event.target.closest('#globalThemeToggle, .global-theme-toggle, .theme-toggle') : null;
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    }
+  }
+  const toggleBtn = document.getElementById('globalThemeToggle') ||
+                    document.querySelector('.global-theme-toggle') ||
+                    document.querySelector('.theme-toggle');
+  if (toggleBtn) {
+    const rect = toggleBtn.getBoundingClientRect();
+    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  }
+  return { x: window.innerWidth - 44, y: 36 };
+}
+
+function applyThemeState(isLight) {
   localStorage.setItem('pdfhub-theme', isLight ? 'light' : 'dark');
   document.documentElement.classList.toggle('light', isLight);
   if (document.body) document.body.classList.toggle('light', isLight);
@@ -205,9 +224,121 @@ function toggleTheme(){
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isLight ? '#f4f4f8' : '#07070d');
 }
 
+function toggleTheme(event) {
+  if (window.__isThemeTransitioning || isThemeTransitioning || document.documentElement.classList.contains('theme-transitioning')) return;
+  const isLight = !document.documentElement.classList.contains('light') && !document.body?.classList.contains('light');
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) {
+    applyThemeState(isLight);
+    return;
+  }
+
+  const { x, y } = getThemeToggleOrigin(event);
+  const endRadius = Math.ceil(Math.hypot(
+    Math.max(x, window.innerWidth - x),
+    Math.max(y, window.innerHeight - y)
+  )) + 4;
+
+  if (typeof document.startViewTransition === 'function') {
+    window.__isThemeTransitioning = true;
+    isThemeTransitioning = true;
+    document.documentElement.classList.add('theme-transitioning');
+    let transition;
+    try {
+      transition = document.startViewTransition(() => {
+        applyThemeState(isLight);
+      });
+    } catch (err) {
+      window.__isThemeTransitioning = false;
+      isThemeTransitioning = false;
+      document.documentElement.classList.remove('theme-transitioning');
+      applyThemeState(isLight);
+      return;
+    }
+
+    transition.ready.then(() => {
+      const animation = document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`
+          ]
+        },
+        {
+          duration: 720,
+          easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+          pseudoElement: '::view-transition-new(root)'
+        }
+      );
+      const cleanup = () => {
+        window.__isThemeTransitioning = false;
+        isThemeTransitioning = false;
+        document.documentElement.classList.remove('theme-transitioning');
+      };
+      setTimeout(cleanup, 740);
+      if (animation && animation.finished) {
+        animation.finished.then(cleanup).catch(cleanup);
+      }
+      transition.finished.finally(cleanup);
+    }).catch(() => {
+      window.__isThemeTransitioning = false;
+      isThemeTransitioning = false;
+      document.documentElement.classList.remove('theme-transitioning');
+    });
+
+    transition.finished.finally(() => {
+      window.__isThemeTransitioning = false;
+      isThemeTransitioning = false;
+      document.documentElement.classList.remove('theme-transitioning');
+    });
+    return;
+  }
+
+  // Fallback: smooth expanding circular overlay
+  window.__isThemeTransitioning = true;
+  isThemeTransitioning = true;
+  const overlay = document.createElement('div');
+  overlay.className = 'theme-reveal-overlay';
+  overlay.style.cssText = [
+    'position: fixed',
+    'inset: 0',
+    'z-index: 999999',
+    'pointer-events: none',
+    `background-color: ${isLight ? '#f4f4f8' : '#07070d'}`,
+    `clip-path: circle(0px at ${x}px ${y}px)`,
+    'will-change: clip-path, opacity'
+  ].join(';');
+  document.body.appendChild(overlay);
+
+  applyThemeState(isLight);
+
+  const anim = overlay.animate(
+    [
+      { clipPath: `circle(0px at ${x}px ${y}px)`, opacity: 1 },
+      { clipPath: `circle(${endRadius}px at ${x}px ${y}px)`, opacity: 1, offset: 0.85 },
+      { clipPath: `circle(${endRadius}px at ${x}px ${y}px)`, opacity: 0, offset: 1 }
+    ],
+    {
+      duration: 720,
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      fill: 'forwards'
+    }
+  );
+
+  const cleanup = () => {
+    window.__isThemeTransitioning = false;
+    isThemeTransitioning = false;
+    document.documentElement.classList.remove('theme-transitioning');
+    overlay.remove();
+  };
+  anim.onfinish = cleanup;
+  anim.oncancel = cleanup;
+}
+
 function buildThemeToggle(){
   const isLight = document.documentElement.classList.contains('light') || document.body?.classList.contains('light');
-  return `<div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+  return `<div class="theme-toggle" onclick="toggleTheme(event)" title="Toggle theme">
     <span class="t-label" id="themeLabel">${isLight?'Light':'Dark'}</span>
     <div class="toggle-track">
       <div class="toggle-knob">${isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'}</div>
@@ -216,6 +347,7 @@ function buildThemeToggle(){
 }
 
 window.toggleTheme = toggleTheme;
+window.getThemeToggleOrigin = getThemeToggleOrigin;
 window.addEventListener('storage', event => {
   if (event.key !== 'pdfhub-theme') return;
   const isLight = event.newValue === 'light';

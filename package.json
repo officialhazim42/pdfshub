@@ -25,6 +25,7 @@
     "test:footer": "node scripts/verify-footer-ui-e2e.mjs",
     "test:social": "node scripts/test-social-preview.mjs",
     "test:theme": "node scripts/test-theme-consistency-e2e.mjs",
+    "test:reveal": "node scripts/test-circular-theme-reveal.mjs",
     "test:menu-search": "node scripts/test-toolbar-search-and-menu.mjs",
     "test:live-preview": "node scripts/verify-live-production-preview.mjs",
     "audit:domain": "node scripts/audit-domain-references.mjs && node scripts/check-dist-domain.mjs"

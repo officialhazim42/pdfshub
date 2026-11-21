@@ -136,15 +136,151 @@
   };
   enhanceMenu();
 
-  if(!window.__pdfhubThemeWrapped){
-    window.toggleTheme=()=>{
-      const current=localStorage.getItem('pdfhub-theme')||(document.documentElement.classList.contains('light')||document.body?.classList.contains('light')?'light':'dark');
-      const next=current==='light'?'dark':'light';
-      localStorage.setItem('pdfhub-theme',next);
+  let isThemeTransitioning = false;
+
+  const getThemeToggleOrigin = event => {
+    if (event && typeof event.clientX === 'number' && event.clientX > 0 && event.clientY > 0) {
+      const target = event.target && event.target.closest ? event.target.closest('#globalThemeToggle, .global-theme-toggle, .theme-toggle') : null;
+      if (target) {
+        const rect = target.getBoundingClientRect();
+        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+      }
+    }
+    const toggleBtn = document.getElementById('globalThemeToggle') ||
+                      document.querySelector('.global-theme-toggle') ||
+                      document.querySelector('.theme-toggle');
+    if (toggleBtn) {
+      const rect = toggleBtn.getBoundingClientRect();
+      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    }
+    return { x: window.innerWidth - 44, y: 36 };
+  };
+
+  const executeCircularThemeToggle = event => {
+    if (window.__isThemeTransitioning || isThemeTransitioning || document.documentElement.classList.contains('theme-transitioning')) return;
+    const current = localStorage.getItem('pdfhub-theme') || (document.documentElement.classList.contains('light') || document.body?.classList.contains('light') ? 'light' : 'dark');
+    const next = current === 'light' ? 'dark' : 'light';
+    const isNextLight = next === 'light';
+
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      localStorage.setItem('pdfhub-theme', next);
       applyTheme(next);
+      return;
+    }
+
+    const { x, y } = getThemeToggleOrigin(event);
+    const endRadius = Math.ceil(Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    )) + 4;
+
+    if (typeof document.startViewTransition === 'function') {
+      window.__isThemeTransitioning = true;
+      isThemeTransitioning = true;
+      document.documentElement.classList.add('theme-transitioning');
+      let transition;
+      try {
+        transition = document.startViewTransition(() => {
+          localStorage.setItem('pdfhub-theme', next);
+          applyTheme(next);
+        });
+      } catch (err) {
+        window.__isThemeTransitioning = false;
+        isThemeTransitioning = false;
+        document.documentElement.classList.remove('theme-transitioning');
+        localStorage.setItem('pdfhub-theme', next);
+        applyTheme(next);
+        return;
+      }
+
+      transition.ready.then(() => {
+        const animation = document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`
+            ]
+          },
+          {
+            duration: 720,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+            pseudoElement: '::view-transition-new(root)'
+          }
+        );
+        const cleanup = () => {
+          window.__isThemeTransitioning = false;
+          isThemeTransitioning = false;
+          document.documentElement.classList.remove('theme-transitioning');
+        };
+        setTimeout(cleanup, 740);
+        if (animation && animation.finished) {
+          animation.finished.then(cleanup).catch(cleanup);
+        }
+        transition.finished.finally(cleanup);
+      }).catch(() => {
+        window.__isThemeTransitioning = false;
+        isThemeTransitioning = false;
+        document.documentElement.classList.remove('theme-transitioning');
+      });
+
+      transition.finished.finally(() => {
+        window.__isThemeTransitioning = false;
+        isThemeTransitioning = false;
+        document.documentElement.classList.remove('theme-transitioning');
+      });
+      return;
+    }
+
+    // Fallback: smooth expanding circular overlay
+    window.__isThemeTransitioning = true;
+    isThemeTransitioning = true;
+    const overlay = document.createElement('div');
+    overlay.className = 'theme-reveal-overlay';
+    overlay.style.cssText = [
+      'position: fixed',
+      'inset: 0',
+      'z-index: 999999',
+      'pointer-events: none',
+      `background-color: ${isNextLight ? '#f4f4f8' : '#07070d'}`,
+      `clip-path: circle(0px at ${x}px ${y}px)`,
+      'will-change: clip-path, opacity'
+    ].join(';');
+    document.body.appendChild(overlay);
+
+    localStorage.setItem('pdfhub-theme', next);
+    applyTheme(next);
+
+    const anim = overlay.animate(
+      [
+        { clipPath: `circle(0px at ${x}px ${y}px)`, opacity: 1 },
+        { clipPath: `circle(${endRadius}px at ${x}px ${y}px)`, opacity: 1, offset: 0.85 },
+        { clipPath: `circle(${endRadius}px at ${x}px ${y}px)`, opacity: 0, offset: 1 }
+      ],
+      {
+        duration: 720,
+        easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        fill: 'forwards'
+      }
+    );
+
+    const cleanup = () => {
+      window.__isThemeTransitioning = false;
+      isThemeTransitioning = false;
+      document.documentElement.classList.remove('theme-transitioning');
+      overlay.remove();
     };
-    window.__pdfhubThemeWrapped=true;
-    window.addEventListener('storage',event=>{if(event.key==='pdfhub-theme')applyTheme(event.newValue||'dark');});
+    anim.onfinish = cleanup;
+    anim.oncancel = cleanup;
+  };
+
+  if(!window.__pdfhubThemeWrapped){
+    window.toggleTheme = executeCircularThemeToggle;
+    window.getThemeToggleOrigin = getThemeToggleOrigin;
+    window.__pdfhubThemeWrapped = true;
+    window.addEventListener('storage', event => {
+      if (event.key === 'pdfhub-theme') applyTheme(event.newValue || 'dark');
+    });
   }
 
   const verifiedSupportEmail = 'hazimbashir.dev@gmail.com';
