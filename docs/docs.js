@@ -91,7 +91,7 @@
         // 2. Explicitly trigger mailto navigation
         try {
           window.location.href = supportMailtoUrl;
-        } catch (_) {}
+        } catch (_) { }
 
         // 3. Informative toast feedback
         showToast('Opening default email application for PDFHub support...');
@@ -212,16 +212,16 @@
   function highlightActiveSidebarLink() {
     const currentPath = window.location.pathname.replace(/\/index\.html$/, '/');
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
-    
+
     let matchedLink = null;
     sidebarLinks.forEach(link => {
       link.classList.remove('active');
       const href = link.getAttribute('href');
       if (!href) return;
-      
+
       const linkUrl = new URL(href, window.location.href);
       const linkPath = linkUrl.pathname.replace(/\/index\.html$/, '/');
-      
+
       if (linkPath === currentPath || (currentPath.endsWith(linkPath) && linkPath !== '/')) {
         matchedLink = link;
       }
@@ -285,7 +285,7 @@
     if (!mobileToc && headings.length >= 2) {
       mobileToc = document.createElement('div');
       mobileToc.className = 'mobile-toc-accordion';
-      
+
       const toggle = document.createElement('button');
       toggle.type = 'button';
       toggle.className = 'mobile-toc-toggle';
@@ -433,8 +433,8 @@
       const filtered = docsDirectory.filter(item => {
         if (!query) return true;
         return item.title.toLowerCase().includes(query) ||
-               item.desc.toLowerCase().includes(query) ||
-               item.category.toLowerCase().includes(query);
+          item.desc.toLowerCase().includes(query) ||
+          item.category.toLowerCase().includes(query);
       }).slice(0, 10);
 
       if (!filtered.length) {
@@ -591,7 +591,7 @@
         chips.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
         const cat = chip.dataset.cat;
-        
+
         cards.forEach(card => {
           if (cat === 'all' || card.dataset.category.toLowerCase().includes(cat.toLowerCase())) {
             card.style.display = 'flex';
