@@ -66,11 +66,6 @@
             </button>
           </div>
         </div>
-        <form class="menu-search" id="menuSearch" role="search">
-          <i class="fas fa-search" aria-hidden="true"></i>
-          <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools" autocomplete="off"/>
-          <button type="submit" title="Search"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
-        </form>
         <div class="menu-status">
           <span><i class="fas fa-shield-halved" aria-hidden="true"></i> Runs in your browser</span>
           <span class="menu-status-dot">●</span>
@@ -212,8 +207,6 @@
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('siteMenu');
     const closeBtn = document.getElementById('menuCloseBtn');
-    const searchForm = document.getElementById('menuSearch');
-    const searchInput = document.getElementById('menuSearchInput');
 
     // Theme toggle fallback if developer.js has not set window.toggleTheme yet
     if (!window.toggleTheme) {
@@ -236,9 +229,8 @@
         toggle.setAttribute('aria-label', 'Close menu');
         toggle.title = 'Close menu';
         toggle.innerHTML = '<i class="fas fa-xmark" aria-hidden="true"></i>';
-        if (searchInput) {
-          setTimeout(() => searchInput.focus(), 80);
-        }
+        const firstAction = menu.querySelector('.menu-action') || closeBtn;
+        firstAction?.focus();
       }
 
       function closeMenu() {
@@ -265,17 +257,6 @@
         closeBtn.addEventListener('click', function(e) {
           e.stopPropagation();
           closeMenu();
-        });
-      }
-
-      if (searchForm && searchInput) {
-        searchForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const query = searchInput.value.trim();
-          closeMenu();
-          if (query) {
-            window.location.href = siteRoot + 'index.html?search=' + encodeURIComponent(query);
-          }
         });
       }
 

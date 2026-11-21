@@ -531,7 +531,8 @@
       toggle.innerHTML = open ? '<i class="fas fa-xmark"></i>' : '<i class="fas fa-bars"></i>';
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       if (open) {
-        document.getElementById('menuSearchInput')?.focus();
+        const firstAction = menu.querySelector('.menu-action') || closeBtn;
+        firstAction?.focus();
       }
     }
 
@@ -565,33 +566,6 @@
         toggleMenu(false);
       });
     });
-
-    // Quick search inside drawer
-    const menuSearchForm = document.getElementById('menuSearch');
-    const menuSearchInput = document.getElementById('menuSearchInput');
-    if (menuSearchForm && menuSearchInput) {
-      menuSearchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const query = menuSearchInput.value.trim().toLowerCase();
-        if (!query) return;
-        toggleMenu(false);
-
-        const portalSearch = document.getElementById('docSearchInput');
-        if (portalSearch) {
-          portalSearch.value = query;
-          portalSearch.dispatchEvent(new Event('input', { bubbles: true }));
-          portalSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          const searchModalBtn = document.querySelector('.nav-search-btn');
-          if (searchModalBtn) searchModalBtn.click();
-          const modalInput = document.getElementById('quickSearchInput');
-          if (modalInput) {
-            modalInput.value = query;
-            modalInput.dispatchEvent(new Event('input', { bubbles: true }));
-          }
-        }
-      });
-    }
   }
 
   // 8. DOCS PORTAL TAB NAVIGATION & FILTERING (For docs/index.html)

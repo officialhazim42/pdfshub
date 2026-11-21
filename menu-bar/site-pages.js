@@ -99,8 +99,10 @@
   dashboardLink?.remove();
   const notificationsLink=menu?.querySelector('.menu-action[href$="dashboard.html#notifications"]');
   notificationsLink?.remove();
+  menu?.querySelector('.menu-search')?.remove();
   if(menu&&!menu.querySelector('.menu-status')){
-    menu.querySelector('.menu-search')?.insertAdjacentHTML('afterend','<div class="menu-status"><span><i class="fas fa-shield-halved"></i> Runs in your browser</span><span class="menu-status-dot">●</span><span>No account needed</span></div>');
+    const target=menu.querySelector('.menu-heading');
+    target?.insertAdjacentHTML('afterend','<div class="menu-status"><span><i class="fas fa-shield-halved"></i> Runs in your browser</span><span class="menu-status-dot">●</span><span>No account needed</span></div>');
   }
   const termsLink=menu?.querySelector('.menu-action[href$="terms.html"]');
   if(termsLink&&!menu.querySelector('.menu-section-label[data-section="about"]')){
@@ -116,7 +118,6 @@
   if(menu&&!menu.querySelector('a[href^="mailto:"]')){const contact=document.createElement('a');contact.className='menu-action';contact.href='mailto:hazimbashir.dev@gmail.com?subject=PDFHub%20Support%20Request&body=Hello%20PDFHub%20Support%20Team%2C%0A%0AI%20need%20assistance%20with%20PDFHub%3A%0A-%20Tool%20%2F%20Feature%3A%20%0A-%20Description%20of%20issue%3A%20%0A-%20Operating%20System%20%2F%20Browser%3A%20%0A%0AThank%20you!';contact.innerHTML='<i class="fas fa-envelope"></i><span>Contact Support</span>';menu.querySelector('.menu-list')?.append(contact);}
   if(menu&&!menu.querySelector('.menu-header')){
     const heading=menu.querySelector('.menu-heading');
-    const search=menu.querySelector('.menu-search');
     const status=menu.querySelector('.menu-status');
     const list=menu.querySelector('.menu-list');
     const note=menu.querySelector('.menu-note');
@@ -127,7 +128,6 @@
       const closeBtn=document.createElement('button');closeBtn.className='menu-close-btn';closeBtn.id='menuCloseBtn';closeBtn.type='button';closeBtn.title='Close menu';closeBtn.setAttribute('aria-label','Close menu');closeBtn.innerHTML='<i class="fas fa-xmark"></i>';
       actions.appendChild(closeBtn);heading.appendChild(actions);header.appendChild(heading);
     }
-    if(search)header.appendChild(search);
     if(status)header.appendChild(status);
     const body=document.createElement('div');body.className='menu-body';body.id='menuBody';
     if(list)body.appendChild(list);
@@ -137,11 +137,10 @@
   }
   const globalTheme=document.createElement('button');globalTheme.className='global-theme-toggle';globalTheme.type='button';globalTheme.title='Toggle light/dark mode';globalTheme.innerHTML='<span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span>';globalTheme.onclick=()=>window.toggleTheme();toggle?.parentElement.insertBefore(globalTheme,toggle);
   const close=()=>{menu?.classList.remove('open');menu?.setAttribute('aria-hidden','true');toggle?.setAttribute('aria-expanded','false');toggle?.setAttribute('aria-label','Open menu');if(toggle){toggle.title='Open menu';toggle.innerHTML='<i class="fas fa-bars"></i>';toggle.focus();}};
-  toggle?.addEventListener('click',event=>{event.stopPropagation();const open=!menu.classList.contains('open');menu.classList.toggle('open',open);menu.setAttribute('aria-hidden',String(!open));toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close menu':'Open menu');toggle.title=open?'Close menu':'Open menu';toggle.innerHTML=open?'<i class="fas fa-xmark"></i>':'<i class="fas fa-bars"></i>';if(open)menu.querySelector('#menuSearchInput')?.focus();});
+  toggle?.addEventListener('click',event=>{event.stopPropagation();const open=!menu.classList.contains('open');menu.classList.toggle('open',open);menu.setAttribute('aria-hidden',String(!open));toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close menu':'Open menu');toggle.title=open?'Close menu':'Open menu';toggle.innerHTML=open?'<i class="fas fa-xmark"></i>':'<i class="fas fa-bars"></i>';if(open){const firstAction=menu?.querySelector('.menu-action')||menu?.querySelector('#menuCloseBtn');firstAction?.focus();}});
   menu?.querySelector('#menuCloseBtn')?.addEventListener('click',event=>{event.stopPropagation();close();});
   document.addEventListener('click',event=>{if(!event.target.closest('#siteMenu')&&!event.target.closest('#menuToggle'))close();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu?.classList.contains('open')){close();}});
-  document.getElementById('menuSearch')?.addEventListener('submit',event=>{event.preventDefault();location.href=root+'index.html?search='+encodeURIComponent(document.getElementById('menuSearchInput').value);});
   window.toggleTheme=function(){const light=document.body.classList.toggle('light');localStorage.setItem('pdfhub-theme',light?'light':'dark');document.querySelectorAll('.t-label').forEach(label=>label.textContent=light?'Light':'Dark');document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>');document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f2f2f8':'#07070d');};
   window.addEventListener('storage',event=>{if(event.key!=='pdfhub-theme')return;const light=event.newValue==='light';document.body.classList.toggle('light',light);document.querySelectorAll('.t-label').forEach(label=>label.textContent=light?'Light':'Dark');document.querySelectorAll('.toggle-knob').forEach(knob=>knob.innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>');});
   const light=document.body.classList.contains('light');document.getElementById('themeLabel').textContent=light?'Light':'Dark';document.getElementById('themeKnob').innerHTML=light?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';

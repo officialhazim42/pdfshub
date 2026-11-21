@@ -250,11 +250,6 @@ function ensureSiteMenu(){
         </button>
       </div>
     </div>
-    <form class="menu-search" id="menuSearch">
-      <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
-      <input id="menuSearchInput" type="search" placeholder="Search 33 tools..." aria-label="Search tools"/>
-      <button type="submit" title="Search tools"><i class="fas fa-arrow-right"></i></button>
-    </form>
     <div class="menu-status">
       <span><i class="fas fa-shield-halved"></i> Runs in your browser</span>
       <span class="menu-status-dot">●</span>
@@ -302,7 +297,6 @@ function ensureSiteMenu(){
   const globalTheme=document.createElement('button');globalTheme.className='global-theme-toggle';globalTheme.id='globalThemeToggle';globalTheme.type='button';globalTheme.title='Toggle light/dark mode';globalTheme.innerHTML='<span class="t-label" id="themeLabel">Dark</span><span class="toggle-track"><span class="toggle-knob" id="themeKnob"><i class="fas fa-moon"></i></span></span>';globalTheme.onclick=toggleTheme;container.insertBefore(globalTheme,toggle);
   if(document.body.classList.contains('light')){globalTheme.querySelector('.t-label').textContent='Light';globalTheme.querySelector('.toggle-knob').innerHTML='<i class="fas fa-sun"></i>';}
   menu.querySelector('.menu-action[href$="history.html"]')?.setAttribute('aria-label',`Open tool history (${getHistoryTools().length} items)`);
-  menu.querySelector('#menuSearch').addEventListener('submit',event=>{event.preventDefault();location.href='../index.html?search='+encodeURIComponent(menu.querySelector('#menuSearchInput').value);});
   const close=()=>{
     if(!menu.classList.contains('open'))return;
     menu.classList.remove('open');
@@ -324,7 +318,8 @@ function ensureSiteMenu(){
       toggle.setAttribute('aria-label','Close menu');
       toggle.title='Close menu';
       toggle.innerHTML='<i class="fas fa-xmark"></i>';
-      menu.querySelector('#menuSearchInput')?.focus();
+      const firstAction=menu.querySelector('.menu-action')||menu.querySelector('#menuCloseBtn');
+      firstAction?.focus();
     }
   });
   menu.querySelector('#menuCloseBtn')?.addEventListener('click',event=>{event.stopPropagation();close();});

@@ -123,8 +123,10 @@
     if(!menu)return;
     const dashboard=menu.querySelector('.menu-action[href*="dashboard.html"]');
     if(dashboard)dashboard.remove();
+    menu.querySelector('.menu-search')?.remove();
     if(!menu.querySelector('.menu-status')){
-      menu.querySelector('.menu-search')?.insertAdjacentHTML('afterend','<div class="menu-status"><span><i class="fas fa-shield-halved"></i> Runs in your browser</span><span class="menu-status-dot">●</span><span>No account needed</span></div>');
+      const target=menu.querySelector('.menu-heading') || menu.querySelector('.menu-header');
+      target?.insertAdjacentHTML('afterend','<div class="menu-status"><span><i class="fas fa-shield-halved"></i> Runs in your browser</span><span class="menu-status-dot">●</span><span>No account needed</span></div>');
     }
     updateInstallMenuAction();
   };
